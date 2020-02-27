@@ -7,6 +7,7 @@ app = Flask(__name__)
 def hello_world():
     print('申林-测试')
     print('zsf test')
+    print('DMY-Test')
     return '高校学者发现系统!'
 
 

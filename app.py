@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    print('申林-测试')
-    print('zsf test')
+    print('申林-测试pycharm')
     return '高校学者发现系统!'
 
 

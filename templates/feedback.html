@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高校学者发现系统反馈页面</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+{% block content %}
+<div class="container" >
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+    <div class="panel panel-primary" >
+        <div class="panel-heading">
+            <h3 class="panel-title">感谢您的反馈！</h3>
+        </div>
+        <div class="panel-body">
+            <form role="form">
+                <div class="form-group">
+                    <label for="name">学者姓名</label>
+                    <input type="text" class="form-control" id="name"
+                           placeholder="请输入您要反馈的学者姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您要反馈的学者姓名'">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">反馈内容</label>
+                    <textarea class="form-control" id="content" rows="4" placeholder="请输入您的反馈内容" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的反馈内容'"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">联系方式</label>
+                    <input type="email" class="form-control" id="contact"
+                           placeholder="请输入您的Email地址" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的Email地址'">
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 接收反馈结果
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">提交反馈</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+
+</body>
+</html>

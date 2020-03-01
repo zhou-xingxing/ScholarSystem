@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../static/js/jquery-1.8.3.min.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script type="text/javascript">
+    //<![CDATA[
+    var theForm = document.forms['form1'];
+        if (!theForm) {
+            theForm = document.form1;
+        }
+        function __doPostBack(eventTarget, eventArgument) {
+            if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                theForm.__EVENTTARGET.value = eventTarget;
+                theForm.__EVENTARGUMENT.value = eventArgument;
+                theForm.submit();
+            }
+        }//]]>
+</script>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+        <!-- start 1、LOGO+反馈按钮-->
+        <tr>
+            <td>
+                <div class="box100 bg-wit">
+                    <div class="box1200 h80 mau">
+                        <!-- start LOGO -->
+                        <div class="fl logo">
+                            <a href="index.html">
+                                <img src="../static/images/left-logo.png" alt>
+                            </a>
+                        </div>
+                        <!-- LOGO -->
+                        <!--start联系我们按钮-->
+                        <div class="fr pt25">
+                            <a class="my-btn mr15 fr" href="index.html" target="_blank" title="云中君">联系我们</a>
+                        </div>
+                        <!--end联系我们按钮-->
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!-- end 1、LOGO+反馈按钮-->
+
+        <!-- start 2、页面主体：学者信息+左侧导航条-->
+        <tr>
+            <td>
+                <table width="100%" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td valign="top">
+                            <div class="bg-e">
+                                <!-- main start -->
+                                <!-- 学者个人简介 -->
+                                <div class="box100 line-b bg-blue2 pt40">
+                                    <div class="box1200 mau">
+                                        <ul class="clearfix author-list txt-box bg-hot">
+                                            <li style="border: 0;">
+                                                <!-- start 学者头像 -->
+                                                <div class="fl  mr40">
+                                                    <a class="userbox" href="javascript:void(0)">
+                                                        <img id="ContentPlaceHolder1_imgTitleImage" src(unknow)>
+                                                    </a>
+                                                </div>
+                                                <!-- end 学者头像 -->
+                                                <!-- start 学者个人简介-->
+                                                <div class="box50 fl">
+                                                    <!-- 学者姓名 -->
+                                                    <a class="font24 color-wit" href="javascript:void(0)">
+                                                        <span id="ContentPlaceHolder1_LabelFullName"></span>
+                                                        <span id="ContentPlaceHolder1_LabelShortName"></span>
+                                                    </a>
+                                                    <!-- 地区和机构 -->
+                                                    <div class="ini-box pr20 color-gray pt10">
+                                                        <!-- 图标 -->
+                                                        <i class="glyphicon glyphicon-jigou pr10"></i>
+                                                        <!-- 地区机构 -->
+                                                        <span id="ContentPlaceHolder1_LabelRegion"></span>
+                                                    </div>
+                                                    <!-- ORCID 号-->
+                                                    <p class="color-gray pb10">ORCID：
+                                                        <a id="ContentPlaceHolder1_idORCID" class="color-gray" target="_blank">
+                                                            <span id="ContentPlaceHolder1_LabelORCID"></span>
+                                                        </a>
+                                                    </p>
+                                                    <!-- 一行数据 -->
+                                                    <p class="color-gray">
+                                                        <!-- 成果数目-->
+                                                        <a class="mr15 color-wit line-h" href="javascript:void(0)">
+                                                            <span class="txt-h">成果数</span>
+                                                            <span id="ContentPlaceHolder1_LabelCount"></span>
+                                                        </a>
+                                                        <!-- IF数目-->
+                                                        <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF" class="mr15 color-wit line-h">
+                                                            <span class="txt-h">总IF</span>
+                                                            <span id="ContentPlaceHolder1_LabelCountIF"></span>
+                                                        </a>
+                                                        <!-- 平均IF-->
+                                                        <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
+                                                            <span class="txt-h">平均IF</span>
+                                                            <span id="ContentPlaceHolder1_LabelAverageIF"></span>
+                                                        </a>
+                                                        <!-- XML 和导出成果-->
+                                                        <a id="ContentPlaceHolder1_A1" target="_blank" class="mr15 color-wit line-h">&nbsp;&nbsp;XML</a>
+                                                        <a id="ContentPlaceHolder1_LinkButton1" class="mr15 color-wit line-h pl10 bg-red" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$LinkButton1','')">
+                                                            <span class="glyphicon glyphicon-new-window pr10" aria-hidden="true"></span>导出成果
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                                <!-- end 学者个人简介-->
+                                                <div class="clear"></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- 详细信息 -->
+                                <div class="class=box100 bg-wit">
+                                    <div class="box1200 mau">
+                                        <div class="box100 pl20 pt40 pb40 clearfix ">
+
+                                            <!-- Nav tabs -->
+                                            <ul class="nav-list clearfix fl" role="tablist" style="width: 14%;">
+                                                <li role="presentation" class="active">
+                                                    <a class="li1" href="#cluster1" aria-controls="cluster1" role="tab" data-toggle="tab" aria-expanded="true">
+                                                        <span class="glyphicon glyphicon-list-alt pr10" aria-hidden="true"></span>
+                                                        学术成果
+                                                    </a>
+                                                </li>
+                                                <li id="ContentPlaceHolder1_li2" role="presentation" class="">
+                                                    <a href="#cluster2" aria-controls="cluster2" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-jigou pr10" aria-hidden="true"></span>
+                                                        合作机构
+                                                    </a>
+                                                </li>
+                                                <li role="presentation" class="">
+                                                    <a href="#cluster3" aria-controls="cluster3" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-user pr10" aria-hidden="true"></span>
+                                                        合作学者
+                                                    </a>
+                                                </li>
+                                                <li role="presentation" class="">
+                                                    <a href="#cluster4" aria-controls="cluster4" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-leaf pr10" aria-hidden="true"></span>
+                                                        学科
+                                                    </a>
+                                                </li>
+                                                <li role="presentation" class="">
+                                                    <a href="#cluster5" aria-controls="cluster5" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-book pr10" aria-hidden="true"></span>
+                                                        期刊
+                                                    </a>
+                                                </li>
+                                                <li role="presentation" class="">
+                                                    <a href="#cluster6" aria-controls="cluster6" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-globe pr10" aria-hidden="true"></span>
+                                                        关系网络
+                                                    </a>
+                                                </li>
+                                                <li role="presentation" class="">
+                                                    <a href="#cluster7" aria-controls="cluster7" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-fire pr10" aria-hidden="true"></span>
+                                                        个人画像
+                                                    </a>
+                                                </li>
+                                                <li role="presentation" class="">
+                                                    <a href="#cluster8" aria-controls="cluster8" role="tab" data-toggle="tab" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-blackboard pr10" aria-hidden="true"></span>
+                                                        可视化
+                                                    </a>
+                                                </li>
+                                                <div class="clear"></div>
+                                            </ul>
+                                            <!-- Tab panes -->
+
+                                            <!-- 动态展开接受页面 -->
+                                            <div class="tab-content pb40 pl40 fl" style="width: 85.5%;">
+                                                <div role="tabpanel" class="tab-pane active" id="cluster1">
+                                                    <ul class="box100 clearfix author-list">
+                                                        <div id="ContentPlaceHolder1_InfoList1_divid"></div>
+                                                    </ul>
+                                                    <div class="line-t pt10 pl20">
+                                                        <nav aria-label="Page navigation">
+                                                            <ul class="pagination">
+                                                                <!-- AspNetPager 7.3.2  Copyright:2003-2010 Webdiyer (www.webdiyer.com) -->
+                                                                <!--记录总数只有一页，AspNetPager已自动隐藏，若需在只有一页数据时显示AspNetPager，请将AlwaysShow属性值设为true！-->
+                                                                <!-- AspNetPager 7.3.2  Copyright:2003-2010 Webdiyer (www.webdiyer.com) -->
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster2">
+                                                    <div class="line-a bg-e pd40">
+                                                        <div id="ContentPlaceHolder1_divOrganization"></div>
+                                                        <table class="my-table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>序号</th>
+                                                                    <th>名称</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster3">
+                                                    <div class="line-a bg-e pd40">
+                                                        <div id="ContentPlaceHolder1_divPartners"></div>
+                                                        <table class="my-table table-hover">
+                                                            <colgroup>
+                                                                <col width="50">
+                                                                <col width="">
+                                                                <col width="100">
+                                                                <col width="130">
+                                                            </colgroup>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>序号</th>
+                                                                    <th>名称</th>
+                                                                    <th>&nbsp;</th>
+                                                                    <th>合作成果</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster4">
+                                                    <div class="line-a bg-e pd40">
+                                                            <div id="ContentPlaceHolder1_divSubject"></div>
+                                                        <table class="my-table table-hover">
+                                                                <colgroup>
+                                                                    <col width="50">
+                                                                    <col width="">
+                                                                    <col width="100">
+                                                                    <col width="130">
+                                                                </colgroup>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>序号</th>
+                                                                        <th>名称</th>
+                                                                        <th>&nbsp;</th>
+                                                                        <th>成果数量</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster5">
+                                                    <div class="line-a bg-e pd40">
+                                                        <div id="ContentPlaceHolder1_divJournal"></div>
+                                                        <table class="my-table table-hover">
+                                                                <colgroup>
+                                                                    <col width="50">
+                                                                    <col width="">
+                                                                    <col width="100">
+                                                                    <col width="130">
+                                                                </colgroup>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>序号</th>
+                                                                        <th>名称</th>
+                                                                        <th>&nbsp;</th>
+                                                                        <th>成果数量</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster6">
+                                                    <div class="line-a bg-e pd40">
+                                                        <div id="ContentPlaceHolder1_divRenetwork"></div>
+                                                        <table class="my-table table-hover">
+                                                                <colgroup>
+                                                                    <col width="50">
+                                                                    <col width="">
+                                                                    <col width="100">
+                                                                    <col width="130">
+                                                                </colgroup>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>序号</th>
+                                                                        <th>名称</th>
+                                                                        <th>&nbsp;</th>
+                                                                        <th>成果数量</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster7">
+                                                    <div class="line-a bg-e pd40">
+                                                        <div id="ContentPlaceHolder1_divPainting"></div>
+                                                        <table class="my-table table-hover">
+                                                                <colgroup>
+                                                                    <col width="50">
+                                                                    <col width="">
+                                                                    <col width="100">
+                                                                    <col width="130">
+                                                                </colgroup>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>序号</th>
+                                                                        <th>名称</th>
+                                                                        <th>&nbsp;</th>
+                                                                        <th>成果数量</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="cluster8">
+                                                    <div class="line-a bg-e pd40">
+                                                        <div id="ContentPlaceHolder1_divDataVision"></div>
+                                                        <table class="my-table table-hover">
+                                                                <colgroup>
+                                                                    <col width="50">
+                                                                    <col width="">
+                                                                    <col width="100">
+                                                                    <col width="130">
+                                                                </colgroup>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>序号</th>
+                                                                        <th>名称</th>
+                                                                        <th>&nbsp;</th>
+                                                                        <th>成果数量</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- main end -->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <!-- end 2、页面主体：学者信息+左侧导航条-->
+        <tr></tr>
+        </tbody>
+    </table>
+</body>
+</html>

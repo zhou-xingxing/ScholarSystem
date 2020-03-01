@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关系网络图</title>
+    <script src="../static/js/echarts.min.js" ></script>
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 900px;height: 900px;"></div>
+</body>
+<script>
+      //3.初始化echarts
+    var  ec = echarts.init(document.getElementById("main"))
+      //4.配置option
+    var option = {
+    title: {
+        text: "关系网络图",
+        top: "top",
+        left: "center"
+    },
+    tooltip: {},
+
+    toolbox: {
+        show: true,
+        feature: {
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    animationDuration: 3000,
+    animationEasingUpdate: 'quinticInOut',
+    series: [{
+        name: '三国演义',
+        type: 'graph',
+        layout: 'force',
+        force: {
+            repulsion: 2000,
+            layoutAnimation: true,
+            edgeLength: [50, 200],
+        },
+        data: [{
+            "name": "三国演义",
+            "symbolSize": 100,
+            "value": 100,
+            "url": 'www.baidu.com',
+            "category": "三国演义",
+
+        }, {
+            "name": "刘备",
+            "value": 70,
+            "symbolSize": 70,
+            "category": "刘备",
+
+        }, {
+            "name": "诸葛亮",
+            "value": 80,
+            "symbolSize": 80,
+            "category": "诸葛亮",
+
+        }, {
+            "name": "曹操",
+            "value": 70,
+            "symbolSize": 70,
+            "category": "曹操",
+            "draggable": "true"
+        }, {
+            "name": "关羽",
+            "value": 60,
+            "symbolSize": 60,
+            "category": "关羽",
+            "draggable": "true"
+        }, {
+            "name": "张飞",
+            "value": 50,
+            "symbolSize": 50,
+            "category": "张飞",
+            "draggable": "true"
+        }, {
+            "name": "赵云",
+            "value": 50,
+            "symbolSize": 50,
+            "category": "赵云",
+            "draggable": "true"
+        }, {
+            "name": "孙权",
+            "value": 60,
+            "symbolSize": 60,
+            "category": "孙权",
+            "draggable": "false"
+        }, {
+            "name": "吕布",
+            "value": 30,
+            "symbolSize": 30,
+            "category": "吕布",
+            "draggable": "true"
+        }, {
+            "name": "周瑜",
+            "value": 50,
+            "symbolSize": 50,
+            "category": "周瑜",
+            "draggable": "true"
+        }],
+        links: [{
+            "source": "三国演义",
+            "target": "刘备",
+            "value": 70,
+        }, {
+            "source": "三国演义",
+            "target": "诸葛亮",
+            "value": 80,
+        }, {
+            "source": "三国演义",
+            "target": "曹操",
+            "value": 70,
+        }, {
+            "source": "三国演义",
+            "target": "关羽",
+            "value": 60
+        }, {
+            "source": "三国演义",
+            "target": "张飞",
+            "value": 40,
+        }, {
+            "source": "三国演义",
+            "target": "赵云",
+            "value": 50,
+        }, {
+            "source": "三国演义",
+            "target": "孙权",
+            "value": 60,
+        }, {
+            "source": "三国演义",
+            "target": "吕布",
+            "value": 30,
+        }, {
+            "source": "三国演义",
+            "target": "周瑜",
+            "value": 50,
+        }],
+        categories: [{
+                'name': '刘备'
+            }, {
+                'name': '三国演义'
+            },
+            {
+                'name': '诸葛亮'
+            }, {
+                'name': '曹操'
+            }, {
+                'name': '关羽'
+            }, {
+                'name': '张飞'
+            }, {
+                'name': '赵云'
+            }, {
+                'name': '孙权'
+            }, {
+                'name': '吕布'
+            }, {
+                'name': '周瑜'
+            },
+        ],
+        focusNodeAdjacency: true,
+        roam: true,
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+
+            }
+        },
+        lineStyle: {
+            normal: {
+                color: 'target',
+                width: 2,
+                type: "solid",
+                curveness: 0,
+            }
+        }
+    }]
+};
+      //5.设置option
+      ec.setOption(option)
+
+
+</script>
+
+
+</html>

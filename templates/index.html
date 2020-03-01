@@ -10,18 +10,73 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#select").click(function () {
+
+            })
+
+        })
+    </script>
 </head>
 <body>
     <div class="head">
-        <div><image class="headimage" src="../static/images/logo.png"></image></div>
-        <div><button type="button" class="btn btn-info btn-default">联系我们</button></div>
+        <div><image class="headimage" src="../static/images/left-logo.png"></image></div>
+        <div><button type="button" class="btn btn-info btn-default btnfeedback">联系我们</button></div>
     </div>
     <div class = "inputcontainer">
+        <div><image class="globalid" src="../static/images/globalID.png"></image></div>
         <div class="input">
-            <input type="text" class="input1" placeholder="学者名：中英文名（必填）">
-            <button type="button" class="btn btn-info btn-default btnsearch">搜索</button>
+            <select name="search_type" class="select" id="select">
+                    <option value="1">学者姓名</option>
+                    <option value="2">学者专业</option>
+                    <option value="3">学者学校</option>
+                    <option value="4">研究方向</option>
+            </select>
+            <input type="text" class="input1" placeholder="请输入关键字">
+            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">搜索</button>
+        </div>
+        <div class="record">
+            <p>
+                <a class="recordname">杨振宁</a>
+                <a class="recordname">屠呦呦</a>
+                <a class="recordname">饶毅</a>
+                <a class="recordname">葛均波</a>
+                <a class="recordname">张建平</a>
+                <a class="recordname">贾伟平</a>
+                <a class="recordname">王拥军</a>
+                <a class="recordname">于吉红</a>
+                <a class="recordname">黄晓军</a>
+            </p>
         </div>
     </div>
+    <div class="inner">
+            <div class="schools">
+                <span class="schoolhead">
+                    <image class="schoolheadimage" src="../static/images/china.png"></image>
+                    <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
+                </span>
 
+                <div class="schoolnames">
+                    <table class="table table-hover table-striped">
+                        <tr>
+                            <td>清华大学</td>
+                            <td>北京大学</td>
+                            <td>浙江大学</td>
+                            <td>山东大学</td>
+                            <td>同济大学</td>
+                        </tr>
+                        <tr>
+                            <td>清华大学</td>
+                            <td>北京大学</td>
+                            <td>浙江大学</td>
+                            <td>山东大学</td>
+                            <td>同济大学</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+    </div>
 </body>
 </html>

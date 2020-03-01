@@ -32,30 +32,46 @@
             <h3 class="panel-title">感谢您的反馈！</h3>
         </div>
         <div class="panel-body">
-            <form role="form">
+            <form role="form" action="/handlefeedback" method="post">
                 <div class="form-group">
                     <label for="name">学者姓名</label>
-                    <input type="text" class="form-control" id="name"
+                    <input type="text" class="form-control" id="name" name="name"
                            placeholder="请输入您要反馈的学者姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您要反馈的学者姓名'">
                 </div>
-
                 <div class="form-group">
-                    <label for="content">反馈内容</label>
-                    <textarea class="form-control" id="content" rows="4" placeholder="请输入您的反馈内容" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的反馈内容'"></textarea>
+                    <label for="school">学术机构</label>
+                    <input type="text" class="form-control" id="school" name="school"
+                           placeholder="请输入您要反馈学者的所在学术机构" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您要反馈学者的所在学术机构'">
+                </div>
+                <div class="form-group">
+		        <label for="name">反馈类型</label>
+		        <select class="form-control" id="type" name="type">
+                    <option>学者基本信息有误</option>
+                    <option>科研成果信息有误</option>
+                    <option>我想提供更多信息</option>
+                    <option>网站系统有BUG</option>
+                    <option>其他</option>
+		        </select>
+	            </div>
+                <div class="form-group">
+                    <label for="content">反馈内容（必填）</label>
+                    <textarea class="form-control" id="content" rows="4" name="content" required placeholder="请输入您的反馈内容" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的反馈内容'"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="contact">联系方式</label>
-                    <input type="email" class="form-control" id="contact"
+                    <label for="email">联系方式</label>
+                    <input type="email" class="form-control" id="email" name="email"
                            placeholder="请输入您的Email地址" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的Email地址'">
+                    <span class="help-block">若您选择接收反馈结果，我们会在三个工作日内以邮件的方式及时向您告知</span>
                 </div>
 
                 <div class="checkbox">
+{#                    返回str类型，选中返回"on"，未选中返回"None"#}
                     <label>
-                        <input type="checkbox"> 接收反馈结果
+                        <input type="checkbox" name="receive"> 接收反馈结果
                     </label>
                 </div>
-                <button type="submit" class="btn btn-default" style="display:block;margin:0 auto">提交反馈</button>
+                <button type="submit"  class="btn btn-default" style="display:block;margin:0 auto">提交反馈</button>
             </form>
         </div>
     </div>

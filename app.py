@@ -33,7 +33,7 @@ def handlefeedback():
     print(name, type, content, email, receive, time)
     # FeedBack接口待实现
     # SuccessOrNot=FeedBack(name,type,content,email,receive,time)
-    SuccessOrNot = False
+    SuccessOrNot = True
     return render_template("feedback_result.html",SuccessOrNot=SuccessOrNot)
 
 

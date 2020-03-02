@@ -1,0 +1,5 @@
+.my-table tr th, .my-table tr td {
+    padding: 10px;
+    color: #3555aa;
+    font-size: 16px;
+}

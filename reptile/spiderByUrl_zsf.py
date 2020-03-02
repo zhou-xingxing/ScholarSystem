@@ -197,7 +197,7 @@ def spid(url0, browser, browser2):
                 mainps = browser2.find_elements_by_css_selector(
                     '#dtl_r > div:nth-child(' + str(i + 1) + ') > div > div > a')
                 for s in mainps:
-                    mainp.append(s.text)
+                    mainp.append(s.text[1:])
                 break
         else:
             mainp = []
@@ -212,7 +212,7 @@ def spid(url0, browser, browser2):
         corpins_dict[corpin.text.split('\n')[0]] = corpin.text.split('\n')[1]
 
 
-    return [info_id, info_cited, info_achi, info_h, info_g, info_field, achi_dict, achi_json, cited_json, per_json, namelist, \
+    return [info_id, info_field, info_cited, info_achi, info_h, info_g, achi_dict, achi_json, cited_json, per_json, namelist, \
            paperinfolist, mainplist, corpins_dict]
 
 

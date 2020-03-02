@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    print("Linux test git")
     return render_template("index.html")
 
 

@@ -29,21 +29,18 @@ def spid(url0, browser, browser2):
     info_h = citedetc[2].text
     info_g = citedetc[3].text
     # print('citedetc', info_cited, info_achi, info_h, info_g)
-    # 定义一个list作为成果列表
-    achi_list = []
+    # 定义一个字典作为成果列表
+    achi_dict = {}
     # 获取期刊成果
     browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[1]/div').click()
     try:
         achi1s = browser.find_elements_by_css_selector(
-            '#achievement_wr > div.effectmap_pie > div.pieBox.journalBox > p > span.boxnum')
+            '#achievement_wr > div.effectmap_pie > div.pieBox.journalBox > p')
         for achi in achi1s:
-            achi_list.append(achi.text)
+            achi_dict[re.split('0|1|2|3|4|5|6|7|8|9', achi.text)[0]] = re.search('(\d+)', achi.text).group(1)
     except Exception as e:
-        achi_list.append('0')
-        achi_list.append('0')
-        achi_list.append('0')
-        achi_list.append('0')
-        achi_list.append('0')
+        pass
+        # print('no qikan')
 
     # 焦点移动或者点击之后，一定要再把鼠标点回去
     browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
@@ -55,9 +52,10 @@ def spid(url0, browser, browser2):
     try:
         achi2 = browser.find_element_by_css_selector(
             '#achievement_wr > div.effectmap_pie > div.pieBox.conferenceBox > p > span.boxnum')
-        achi_list.append(achi2.text)
+        achi_dict['其他会议数'] = achi2.text
     except Exception as e:
-        achi_list.append('0')
+        pass
+        # achi_list.append('0')
 
     # 焦点移动或者点击之后，一定要再把鼠标点回去
     browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
@@ -67,9 +65,10 @@ def spid(url0, browser, browser2):
     sleep(0.01)
     try:
         achi3 = browser.find_element_by_css_selector('#achievement_wr > div.effectmap_pie > div.pieBox.booktitleBox > h3 > span.boxNumber')
-        achi_list.append(re.search('\(共(\d+?)篇\)', achi3.text).group(1))
+        achi_dict['专著'] = re.search('\(共(\d+?)篇\)', achi3.text).group(1)
     except Exception as e:
-        achi_list.append('0')
+        pass
+        # achi_list.append('0')
     # 焦点移动或者点击之后，一定要再把鼠标点回去
     browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
     sleep(0.1)
@@ -79,9 +78,10 @@ def spid(url0, browser, browser2):
         achi4 = browser.find_element_by_css_selector(
             '#achievement_wr > div.effectmap_pie > div.pieBox.otherBox > h3 > span.boxNumber'
             )
-        achi_list.append(re.search('\(共(\d+?)篇\)', achi4.text).group(1))
+        achi_dict['其他'] = re.search('\(共(\d+?)篇\)', achi4.text).group(1)
     except Exception as e:
-        achi_list.append('0')
+        # achi_list.append('0')
+        pass
     # 焦点移动或者点击之后，一定要再把鼠标点回去
     browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
     sleep(0.1)
@@ -167,6 +167,11 @@ def spid(url0, browser, browser2):
         except Exception as e:
             # print('no time')
             paperinfo['time'] = 'None'
+
+        try:
+            paperinfo['corppersons'] = browser.find_element_by_css_selector('#articlelist_container > div.in_content_result_wr > div.in_conternt_reslist > div:nth-child('+str(i+1)+') > div.res_con > div.res_info > span:nth-child(2)').text
+        except Exception as e:
+            paperinfo['corppersons'] = None
         try:
             paperinfo['cited'] = browser2.find_element_by_css_selector(
                 '#dtl_l > div > div.c_content > div.ref_wr'
@@ -192,7 +197,7 @@ def spid(url0, browser, browser2):
                 mainps = browser2.find_elements_by_css_selector(
                     '#dtl_r > div:nth-child(' + str(i + 1) + ') > div > div > a')
                 for s in mainps:
-                    mainp.append(s.text)
+                    mainp.append(s.text[1:])
                 break
         else:
             mainp = []
@@ -207,7 +212,7 @@ def spid(url0, browser, browser2):
         corpins_dict[corpin.text.split('\n')[0]] = corpin.text.split('\n')[1]
 
 
-    return [info_id, info_cited, info_achi, info_h, info_g, achi_list, achi_json, cited_json, per_json, namelist, \
+    return [info_id, info_field, info_cited, info_achi, info_h, info_g, achi_dict, achi_json, cited_json, per_json, namelist, \
            paperinfolist, mainplist, corpins_dict]
 
 

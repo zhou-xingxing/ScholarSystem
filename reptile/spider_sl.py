@@ -11,26 +11,31 @@ browser.get(url)     #打开具体的网页
 # html=browser.page_source  #获取页面源码
 # print(html)
 school = browser.find_elements_by_css_selector("li > dl > dt > div > a")
+
+#找到所有学校元素进行遍历
 for i in school:
     print(i.text)
     cls = conn.cursor()
+    #按学校建表
     sql = "CREATE TABLE `scholar_info`.`%s`  (" \
           "`id` int(0) NOT NULL AUTO_INCREMENT," \
           "`name` varchar(255) NOT NULL," \
           "`school` varchar(255) NOT NULL," \
           "`college` varchar(255) NOT NULL," \
           "`scholarid` varchar(255) NULL," \
-          "`direction` varchar(255) NULL ," \
-          "`achievement_num` int(0) NULL," \
-          "`Hpoint` varchar(255) NULL ," \
-          "`Gpoint` varchar(255) NULL," \
+          "`field` varchar(255) NULL ," \
+          "`cited_num` varchar(10) NULL," \
+          "`achievement_num` varchar(10) NULL," \
+          "`Hpoint` varchar(10) NULL ," \
+          "`Gpoint` varchar(10) NULL," \
           "`achievement_list` varchar(2550) NULL," \
           "`achievement_list2` varchar(2550) NULL," \
           "`cited_list` varchar(2550) NULL," \
-          "`collaborate_list` varchar(2550) NULL," \
+          "`partner_list` varchar(2550) NULL," \
           "`paper_name_list` varchar(2550) NULL," \
           "`paper_info_list` varchar(2550) NULL,"\
-          "`paper_search_list` varchar(2550) NULL,"\
+          "`paper_search_list` varchar(2550) NULL," \
+          "`collaborate_org` varchar(2550) NULL," \
           " PRIMARY KEY (`id`)" \
           ");" % (i.text)
     cls.execute(sql)
@@ -42,6 +47,8 @@ for i in school:
     # browser.find_element_by_xpath('//*/li[1]/dl/dt/div[1]/a[1]').click()
     time.sleep(2)
     college=schoolbrowser.find_elements_by_css_selector("dl > dt > div > a")
+
+    # 找到所有学院元素进行遍历
     for j in college:
         print(j.text)
         collegeurl = j.get_attribute("href")
@@ -50,6 +57,8 @@ for i in school:
         # childbrowser.find_element_by_xpath('//*/div[1]/div/ul[2]/li[1]/dl/dt/div/a').click()
         time.sleep(2)
         all_a = collegebrowser.find_elements_by_css_selector("a.topictitle")
+
+        # 找到所有学者元素进行遍历
         for k in all_a:
             print(k.text)   #Webelement 对象.text 获取对象文本，.get_attribute（目标属性）
             cls = conn.cursor()
@@ -58,5 +67,5 @@ for i in school:
             cls.execute(sql)
             conn.commit()
         collegebrowser.quit()      #关闭浏览器
-    schoolbrowser.quit()
+    schoolbrowser.quit()      #关闭浏览器
 browser.quit()      #关闭浏览器

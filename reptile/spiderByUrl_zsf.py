@@ -1,12 +1,13 @@
-from selenium.webdriver import  Chrome, ChromeOptions
+from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.common.action_chains import ActionChains
+import json
 from time import *
 import re
 
 
 # 输入值为学者主页，返回值为爬取的信息
 def spid(url0, browser, browser2):
-    sleep(0.01)
+    action = ActionChains(browser)
     try:
         browser.get(url0)
     except Exception as e:
@@ -31,61 +32,62 @@ def spid(url0, browser, browser2):
     # print('citedetc', info_cited, info_achi, info_h, info_g)
     # 定义一个字典作为成果列表
     achi_dict = {}
-    # 获取期刊成果
-    browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[1]/div').click()
-    try:
-        achi1s = browser.find_elements_by_css_selector(
-            '#achievement_wr > div.effectmap_pie > div.pieBox.journalBox > p')
-        for achi in achi1s:
-            achi_dict[re.split('0|1|2|3|4|5|6|7|8|9', achi.text)[0]] = re.search('(\d+)', achi.text).group(1)
+
+    try :
+
+        browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[4]/div').click()
+        sleep(1)
+        try:
+            achi4 = browser.find_element_by_css_selector(
+                '#achievement_wr > div.effectmap_pie > div.pieBox.otherBox > h3 > span.boxNumber'
+                )
+            achi_dict['其他'] = re.search('\(共(\d+?)篇\)', achi4.text).group(1)
+        except Exception as e:
+            # achi_list.append('0')
+            pass
+        #  焦点移动或者点击之后，一定要再把鼠标点回去
+        # browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
+        # sleep(0.1)
+
+        browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[3]/div').click()
+        sleep(1)
+        try:
+            achi3 = browser.find_element_by_css_selector(
+                '#achievement_wr > div.effectmap_pie > div.pieBox.booktitleBox > h3 > span.boxNumber')
+            achi_dict['专著'] = re.search('\(共(\d+?)篇\)', achi3.text).group(1)
+        except Exception as e:
+            pass
+            # achi_list.append('0')
+        # 焦点移动或者点击之后，一定要再把鼠标点回去
+        # browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
+        # sleep(1)
+
+        # 获取会议成果
+        browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[2]/div').click()
+        sleep(1)
+
+        try:
+            achi2 = browser.find_element_by_css_selector(
+                '#achievement_wr > div.effectmap_pie > div.pieBox.conferenceBox > p > span.boxnum')
+            achi_dict['其他会议数'] = achi2.text
+        except Exception as e:
+            pass
+            # achi_list.append('0')
+
+        # 获取期刊成果
+        browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[1]/div').click()
+        sleep(1)
+        try:
+            achi1s = browser.find_elements_by_css_selector(
+                '#achievement_wr > div.effectmap_pie > div.pieBox.journalBox > p')
+            for achi in achi1s:
+                achi_dict[re.split('0|1|2|3|4|5|6|7|8|9', achi.text)[0]] = re.search('(\d+)', achi.text).group(1)
+        except Exception as e:
+            pass
+                # print('no qikan')
     except Exception as e:
-        pass
-        # print('no qikan')
+        print('No achis')
 
-    # 焦点移动或者点击之后，一定要再把鼠标点回去
-    browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
-    sleep(0.1)
-
-    # 获取会议成果
-    browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[2]/div').click()
-    sleep(0.01)
-    try:
-        achi2 = browser.find_element_by_css_selector(
-            '#achievement_wr > div.effectmap_pie > div.pieBox.conferenceBox > p > span.boxnum')
-        achi_dict['其他会议数'] = achi2.text
-    except Exception as e:
-        pass
-        # achi_list.append('0')
-
-    # 焦点移动或者点击之后，一定要再把鼠标点回去
-    browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
-    sleep(0.1)
-
-    browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[3]/div').click()
-    sleep(0.01)
-    try:
-        achi3 = browser.find_element_by_css_selector('#achievement_wr > div.effectmap_pie > div.pieBox.booktitleBox > h3 > span.boxNumber')
-        achi_dict['专著'] = re.search('\(共(\d+?)篇\)', achi3.text).group(1)
-    except Exception as e:
-        pass
-        # achi_list.append('0')
-    # 焦点移动或者点击之后，一定要再把鼠标点回去
-    browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
-    sleep(0.1)
-
-    browser.find_element_by_xpath('//*[@id="achievement_wr"]/div[1]/div[1]/div[4]/div').click()
-    try:
-        achi4 = browser.find_element_by_css_selector(
-            '#achievement_wr > div.effectmap_pie > div.pieBox.otherBox > h3 > span.boxNumber'
-            )
-        achi_dict['其他'] = re.search('\(共(\d+?)篇\)', achi4.text).group(1)
-    except Exception as e:
-        # achi_list.append('0')
-        pass
-    # 焦点移动或者点击之后，一定要再把鼠标点回去
-    browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
-    sleep(0.1)
-    # print('achi_list', achi_list)
 
     # 定义一个json作为按年份统计的成果数
     tmptext = re.search('lineMapCitedData = (.*?);', browser.page_source)
@@ -97,50 +99,84 @@ def spid(url0, browser, browser2):
     cited_json = tmptext.group(1)
     # print('cited_json', cited_json)
 
-    # 点击合作学者的“更多”按钮
-    browser.find_element_by_css_selector('#main_content_right > div.co_author_wr > h3 > a').click()
-    sleep(0.1)
-    corppersons = browser.find_elements_by_css_selector('#co_rel_map > div > a')
-    # print('corppersons', corppersons)
-    # print('num of corppersons', len(corppersons))
-    # 定义json数组作为所有合作学者信息记录
+    # 点击合作学者的“更多”按钮（此处有“更多按钮”）
     per_json = []
-
-    for corpperson in corppersons:
-        urlnew = corpperson.get_attribute('href')
-        sleep(0.01)
-        # 设置鼠标点击
-        corpperson.click()
-        # 定义json对象作为每个学者的个人信息记录
-        perinfo = {}
-        per = browser.find_elements_by_css_selector('#co_rel_map > div > div.co_relmap_tips > p')
-        perinfo['name'] = per[0].text.split(':')[-1]
-        perinfo['in'] = per[1].text.split(':')[-1]
-        perinfo['corpnum'] = per[2].text.split(':')[-1]
-        # 进入对应学者主页爬取scholarid
-        browser2.get(urlnew)
-        info_id2 = browser2.find_element_by_css_selector('#author_intro_wr > div.person_baseinfo > div.p_scholarID > div')
-        perinfo['id'] = info_id2.text.split(':')[-1]
-        # 将个人信息填入合作学者信息集合
-        per_json.append(perinfo)
-        # 移回焦点
-        browser.find_element_by_css_selector('#co_rel_map > a > i').click()
+    print('begin to find corp person')
+    try:
         browser.find_element_by_css_selector('#main_content_right > div.co_author_wr > h3 > a').click()
+        sleep(1)
+        a1 = browser.find_element_by_css_selector('#co_rel_map > h3')
+        corppersons = browser.find_elements_by_css_selector('#co_rel_map > div > a')
+        # print('corppersons', corppersons)
+        # print('num of corppersons', len(corppersons))
+        # 定义json数组作为所有合作学者信息记录
+
+        for corpperson in corppersons:
+            urlnew = corpperson.get_attribute('href')
+            sleep(1)
+            # 设置鼠标点击
+            corpperson.click()
+            # 定义json对象作为每个学者的个人信息记录
+            perinfo = {}
+            per = browser.find_elements_by_css_selector('#co_rel_map > div > div.co_relmap_tips > p')
+            perinfo['name'] = per[0].text.split('：')[-1]
+            perinfo['in'] = per[1].text.split('：')[-1]
+            perinfo['corpnum'] = per[2].text.split('：')[-1]
+            # 进入对应学者主页爬取scholarid
+            browser2.get(urlnew)
+            info_id2 = browser2.find_element_by_css_selector(
+                '#author_intro_wr > div.person_baseinfo > div.p_scholarID > div')
+            perinfo['id'] = info_id2.text.split(':')[-1]
+            # 将个人信息填入合作学者信息集合
+            per_json.append(perinfo)
+            # 移回焦点
+            browser.find_element_by_css_selector('#co_rel_map > a > i').click()
+            browser.find_element_by_css_selector('#main_content_right > div.co_author_wr > h3 > a').click()
+            # browser2.close()
+
+    except Exception as e:
+        print('没有“更多”按钮')
+        corppersons = browser.find_elements_by_css_selector('#main_content_right > div.co_author_wr > div > div')
+        urlnews = browser.find_elements_by_css_selector('#main_content_right > div.co_author_wr > div > div > a')
+        for i in range(len(corppersons)):
+            # main_content_right > div.co_author_wr > div > div > span > p:nth-child(1)
+            # urlnew = corppersons[i].get_attribute('href')
+            sleep(1)
+
+            # 设置鼠标点击
+            # corpperson.click()
+            # 定义json对象作为每个学者的个人信息记录
+            perinfo = {}
+            perinfo['name'] = corppersons[i].text.split('\n')[0]
+            perinfo['in'] = corppersons[i].text.split('\n')[1]
+            # 进入对应学者主页爬取scholarid
+            browser2.get(urlnews[i].get_attribute('href'))
+            info_id2 = browser2.find_element_by_css_selector('#author_intro_wr > div.person_baseinfo > div.p_scholarID > div')
+            perinfo['id'] = info_id2.text.split(':')[-1]
+            # 将个人信息填入合作学者信息集合
+            per_json.append(perinfo)
 
     # print('per_json', per_json)
     # 点击获取按照被引量降序的论文排列
     # 重新获取该网址
-    browser.get(url0)
-    browser.find_element_by_css_selector(
-        '#articlelist_container > div.in_content_rtop > div > div:nth-child(4) > div.time_sel_default.filter_sel_default'
-    ).click()
 
-    sleep(0.01)
+    browser.get(url0)
+    sleep(1)
+    # 点击弹出按照被引排序的图表
+
+    a1 = browser.find_element_by_css_selector(
+        '#articlelist_container > div.in_content_rtop > div > div:nth-child(4) > div.time_sel_default.filter_sel_default'
+    )
+    action.move_to_element(a1).perform()
+
+    sleep(1)
+
+    # 点击按照被引排序按钮
     browser.find_element_by_css_selector(
         '#articlelist_container > div.in_content_rtop > div > div:nth-child(4) > div.time_filter_list.filter_list > ul > li:nth-child(2) > a'
     ).click()
 
-    sleep(0.5)
+    sleep(1)
 
     papers = browser.find_elements_by_css_selector(
         '#articlelist_container > div.in_content_result_wr > div.in_conternt_reslist > div> div.res_con > h3')
@@ -163,7 +199,7 @@ def spid(url0, browser, browser2):
             paperinfo['time'] = \
                 browser2.find_element_by_css_selector(
                     '#dtl_l > div.main-info > div.c_content > div.year_wr').text.split('：')[
-                    -1]
+                    -1].replace('\n', '')
         except Exception as e:
             # print('no time')
             paperinfo['time'] = 'None'
@@ -175,7 +211,7 @@ def spid(url0, browser, browser2):
         try:
             paperinfo['cited'] = browser2.find_element_by_css_selector(
                 '#dtl_l > div > div.c_content > div.ref_wr'
-            ).text.split('：')[-1]
+            ).text.split('：')[-1].text.replace('\n', '')
         except Exception as e:
             # print('no cited')
             paperinfo['cited'] = '0'
@@ -184,11 +220,12 @@ def spid(url0, browser, browser2):
         for infoitem in infos:
             if '来源' in infoitem.text:
                 paperinfo['source'] = browser2.find_element_by_css_selector(
-                    '#dtl_r > div:nth-child(1) > div > div > div.container_right').text
+                    '#dtl_r > div:nth-child(1) > div > div > div.container_right').text.replace('\n', ' ')
                 # dtl_r > div:nth-child(1) > div > div > div.container_right
                 break
         else:
             paperinfo['source'] = 'None'
+        paperinfo['href'] = urlnew
         paperinfolist.append(paperinfo)
 
         for i in range(len(infos)):
@@ -201,6 +238,7 @@ def spid(url0, browser, browser2):
                 break
         else:
             mainp = []
+
         mainplist.append(mainp)
 
     # print('namelist', namelist)
@@ -228,5 +266,5 @@ if __name__ == '__main__':
     print('开始爬取')
     info = spid(Url, browser, browser2)
     print('爬取完毕:\ninfo:\n', info)
-    browser.close()
-    browser2.close()
+    browser.quit()
+    browser2.quit()

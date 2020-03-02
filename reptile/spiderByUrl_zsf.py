@@ -13,22 +13,22 @@ def spid(url0, browser, browser2):
         print(e)
     name = browser.find_element_by_css_selector('#author_intro_wr > div.person_baseinfo > div.p_name')
     info_name = name.text
-    print('info_name', info_name)
+    # print('info_name', info_name)
     inname = browser.find_element_by_xpath('//*[@id="author_intro_wr"]/div[2]/div[4]')
     info_in = inname.text
-    print('info_in', info_in)
+    # print('info_in', info_in)
     id = browser.find_element_by_xpath('//*[@id="author_intro_wr"]/div[2]/div[3]/div')
     info_id = id.text.split(':')[-1]
-    print('info_id', info_id)
+    # print('info_id', info_id)
     field = browser.find_element_by_xpath('//*[@id="author_intro_wr"]/div[2]/div[6]/div/span[2]')
     info_field = field.text.split('/')
-    print('info_field', info_field)
+    # print('info_field', info_field)
     citedetc = browser.find_elements_by_css_selector('#author_intro_wr > div.person_baseinfo > ul > li> p.p_ach_num')
     info_cited = citedetc[0].text
     info_achi = citedetc[1].text
     info_h = citedetc[2].text
     info_g = citedetc[3].text
-    print('citedetc', info_cited, info_achi, info_h, info_g)
+    # print('citedetc', info_cited, info_achi, info_h, info_g)
     # 定义一个list作为成果列表
     achi_list = []
     # 获取期刊成果
@@ -85,24 +85,24 @@ def spid(url0, browser, browser2):
     # 焦点移动或者点击之后，一定要再把鼠标点回去
     browser.find_element_by_css_selector('#author_intro_wr > div.person_image > a.person_portraitwr > img').click()
     sleep(0.1)
-    print('achi_list', achi_list)
+    # print('achi_list', achi_list)
 
     # 定义一个json作为按年份统计的成果数
     tmptext = re.search('lineMapCitedData = (.*?);', browser.page_source)
     achi_json = tmptext.group(1)
-    print('achi_json', achi_json)
+    # print('achi_json', achi_json)
 
     # 定义一个json作为按年份统计的被引用数
     tmptext = re.search('lineMapAchData = (.*?);', browser.page_source)
     cited_json = tmptext.group(1)
-    print('cited_json', cited_json)
+    # print('cited_json', cited_json)
 
     # 点击合作学者的“更多”按钮
     browser.find_element_by_css_selector('#main_content_right > div.co_author_wr > h3 > a').click()
     sleep(0.1)
     corppersons = browser.find_elements_by_css_selector('#co_rel_map > div > a')
-    print('corppersons', corppersons)
-    print('num of corppersons', len(corppersons))
+    # print('corppersons', corppersons)
+    # print('num of corppersons', len(corppersons))
     # 定义json数组作为所有合作学者信息记录
     per_json = []
 
@@ -127,7 +127,7 @@ def spid(url0, browser, browser2):
         browser.find_element_by_css_selector('#co_rel_map > a > i').click()
         browser.find_element_by_css_selector('#main_content_right > div.co_author_wr > h3 > a').click()
 
-    print('per_json', per_json)
+    # print('per_json', per_json)
     # 点击获取按照被引量降序的论文排列
     # 重新获取该网址
     browser.get(url0)
@@ -165,14 +165,14 @@ def spid(url0, browser, browser2):
                     '#dtl_l > div.main-info > div.c_content > div.year_wr').text.split('：')[
                     -1]
         except Exception as e:
-            print('no time')
+            # print('no time')
             paperinfo['time'] = 'None'
         try:
             paperinfo['cited'] = browser2.find_element_by_css_selector(
                 '#dtl_l > div > div.c_content > div.ref_wr'
             ).text.split('：')[-1]
         except Exception as e:
-            print('no cited')
+            # print('no cited')
             paperinfo['cited'] = '0'
 
         infos = browser2.find_elements_by_css_selector('#dtl_r > div> div')
@@ -198,9 +198,11 @@ def spid(url0, browser, browser2):
             mainp = []
         mainplist.append(mainp)
 
-    print('namelist', namelist)
-    print('paperinfolist', paperinfolist)
-    print('mainplist', mainplist)
+    # print('namelist', namelist)
+    # print('paperinfolist', paperinfolist)
+    # print('mainplist', mainplist)
+    return [info_id, info_cited, info_achi, info_h, info_g, achi_list, achi_json, cited_json, per_json, namelist, \
+           paperinfolist, mainplist]
 
 
 if __name__ == '__main__':
@@ -214,6 +216,6 @@ if __name__ == '__main__':
     Url = input('请输入需要爬取的学者主页网址')
     print('开始爬取')
     info = spid(Url, browser, browser2)
-    print('爬取完毕:\n', info)
+    print('爬取完毕:\ninfo:\n', info)
     browser.close()
     browser2.close()

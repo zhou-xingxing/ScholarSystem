@@ -201,8 +201,14 @@ def spid(url0, browser, browser2):
     # print('namelist', namelist)
     # print('paperinfolist', paperinfolist)
     # print('mainplist', mainplist)
+    corpins = browser.find_elements_by_css_selector('#main_content_right > div.co_affiliate_wr > ul > li')
+    corpins_dict = {}
+    for corpin in corpins:
+        corpins_dict[corpin.text.split('\n')[0]] = corpin.text.split('\n')[1]
+
+
     return [info_id, info_cited, info_achi, info_h, info_g, achi_list, achi_json, cited_json, per_json, namelist, \
-           paperinfolist, mainplist]
+           paperinfolist, mainplist, corpins_dict]
 
 
 if __name__ == '__main__':

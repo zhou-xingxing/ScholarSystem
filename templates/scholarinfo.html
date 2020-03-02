@@ -5,6 +5,8 @@
     <title>Title</title>
     <script type="text/javascript" src="../static/js/jquery-1.8.3.min.js"></script>
     <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/echarts.js" ></script>
+    <script src="../static/js/RelationNet.js"></script>
     <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../static/css/tableyx.css" rel="stylesheet" type="text/css">
@@ -202,10 +204,26 @@
                                                         <table class="my-table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>序号</th>
-                                                                    <th>名称</th>
-                                                                </tr>
+                                                                        <th style="width: 20%">序号</th>
+                                                                        <th style="width: 40%">合作机构</th>
+
+                                                                        <th>合作次数</th>
+                                                                    </tr>
                                                             </thead>
+                                                            <tbody>
+                                                                    <tr>
+                                                                        <td><sapn class="num-box radius3">1</sapn></td>
+                                                                        <td>上海市肿瘤研究所</td>
+
+                                                                        <td>1571</td>
+                                                                    </tr>
+                                                                <tr>
+                                                                        <td><sapn class="num-box radius3">2</sapn></td>
+                                                                        <td>上海市肿瘤研究所流行病学研究室</td>
+
+                                                                        <td>644</td>
+                                                                    </tr>
+                                                                </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -282,22 +300,7 @@
                                                 <div role="tabpanel" class="tab-pane" id="cluster6">
                                                     <div class="line-a bg-e pd40">
                                                         <div id="ContentPlaceHolder1_divRenetwork"></div>
-                                                        <table class="my-table table-hover">
-                                                                <colgroup>
-                                                                    <col width="50">
-                                                                    <col width="">
-                                                                    <col width="100">
-                                                                    <col width="130">
-                                                                </colgroup>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>序号</th>
-                                                                        <th>名称</th>
-                                                                        <th>&nbsp;</th>
-                                                                        <th>成果数量</th>
-                                                                    </tr>
-                                                                </thead>
-                                                            </table>
+                                                        <div id="RelationNet" style="width: 800px;height: 800px;"></div>
                                                         </div>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane" id="cluster7">

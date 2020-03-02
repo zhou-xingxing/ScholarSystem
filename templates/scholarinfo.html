@@ -2,16 +2,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>学者个人界面</title>
     <script type="text/javascript" src="../static/js/jquery-1.8.3.min.js"></script>
     <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/echarts.js" ></script>
+    <script src="../static/js/RelationNet.js"></script>
+    <script type="text/javascript" src="../static/js/echarts-wordcloud.js"></script>
     <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../static/css/tableyx.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
 <script type="text/javascript">
+    //<![CDATA[
+    var theForm = document.forms['form1'];
+        if (!theForm) {
+            theForm = document.form1;
+        }
+        function __doPostBack(eventTarget, eventArgument) {
+            if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                theForm.__EVENTTARGET.value = eventTarget;
+                theForm.__EVENTARGUMENT.value = eventArgument;
+                theForm.submit();
+            }
+        }//]]>
 </script>
+
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tbody>
         <!-- start 1、LOGO+反馈按钮-->
@@ -62,20 +79,30 @@
                                                 <div class="box50 fl">
                                                     <!-- 学者姓名 -->
                                                     <a class="font24 color-wit" href="javascript:void(0)">
-                                                        <span id="ContentPlaceHolder1_LabelFullName"></span>
-                                                        <span id="ContentPlaceHolder1_LabelShortName"></span>
+                                                        <span>{{ scholarname }}</span>
                                                     </a>
                                                     <!-- 地区和机构 -->
                                                     <div class="ini-box pr20 color-gray pt10">
                                                         <!-- 图标 -->
-                                                        <i class="glyphicon glyphicon-jigou pr10"></i>
+                                                        <i class="glyphicon glyphicon-home pr10"></i>
                                                         <!-- 地区机构 -->
-                                                        <span id="ContentPlaceHolder1_LabelRegion"></span>
+                                                        <span id="ContentPlaceHolder1_LabelRegion">{{ scholarschool }}</span>
                                                     </div>
                                                     <!-- ORCID 号-->
-                                                    <p class="color-gray pb10">ORCID：
+                                                    <p class="color-gray pb10">ScholarID：
                                                         <a id="ContentPlaceHolder1_idORCID" class="color-gray" target="_blank">
-                                                            <span id="ContentPlaceHolder1_LabelORCID"></span>
+                                                            <span id="ContentPlaceHolder1_LabelORCID">{{ scholarid }}</span>
+                                                        </a>
+                                                    </p>
+                                                     <!-- 研究领域-->
+                                                    <p class="color-gray pb10">研究领域：
+                                                        <a id="ContentPlaceHolder1_idORCID" class="color-gray" target="_blank">
+                                                            <span id="ContentPlaceHolder1_LabelORCID">
+                                                                {% for field in scholarfield %}
+                                                                    {{ field }}
+                                                                {% endfor %}
+
+                                                            </span>
                                                         </a>
                                                     </p>
                                                     <!-- 一行数据 -->
@@ -83,24 +110,25 @@
                                                         <!-- 成果数目-->
                                                         <a class="mr15 color-wit line-h" href="javascript:void(0)">
                                                             <span class="txt-h">成果数</span>
-                                                            <span id="ContentPlaceHolder1_LabelCount"></span>
+                                                            <span id="ContentPlaceHolder1_LabelCount">{{ achievement_num }}</span>
                                                         </a>
-                                                        <!-- IF数目-->
+                                                        <!-- 引用数目-->
                                                         <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF" class="mr15 color-wit line-h">
-                                                            <span class="txt-h">总IF</span>
-                                                            <span id="ContentPlaceHolder1_LabelCountIF"></span>
+                                                            <span class="txt-h">引用数</span>
+                                                            <span id="ContentPlaceHolder1_LabelCountIF">{{ cited_num }}</span>
                                                         </a>
-                                                        <!-- 平均IF-->
+                                                        <!-- H指数-->
                                                         <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
-                                                            <span class="txt-h">平均IF</span>
-                                                            <span id="ContentPlaceHolder1_LabelAverageIF"></span>
+                                                            <span class="txt-h">H指数</span>
+                                                            <span id="ContentPlaceHolder1_LabelAverageIF">{{ Hpoint }}</span>
                                                         </a>
-                                                        <!-- XML 和导出成果-->
-                                                        <a id="ContentPlaceHolder1_A1" target="_blank" class="mr15 color-wit line-h">&nbsp;&nbsp;XML</a>
-                                                        <a id="ContentPlaceHolder1_LinkButton1" class="mr15 color-wit line-h pl10 bg-red" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$LinkButton1','')">
-                                                            <span class="glyphicon glyphicon-new-window pr10" aria-hidden="true"></span>导出成果
+                                                        <!-- G指数-->
+                                                        <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
+                                                            <span class="txt-h">G指数</span>
+                                                            <span id="ContentPlaceHolder1_LabelAverageIF">{{ Gpoint }}</span>
                                                         </a>
                                                     </p>
+
                                                 </div>
                                                 <!-- end 学者个人简介-->
                                                 <div class="clear"></div>
@@ -170,10 +198,39 @@
 
                                             <!-- 动态展开接受页面 -->
                                             <div class="tab-content pb40 pl40 fl" style="width: 85%;">
+                                                <!-- 学术成果列表 -->
                                                 <div role="tabpanel" class="tab-pane active" id="cluster1">
                                                     <ul class="box100 clearfix author-list">
-                                                        <div id="ContentPlaceHolder1_InfoList1_divid"></div>
+                                                        <div id="ContentPlaceHolder1_InfoList1_divid">
+                                                            {% for i in range(10)%}
+                                                                <li class="ico-box">
+                                                                    <a class="font16" href="javascript:void(0)">
+                                                                        <span class="pr10">{{ loop.index }}</span>
+                                                                        {{ paper_name_list[i] }}
+                                                                    </a>
+                                                                    {% for paper_info in paper_info_list[i] %}
+                                                                        {% if paper_info == "time" %}
+                                                                             <p class="pt10">发表时间:{{ paper_info_list[i][paper_info] }}</p>
+                                                                        {% endif %}
+                                                                        {% if paper_info == "corppersons" %}
+                                                                             <p class="pt10">合作学者:{{ paper_info_list[i][paper_info] }}</p>
+                                                                        {% endif %}
+                                                                        {% if paper_info == "cited" %}
+                                                                             <p class="pt10">引用量:{{ paper_info_list[i][paper_info] }}</p>
+                                                                        {% endif %}
+                                                                        {% if paper_info == "source" %}
+                                                                             <p class="pt10">来源:{{ paper_info_list[i][paper_info] }}</p>
+                                                                        {% endif %}
+                                                                        {% if paper_info == "href" %}
+                                                                            <p class="pt10">百度学术:<a href="{{ paper_info_list[i][paper_info] }}">链接</a></p>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                    <div class="clear"></div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </div>
                                                     </ul>
+                                                    <!-- 自动隐藏翻页 -->
                                                     <div class="line-t pt10 pl20">
                                                         <nav aria-label="Page navigation">
                                                             <ul class="pagination">
@@ -186,34 +243,44 @@
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane" id="cluster2">
                                                     <div class="line-a bg-e pd40">
-                                                        <div id="ContentPlaceHolder1_divOrganization"></div>
-                                                        <table class="my-table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>序号</th>
-                                                                    <th>名称</th>
-                                                                </tr>
-                                                            </thead>
-                                                        </table>
+                                                            <table class="my-table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 20%;">序号</th>
+                                                                        <th style="width: 40%;">机构名称</th>
+                                                                        <th>&nbsp;</th>
+                                                                        <th>合作次数</th>
+                                                                    </tr>
+                                                                    {% for col in collaborate_org %}
+                                                                        <tr>
+                                                                            <td><span class="num-box radius3">{{ loop.index }}</span></td>
+                                                                            <td><span class="b">{{ col }}</span></td>
+                                                                            <td>------------</td>
+                                                                            <td><span class="b">{{ collaborate_org[col] }}</span></td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                </thead>
+                                                            </table>
                                                     </div>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane" id="cluster3">
                                                     <div class="line-a bg-e pd40">
-                                                        <div id="ContentPlaceHolder1_divPartners"></div>
                                                         <table class="my-table table-hover">
-                                                            <colgroup>
-                                                                <col width="50">
-                                                                <col width="">
-                                                                <col width="100">
-                                                                <col width="130">
-                                                            </colgroup>
                                                             <thead>
                                                                 <tr>
-                                                                    <th>序号</th>
-                                                                    <th>名称</th>
-                                                                    <th>&nbsp;</th>
-                                                                    <th>合作成果</th>
+                                                                    <th style="width: 20%;">序号</th>
+                                                                    <th style="width: 20%;">姓名</th>
+                                                                    <th>机构</th>
+                                                                    <th>学者ID</th>
                                                                 </tr>
+                                                                {% for pal in partner_list %}
+                                                                    <tr>
+                                                                        <td><span class="num-box radius3">{{ loop.index }}</span></td>
+                                                                        {% for p in pal %}
+                                                                                <td><span class="b">{{ pal[p]}}</span></td>
+                                                                        {% endfor %}
+                                                                    </tr>
+                                                                {% endfor %}
                                                             </thead>
                                                         </table>
                                                     </div>
@@ -224,17 +291,23 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th style="width: 20%">序号</th>
-                                                                        <th style="width: 40%">学科名称</th>
+                                                                        <th style="width: 40%">名称</th>
+                                                                        <th ></th>
+                                                                        <th>成果数量</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td><sapn class="num-box radius3">1</sapn></td>
+                                                                        <td><span class="num-box radius3">1</span></td>
                                                                         <td>名称</td>
+                                                                        <td>------------</td>
+                                                                        <td>成果数量</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td><sapn class="num-box radius3">2</sapn></td>
+                                                                <tr>
+                                                                        <td><span class="num-box radius3">2</span></td>
                                                                         <td>名称</td>
+                                                                        <td>------------</td>
+                                                                        <td>成果数量</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -242,89 +315,731 @@
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane" id="cluster5">
                                                     <div class="line-a bg-e pd40">
-                                                        <table class="my-table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="width: 20%">序号</th>
-                                                                        <th style="width: 40%">期刊名称</th>
-                                                                        <th ></th>
-                                                                        <th>成果数量</th>
+                                                         <table class="my-table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 20%">序号</th>
+                                                                    <th style="width: 40%">名称</th>
+                                                                    <th ></th>
+                                                                    <th>成果数量</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for achievement in achievement_list %}
+                                                                     <tr>
+                                                                        <td><span class="num-box radius3">{{ loop.index }}</span></td>
+                                                                        <td>{{ achievement }}</td>
+                                                                        <td>------------</td>
+                                                                        <td>{{ achievement_list[achievement] }}</td>
                                                                     </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    {%  for res in result %}
-                                                                        <tr>
-                                                                            <td><sapn class="num-box radius3">{{ loop.index }}</sapn></td>
-                                                                            <td>{{ res[0] }}</td>
-                                                                            <td>------------</td>
-                                                                            <td>{{ res[1] }}</td>
-                                                                        </tr>
-                                                                    {% endfor %}
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                         </table>
+                                                    </div>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane" id="cluster6">
                                                     <div class="line-a bg-e pd40">
                                                         <div id="ContentPlaceHolder1_divRenetwork"></div>
-                                                        <table class="my-table table-hover">
-                                                                <colgroup>
-                                                                    <col width="50">
-                                                                    <col width="">
-                                                                    <col width="100">
-                                                                    <col width="130">
-                                                                </colgroup>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>序号</th>
-                                                                        <th>名称</th>
-                                                                        <th>&nbsp;</th>
-                                                                        <th>成果数量</th>
-                                                                    </tr>
-                                                                </thead>
-                                                            </table>
+                                                        <div id="RelationNet" style="width: 800px;height: 800px;"></div>
                                                         </div>
                                                 </div>
+                                                <!--个人画像模块-->
                                                 <div role="tabpanel" class="tab-pane" id="cluster7">
                                                     <div class="line-a bg-e pd40">
                                                         <div id="ContentPlaceHolder1_divPainting"></div>
-                                                        <table class="my-table table-hover">
-                                                                <colgroup>
-                                                                    <col width="50">
-                                                                    <col width="">
-                                                                    <col width="100">
-                                                                    <col width="130">
-                                                                </colgroup>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>序号</th>
-                                                                        <th>名称</th>
-                                                                        <th>&nbsp;</th>
-                                                                        <th>成果数量</th>
-                                                                    </tr>
-                                                                </thead>
-                                                            </table>
+                                                        <div id="7_main" style="width: 800px; height: 600px"></div>
+                                                        <script>
+                                                            onload = function () {
+      var data = {
+        value: [
+          {
+            "name": "清华大学",
+            "value": 309
+          },
+          {
+            "name": "人工智能",
+            "value": 260
+          },
+          {
+            "name": "无人驾驶",
+            "value": 173
+          },
+          {
+            "name": "深度学习",
+            "value": 155
+          },
+          {
+            "name": "卷积神经网络",
+            "value": 3360
+          },
+          {
+            "name": "ACM fellow",
+            "value": 121
+          },
+          {
+            "name": "计算机系",
+            "value": 76
+          },
+          {
+            "name": "计算机图形学",
+            "value": 62
+          },
+          {
+            "name": "教授",
+            "value": 37
+          },
+          {
+            "name": "EMNLP",
+            "value": 32
+          },
+          {
+            "name": "学术成果丰富",
+            "value": 28
+          },
+          {
+            "name": "合作人员众多",
+            "value": 4
+          },
+          {
+            "name": "百度CTO",
+            "value": 1275
+          },
+          {
+            "name": "AI LAB",
+            "value": 254
+          },
+          {
+            "name": "姚期智",
+            "value": 188
+          },
+          {
+            "name": "唐杰",
+            "value": 166
+          },
+          {
+            "name": "正直",
+            "value": 942
+          },
+          {
+            "name": "友善",
+            "value": 177
+          },
+          {
+            "name": "聪明",
+            "value": 133
+          },
+          {
+            "name": "美发",
+            "value": 80
+          },
+          {
+            "name": "香水",
+            "value": 50
+          },
+          {
+            "name": "个人护理",
+            "value": 46
+          },
+          {
+            "name": "美甲",
+            "value": 26
+          },
+          {
+            "name": "SPA美体",
+            "value": 21
+          },
+          {
+            "name": "ICCV 5篇",
+            "value": 914
+          },
+          {
+            "name": "绿植花卉",
+            "value": 311
+          },
+          {
+            "name": "狗",
+            "value": 257
+          },
+          {
+            "name": "其他宠物",
+            "value": 131
+          },
+          {
+            "name": "水族",
+            "value": 125
+          },
+          {
+            "name": "猫",
+            "value": 122
+          },
+          {
+            "name": "动物",
+            "value": 81
+          },
+          {
+            "name": "鸟",
+            "value": 67
+          },
+          {
+            "name": "宠物用品",
+            "value": 41
+          },
+          {
+            "name": "宠物服务",
+            "value": 26
+          },
+          {
+            "name": "图像识别",
+            "value": 913
+          },
+          {
+            "name": "路障检测",
+            "value": 483
+          },
+          {
+            "name": "面相分析",
+            "value": 47
+          },
+          {
+            "name": "手相",
+            "value": 32
+          },
+          {
+            "name": "公益",
+            "value": 90
+          }
+        ],
+        //专家图片，转码成base64
+          image:"data:image/png;base64,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"
+      }
+      var myChart = echarts.init(document.getElementById('7_main'));
+      //温馨提示：image 选取有严格要求不可过大；，否则firefox不兼容 iconfont上面的图标可以
+      var maskImage = new Image();
+      maskImage.src = data.image
+
+      maskImage.onload = function(){
+        myChart.setOption( {
+          backgroundColor:'#fff',
+          tooltip: {
+            show: false
+          },
+          series: [{
+            type: 'wordCloud',
+            gridSize: 1,
+            sizeRange: [12, 55],
+            rotationRange: [-45, 0, 45, 90],
+            maskImage: maskImage,
+            textStyle: {
+              normal: {
+                color: function() {
+                  return 'rgb(' +
+                      Math.round(Math.random() * 255) +
+                      ', ' + Math.round(Math.random() * 255) +
+                      ', ' + Math.round(Math.random() * 255) + ')'
+                }
+              }
+            },
+            left: 'center',
+            top: 'center',
+            // width: '96%',
+            // height: '100%',
+            right: null,
+            bottom: null,
+            // width: 300,
+            // height: 200,
+            // top: 20,
+            data: data.value
+          }]
+        })
+      }
+
+    }
+                                                        </script>
                                                         </div>
                                                 </div>
+                                                <!--数据可视化模块-->
                                                 <div role="tabpanel" class="tab-pane" id="cluster8">
                                                     <div class="line-a bg-e pd40">
                                                         <div id="ContentPlaceHolder1_divDataVision"></div>
-                                                        <table class="my-table table-hover">
-                                                                <colgroup>
-                                                                    <col width="50">
-                                                                    <col width="">
-                                                                    <col width="100">
-                                                                    <col width="130">
-                                                                </colgroup>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>序号</th>
-                                                                        <th>名称</th>
-                                                                        <th>&nbsp;</th>
-                                                                        <th>成果数量</th>
-                                                                    </tr>
-                                                                </thead>
-                                                            </table>
+                                                        <script>
+    $(function() {
+        //3.初始化echarts
+        var  ec1 = echarts.init(document.getElementById('8_main1'))
+        var  ec2= echarts.init(document.getElementById('8_main2'))
+        var  ec3= echarts.init(document.getElementById('8_main3'))
+        var  ec4= echarts.init(document.getElementById('8_main4'))
+        //4.配置option
+        //<!--可视化模块：成果可视化findResultByWD-->
+        var option1 = {
+            title: {
+	        text: '1. 学术成果可视化',
+	        textStyle: {
+	        	 align: 'center',
+	            color: '#000',
+	            fontSize: 20,
+	        },
+	        top: '3%',
+	        left: '10%',
+	    },
+    backgroundColor: '#fff',
+    grid: {
+        top: '15%',
+        right: '10%',
+        left: '10%',
+        bottom: '12%'
+    },
+    xAxis: [{
+        type: 'category',
+        color: '#59588D',
+        data: ['2019Q1', '2019Q2', '2019Q3', '2019Q4'],
+        axisLabel: {
+            margin: 20,
+            color: '#000',
+            textStyle: {
+                fontSize: 18
+            },
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'rgba(107,107,107,0.37)',
+            }
+        },
+        axisTick: {
+            show: false
+        },
+    }],
+    yAxis: [{
+        min: 0,
+        max: 100,
+        axisLabel: {
+            formatter: '{value}%',
+            color: '#000',
+            textStyle: {
+                fontSize: 18
+            },
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'rgba(107,107,107,0.37)',
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        splitLine: {
+            lineStyle: {
+                color: 'rgba(131,101,101,0.2)',
+                type: 'dashed',
+            }
+        }
+    }],
+    series: [{
+        type: 'bar',
+        data: [40, 80, 20, 56],
+        barWidth: '50px',
+        itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#FF9A22' // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: '#FFD56E' // 100% 处的颜色
+                }], false),
+                barBorderRadius: [30, 30, 0, 0],
+            }
+        },
+        label: {
+            normal: {
+                show: true,
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#333',
+                position: 'top',
+            }
+        }
+    },{
+        data: [48, 95, 60, 56],
+        type: 'line',
+        smooth: true,
+        name: '折线图',
+        symbol: 'none',
+        lineStyle: {
+            color: '#3275FB',
+            width: 4,
+            shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
+            shadowBlur: 15,
+            shadowOffsetY: 20,
+        }
+    }
+]
+};
+        //<!--可视化模块：引用可视化findQuationByWD-->
+        var option2 = {
+            title: {
+	        text: '2. 引用可视化',
+	        textStyle: {
+	        	 align: 'center',
+	            color:'black',
+	            fontSize: 20,
+	        },
+	        top: '3%',
+	        left: '10%',
+	    },
+    backgroundColor: '#fff',
+    grid: {
+        top: '15%',
+        right: '10%',
+        left: '10%',
+        bottom: '12%'
+    },
+    xAxis: [{
+        type: 'category',
+        color: 'green',
+        data: ['2019Q1', '2019Q2', '2019Q3', '2019Q4'],
+        axisLabel: {
+            margin: 20,
+            color: 'black',
+            textStyle: {
+                fontSize: 18
+            },
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'rgba(107,107,107,0.37)',
+            }
+        },
+        axisTick: {
+            show: false
+        },
+    }],
+    yAxis: [{
+        min: 0,
+        max: 100,
+        axisLabel: {
+            formatter: '{value}%',
+            color: 'black',
+            textStyle: {
+                fontSize: 18
+            },
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'rgba(107,107,107,0.37)',
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        splitLine: {
+            lineStyle: {
+                color: 'rgba(131,101,101,0.2)',
+                type: 'dashed',
+            }
+        }
+    }],
+    series: [{
+        type: 'bar',
+        data: [40, 80, 20, 56],
+        barWidth: '50px',
+        itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#d3e4ff' // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: '#0f4aff' // 100% 处的颜色
+                }], false),
+                barBorderRadius: [30, 30, 0, 0],
+            }
+        },
+        label: {
+            normal: {
+                show: true,
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#333',
+                position: 'top',
+            }
+        }
+    },{
+        data: [48, 95, 60, 56],
+        type: 'line',
+        smooth: true,
+        name: '折线图',
+        symbol: 'none',
+        lineStyle: {
+            color: '#f1c93b',
+            width: 4,
+            shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
+            shadowBlur: 15,
+            shadowOffsetY: 20,
+        }
+    }
+]
+};
+        //<!--可视化模块：论文会议分布可视化findPaperDistributeByWD-->
+        var charts = { // 按顺序排列从大到小
+            cityList: ['SCI', '北大核心期刊', 'CSCD期刊数', '中国科技核心', '其他期刊数'],
+            cityData: [7500, 6200, 5700, 4200, 3500]
+        }
+        var top10CityList = charts.cityList
+        var top10CityData = charts.cityData
+        var color = ['rgba(248,195,248', 'rgba(100,255,249', 'rgba(135,183,255', 'rgba(248,195,248', 'rgba(100,255,249']
+        let lineY = []
+        for (var i = 0; i < charts.cityList.length; i++) {
+            var x = i
+            if (x > color.length - 1) {
+                x = color.length - 1
+            }
+            var data = {
+    name: charts.cityList[i],
+    color: color[x] + ')',
+    value: top10CityData[i],
+    itemStyle: {
+      normal: {
+        show: true,
+        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+          offset: 0,
+          color: color[x] + ', 0.3)'
+        }, {
+          offset: 1,
+          color: color[x] + ', 1)'
+        }], false),
+        barBorderRadius: 10
+      },
+      emphasis: {
+        shadowBlur: 15,
+        shadowColor: 'rgba(0, 0, 0, 0.1)'
+      }
+    }
+  }
+            lineY.push(data)
+        }
+        console.log(lineY)
+        var option3= {
+            title: {
+	        text: '3. 论文分布情况',
+	        textStyle: {
+	        	 align: 'center',
+	            color:'black',
+	            fontSize: 20,
+	        },
+	        top: '3%',
+	        left: '10%',
+	    },
+    backgroundColor:'#fff',
+  tooltip: {
+    trigger: 'item'
+  },
+  grid: {
+    borderWidth: 0,
+    top: '10%',
+    left: '5%',
+    right: '15%',
+    bottom: '3%'
+  },
+  color: color,
+  yAxis: [{
+    type: 'category',
+    inverse: true,
+    axisTick: {
+      show: false
+    },
+    axisLine: {
+      show: false
+    },
+    axisLabel: {
+      show: false,
+      inside: false
+    },
+    data: top10CityList
+  }, {
+    type: 'category',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      inside: false,
+      textStyle: {
+        color: '#000',
+        fontSize: '14',
+        fontFamily: 'PingFangSC-Regular'
+      },
+      formatter: function (val) {
+        return `${val}k`
+      }
+    },
+    splitArea: {
+      show: false
+    },
+    splitLine: {
+      show: false
+    },
+    data: top10CityData
+  }],
+  xAxis: {
+    type: 'value',
+    axisTick: {
+      show: false
+    },
+    axisLine: {
+      show: false
+    },
+    splitLine: {
+      show: false
+    },
+    axisLabel: {
+      show: false
+    }
+  },
+  series: [{
+    name: '',
+    type: 'bar',
+    zlevel: 2,
+    barWidth: '10px',
+    data: lineY,
+    animationDuration: 1500,
+    label: {
+      normal: {
+        color: '#000',
+        show: true,
+        position: [0, '-24px'],
+        textStyle: {
+          fontSize: 16
+        },
+        formatter: function (a, b) {
+          return a.name
+        }
+      }
+    }
+  }],
+  animationEasing: 'cubicOut'
+};
+        //<!--可视化模块：论文关键词可视化findDirectionByWD-->
+        var option4 = {
+    title: {
+	        text: '4. 论文关键词词云',
+	        textStyle: {
+	        	 align: 'center',
+	            color: '#000',
+	            fontSize: 20,
+	        },
+	        top: '3%',
+	        left: '10%',
+	    },
+    tooltip: {},
+    series: [{
+        type: 'wordCloud',
+        gridSize: 20,
+        sizeRange: [12, 50],
+        rotationRange: [0, 0],
+        shape: 'circle',
+        textStyle: {
+            normal: {
+                color: function() {
+                    return 'rgb(' + [
+                        Math.round(Math.random() * 160),
+                        Math.round(Math.random() * 160),
+                        Math.round(Math.random() * 160)
+                    ].join(',') + ')';
+                }
+            },
+            emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+            }
+        },
+        data: [{
+            name: 'Sam S Club',
+            value: 10000,
+            textStyle: {
+                normal: {
+                    color: 'black'
+                },
+                emphasis: {
+                    color: 'red'
+                }
+            }
+        }, {
+            name: 'Macys',
+            value: 6181
+        }, {
+            name: 'Amy Schumer',
+            value: 4386
+        }, {
+            name: 'Jurassic World',
+            value: 4055
+        }, {
+            name: 'Charter Communications',
+            value: 2467
+        }, {
+            name: 'Chick Fil A',
+            value: 2244
+        }, {
+            name: 'Planet Fitness',
+            value: 1898
+        }, {
+            name: 'Pitch Perfect',
+            value: 1484
+        }, {
+            name: 'Express',
+            value: 1112
+        }, {
+            name: 'Home',
+            value: 965
+        }, {
+            name: 'Johnny Depp',
+            value: 847
+        }, {
+            name: 'Lena Dunham',
+            value: 582
+        }, {
+            name: 'Lewis Hamilton',
+            value: 555
+        }, {
+            name: 'KXAN',
+            value: 550
+        }, {
+            name: 'Mary Ellen Mark',
+            value: 462
+        }, {
+            name: 'Farrah Abraham',
+            value: 366
+        }, {
+            name: 'Rita Ora',
+            value: 360
+        }, {
+            name: 'Serena Williams',
+            value: 282
+        }, {
+            name: 'NCAA baseball tournament',
+            value: 273
+        }, {
+            name: 'Point Break',
+            value: 265
+        }]
+    }]
+};
+        //5.设置option
+        ec1.setOption(option1)
+        ec2.setOption(option2)
+        ec3.setOption(option3)
+        ec4.setOption(option4)
+    })
+
+
+
+</script>
+                                                        <div id="8_main1" align="center" style="margin:0 auto;width: 1000px;height: 800px;"></div>
+                                                        <div id="8_main2" align="center" style="margin:0 auto;width: 1000px;height: 800px;"></div>
+                                                        <div id="8_main3" align="center" style="margin:0 auto;width: 1000px;height: 800px;"></div>
+                                                        <div id="8_main4" align="center" style="margin:0 auto;width: 1000px;height: 800px;"></div>
                                                         </div>
                                                 </div>
                                             </div>

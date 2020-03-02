@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,Blueprint
 import datetime
 
-app = Flask(__name__)
-
+app = Blueprint("app",__name__)
 
 @app.route('/')
 def index():
@@ -41,5 +40,4 @@ def handlefeedback():
 def relation():
     return render_template("RelationNet_test.html")
 
-if __name__ == '__main__':
-    app.run()
+

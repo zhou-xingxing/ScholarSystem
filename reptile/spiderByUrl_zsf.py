@@ -36,7 +36,7 @@ def spid(url0, browser, browser2):
     try:
         achi1s = browser.find_elements_by_css_selector(
             '#achievement_wr > div.effectmap_pie > div.pieBox.journalBox > p')
-        for achi in achi1s[1:]:
+        for achi in achi1s:
             achi_dict[re.split('0|1|2|3|4|5|6|7|8|9', achi.text)[0]] = re.search('(\d+)', achi.text).group(1)
     except Exception as e:
         pass

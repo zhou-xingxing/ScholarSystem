@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
-import datetime,json
+from flask import Flask, render_template, request,Blueprint
+import datetime
 
-app = Flask(__name__)
-
+app = Blueprint("app",__name__)
 
 @app.route('/')
 def index():
@@ -92,6 +91,3 @@ def testrelation():
             "value": i["corpnum"]
         })
     return render_template("RelationNet_test.html",rela_categories=local_category, rela_dates=local_data, rela_links=local_data)
-
-if __name__ == '__main__':
-    app.run()

@@ -37,17 +37,21 @@ def handlefeedback():
     cursor.execute("select max(id) from feedback")
     result = cursor.fetchone()
     id = int(result[0])
+    row=0
     # 插入数据
     try:
         sql = "insert into feedback(id,scholar_name,scholar_school,fd_type,content,email,receive) values (%s,%s,%s,%s,%s,%s,%s) "
-        cursor.execute(sql, [id + 1, name, school, fd_type, content, email, receive])
+        row=cursor.execute(sql, [id + 1, name, school, fd_type, content, email, receive])
         # print('Successful')
-        SuccessOrNot = True
         connection.commit()
     except:
         # print('Failed')
         SuccessOrNot = False
         connection.rollback()
+    if row==1:
+        SuccessOrNot = True
+    else:
+        SuccessOrNot = False
 
     cursor.close()
     connection.close()

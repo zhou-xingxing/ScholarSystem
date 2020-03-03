@@ -30,7 +30,7 @@ $(function() {
             achiveyear.push(achivelist[i]["year"]);
             achivenum.push(achivelist[i]["num"]);
         }
-
+        achivenum_max=Math.max(achivenum)
          for(i=0,len=citedlist.length;i<len;i++){
 
             citedyear.push(citedlist[i]["year"]);
@@ -59,9 +59,24 @@ $(function() {
 	            fontSize: 20,
 	        },
 	        top: '3%',
-	        left: '10%',
+	        left: '5%',
 	    },
-        backgroundColor: '#fff',
+            tooltip:{
+                show:true,
+                formatter:'{b}年：{c}篇'
+            },
+        toolbox: {
+            show: true,
+            feature: {
+            saveAsImage: {
+                show: true
+            },
+
+        },
+            top:'3%',
+            right:'10%',
+    },
+        // backgroundColor: '#fff',
         grid: {
             top: '15%',
             right: '10%',
@@ -89,14 +104,15 @@ $(function() {
             },
         }],
         yAxis: [{
-            min: 0,
-            max: 100,
+            type:'value',
+            scale:true,
             axisLabel: {
-                formatter: '{value}%',
+                show:true,
                 color: '#000',
                 textStyle: {
                     fontSize: 18
                 },
+                formatter:'{value}'
             },
             axisLine: {
                 lineStyle: {
@@ -116,15 +132,15 @@ $(function() {
         series: [{
             type: 'bar',
             data: achivenum,
-            barWidth: '50px',
+            barWidth: '30px',
             itemStyle: {
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                         offset: 0,
-                        color: '#FF9A22' // 0% 处的颜色
+                        color: '#ff7204' // 0% 处的颜色
                     }, {
                         offset: 1,
-                        color: '#FFD56E' // 100% 处的颜色
+                        color: '#ffe670' // 100% 处的颜色
                     }], false),
                     barBorderRadius: [30, 30, 0, 0],
                 }
@@ -146,7 +162,7 @@ $(function() {
             symbol: 'none',
             lineStyle: {
                 color: '#3275FB',
-                width: 4,
+                width: 3,
                 shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
                 shadowBlur: 15,
                 shadowOffsetY: 20,
@@ -163,10 +179,25 @@ $(function() {
 	            color:'black',
 	            fontSize: 20,
 	        },
+
 	        top: '3%',
-	        left: '10%',
+	        left: '5%',
 	    },
-    backgroundColor: '#fff',
+            tooltip:{
+                show:true,
+                formatter:'{b}年：{c}次'
+            },
+    // backgroundColor: '#fff',
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show: true
+            }
+        },
+        top:'3%',
+        right:'10%',
+    },
     grid: {
         top: '15%',
         right: '10%',
@@ -194,10 +225,12 @@ $(function() {
         },
     }],
     yAxis: [{
-        min: 0,
-        max: 100,
+        type:'value',
+        scale:true,
+        // min: 0,
+        // max: 100,
         axisLabel: {
-            formatter: '{value}%',
+            formatter: '{value}',
             color: 'black',
             textStyle: {
                 fontSize: 18
@@ -221,15 +254,15 @@ $(function() {
     series: [{
         type: 'bar',
         data: citednum,
-        barWidth: '50px',
+        barWidth: '20px',
         itemStyle: {
             normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: '#d3e4ff' // 0% 处的颜色
+                    color: '#ff7204' // 0% 处的颜色
                 }, {
                     offset: 1,
-                    color: '#0f4aff' // 100% 处的颜色
+                    color: '#ffe670' // 100% 处的颜色
                 }], false),
                 barBorderRadius: [30, 30, 0, 0],
             }
@@ -250,8 +283,8 @@ $(function() {
         name: '折线图',
         symbol: 'none',
         lineStyle: {
-            color: '#f1c93b',
-            width: 4,
+            color: '#3275FB',
+            width: 3,
             shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
             shadowBlur: 15,
             shadowOffsetY: 20,
@@ -307,11 +340,22 @@ $(function() {
 	            fontSize: 20,
 	        },
 	        top: '3%',
-	        left: '10%',
+	        left: '5%',
 	    },
-    backgroundColor:'#fff',
+    // backgroundColor:'#fff',
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show: true
+            }
+        },
+        top:'3%',
+        right:'10%',
+    },
   tooltip: {
-    trigger: 'item'
+    trigger: 'item',
+    formatter:'{c}篇'
   },
   grid: {
     borderWidth: 0,
@@ -331,9 +375,18 @@ $(function() {
       show: false
     },
     axisLabel: {
-      show: false,
-      inside: false
+      show: true,
+      inside: false,
+      formatter: function (val) {
+        return `${val}`
+      },
+        textStyle: {
+        color: '#000',
+        fontSize: '16',
+        fontFamily: 'PingFangSC-Regular'
+      },
     },
+
     data: papernum
   }, {
     type: 'category',
@@ -348,11 +401,11 @@ $(function() {
       inside: false,
       textStyle: {
         color: '#000',
-        fontSize: '14',
+        fontSize: '16',
         fontFamily: 'PingFangSC-Regular'
       },
       formatter: function (val) {
-        return `${val}k`
+        return `${val}`
       }
     },
     splitArea: {
@@ -369,37 +422,38 @@ $(function() {
       show: false
     },
     axisLine: {
-      show: false
+      show: true
     },
     splitLine: {
-      show: false
+      show: true
     },
     axisLabel: {
-      show: false
+      show: true
     }
   },
+
   series: [{
     name: '',
     type: 'bar',
-    zlevel: 2,
-    barWidth: '10px',
+    // zlevel: 2,
+    barWidth: '15px',
     data: papernum,
-    animationDuration: 1500,
+    // animationDuration: 1500,
     label: {
       normal: {
         color: '#000',
-        show: true,
-        position: [0, '-24px'],
-        textStyle: {
-          fontSize: 16
-        },
-        formatter: function (a, b) {
-          return a.name
-        }
+        show: false,
+        // position: [0, '-24px'],
+        // textStyle: {
+        //   fontSize: 16
+        // },
+        // formatter: function (a, b) {
+        //   return a.name
+        // }
       }
     }
   }],
-  animationEasing: 'cubicOut'
+  // animationEasing: 'cubicOut'
 };
         //<!--可视化模块：论文关键词可视化findDirectionByWD-->
         var option4 = {
@@ -411,15 +465,28 @@ $(function() {
 	            fontSize: 20,
 	        },
 	        top: '3%',
-	        left: '10%',
+	        left: '5%',
 	    },
-    tooltip: {},
+    tooltip: {
+
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show: true
+            }
+        },
+        top: '3%',
+	    right: '10%',
+    },
     series: [{
         type: 'wordCloud',
         gridSize: 20,
-        sizeRange: [12, 50],
+        sizeRange: [15, 50],
         rotationRange: [0, 0],
         shape: 'circle',
+        roam:true,
         textStyle: {
             normal: {
                 color: function() {

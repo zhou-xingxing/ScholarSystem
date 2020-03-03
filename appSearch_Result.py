@@ -2,41 +2,45 @@ from flask import Flask, render_template, request,Blueprint
 import pymysql
 import requests
 import json
+import time
 app = Blueprint("appSearch_Result",__name__)
 
 
-@app.route('/appSearch_result')
+@app.route('/Search_result')
 def appSearch_result():
-    connection = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",charset="utf8")
-    cursor = connection.cursor()
-    cursor.execute('select * from 北京大学 where scholarid is not null')
-    result = cursor.fetchone()
-    # for i in range(18):
-    #     print(result[i])
-    scholarname = result[1]
-    scholarschool = result[2]
-    scholarmajor = result[3]
-    scholarid = result[4]
-    scholarfield = eval(result[5])
-    cited_num = result[6]
-    achievement_num = result[7]
-    Hpoint = result[8]
-    Gpoint = result[9]
-    str = "{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
-    achievement_list = eval(str)
-    achievement_list2 = result[11]
-    cited_list = result[12]
-    partner_list = eval(result[13])
-    paper_name_list = eval(result[14])
-    paper_info_list = eval(result[15])
-    paper_search_list = result[16]
-    collaborate_org = eval(result[17])
-    return render_template("search_result.html", scholarname=scholarname, scholarschool=scholarschool,
-                           scholarmajor=scholarmajor
-                           , scholarid=scholarid, scholarfield=scholarfield, cited_num=cited_num,
-                           achievement_num=achievement_num,
-                           Hpoint=Hpoint, Gpoint=Gpoint, achievement_list=achievement_list,
-                           achievement_list2=achievement_list2
-                           , cited_list=cited_list, partner_list=partner_list, paper_name_list=paper_name_list,
-                           paper_info_list=paper_info_list,
-                           paper_search_list=paper_search_list, collaborate_org=collaborate_org)
+    keyword = request.args.get('keyword');
+    search_type = request.args.get('type');
+    start_time = time.time()  # 开始时间
+    conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
+                           charset="utf8")
+    cls = conn.cursor()
+    sql1 = "select table_name from information_schema.tables where table_schema='scholar_info'"  # 获取当前所有表（学校）
+    cls.execute(sql1)
+    conn.commit()
+    results = cls.fetchall()
+    # print(results)
+    SQL = ""
+    name = keyword
+    if search_type == "1":
+        for i in results:
+            sql = "select * from %s where id between 1 and 2500 and name='%s'" % (i[0], name)
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
+    elif search_type == "3":
+            sql = "select * from %s " % (name)
+            SQL += sql
+    elif search_type == "4":
+        for i in results:
+            sql = "select * from %s where id between 1 and 2500 and field LIKE %s" % (i[0] , '%'+name+'%')
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
+    # print(SQL+';')
+    cls.execute(SQL + ';')
+    conn.commit()
+    result = cls.fetchall()
+    end_time = time.time()  # 结束时间
+    print("time:", (end_time - start_time))  # 结束时间-开始时间
+    length = len(result)
+    return render_template('search_result.html',result=result,length=length)

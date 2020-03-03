@@ -11,148 +11,128 @@
 </head>
 
 <body>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tbody>
-        <!--页面的最顶部开始-->
-        <tr>
-            <td>
-                <div class="box100 bg-wit">
-                    <div class="box1200 h80 mau ">
-                        <div class="fl logo"><a href="/"><img src="../static/images/logo.png" alt=""></a></div>
-                        <div class="fr pt25">
-                            <a class="my-btn mr15 fr" href="../templates/feedback.html" target="_blank" title="CAU云中君开发团队">联系我们</a>
-                        </div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tbody>
+    <!--页面的最顶部开始-->
+    <tr>
+        <td>
+            <div class="box100 bg-wit">
+                <div class="box1200 h80 mau ">
+                    <div class="fl logo"><a href="/"><img src="../static/images/logo.png" alt=""></a></div>
+                    <div class="fr pt25">
+                        <a class="my-btn mr15 fr" href="../templates/feedback.html" target="_blank" title="CAU云中君开发团队">联系我们</a>
                     </div>
                 </div>
-            </td>
-        </tr>
-        <!--页面的最顶部结束-->
-        <tr>
-            <td>
-                <table width="100%" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
-                    <tbody><tr>
-                        <td valign="top">
-                            <div class="bg-e">
-                                <!--搜索框开始-->
-                                <div class="box100 pt10 pb10 bg-blue2">
-                                    <div class="box1200 mau clearfix pd20">
-                                        <div class="box720 mau soso-bg box-shawd10 pos">
-                                            <div class="box100">
+            </div>
+        </td>
+    </tr>
+    <!--页面的最顶部结束-->
+    <tr>
+        <td>
+            <table width="100%" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+                    <td valign="top">
+                        <div class="bg-e">
+                            <!--搜索框开始-->
+                            <div class="box100 pt10 pb10 bg-blue2">
+                                <div class="box1200 mau clearfix pd20">
+                                    <div class="box720 mau soso-bg box-shawd10 pos">
+                                        <div class="box100">
 
-                                                <div class="box90 box30 pos pt13 pl20 fl font16">
-                                                    <input  id="search2" placeholder="学者名：中英文名（必填）" class="input1">
-                                                </div>
-                                                <div class="box09 fr pt11 text-center font16">
-                                                    <button type="button" id="searchbtn2" class="btn btn-info btn-default btnsearch">搜索</button>
-                                                </div>
+                                            <div class="box90 box30 pos pt13 pl20 fl font16">
+                                                <input id="search2" placeholder="学者名：中英文名（必填）" class="input1">
+                                            </div>
+                                            <div class="box09 fr pt11 text-center font16">
+                                                <button type="button" id="searchbtn2"
+                                                        class="btn btn-info btn-default btnsearch">搜索
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--搜索框结束-->
-        <!--查询结果主页面开始-->
-        <div class="box1200 mau pt20">
-            <p class="font18 box-shawd10 bg-wit pd10 pl20 ">查询结果( <span>x</span> 条记录)</p>
-        </div>
-        <div class="box1200 mau pt10 ">
-            <p class="box-shawd10 bg-wit pl20 font16 ">
-                <p class="font18 box-shawd10 bg-wit pd10 pl20 ">学者列表</p>
-            </p>
-        </div>
-                                <!--循环输出同名学者-->
-        <div class="box1200 mau pd100">
-            <ul id="ContentPlaceHolder1_ulAuthor" class="clearfix author-list">
-            <!--下面的接口主要用的晓哥模板，具体姓名匹配循环输出还没完全实现 by bwm_3.3-->
-                {% for i in range(10)%}
-                    <li class="box-shawd10 bg-wit">
-                    <!--这里是头像，我统一用了黑色的专家图标作为头像-->
-                    <div class="fl mr40"><a class="userbox" href="AuthorView?wd=TZC10000353" target="_blank"><img
-                    src="../static/images/scholar_portrait.png"></a>
-                    </div>
-                    <!--头像右侧的信息栏开始-->
-                        {% for paper_info in paper_info_list[i] %}
-                            {% if paper_info == "time" %}
-                                <p class="pt10">学者姓名: <a href="../scholarinfo">{{ scholarname }}</a></p>
-                            {% endif %}
-                            {% if paper_info == "corppersons" %}
-                                <p class="pt10">工作机构: {{ scholarschool }}</p>
-                            {% endif %}
-                            {% if paper_info == "href" %}
-                                <p class="pt10">专业学科: {{ scholarfield[0] }}</p>
-                            {% endif %}
-                            {% if paper_info == "href" %}
-                                <p class="color-gray pt10"><a class="mr15 line-h" href="javascript: void(0)"><span
-                                        class="txt-h">成果数</span> {{ achievement_num }}</a></p>
-                            {% endif %}
-                        {% endfor %}
-                    <!--头像右侧的信息栏结束-->
-                    <div class="clear"></div>
-                    </li>
-                {% endfor %}
-                <li class="box-shawd10 bg-wit">
-                    <div class="fl mr40"><a class="userbox" href="AuthorView?wd=TZC10000353" target="_blank"><img
-                    src="../static/images/scholar_portrait.png"></a>
-                    </div>
-                    <div class="box50 fl">
-                        <a class="font20 color-green" id="search2_name" href="scholarinfo.html" target="_blank"></a>
-                        <div class="ini-box pr20 pt10">
-                            <i class="iconfont pr10"></i>
-                            <p class="color-gray pb10">工作机构：<a href="https://orcid.org/" target="_blank"></a></p>
-                        </div>
-                        <p class="color-gray pb10">被引用数：<a href="https://orcid.org/" target="_blank"></a></p>
-                        <p class="color-gray pt10"><a class="mr15 line-h" href="javascript: void(0)"><span
-                        class="txt-h">成果数</span>107</a></p>
-                    </div>
-                    <div class="clear"></div>
-                </li>
-            </ul>
-        </div>
+                            </div>
+                            <!--搜索框结束-->
+                            <!--查询结果主页面开始-->
+                            <div class="box1200 mau pt20">
+                                <p class="font18 box-shawd10 bg-wit pd10 pl20 ">查询结果( <span>共{{ length }}</span> 条记录)</p>
+                            </div>
+                            <div class="box1200 mau pt10 ">
+                                <p class="box-shawd10 bg-wit pl20 font16 ">
+                                <p class="font18 box-shawd10 bg-wit pd10 pl20 ">学者列表</p>
+                                </p>
+                            </div>
+                            <!--循环输出同名学者-->
+                            <div class="box1200 mau pd100">
+                                <ul id="ContentPlaceHolder1_ulAuthor" class="clearfix author-list">
+                                    <!--下面的接口主要用的晓哥模板，具体姓名匹配循环输出还没完全实现 by bwm_3.3-->
+                                    {% for res in result %}
+                                        <li class="box-shawd10 bg-wit">
+                                            <!--这里是头像，我统一用了黑色的专家图标作为头像-->
+                                            <div class="fl mr40">
+                                                <a class="userbox" href="scholarinfo?school={{ res[2] }}&name={{ res[1] }}&major={{ res[3] }} " target="_blank">
+                                                    <img src="../static/images/scholar_portrait.png">
+                                                </a>
+                                            </div>
+                                            <!--头像右侧的信息栏开始-->
+                                                    <p class="pt10">学者姓名: {{ res[1] }} </p>
+                                                    <p class="pt10">工作机构: {{ res[2] }}</p>
+                                                    <p class="pt10">专业学科: {{ res[3] }}</p>
+                                                    <p class="color-gray pt10">成果数 {{ res[7] }}</p>
+                                            <!--头像右侧的信息栏结束-->
+                                            <div class="clear"></div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
 
-        <!--查询结果主页面结束-->
-    </div>
-                        </td>
-                    </tr>
-                </tbody></table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-<!--查询结果页面最底部开始-->
-<div class="box100 foot ">
-<div class="box1200 mau clearfix">
-    <div class="pt20 pb20 font24">高校学者发现系统</div>
-    <div class="fl box50">
-        <p class="font12 pr40 pt20 pb20 color-gray">高校学者发现系统是一款免费公开的用来查询学者信息的网站，在1.0版本中我们爬取了各大网站的国内学者信息，包括其工作机构、科研成果、学术关系网络、学者画像等。</p>
-    </div>
-    <div class="fr qerbox ">
-        <p class="color-blue text-center pt20 pb10">返回顶部</p>
-        <a href="#top" class="btn-top mau"><img src="../static/images/return_top.png" alt=""></a>
-    </div>
-</div>
-<p class="pt20 pb20 text-center">Copyright © 2020 CAU云中君开发团队</p>
-</div>
-<!--查询结果页面最底部结束-->
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    </form>
-    <script language="javascript" type="text/javascript">
-        var content=localStorage.value
-        document.getElementById("search2").value=content;
-        document.getElementById("search2_name").value=content;
-        //alert(content)
-    </script>
+                            <!--查询结果主页面结束-->
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--查询结果页面最底部开始-->
+            <div class="box100 foot ">
+                <div class="box1200 mau clearfix">
+                    <div class="pt20 pb20 font24">高校学者发现系统</div>
+                    <div class="fl box50">
+                        <p class="font12 pr40 pt20 pb20 color-gray">
+                            高校学者发现系统是一款免费公开的用来查询学者信息的网站，在1.0版本中我们爬取了各大网站的国内学者信息，包括其工作机构、科研成果、学术关系网络、学者画像等。</p>
+                    </div>
+                    <div class="fr qerbox ">
+                        <p class="color-blue text-center pt20 pb10">返回顶部</p>
+                        <a href="#top" class="btn-top mau"><img src="../static/images/return_top.png" alt=""></a>
+                    </div>
+                </div>
+                <p class="pt20 pb20 text-center">Copyright © 2020 CAU云中君开发团队</p>
+            </div>
+            <!--查询结果页面最底部结束-->
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+<script language="javascript" type="text/javascript">
+    var content = localStorage.value
+    document.getElementById("search2").value = content;
+    document.getElementById("search2_name").value = content;
+    //alert(content)
+</script>
 <SCRIPT LANGUAGE="JavaScript">
-            document.getElementById("searchbtn2").onclick=function () {
-                if(window.localStorage) {
-                    localStorage.value = document.getElementById("search2").value;
-                    location.href = "../appSearch_result"
-                    //window.open("../templates/search_result.html")
-                }else{
-                    alert('浏览器不支持')
-                }
-            }
-    </SCRIPT>
+    document.getElementById("searchbtn2").onclick = function () {
+        if (window.localStorage) {
+            localStorage.value = document.getElementById("search2").value;
+            location.href = "../appSearch_result"
+            //window.open("../templates/search_result.html")
+        } else {
+            alert('浏览器不支持')
+        }
+    }
+</SCRIPT>
 </body>
 </html>

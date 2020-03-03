@@ -28,7 +28,7 @@
     <div class = "inputcontainer">
         <div><image class="globalid" src="../static/images/globalID.png"></image></div>
         <div class="input">
-            <select name="search_type" class="select" id="select">
+            <select name="search_type" class="select" id="select_type">
                     <option value="1">学者姓名</option>
                     <option value="2">学者专业</option>
                     <option value="3">学者学校</option>
@@ -83,9 +83,10 @@
     <SCRIPT LANGUAGE="JavaScript">
             document.getElementById("searchbtn").onclick=function () {
                 if(window.localStorage) {
-                    localStorage.value = document.getElementById("data2search_result").value;
-                    location.href = "../appSearch_result"
-                    //window.open("../templates/search_result.html")
+                    var  myselect=document.getElementById("select_type").value;
+                    var keyword = document.getElementById("data2search_result").value;
+                    localStorage.value = keyword;
+                    location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
                 }else{
                     alert('浏览器不支持')
                 }

@@ -5,11 +5,14 @@ app = Blueprint("appscholarinfo",__name__)
 
 @app.route('/scholarinfo')
 def scholarinfo():
-
+    school = request.args.get('school');
+    name = request.args.get('name');
+    major = request.args.get('major');
     connection = pymysql.connect(host="39.106.96.175",port=3306,db="scholar_info",user="root",password="12345678",charset="utf8")
     cursor = connection.cursor()
 
-    cursor.execute('select * from 北京大学 where scholarid is not null')
+    sql = "select * from %s where name='%s' and college='%s'" % (school, name,major)
+    cursor.execute(sql)
 
     result = cursor.fetchone()
     scholarname = result[1]

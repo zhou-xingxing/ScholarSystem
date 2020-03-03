@@ -20,6 +20,14 @@
         };
     </script>
     <script src="../static/js/DataVisualization.js" type="text/javascript"></script>
+     <script type="text/javascript">
+        var rela_center={
+            data:{{ rela_center|tojson }}
+        }
+        var rela_partner={
+            data:{{ rela_partner|tojson }}
+        }
+    </script>
     <script src="../static/js/RelationNet.js" type="text/javascript"></script>
     <script src="../static/js/PersonalPaint.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -349,8 +357,11 @@
                                                 <div role="tabpanel" class="tab-pane" id="cluster6">
                                                     <div class="line-a bg-e pd40">
                                                         <div id="ContentPlaceHolder1_divRenetwork"></div>
-                                                        <div id="RelationNet" style="width: 800px;height: 800px;"></div>
+                                                        <div id="RelationNet" style="width: 900px;height: 800px;"></div>
                                                         </div>
+                                                        <script>
+                                                            draw()
+                                                        </script>
                                                 </div>
                                                 <!--个人画像模块-->
                                                 <div role="tabpanel" class="tab-pane" id="cluster7">

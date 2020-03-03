@@ -41,7 +41,8 @@ a:hover{color: #299fff; text-decoration: none;}
     -moz-transition: all 0.32s ease-out;
     -ms-transition: all 0.32s ease-out;
     -o-transition: all 0.32s ease-out;
-    transition: all 0.32s ease-out;}
+    transition: all 0.32s ease-out;
+}
 
 .box-shawd{ box-shadow: 0px 0px 30px 0px rgba(11,37,124,0.2)}
 .box-shawd10{ box-shadow: 0px 0px 5px 0px rgba(11,37,124,0.1)}
@@ -60,7 +61,7 @@ a:hover{color: #299fff; text-decoration: none;}
 .box1200{ width: 100%; padding: 0 20px; }
 .mau{margin: 0 auto;}
 .box100{ width: 100%;}
-.box50{ width: 50%; }
+.box50{ width: 70%; }
 .box720{ width: 720px; height: 42px; overflow: hidden;
 /* -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
@@ -166,8 +167,8 @@ a.color-wit{color: #fff;}
 .mtb10{margin:10px 0; }
 
 /*index.html*/
-.logo{ height: 76px;  }
-.logo img{ height: 100%; text-align: center;}
+.logo{ height: 60px;  } /* 原来是76px */
+.logo img{ height: 100%; text-align: center;margin-top:1.5% }  /* 添加margin-top:1.5%*/
 .logo230{ height: 100px; margin-bottom: 30px;}
 .logo230 img{ height: 100%; }
 .txt-img{height: 140px;}
@@ -187,7 +188,7 @@ position: absolute; left: 20px; top:23px;}
 .userbox img{width: 100%;}
 .ico-box{ background: url("../images/scholarinfo-txt.jpg") no-repeat 15px 15px; padding: 15px 15px 15px 155px!important;}
 .line-h{display: inline-block; border: 1px solid #e3ecfd; padding-right: 5px; padding-top: 2px; color: #299fff; font-size: 12px;}
-.txt-h{background: #e3ecfd; padding: 5px; margin-right: 5px; color: #FFF; text-shadow:1px 1px 1px rgba(31,101,230,1);}
+.txt-h{background: #e3ecfd; padding: 5px; margin-right: 5px; color: #0076b1; text-shadow:0px 0px 1px rgba(31,101,230,1);}
 .btn-h{display: inline-block; height: 46px; line-height: 46px; padding: 0 20px; }
 .btn-h:hover,a.btn-active{border-bottom: 1px solid #000;}
 a.art-num{display: block; height: 72px; overflow: hidden; font-size: 72px; line-height: 72px; font-family:'宋体' }

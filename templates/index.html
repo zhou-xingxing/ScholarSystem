@@ -34,8 +34,9 @@
                     <option value="3">学者学校</option>
                     <option value="4">研究方向</option>
             </select>
-            <input type="text" class="input1" placeholder="请输入关键字">
-            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">搜索</button>
+            <!--3.3号柏为民添加。给首页搜索输入框加上id，还有向后端appsearch_result.py文件传数据-->
+            <input type="text" id="data2search_result" class="input1" placeholder="请输入关键字">
+            <button type="button" id="searchbtn" class="btn btn-info btn-default btnsearch">搜索</button>
         </div>
         <div class="record">
             <p>
@@ -78,5 +79,17 @@
                 </div>
             </div>
     </div>
+    <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
+    <SCRIPT LANGUAGE="JavaScript">
+            document.getElementById("searchbtn").onclick=function () {
+                if(window.localStorage) {
+                    localStorage.value = document.getElementById("data2search_result").value;
+                    location.href = "../appSearch_result"
+                    //window.open("../templates/search_result.html")
+                }else{
+                    alert('浏览器不支持')
+                }
+            }
+    </SCRIPT>
 </body>
 </html>

@@ -26,14 +26,14 @@ def scholarinfo():
     Gpoint = result[9]
     str ="{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
     achievement_list =  eval(str)
-    achievement_list2 = result[11]
-    cited_list = result[12]
+    achievement_list2 = eval(result[11])
+    cited_list = eval(result[12])
     partner_list = eval(result[13])
     paper_name_list =eval(result[14])
     paper_info_list = eval(result[15])
-    paper_search_list = result[16]
+    paper_search_list = eval(result[16])
     collaborate_org = eval(result[17])
-
+    print(achievement_list)
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2

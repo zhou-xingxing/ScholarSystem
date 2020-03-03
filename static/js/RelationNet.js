@@ -1,21 +1,7 @@
-var center_data={};
-var datalist=[];
-
-center_data={
-    "name":"罗贯中",
-    //这个值没有实际意义，但必须要有，可以给每个中心点设一固定值
-    "corpnum":100,
-    "in":"三国",
-}
-// 合作学者结点
-datalist=[{"name":"诸葛亮","corpnum":80,"in":"蜀国"},{"name":"刘备","corpnum":60,"in":"蜀国"},{"name":"曹操","corpnum":50,"in":"魏国"},
-{"name": "关羽", "corpnum": 50, "in": "蜀国"},{"name":"赵云","corpnum":40,"in":"蜀国"},{"name":"孙权","corpnum":20,"in":"吴国"},{"name":"张飞","corpnum":10,"in":"蜀国"}]
-
-//需要从html获取数据
-function fillRelation(center,datalist){
-    center_data=center;
-    datalist=datalist;
-}
+//此专家数据
+var center_data=rela_center.data;
+//合作专家数据
+var datalist=rela_partner.data;
 
 
 var local_data = []; //结点数组
@@ -23,8 +9,6 @@ var local_links = []; //连接数组
 var local_category=[]; //种类
 
 //中心学者结点
-
-
 
 //设置categories 一人一个种类，方便以不同颜色区分
 function setCategory(datalist){
@@ -45,7 +29,7 @@ function setData(datalist) {
     local_data.push({
         "name":center_data["name"],
         //图形大小
-        "symbolSize": center_data["corpnum"],
+        "symbolSize": 100,
         "value":center_data["corpnum"],
         "category": center_data["name"],
         //禁止拖动
@@ -56,7 +40,7 @@ function setData(datalist) {
     for (i = 0,len=datalist.length; i < len; i++) {
         local_data.push({
             "name": datalist[i]["name"],
-            "symbolSize": datalist[i]["corpnum"],
+            "symbolSize": 55,
             "value":datalist[i]["corpnum"],
             "category": datalist[i]["name"],
             "draggable": true,
@@ -80,7 +64,7 @@ function setLinks(datalist){
 setCategory(datalist);
 setData(datalist);
 setLinks(datalist);
-// local_data, local_links,local_category
+
 //3.初始化echarts
 function draw () {
     var ec = echarts.init(document.getElementById('RelationNet'))
@@ -88,8 +72,13 @@ function draw () {
     var option = {
     title: {
         text: "学者关系网络",
+        subtext: "通过鼠标和滚轮可以实现拖动和缩放",
         top: "top",
-        left: "center"
+        left: "left",
+        textStyle: {
+            color: '#000000',
+            fontSize:20
+        }
     },
     //定义提示框内容
     tooltip: {
@@ -133,7 +122,7 @@ function draw () {
             //加载动画
             layoutAnimation: true,
             //线的长度，根据线的value线性映射
-            edgeLength: [100, 300],
+            edgeLength: [140, 350],
         },
         symbol:"circle",
         // 鼠标滑过聚焦
@@ -170,7 +159,7 @@ function draw () {
                 textStyle: {
                     fontSize: 14
                 },
-                formatter: "{c}"
+                formatter: "{c}次"
             }
         },
     }]

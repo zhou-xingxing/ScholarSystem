@@ -45,7 +45,7 @@
                         <!-- LOGO -->
                         <!--start联系我们按钮-->
                         <div class="fr pt25">
-                            <a class="my-btn mr15 fr" href="index.html" target="_blank" title="云中君">联系我们</a>
+                            <a class="my-btn mr15 fr" href="index.html" target="_blank" title="点击反馈">反馈问题</a>
                         </div>
                         <!--end联系我们按钮-->
                     </div>
@@ -84,7 +84,7 @@
                                                     <!-- 地区和机构 -->
                                                     <div class="ini-box pr20 color-gray pt10">
                                                         <!-- 图标 -->
-                                                        <i class="glyphicon glyphicon-home pr10"></i>
+                                                        <i class="iconfont icon-jigou pr10"></i>
                                                         <!-- 地区机构 -->
                                                         <span id="ContentPlaceHolder1_LabelRegion">{{ scholarschool }}</span>
                                                     </div>
@@ -145,49 +145,49 @@
                                             <ul class="nav-list clearfix fl" role="tablist" style="width: 15%;">
                                                 <li role="presentation" class="active">
                                                     <a class="li1" href="#cluster1" aria-controls="cluster1" role="tab" data-toggle="tab" aria-expanded="true">
-                                                        <span class="glyphicon glyphicon-list-alt pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-lunwen pr10" aria-hidden="true"></span>
                                                         学术成果
                                                     </a>
                                                 </li>
                                                 <li id="ContentPlaceHolder1_li2" role="presentation" class="">
                                                     <a href="#cluster2" aria-controls="cluster2" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-home pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-jigou pr10" aria-hidden="true"></span>
                                                         合作机构
                                                     </a>
                                                 </li>
                                                 <li role="presentation" class="">
                                                     <a href="#cluster3" aria-controls="cluster3" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-user pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-scholar pr10" aria-hidden="true"></span>
                                                         合作学者
                                                     </a>
                                                 </li>
                                                 <li role="presentation" class="">
                                                     <a href="#cluster4" aria-controls="cluster4" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-leaf pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-leaf pr10" aria-hidden="true"></span>
                                                         学科
                                                     </a>
                                                 </li>
                                                 <li role="presentation" class="">
                                                     <a href="#cluster5" aria-controls="cluster5" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-book pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-book pr10" aria-hidden="true"></span>
                                                         期刊
                                                     </a>
                                                 </li>
                                                 <li role="presentation" class="">
                                                     <a href="#cluster6" aria-controls="cluster6" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-globe pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-relationnet pr10" aria-hidden="true"></span>
                                                         关系网络
                                                     </a>
                                                 </li>
                                                 <li role="presentation" class="">
                                                     <a href="#cluster7" aria-controls="cluster7" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-fire pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-picture pr10" aria-hidden="true"></span>
                                                         个人画像
                                                     </a>
                                                 </li>
                                                 <li role="presentation" class="">
                                                     <a href="#cluster8" aria-controls="cluster8" role="tab" data-toggle="tab" aria-expanded="false">
-                                                        <span class="glyphicon glyphicon-blackboard pr10" aria-hidden="true"></span>
+                                                        <span class="iconfont icon-vision pr10" aria-hidden="true"></span>
                                                         可视化
                                                     </a>
                                                 </li>
@@ -221,7 +221,7 @@
                                                                              <p class="pt10">来源:{{ paper_info_list[i][paper_info] }}</p>
                                                                         {% endif %}
                                                                         {% if paper_info == "href" %}
-                                                                            <p class="pt10">百度学术:<a href="{{ paper_info_list[i][paper_info] }}">链接</a></p>
+                                                                            <p class="pt10">百度学术:<a href="{{ paper_info_list[i][paper_info] }}" class="color-red">链接</a></p>
                                                                         {% endif %}
                                                                     {% endfor %}
                                                                     <div class="clear"></div>

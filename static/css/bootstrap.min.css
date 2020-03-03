@@ -32,6 +32,10 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,secti
   -moz-osx-font-smoothing:grayscale
 }
 
+.icon-search:before {
+  content: "\e504";
+}
+
 .icon-user:before {
   content: "\e60c";
 }

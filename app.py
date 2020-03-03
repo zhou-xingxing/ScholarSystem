@@ -6,7 +6,28 @@ app = Blueprint("app", __name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    file1 = open("schoolname.txt", "r", encoding='utf-8')
+    list_row = file1.readline().split('\', \'')
+    list_school = []
+    list_location = []
+    for i in range(len(list_row)):
+        list_school.append(list_row[i].split('\': \'')[0])
+        list_location.append(list_row[i].split('\': \'')[1])
+
+    list_985 = []
+    list_211 = []
+    list_us = []
+
+    for i in range(len(list_row)):
+        if list_location[i] == '中国 985 + 研究所 + 港澳台':
+            list_985.append(list_school[i].strip("'"))
+        elif list_location[i] == '中国 211 + 其他':
+            list_211.append(list_school[i].strip("'"))
+        else:
+            list_us.append(list_school[i].strip("'"))
+    file1.close()
+
+    return render_template("index.html",list_985=list_985,list_211=list_211,list_us=list_us)
 
 
 # 反馈页面

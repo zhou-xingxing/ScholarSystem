@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>高校学者发现系统</title>
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
      <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -22,8 +23,12 @@
 </head>
 <body>
     <div class="head">
-        <div><image class="headimage" src="../static/images/left-logo.png"></image></div>
-        <div><button type="button" class="btn btn-info btn-default btnfeedback">联系我们</button></div>
+        <div>
+            <img class="headimage" src="../static/images/left-logo.png" alt>
+        </div>
+        <div>
+            <button type="button" class="btn btn-info btn-default btnfeedback" title="点击反馈">反馈问题</button>
+        </div>
     </div>
     <div class = "inputcontainer">
         <div><image class="globalid" src="../static/images/globalID.png"></image></div>
@@ -35,7 +40,9 @@
                     <option value="4">研究方向</option>
             </select>
             <input type="text" class="input1" placeholder="请输入关键字">
-            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">搜索</button>
+            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
+                <span class="iconfont icon-search pr10" aria-hidden="true"></span>搜索
+            </button>
         </div>
         <div class="record">
             <p>
@@ -54,26 +61,55 @@
     <div class="inner">
             <div class="schools">
                 <span class="schoolhead">
-                    <image class="schoolheadimage" src="../static/images/china.png"></image>
+                    <img class="schoolheadimage" src="../static/images/china.png" alt>
                     <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
                 </span>
-
                 <div class="schoolnames">
                     <table class="table table-hover table-striped">
-                        <tr>
-                            <td>清华大学</td>
-                            <td>北京大学</td>
-                            <td>浙江大学</td>
-                            <td>山东大学</td>
-                            <td>同济大学</td>
-                        </tr>
-                        <tr>
-                            <td>清华大学</td>
-                            <td>北京大学</td>
-                            <td>浙江大学</td>
-                            <td>山东大学</td>
-                            <td>同济大学</td>
-                        </tr>
+                        {% for li_985 in list_985 %}
+                            {% if loop.index%5 == 0 %}
+                                <td>{{ li_985 }}</td>
+                                <tr></tr>
+                            {% else %}
+                                <td>{{ li_985}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="schools">
+                <span class="schoolhead">
+                    <img class="schoolheadimage" src="../static/images/china.png" alt>
+                    <h3 class="schoolheadtitle">中国211+其他</h3>
+                </span>
+                <div class="schoolnames">
+                    <table class="table table-hover table-striped">
+                        {% for li_211 in list_211 %}
+                            {% if loop.index%5 == 0 %}
+                                <td>{{ li_211 }}</td>
+                                <tr></tr>
+                            {% else %}
+                                <td>{{ li_211}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="schools" >
+                <span class="schoolhead">
+                    <img class="schoolheadimage" src="../static/images/US.png" alt>
+                    <h3 class="schoolheadtitle">U.S.</h3>
+                </span>
+                <div class="schoolnames">
+                    <table class="table table-hover table-striped">
+                        {% for li_us in list_us %}
+                            {% if loop.index%5 == 0 %}
+                                <td>{{ li_us }}</td>
+                                <tr></tr>
+                            {% else %}
+                                <td>{{ li_us}}</td>
+                            {% endif %}
+                        {% endfor %}
                     </table>
                 </div>
             </div>

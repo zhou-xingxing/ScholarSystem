@@ -41,7 +41,8 @@ a:hover{color: #299fff; text-decoration: none;}
     -moz-transition: all 0.32s ease-out;
     -ms-transition: all 0.32s ease-out;
     -o-transition: all 0.32s ease-out;
-    transition: all 0.32s ease-out;}
+    transition: all 0.32s ease-out;
+}
 
 .box-shawd{ box-shadow: 0px 0px 30px 0px rgba(11,37,124,0.2)}
 .box-shawd10{ box-shadow: 0px 0px 5px 0px rgba(11,37,124,0.1)}

@@ -9,13 +9,14 @@ var citedyear = []
 var citednum =[]
 
 //加载第三个图表数据
-var paperlist=data.paper;
+var paper=data.paper;
 var papername=[];
 var papernum=[];
 
 //加载第四个图表数据
-var paperlist=data.paperinfo;
-
+var paper_key=data.paper_search_key;
+var paper_num =data.paper_search_num;
+var paper_data=[]
 
 $(function() {
         //3.初始化echarts
@@ -36,11 +37,17 @@ $(function() {
             citednum.push(citedlist[i]["num"]);
         }
 
-        for(var key in paperlist){
+        for(var key in paper){
             papername.push(key);
-            papernum.push(paperlist[key]);
+            papernum.push(paper[key]);
         }
 
+        for (i=0,len=paper_key.length;i<len;i++){
+            paper_data.push({
+                "name": paper_key[i],
+                "value": paper_num[i],
+            });
+        }
         //4.配置option
         //<!--可视化模块：成果可视化findResultByWD-->
         var option1 = {
@@ -428,75 +435,7 @@ $(function() {
                 shadowColor: '#333'
             }
         },
-        data: [{
-            name: 'Sam S Club',
-            value: 10000,
-            textStyle: {
-                normal: {
-                    color: 'black'
-                },
-                emphasis: {
-                    color: 'red'
-                }
-            }
-        }, {
-            name: 'Macys',
-            value: 6181
-        }, {
-            name: 'Amy Schumer',
-            value: 4386
-        }, {
-            name: 'Jurassic World',
-            value: 4055
-        }, {
-            name: 'Charter Communications',
-            value: 2467
-        }, {
-            name: 'Chick Fil A',
-            value: 2244
-        }, {
-            name: 'Planet Fitness',
-            value: 1898
-        }, {
-            name: 'Pitch Perfect',
-            value: 1484
-        }, {
-            name: 'Express',
-            value: 1112
-        }, {
-            name: 'Home',
-            value: 965
-        }, {
-            name: 'Johnny Depp',
-            value: 847
-        }, {
-            name: 'Lena Dunham',
-            value: 582
-        }, {
-            name: 'Lewis Hamilton',
-            value: 555
-        }, {
-            name: 'KXAN',
-            value: 550
-        }, {
-            name: 'Mary Ellen Mark',
-            value: 462
-        }, {
-            name: 'Farrah Abraham',
-            value: 366
-        }, {
-            name: 'Rita Ora',
-            value: 360
-        }, {
-            name: 'Serena Williams',
-            value: 282
-        }, {
-            name: 'NCAA baseball tournament',
-            value: 273
-        }, {
-            name: 'Point Break',
-            value: 265
-        }]
+        data: paper_data,
     }]
 };
         //5.设置option

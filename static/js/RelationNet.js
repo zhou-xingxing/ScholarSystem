@@ -1,26 +1,24 @@
-var local_data = []; //节点数组
+//此专家数据
+var center_data=rela_center.data;
+//合作专家数据
+var datalist=rela_partner.data;
+
+
+var local_data = []; //结点数组
 var local_links = []; //连接数组
 var local_category=[]; //种类
 
-//中心结点
-center_data={
-    "姓名":"三国演义",
-    "value":100,
-    "所在机构":"都听泽哥的"
-}
-// 合作结点
-datalist=[{"姓名":"诸葛亮","合作次数":80,"所在机构":"蜀国"},{"姓名":"刘备","合作次数":60,"所在机构":"蜀国"},{"姓名":"曹操","合作次数":50,"所在机构":"魏国"},
-{"姓名":"赵云","合作次数":40,"所在机构":"蜀国"},{"姓名":"孙权","合作次数":20,"所在机构":"吴国"},{"姓名":"张飞","合作次数":10,"所在机构":"蜀国"}]
+//中心学者结点
 
-//设置categories
+//设置categories 一人一个种类，方便以不同颜色区分
 function setCategory(datalist){
     //先把中心放进去
     local_category.push({
-        "name":center_data["姓名"]
+        "name":center_data["name"]
     })
     for (i = 0,len=datalist.length; i < len; i++){
         local_category.push({
-            "name":datalist[i]["姓名"]
+            "name":datalist[i]["name"]
             });
     }
 }
@@ -29,22 +27,24 @@ function setCategory(datalist){
 function setData(datalist) {
     //先把中心放进去
     local_data.push({
-        "name":center_data["姓名"],
-        "symbolSize": center_data["value"],
-        "value":center_data["value"],
-        "category": center_data["姓名"],
+        "name":center_data["name"],
+        //图形大小
+        "symbolSize": 100,
+        "value":center_data["corpnum"],
+        "category": center_data["name"],
+        //禁止拖动
         "draggable": false,
-        "school":center_data["所在机构"],
+        "in":center_data["in"],
     })
 
     for (i = 0,len=datalist.length; i < len; i++) {
         local_data.push({
-            "name": datalist[i]["姓名"],
-            "symbolSize": datalist[i]["合作次数"],
-            "value":datalist[i]["合作次数"],
-            "category": datalist[i]["姓名"],
+            "name": datalist[i]["name"],
+            "symbolSize": 55,
+            "value":datalist[i]["corpnum"],
+            "category": datalist[i]["name"],
             "draggable": true,
-            "school":datalist[i]["所在机构"],
+            "in":datalist[i]["in"],
         });
 
     }
@@ -54,26 +54,31 @@ function setData(datalist) {
 function setLinks(datalist){
     for (i = 0,len=datalist.length; i < len; i++){
         local_links.push({
-            "source":center_data["姓名"],
-            "target":datalist[i]["姓名"],
-            "value":datalist[i]["合作次数"]
+            "source":center_data["name"],
+            "target":datalist[i]["name"],
+            "value":datalist[i]["corpnum"]
         })
     }
 }
-
+//调用填充函数
 setCategory(datalist);
 setData(datalist);
 setLinks(datalist);
 
 //3.初始化echarts
-$(function() {
+function draw () {
     var ec = echarts.init(document.getElementById('RelationNet'))
     //4.配置option
     var option = {
     title: {
         text: "学者关系网络",
+        subtext: "通过鼠标和滚轮可以实现拖动和缩放",
         top: "top",
-        left: "center"
+        left: "left",
+        textStyle: {
+            color: '#000000',
+            fontSize:20
+        }
     },
     //定义提示框内容
     tooltip: {
@@ -85,10 +90,11 @@ $(function() {
                    return params.data.source + '和' + params.data.target + '合作了'+ params.data.value+'次';
                 }
                 else {
-                    return '姓名：'+params.data.name+'<br/>'+'所在机构：'+params.data.school;
+                    return '姓名：'+params.data.name+'<br/>'+'所在机构：'+params.data.in;
                 }
                 }
     },
+    //工具盒
     toolbox: {
         show: true,
         feature: {
@@ -108,18 +114,22 @@ $(function() {
     animationEasingUpdate: 'quinticInOut',
     series: [{
         type: 'graph',
+        //力引导图
         layout: 'force',
         force: {
+            //斥力因子
             repulsion: 2000,
+            //加载动画
             layoutAnimation: true,
-            edgeLength: [100, 300],
-
+            //线的长度，根据线的value线性映射
+            edgeLength: [140, 350],
         },
         symbol:"circle",
         // 鼠标滑过聚焦
          focusNodeAdjacency: true,
         // 允许缩放和拖动
         roam: true,
+
         data: local_data,
         links: local_links,
         categories:local_category,
@@ -129,35 +139,34 @@ $(function() {
                 show: true,
                 position: 'top',
                 textStyle: {
-                    fontSize: 15
+                    fontSize: 16
                 },
+                // 模板变量有 {a}, {b}，{c}，分别表示系列名，数据名，数据值
                 formatter: "{b}",
             }
         },
         lineStyle: {
             normal: {
                 color: 'target',
-                width: 4,
+                width: 5,
                 type: "solid",
-
             },
 
         },
-        // 模板变量有 {a}, {b}，{c}，分别表示系列名，数据名，数据值
         edgeLabel: {
             normal: {
                 show: true,
                 textStyle: {
                     fontSize: 14
                 },
-                formatter: "{c}"
+                formatter: "{c}次"
             }
         },
     }]
 };
     //5.设置option
     ec.setOption(option)
-})
+}
 
 
 

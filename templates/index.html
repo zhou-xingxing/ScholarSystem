@@ -33,16 +33,14 @@
     <div class = "inputcontainer">
         <div><image class="globalid" src="../static/images/globalID.png"></image></div>
         <div class="input">
-            <select name="search_type" class="select" id="select">
+            <select name="search_type" class="select" id="select_type">
                     <option value="1">学者姓名</option>
                     <option value="2">学者专业</option>
                     <option value="3">学者学校</option>
                     <option value="4">研究方向</option>
             </select>
             <input type="text" class="input1" placeholder="请输入关键字">
-            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
-                <span class="iconfont icon-search pr10" aria-hidden="true"></span>搜索
-            </button>
+            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">搜索</button>
         </div>
         <div class="record">
             <p>
@@ -102,17 +100,36 @@
                 </span>
                 <div class="schoolnames">
                     <table class="table table-hover table-striped">
-                        {% for li_us in list_us %}
-                            {% if loop.index%5 == 0 %}
-                                <td>{{ li_us }}</td>
-                                <tr></tr>
-                            {% else %}
-                                <td>{{ li_us}}</td>
-                            {% endif %}
-                        {% endfor %}
+                        <tr>
+                            <td>清华大学</td>
+                            <td>北京大学</td>
+                            <td>浙江大学</td>
+                            <td>山东大学</td>
+                            <td>同济大学</td>
+                        </tr>
+                        <tr>
+                            <td>清华大学</td>
+                            <td>北京大学</td>
+                            <td>浙江大学</td>
+                            <td>山东大学</td>
+                            <td>同济大学</td>
+                        </tr>
                     </table>
                 </div>
             </div>
     </div>
+    <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
+    <SCRIPT LANGUAGE="JavaScript">
+            document.getElementById("searchbtn").onclick=function () {
+                if(window.localStorage) {
+                    var  myselect=document.getElementById("select_type").value;
+                    var keyword = document.getElementById("data2search_result").value;
+                    localStorage.value = keyword;
+                    location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+                }else{
+                    alert('浏览器不支持')
+                }
+            }
+    </SCRIPT>
 </body>
 </html>

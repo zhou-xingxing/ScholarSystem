@@ -1,20 +1,20 @@
 from flask import Flask, render_template, request,Blueprint
 import pymysql
-import json
+from collections import Counter
 app = Blueprint("appscholarinfo",__name__)
 
 @app.route('/scholarinfo')
 def scholarinfo():
-
+    school = request.args.get('school');
+    name = request.args.get('name');
+    major = request.args.get('major');
     connection = pymysql.connect(host="39.106.96.175",port=3306,db="scholar_info",user="root",password="12345678",charset="utf8")
     cursor = connection.cursor()
 
-    cursor.execute('select * from 北京大学 where scholarid is not null')
+    sql = "select * from %s where name='%s' and college='%s'" % (school, name,major)
+    cursor.execute(sql)
 
     result = cursor.fetchone()
-    # for i in range(18):
-    #     print(result[i])
-
     scholarname = result[1]
     scholarschool =result[2]
     scholarmajor = result[3]
@@ -24,8 +24,8 @@ def scholarinfo():
     achievement_num = result[7]
     Hpoint = result[8]
     Gpoint = result[9]
-    str ="{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
-    achievement_list =  eval(str)
+    #str ="{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
+    achievement_list =  eval(result[10])
     achievement_list2 = eval(result[11])
     cited_list = eval(result[12])
     partner_list = eval(result[13])
@@ -33,8 +33,17 @@ def scholarinfo():
     paper_info_list = eval(result[15])
     paper_search_list = eval(result[16])
     collaborate_org = eval(result[17])
-    print(achievement_list)
 
+    paper_search_all=[]
+    for i in range(len(paper_search_list)):
+        for j in range(len(paper_search_list[i])):
+            paper_search_all.append(paper_search_list[i][j])
+    paper_search_list = Counter(paper_search_all)
+    paper_search_key=[];
+    paper_search_num=[];
+    for key in paper_search_list:
+        paper_search_key.append(key)
+        paper_search_num.append(paper_search_list[key])
 # 关系网络图部分
     # 中心学者结点
     rela_center_data = {
@@ -57,5 +66,5 @@ def scholarinfo():
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
                            ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,
-                           paper_search_list=paper_search_list,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data)
+                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data)
 

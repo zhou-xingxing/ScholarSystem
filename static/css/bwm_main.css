@@ -2,7 +2,6 @@
 body,html,div,ul,li,a,p{padding: 0; margin: 0; }
 ul,li{list-style: none;}
 body{ min-width: 1000px!important; font-size: 14px;}
-.input1{border: none; outline: none; background: transparent; width: 96%; position: absolute; left: 20px; top: 9px;}
 a,a:hover,a:active,a:visited,a:focus{ color: #1e2126; text-decoration: none;}
 a:hover{color: #299fff;}
 .my-btn,.foot-tip{ padding: 0 30px; height: 30px; line-height: 30px;
@@ -124,9 +123,9 @@ a.color-wit{color: #fff;}
 /*pd css*/
 
 .pd10{padding: 10px;}
-.pt10{padding-top: 10px;}
+.pt10{padding-top: 20px;}
 .pt13{padding-top: 12px;}
-.pb10{padding-bottom: 10px;}
+.pb10{padding-bottom: 20px;}
 .pl10{padding-left: 10px;}
 .pr10{padding-right: 10px;}
 
@@ -332,4 +331,24 @@ box-shadow: 0px 0px 5px 0px rgba(11,37,124,0.1);}
 
 @media print {
    
+}
+.input{
+    width: 40%;
+    height: 45px;
+}
+.selectsearch{
+    margin-left: 14.5%;
+    width: 7%;
+    height: 45px;
+}
+.inputsearch{
+    width: 57%;
+    height: 45px;
+}
+.btnsearch{
+        height: 45px;
+    margin-top: -5px;
+    width: 6%;
+    /* margin-left: -2px; */
+    margin-left: 2px;
 }

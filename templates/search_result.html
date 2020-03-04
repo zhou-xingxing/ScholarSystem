@@ -8,54 +8,68 @@
     <link href="../static/css/iconfont.css" rel="stylesheet" type="text/css">
     <link href="../static/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
     <link href="../static/css/bwm_main.css" rel="stylesheet" type="text/css">
+     <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tbody>
-    <!--页面的最顶部开始-->
+    <!-- start 1、LOGO+反馈按钮-->
     <tr>
         <td>
             <div class="box100 bg-wit">
-                <div class="box1200 h80 mau ">
-                    <div class="fl logo"><a href="/"><img src="../static/images/logo.png" alt=""></a></div>
-                    <div class="fr pt25">
-                        <a class="my-btn mr15 fr" href="feedback" target="_blank" title="CAU云中君开发团队">联系我们</a>
+                <div class="box1200 h80 mau">
+                    <!-- start LOGO -->
+                    <div class="fl logo">
+                        <a href="/">
+                            <img src="../static/images/left-logo.png" alt>
+                        </a>
                     </div>
+                    <!-- LOGO -->
+                    <!--start联系我们按钮-->
+                    <div class="fr pt25">
+                        <a class="my-btn mr15 fr" href="feedback" target="_blank" title="点击反馈">反馈问题</a>
+                    </div>
+                    <!--end联系我们按钮-->
                 </div>
             </div>
         </td>
     </tr>
-    <!--页面的最顶部结束-->
+    <!-- end 1、LOGO+反馈按钮-->
+    <tr>
+        <td>
+            <div class="box100 pt10 pb10 bg-blue2">
+                <select name="search_type" class="selectsearch" id="select_type">
+                        <option value="1">学者姓名</option>
+                        <option value="2">学者专业</option>
+                        <option value="3">学者学校</option>
+                        <option value="4">研究方向</option>
+                </select>
+                <input type="text" class="inputsearch" placeholder="请输入关键字" id="data2search_result">
+                <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
+                    <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
+                </button>
+            </div>
+        </td>
+    </tr>
     <tr>
         <td>
             <table width="100%" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                 <tr>
                     <td valign="top">
-                        <div class="bg-e">
-                            <!--搜索框开始-->
-                            <div class="box100 pt10 pb10 bg-blue2">
-                                <div class="box1200 mau clearfix pd20">
-                                    <div class="box720 mau soso-bg box-shawd10 pos">
-                                        <div class="box100">
 
-                                            <div class="box90 box30 pos pt13 pl20 fl font16">
-                                                <input id="search2" placeholder="学者名：中英文名（必填）" class="input1">
-                                            </div>
-                                            <div class="box09 fr pt11 text-center font16">
-                                                <button type="button" id="searchbtn2"
-                                                        class="btn btn-info btn-default btnsearch">搜索
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--搜索框结束-->
+                        <div class="bg-e">
                             <!--查询结果主页面开始-->
                             <div class="box1200 mau pt20">
-                                <p class="font18 box-shawd10 bg-wit pd10 pl20 ">查询结果( <span>共{{ length }}</span> 条记录)</p>
+                                <p class="font18 box-shawd10 bg-wit pd10 pl20 ">查询结果( <span>共{{ length }}</span> 条记录)
+                                </p>
                             </div>
                             <div class="box1200 mau pt10 ">
                                 <p class="box-shawd10 bg-wit pl20 font16 ">
@@ -70,16 +84,27 @@
                                         <li class="box-shawd10 bg-wit">
                                             <!--这里是头像，我统一用了黑色的专家图标作为头像-->
                                             <div class="fl mr40">
-                                                <a class="userbox" href="scholarinfo?school={{ res[2] }}&name={{ res[1] }}&major={{ res[3] }} " target="_blank">
+                                                <a class="userbox"
+                                                   href="scholarinfo?school={{ res[2] }}&name={{ res[1] }}&major={{ res[3] }} "
+                                                   target="_blank">
                                                     <img src="../static/images/scholar_portrait.png">
                                                 </a>
                                             </div>
                                             <!--头像右侧的信息栏开始-->
-                                                    <p class="pt10">学者姓名: {{ res[1] }} </p>
-                                                    <p class="pt10">工作机构: {{ res[2] }}</p>
-                                                    <p class="pt10">专业学科: {{ res[3] }}</p>
-                                                    <p class="color-gray pt10">成果数 {{ res[7] }}</p>
+                                        <div>
+                                            <span class="pt10">学者姓名: {{ res[1] }} </span><br>
+                                            <span class="pt10">工作机构: {{ res[2] }}</span><br>
+                                            <sapn class="pt10">专业院系: {{ res[3] }}</sapn><br>
+                                            {% if res[7] %}
+                                                <span class="pt10">研究领域:{{ res[5] }}</span><br>
+                                                <span class="color-gray pt10">成果数:{{ res[7] }}</span><br>
+                                            {% else	%}
+                                                <span class="pt10">研究领域:未知</span><br>
+                                                <span class="color-gray pt10">成果数:未知</span><br>
+                                            {% endif %}
+
                                             <!--头像右侧的信息栏结束-->
+                                        </div>
                                             <div class="clear"></div>
                                         </li>
                                     {% endfor %}
@@ -119,16 +144,15 @@
 </form>
 <script language="javascript" type="text/javascript">
     var content = localStorage.value
-    document.getElementById("search2").value = content;
-    document.getElementById("search2_name").value = content;
-    //alert(content)
+    document.getElementById("data2search_result").value = content;
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-    document.getElementById("searchbtn2").onclick = function () {
+    document.getElementById("searchbtn").onclick = function () {
         if (window.localStorage) {
-            localStorage.value = document.getElementById("search2").value;
-            location.href = "../appSearch_result"
-            //window.open("../templates/search_result.html")
+            var  myselect=document.getElementById("select_type").value;
+            var keyword = document.getElementById("data2search_result").value;
+            localStorage.value = keyword;
+            location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
         } else {
             alert('浏览器不支持')
         }

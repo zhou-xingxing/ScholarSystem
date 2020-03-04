@@ -7,7 +7,6 @@ textrank = analyse.textrank
 tfidf = analyse.extract_tags
 textrankE = Rake()
 
-
 # 判断是否有中文
 def is_contain_chinese(check_str):
     for ch in check_str:

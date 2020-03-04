@@ -12,7 +12,7 @@ var citednum =[]
 var paper=data.paper;
 var papername=[];
 var papernum=[];
-
+data.pa
 //加载第四个图表数据
 var paper_key=data.paper_search_key;
 var paper_num =data.paper_search_num;
@@ -68,9 +68,13 @@ $(function() {
         toolbox: {
             show: true,
             feature: {
-            saveAsImage: {
+            restore: {
                 show: true
             },
+                saveAsImage: {
+                show: true
+            },
+
 
         },
             top:'3%',
@@ -106,6 +110,7 @@ $(function() {
         yAxis: [{
             type:'value',
             scale:true,
+            min:0,
             axisLabel: {
                 show:true,
                 color: '#000',
@@ -129,10 +134,11 @@ $(function() {
                 }
             }
         }],
+
         series: [{
             type: 'bar',
             data: achivenum,
-            barWidth: '30px',
+            barWidth: '20px',
             itemStyle: {
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -153,19 +159,6 @@ $(function() {
                     color: '#333',
                     position: 'top',
                 }
-            }
-        },{
-            data: achivenum,
-            type: 'line',
-            smooth: true,
-            name: '折线图',
-            symbol: 'none',
-            lineStyle: {
-                color: '#3275FB',
-                width: 3,
-                shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
-                shadowBlur: 15,
-                shadowOffsetY: 20,
             }
         }
     ]
@@ -191,9 +184,13 @@ $(function() {
     toolbox: {
         show: true,
         feature: {
+            restore: {
+                show: true
+            },
             saveAsImage: {
                 show: true
-            }
+            },
+
         },
         top:'3%',
         right:'10%',
@@ -227,7 +224,7 @@ $(function() {
     yAxis: [{
         type:'value',
         scale:true,
-        // min: 0,
+        min: 0,
         // max: 100,
         axisLabel: {
             formatter: '{value}',
@@ -276,61 +273,11 @@ $(function() {
                 position: 'top',
             }
         }
-    },{
-        data: citednum,
-        type: 'line',
-        smooth: true,
-        name: '折线图',
-        symbol: 'none',
-        lineStyle: {
-            color: '#3275FB',
-            width: 3,
-            shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
-            shadowBlur: 15,
-            shadowOffsetY: 20,
-        }
     }
 ]
 };
         //<!--可视化模块：论文会议分布可视化findPaperDistributeByWD-->
-        var charts = { // 按顺序排列从大到小
-            cityList: ['SCI', '北大核心期刊', 'CSCD期刊数', '中国科技核心', '其他期刊数'],
-            cityData: [7500, 6200, 5700, 4200, 3500]
-        }
-        var top10CityList = charts.cityList
-        var top10CityData = charts.cityData
-        var color = ['rgba(248,195,248', 'rgba(100,255,249', 'rgba(135,183,255', 'rgba(248,195,248', 'rgba(100,255,249']
-        let lineY = []
-        for (var i = 0; i < charts.cityList.length; i++) {
-            var x = i
-            if (x > color.length - 1) {
-                x = color.length - 1
-            }
-            var data = {
-    name: charts.cityList[i],
-    color: color[x] + ')',
-    value: top10CityData[i],
-    itemStyle: {
-      normal: {
-        show: true,
-        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-          offset: 0,
-          color: color[x] + ', 0.3)'
-        }, {
-          offset: 1,
-          color: color[x] + ', 1)'
-        }], false),
-        barBorderRadius: 10
-      },
-      emphasis: {
-        shadowBlur: 15,
-        shadowColor: 'rgba(0, 0, 0, 0.1)'
-      }
-    }
-  }
-            lineY.push(data)
-        }
-        console.log(lineY)
+
         var option3= {
             title: {
 	        text: '3. 论文分布情况',
@@ -346,9 +293,13 @@ $(function() {
     toolbox: {
         show: true,
         feature: {
+            restore: {
+                show: true
+            },
             saveAsImage: {
                 show: true
-            }
+            },
+
         },
         top:'3%',
         right:'10%',
@@ -364,7 +315,7 @@ $(function() {
     right: '15%',
     bottom: '3%'
   },
-  color: color,
+  color: '#FF00FF',
   yAxis: [{
     type: 'category',
     inverse: true,
@@ -414,7 +365,7 @@ $(function() {
     splitLine: {
       show: false
     },
-    data: papername
+    data: papername.reverse()
   }],
   xAxis: {
     type: 'value',
@@ -438,7 +389,7 @@ $(function() {
     // zlevel: 2,
     barWidth: '15px',
     data: papernum,
-    // animationDuration: 1500,
+      // animationDuration: 1500,
     label: {
       normal: {
         color: '#000',
@@ -457,7 +408,7 @@ $(function() {
 };
         //<!--可视化模块：论文关键词可视化findDirectionByWD-->
         var option4 = {
-    title: {
+            title: {
 	        text: '4. 论文关键词词云',
 	        textStyle: {
 	        	 align: 'center',
@@ -473,9 +424,13 @@ $(function() {
     toolbox: {
         show: true,
         feature: {
+            restore: {
+                show: true
+            },
             saveAsImage: {
                 show: true
-            }
+            },
+
         },
         top: '3%',
 	    right: '10%',

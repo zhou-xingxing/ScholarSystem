@@ -27,6 +27,12 @@ def appSearch_result():
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql
+    elif search_type == "2":
+        for i in results:
+            sql = "select * from %s where id between 1 and 2500 and college LIKE '%s'" % (i[0] , '%'+name+'%')
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
     elif search_type == "3":
             sql = "select * from %s where id between 1 and 2500" % (name)
             SQL += sql

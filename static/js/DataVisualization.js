@@ -12,25 +12,25 @@ var citednum =[]
 var paper=data.paper;
 var papername=[];
 var papernum=[];
-data.pa
+
 //加载第四个图表数据
 var paper_key=data.paper_search_key;
 var paper_num =data.paper_search_num;
 var paper_data=[]
 
 $(function() {
-        //3.初始化echarts
+        //初始化echarts
         var  ec1 = echarts.init(document.getElementById('8_main1'))
         var  ec2= echarts.init(document.getElementById('8_main2'))
         var  ec3= echarts.init(document.getElementById('8_main3'))
         var  ec4= echarts.init(document.getElementById('8_main4'))
-
+        //填充为图表可用数据格式
         for(i=0,len=achivelist.length;i<len;i++){
 
             achiveyear.push(achivelist[i]["year"]);
             achivenum.push(achivelist[i]["num"]);
         }
-        achivenum_max=Math.max(achivenum)
+
          for(i=0,len=citedlist.length;i<len;i++){
 
             citedyear.push(citedlist[i]["year"]);
@@ -48,9 +48,10 @@ $(function() {
                 "value": paper_num[i],
             });
         }
-        //4.配置option
+        //配置option
         //<!--可视化模块：成果可视化findResultByWD-->
         var option1 = {
+            //标题内容
             title: {
 	        text: '1. 学术成果可视化',
 	        textStyle: {
@@ -61,32 +62,34 @@ $(function() {
 	        top: '3%',
 	        left: '5%',
 	    },
+            //定义鼠标提示框内容
             tooltip:{
                 show:true,
                 formatter:'{b}年：{c}篇'
             },
-        toolbox: {
-            show: true,
-            feature: {
-            restore: {
-                show: true
-            },
-                saveAsImage: {
-                show: true
-            },
-
-
-        },
+            //工具盒
+            toolbox: {
+                show: true,
+                feature: {
+                    //重新加载
+                    restore: {
+                    show: true
+                    },
+                    //下载图片
+                    saveAsImage: {
+                    show: true
+                    },
+                },
             top:'3%',
             right:'10%',
     },
-        // backgroundColor: '#fff',
         grid: {
             top: '15%',
             right: '10%',
             left: '10%',
             bottom: '12%'
         },
+        //设置横坐标轴
         xAxis: [{
             type: 'category',
             color: '#59588D',
@@ -107,9 +110,12 @@ $(function() {
                 show: false
             },
         }],
+        //设置纵坐标轴
         yAxis: [{
             type:'value',
+            //坐标轴范围自适应
             scale:true,
+            //坐标轴从0开始
             min:0,
             axisLabel: {
                 show:true,
@@ -117,6 +123,7 @@ $(function() {
                 textStyle: {
                     fontSize: 18
                 },
+                //自定义坐标轴标签格式
                 formatter:'{value}'
             },
             axisLine: {
@@ -127,6 +134,7 @@ $(function() {
             axisTick: {
                 show: false
             },
+            //坐标轴的分割线
             splitLine: {
                 lineStyle: {
                     color: 'rgba(131,101,101,0.2)',
@@ -141,6 +149,7 @@ $(function() {
             barWidth: '20px',
             itemStyle: {
                 normal: {
+                    //设置bar颜色随数值渐变
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                         offset: 0,
                         color: '#ff7204' // 0% 处的颜色
@@ -151,6 +160,7 @@ $(function() {
                     barBorderRadius: [30, 30, 0, 0],
                 }
             },
+            //bar的标签
             label: {
                 normal: {
                     show: true,
@@ -180,7 +190,6 @@ $(function() {
                 show:true,
                 formatter:'{b}年：{c}次'
             },
-    // backgroundColor: '#fff',
     toolbox: {
         show: true,
         feature: {
@@ -225,7 +234,6 @@ $(function() {
         type:'value',
         scale:true,
         min: 0,
-        // max: 100,
         axisLabel: {
             formatter: '{value}',
             color: 'black',
@@ -289,7 +297,7 @@ $(function() {
 	        top: '3%',
 	        left: '5%',
 	    },
-    // backgroundColor:'#fff',
+
     toolbox: {
         show: true,
         feature: {
@@ -316,9 +324,9 @@ $(function() {
     bottom: '3%'
   },
   color: '#FF00FF',
+  //两个纵坐标轴
   yAxis: [{
     type: 'category',
-    inverse: true,
     axisTick: {
       show: false
     },
@@ -328,7 +336,8 @@ $(function() {
     axisLabel: {
       show: true,
       inside: false,
-      formatter: function (val) {
+        //自定义坐标轴标签
+        formatter: function (val) {
         return `${val}`
       },
         textStyle: {
@@ -337,7 +346,6 @@ $(function() {
         fontFamily: 'PingFangSC-Regular'
       },
     },
-
     data: papernum
   }, {
     type: 'category',
@@ -365,8 +373,9 @@ $(function() {
     splitLine: {
       show: false
     },
-    data: papername.reverse()
+    data: papername
   }],
+  // 横坐标轴
   xAxis: {
     type: 'value',
     axisTick: {
@@ -386,21 +395,12 @@ $(function() {
   series: [{
     name: '',
     type: 'bar',
-    // zlevel: 2,
     barWidth: '15px',
     data: papernum,
-      // animationDuration: 1500,
     label: {
       normal: {
         color: '#000',
         show: false,
-        // position: [0, '-24px'],
-        // textStyle: {
-        //   fontSize: 16
-        // },
-        // formatter: function (a, b) {
-        //   return a.name
-        // }
       }
     }
   }],
@@ -408,7 +408,7 @@ $(function() {
 };
         //<!--可视化模块：论文关键词可视化findDirectionByWD-->
         var option4 = {
-            title: {
+    title: {
 	        text: '4. 论文关键词词云',
 	        textStyle: {
 	        	 align: 'center',
@@ -438,6 +438,7 @@ $(function() {
     series: [{
         type: 'wordCloud',
         gridSize: 20,
+        //大小范围随value变动
         sizeRange: [15, 50],
         rotationRange: [0, 0],
         shape: 'circle',
@@ -460,7 +461,7 @@ $(function() {
         data: paper_data,
     }]
 };
-        //5.设置option
+        //设置option
         ec1.setOption(option1)
         ec2.setOption(option2)
         ec3.setOption(option3)

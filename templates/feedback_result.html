@@ -10,6 +10,7 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- 设置页面上下位置-->
     <style>
         .height-alert{
             position: absolute;
@@ -24,8 +25,10 @@
     </style>
 </head>
 <body>
+<!-- 根据传入的SuccessOrNot显示不同的反馈结果-->
     {% if SuccessOrNot %}
     <div class="container-fluid" >
+<!-- 居中显示，不同结果设置不同页面链接-->
         <div class="height-alert alert alert-success col-lg-4 col-lg-offset-4  col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
 	    <a href="/" class="alert-link"> 提交成功！&emsp;&emsp;感谢您的积极配合，点击将跳转至首页。</a>
     </div>

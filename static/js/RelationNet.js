@@ -1,6 +1,6 @@
-//此专家数据
+//从后台传入的当前学者数据
 var center_data=rela_center.data;
-//合作专家数据
+//从后台传入的其合作学者数据
 var datalist=rela_partner.data;
 
 
@@ -8,7 +8,7 @@ var local_data = []; //结点数组
 var local_links = []; //连接数组
 var local_category=[]; //种类
 
-//中心学者结点
+
 
 //设置categories 一人一个种类，方便以不同颜色区分
 function setCategory(datalist){
@@ -16,6 +16,7 @@ function setCategory(datalist){
     local_category.push({
         "name":center_data["name"]
     })
+    //合作学者放进去
     for (i = 0,len=datalist.length; i < len; i++){
         local_category.push({
             "name":datalist[i]["name"]
@@ -23,7 +24,7 @@ function setCategory(datalist){
     }
 }
 
-//设置data
+//设置结点data
 function setData(datalist) {
     //先把中心放进去
     local_data.push({
@@ -36,7 +37,7 @@ function setData(datalist) {
         "draggable": false,
         "in":center_data["in"],
     })
-
+    //合作学者放进去
     for (i = 0,len=datalist.length; i < len; i++) {
         local_data.push({
             "name": datalist[i]["name"],
@@ -46,11 +47,10 @@ function setData(datalist) {
             "draggable": true,
             "in":datalist[i]["in"],
         });
-
     }
 }
 
-//设置links
+//设置连线links
 function setLinks(datalist){
     for (i = 0,len=datalist.length; i < len; i++){
         local_links.push({
@@ -65,12 +65,13 @@ setCategory(datalist);
 setData(datalist);
 setLinks(datalist);
 
-//3.初始化echarts
+//初始化echarts
 function draw () {
     var ec = echarts.init(document.getElementById('RelationNet'))
-    //4.配置option
+    //配置option
     var option = {
-    title: {
+        //标题
+        title: {
         text: "学者关系网络",
         subtext: "通过鼠标和滚轮可以实现拖动和缩放",
         top: "top",
@@ -98,18 +99,17 @@ function draw () {
     toolbox: {
         show: true,
         feature: {
-            dataView: {
-                show: false,
-                readOnly: true
-            },
+            // 重新载入
             restore: {
                 show: true
             },
+            //下载图片
             saveAsImage: {
                 show: true
             }
         }
     },
+    //初始动画时长
     animationDuration: 1000,
     animationEasingUpdate: 'quinticInOut',
     series: [{
@@ -118,22 +118,22 @@ function draw () {
         layout: 'force',
         force: {
             //斥力因子
-            repulsion: 2000,
+            repulsion: 1000,
             //加载动画
             layoutAnimation: true,
             //线的长度，根据线的value线性映射
-            edgeLength: [140, 350],
+            edgeLength: [120, 240],
         },
         symbol:"circle",
-        // 鼠标滑过聚焦
+        // 鼠标滑过线是否聚焦
          focusNodeAdjacency: true,
         // 允许缩放和拖动
         roam: true,
-
+        //加载图表数据
         data: local_data,
         links: local_links,
         categories:local_category,
-
+        //结点标签
         label: {
             normal: {
                 show: true,
@@ -145,6 +145,7 @@ function draw () {
                 formatter: "{b}",
             }
         },
+        //连线样式
         lineStyle: {
             normal: {
                 color: 'target',
@@ -153,6 +154,7 @@ function draw () {
             },
 
         },
+        //连线标签
         edgeLabel: {
             normal: {
                 show: true,
@@ -164,8 +166,9 @@ function draw () {
         },
     }]
 };
-    //5.设置option
-    ec.setOption(option)
+    //设置option
+    ec.setOption(option);
+    window.onresize  = ec.resize
 }
 
 

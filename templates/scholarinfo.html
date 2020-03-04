@@ -326,11 +326,17 @@
                                                                     <th>机构</th>
                                                                     <th>合作次数</th>
                                                                 </tr>
-                                                                {% for pal in partner_list %}
+                                                                {% for pal in rela_partner %}
                                                                     <tr>
                                                                         <td><span class="num-box radius3">{{ loop.index }}</span></td>
                                                                         {% for p in pal %}
+                                                                            <!--去掉合作学者里的id信息并给合作学者加上链接  3.4 bwm-->
+                                                                            {% if p=="name" %}
+                                                                               <td><span class="b"><a href="/scholarinfo?school={{ scholarschool }}&name={{ pal[p] }}&major={{ scholarmajor }}">{{ pal[p]}}</a></span></td>
+                                                                            {% endif %}
+                                                                            {% if p!="id" and p!="name" %}
                                                                                 <td><span class="b">{{ pal[p]}}</span></td>
+                                                                            {% endif %}
                                                                         {% endfor %}
                                                                     </tr>
                                                                 {% endfor %}

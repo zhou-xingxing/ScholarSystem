@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
 import jieba
-from rake_nltk import Rake
+#from rake_nltk import Rake
 from jieba import posseg
 from jieba import analyse
 textrank = analyse.textrank
 tfidf = analyse.extract_tags
-textrankE = Rake()
+#textrankE = Rake()
 
 # 判断是否有中文
 def is_contain_chinese(check_str):

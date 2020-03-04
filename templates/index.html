@@ -13,15 +13,10 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        $(function() {
-            $("#select").click(function () {
-
-            })
-
-        })
     </script>
 </head>
 <body>
+    <!--首页logo图片及反馈问题按钮 -->
     <div class="head">
         <div class="headimage">
             <a href="/">
@@ -33,21 +28,25 @@
         </div>
     </div>
     <div class = "inputcontainer">
+        <!--按类型搜索学者信息 -->
         <div class="globalid">
             <img src="../static/images/globalID.png" alt>
         </div>
         <div class="input">
+            <!--搜索类型-->
             <select name="search_type" class="select" id="select_type">
                     <option value="1">学者姓名</option>
                     <option value="2">学者专业</option>
                     <option value="3">学者学校</option>
                     <option value="4">研究方向</option>
             </select>
+            <!--关键词输入框-->
             <input type="text" class="input1" placeholder="请输入关键字" id="data2search_result">
             <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
                 <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
             </button>
         </div>
+        <!--热门学者推荐
         <div class="record">
             <p>
                 <a class="recordname" href="../Search_result?keyword=杨振宁&type=1">杨振宁</a>
@@ -61,17 +60,21 @@
                 <a class="recordname" href="../Search_result?keyword=黄晓军&type=1">黄晓军</a>
             </p>
         </div>
+        -->
     </div>
+    <!--高校列表并分类展示-->
     <table width="100%" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
         <tbody>
         <tr>
             <td style="background-color: #f6f7fb">
                 <div class="inner" style="background-color: #FFFFFF">
                     <div class="schools">
+                    <!--985高校-->
                     <span class="schoolhead">
                         <img class="schoolheadimage" src="../static/images/china.png" alt>
                         <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
                     </span>
+                    <!--从字典里获取学校列表数据-->
                     <div class="schoolnames">
                         <table class="table table-hover table-striped">
                             {% for li_985 in list_985 %}
@@ -86,10 +89,12 @@
                     </div>
                 </div>
                     <div class="schools">
+                    <!--211高校-->
                     <span class="schoolhead">
                         <img class="schoolheadimage" src="../static/images/china.png" alt>
                         <h3 class="schoolheadtitle">中国211+其他</h3>
                     </span>
+                    <!--字典列表读取，并使用jinja模板展示-->
                     <div class="schoolnames">
                         <table class="table table-hover table-striped">
                             {% for li_211 in list_211 %}
@@ -103,11 +108,13 @@
                         </table>
                     </div>
                 </div>
+                <!--国外高校US-->
                     <div class="schools" >
                     <span class="schoolhead">
                         <img class="schoolheadimage" src="../static/images/US.png" alt>
                         <h3 class="schoolheadtitle">U.S.</h3>
                     </span>
+                     <!--字典列表读取，并使用jinja模板循环展示-->
                     <div class="schoolnames">
                         <table class="table table-hover table-striped">
                               {% for li_us in list_us %}
@@ -126,6 +133,7 @@
         </tr>
         </tbody>
     </table>
+     <!--页面底部系统介绍-->
     <div class="foot">
             <div class="foot-title">
                 高校学者发现系统

@@ -9,6 +9,7 @@ app = Blueprint("appSearch_Result",__name__)
 @app.route('/Search_result')
 def appSearch_result():
     keyword = request.args.get('keyword')
+    #scholarid=request.args.get('scholarid')
     search_type = request.args.get('type')
     start_time = time.time()  # 开始时间
     conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
@@ -18,7 +19,7 @@ def appSearch_result():
     cls.execute(sql1)
     conn.commit()
     results = cls.fetchall()
-    # print(results)
+    #print(results)
     SQL = ""
     name = keyword
     if search_type == "1":
@@ -42,6 +43,13 @@ def appSearch_result():
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql
+    elif search_type == "5":
+        for i in results:
+            sql = "select * from %s where id between 1 and 2500 and scholarid='%s'" % (i[0],name)
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
+        #return render_template('scholarinfo.html',result=result,length=length)
     # print(SQL+';')
     try:
         cls.execute(SQL + ';')

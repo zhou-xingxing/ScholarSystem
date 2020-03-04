@@ -45,22 +45,28 @@ def scholarinfo():
         paper_info_list = []
         paper_search_list = []
         collaborate_org = []
-    #学科映射
+
+    #学科映射_申林
     subject=[]
     file2 = open("subjectname.txt", "r", encoding='utf-8')
     text2 = file2.readlines()
+    wordsplitscholarfield=[]
+    for fieldone in scholarfield:
+        wordsplitscholarfield.append(wordsExtra_zsf.wordsplit(fieldone))
     for line in text2:
-        for i in scholarfield:
-            if i in line.strip().split(":")[0]:
-                subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
-                subject.append(subjectone)
+        for i in wordsplitscholarfield:
+            for j in i:
+                if j in line.strip().split(":")[0]:
+                    subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
+                    subject.append(subjectone)
+
     paper_search_all=[]
     for i in range(len(paper_search_list)):
         for j in range(len(paper_search_list[i])):
             paper_search_all.append(paper_search_list[i][j])
     paper_search_list = Counter(paper_search_all)
-    paper_search_key=[];
-    paper_search_num=[];
+    paper_search_key=[]
+    paper_search_num=[]
     # 调用方哥的单词抽取函数
     # 传入参数为数据库中原始字符串，返回值为抽取的单词字典
     dict_word = wordsExtra_zsf.deal_srchp2(result[14], result[16])
@@ -98,5 +104,5 @@ def scholarinfo():
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
                            ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,
-                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data)
+                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject)
 

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request,Blueprint
 import pymysql
 from collections import Counter
+import wordsExtra_zsf
+
 app = Blueprint("appscholarinfo",__name__)
 
 @app.route('/scholarinfo')
@@ -42,9 +44,21 @@ def scholarinfo():
     paper_search_list = Counter(paper_search_all)
     paper_search_key=[];
     paper_search_num=[];
-    for key in paper_search_list:
-        paper_search_key.append(key)
-        paper_search_num.append(paper_search_list[key])
+    # 调用方哥的单词抽取函数
+    # 传入参数为数据库中原始字符串，返回值为抽取的单词字典
+    dict_word = wordsExtra_zsf.deal_srchp2(result[14], result[16])
+    paper_search_key1 = list(dict_word.keys())
+    paper_search_num1 = list(dict_word.values())
+
+
+    if len(paper_search_key1)>30:
+        paper_search_key = paper_search_key1[:30]
+        paper_search_num = paper_search_num1[:30]
+    else:
+        paper_search_key = paper_search_key1
+        paper_search_num = paper_search_num1
+
+
 # 关系网络图部分
     # 中心学者结点
     rela_center_data = {

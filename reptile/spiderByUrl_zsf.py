@@ -149,10 +149,13 @@ def spid(url0, browser, browser2):
             perinfo = {}
             perinfo['name'] = corppersons[i].text.split('\n')[0]
             perinfo['in'] = corppersons[i].text.split('\n')[1]
+            # 如果没有合作次数，则全部写为1
+            perinfo['corpnum'] = '1'
             # 进入对应学者主页爬取scholarid
             browser2.get(urlnews[i].get_attribute('href'))
             info_id2 = browser2.find_element_by_css_selector('#author_intro_wr > div.person_baseinfo > div.p_scholarID > div')
             perinfo['id'] = info_id2.text.split(':')[-1]
+
             # 将个人信息填入合作学者信息集合
             per_json.append(perinfo)
 
@@ -160,6 +163,7 @@ def spid(url0, browser, browser2):
     # 点击获取按照被引量降序的论文排列
     # 重新获取该网址
 
+    print('begin to find paper')
     browser.get(url0)
     sleep(1)
     # 点击弹出按照被引排序的图表
@@ -209,9 +213,11 @@ def spid(url0, browser, browser2):
         except Exception as e:
             paperinfo['corppersons'] = None
         try:
-            paperinfo['cited'] = browser2.find_element_by_css_selector(
+            citedsource = browser2.find_element_by_css_selector(
                 '#dtl_l > div > div.c_content > div.ref_wr'
-            ).text.split('：')[-1].text.replace('\n', '')
+            ).text
+            cited = re.search('(\d+)', citedsource).group(1)
+            paperinfo['cited'] = cited
         except Exception as e:
             # print('no cited')
             paperinfo['cited'] = '0'
@@ -255,6 +261,7 @@ def spid(url0, browser, browser2):
 
 
 if __name__ == '__main__':
+
     # 使用option
     option = ChromeOptions()  # 创建配置示例
     option.add_argument('--headless')  # 无头模式，后台启动
@@ -268,3 +275,17 @@ if __name__ == '__main__':
     print('爬取完毕:\ninfo:\n', info)
     browser.quit()
     browser2.quit()
+
+
+
+    # url = 'http://xueshu.baidu.com/s?wd=paperuri:(fa6d6b67c3be1c5ece3b2479688d5f7c)&filter=sc_long_sign&sc_us=2194680500979485941&tn=SE_baiduxueshu_c1gjeupa&ie=utf-8&no_jump=true'
+    #
+    # browser2.get(url)
+    # citedsource = browser2.find_element_by_css_selector(
+    #     '#dtl_l > div > div.c_content > div.ref_wr'
+    # ).text
+    # cited = re.search('(\d+)', citedsource).group(1)
+    # print(browser2.find_element_by_css_selector(
+    #     '#dtl_l > div > div.c_content > div.ref_wr'
+    # ).text)
+    # print(cited)

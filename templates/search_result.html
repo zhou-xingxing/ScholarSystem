@@ -144,7 +144,9 @@
 </form>
 <script language="javascript" type="text/javascript">
     var content = localStorage.value
-    document.getElementById("data2search_result").value = content;
+    if(content){
+        document.getElementById("data2search_result").value = content;
+    }
 </script>
 <SCRIPT LANGUAGE="JavaScript">
     document.getElementById("searchbtn").onclick = function () {

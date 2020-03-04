@@ -64,10 +64,12 @@ def scholarinfo():
     paper_search_num=[];
     # 调用方哥的单词抽取函数
     # 传入参数为数据库中原始字符串，返回值为抽取的单词字典
-    dict_word = wordsExtra_zsf.deal_srchp2(result[14], result[16])
-    paper_search_key1 = list(dict_word.keys())
-    paper_search_num1 = list(dict_word.values())
-
+    try:
+        dict_word = wordsExtra_zsf.deal_srchp2(result[14], result[16])
+        paper_search_key1 = list(dict_word.keys())
+        paper_search_num1 = list(dict_word.values())
+    except:
+        dict_word={}
 
     if len(paper_search_key1)>30:
         paper_search_key = paper_search_key1[:30]

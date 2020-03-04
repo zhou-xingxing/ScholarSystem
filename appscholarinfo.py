@@ -19,6 +19,7 @@ def scholarinfo():
     scholarschool =result[2]
     scholarmajor = result[3]
     scholarid = result[4]
+    print(result[5])
     scholarfield = eval(result[5])
     cited_num = result[6]
     achievement_num = result[7]

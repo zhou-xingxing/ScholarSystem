@@ -170,7 +170,7 @@ a.color-wit{color: #fff;}
 position: absolute; left: 20px; top:23px;}
 .author-list{width: 100%; overflow: hidden;}
 .author-list li{ clear: both; border-top: 1px solid #eee; padding: 15px;  margin-bottom:10px;}
-.userbox{display: block; width: 90px; height: 120px; overflow: hidden; background: url("../images/scholarinfo-img-bg.png");
+.userbox{display: block; width: 90px; height: 120px; overflow: hidden; background: url("../images/bg-white.png");
 /*  -webkit-border-radius: 70px;
     -moz-border-radius: 70px;
     border-radius: 70px; */ 

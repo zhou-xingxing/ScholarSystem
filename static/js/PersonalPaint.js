@@ -3,22 +3,7 @@ var paper_num =data.paper_search_num;
 var scholar_school=data.scholar_school;
 var scholar_name=data.scholar_name;
 var labels=[]  //个人画像的标签，目前考虑到的有：论文关键词、工作机构、学科专业、
-// labels.push({
-//   "name":scholar_school[0],
-//   "value":2,
-// });
-// labels.push({
-//   "name":scholar_school[1],
-//   "value":2,
-// });
-// labels.push({
-//   "name":scholar_school[2],
-//   "value":2,
-// });
-// labels.push({
-//   "name":scholar_school[3],
-//   "value":2,
-// });
+
 labels.push({
   "name":scholar_school,
   "value":1,

@@ -128,7 +128,7 @@
                                                 <!-- start 学者头像 -->
                                                 <div class="fl  mr40">
                                                     <a class="userbox" href="javascript:void(0)">
-                                                        <img id="ContentPlaceHolder1_imgTitleImage" src(unknow)>
+                                                        <img id="ContentPlaceHolder1_imgTitleImage" src="../static/images/scholar_portrait.png">
                                                     </a>
                                                 </div>
                                                 <!-- end 学者头像 -->
@@ -146,7 +146,7 @@
                                                         <span id="ContentPlaceHolder1_LabelRegion">{{ scholarschool }}</span>
                                                     </div>
                                                     <!-- ORCID 号-->
-                                                    <p class="color-gray pb10">ScholarID：
+                                                    <p class="ini-box pr20 color-gray pt10">ScholarID：
                                                         <a id="ContentPlaceHolder1_idORCID" class="color-gray" target="_blank">
                                                             <span id="ContentPlaceHolder1_LabelORCID">{{ scholarid }}</span>
                                                         </a>
@@ -260,25 +260,22 @@
                                                         <div id="ContentPlaceHolder1_InfoList1_divid">
                                                             {% for i in range(10)%}
                                                                 <li class="ico-box">
-                                                                    <a class="font16" href="javascript:void(0)">
+                                                                    <a class="font16" style="color:blue" href="{{ paper_info_list[i]["href"] }}">
                                                                         <span class="pr10">{{ loop.index }}</span>
                                                                         {{ paper_name_list[i] }}
                                                                     </a>
                                                                     {% for paper_info in paper_info_list[i] %}
                                                                         {% if paper_info == "time" %}
-                                                                             <p class="pt10">发表时间:{{ paper_info_list[i][paper_info] }}</p>
+                                                                             <p class="pt10">发表时间: {{ paper_info_list[i][paper_info] }}</p>
                                                                         {% endif %}
                                                                         {% if paper_info == "corppersons" %}
-                                                                             <p class="pt10">合作学者:{{ paper_info_list[i][paper_info] }}</p>
+                                                                             <p class="pt10">合作学者: {{ paper_info_list[i][paper_info] }}</p>
                                                                         {% endif %}
                                                                         {% if paper_info == "cited" %}
-                                                                             <p class="pt10">引用量:{{ paper_info_list[i][paper_info] }}</p>
+                                                                             <p class="pt10">引用量: {{ paper_info_list[i][paper_info] }}&nbsp;&nbsp;&nbsp;
                                                                         {% endif %}
                                                                         {% if paper_info == "source" %}
-                                                                             <p class="pt10">来源:{{ paper_info_list[i][paper_info] }}</p>
-                                                                        {% endif %}
-                                                                        {% if paper_info == "href" %}
-                                                                            <p class="pt10">百度学术:<a href="{{ paper_info_list[i][paper_info] }}" class="color-red">链接</a></p>
+                                                                             来源: {{ paper_info_list[i][paper_info] }}</p>
                                                                         {% endif %}
                                                                     {% endfor %}
                                                                     <div class="clear"></div>
@@ -327,7 +324,7 @@
                                                                     <th style="width: 20%;">序号</th>
                                                                     <th style="width: 20%;">姓名</th>
                                                                     <th>机构</th>
-                                                                    <th>学者ID</th>
+                                                                    <th>合作次数</th>
                                                                 </tr>
                                                                 {% for pal in partner_list %}
                                                                     <tr>

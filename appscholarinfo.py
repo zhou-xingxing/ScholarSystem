@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request,Blueprint
 import pymysql
+import requests
+import json
 from collections import Counter
 import wordsExtra_zsf
 
@@ -7,14 +9,11 @@ app = Blueprint("appscholarinfo",__name__)
 
 @app.route('/scholarinfo')
 def scholarinfo():
-    school = request.args.get('school');
-    name = request.args.get('name');
-    major = request.args.get('major');
+
     connection = pymysql.connect(host="39.106.96.175",port=3306,db="scholar_info",user="root",password="12345678",charset="utf8")
     cursor = connection.cursor()
 
-    sql = "select * from %s where name='%s' and college='%s'" % (school, name,major)
-    cursor.execute(sql)
+    cursor.execute('select * from 北京大学 where scholarid is not null')
 
     result = cursor.fetchone()
     scholarname = result[1]

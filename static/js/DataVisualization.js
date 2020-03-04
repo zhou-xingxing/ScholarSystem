@@ -12,7 +12,7 @@ var citednum =[]
 var paper=data.paper;
 var papername=[];
 var papernum=[];
-
+data.pa
 //加载第四个图表数据
 var paper_key=data.paper_search_key;
 var paper_num =data.paper_search_num;
@@ -457,7 +457,7 @@ $(function() {
 };
         //<!--可视化模块：论文关键词可视化findDirectionByWD-->
         var option4 = {
-    title: {
+            title: {
 	        text: '4. 论文关键词词云',
 	        textStyle: {
 	        	 align: 'center',

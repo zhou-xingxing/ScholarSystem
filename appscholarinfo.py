@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request,Blueprint
 import pymysql
+import requests
+import json
 from collections import Counter
 import wordsExtra_zsf
 
@@ -10,12 +12,12 @@ def scholarinfo():
     school = request.args.get('school');
     name = request.args.get('name');
     major = request.args.get('major');
-    connection = pymysql.connect(host="39.106.96.175",port=3306,db="scholar_info",user="root",password="12345678",charset="utf8")
+    connection = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
+                                 charset="utf8")
     cursor = connection.cursor()
 
-    sql = "select * from %s where name='%s' and college='%s'" % (school, name,major)
+    sql = "select * from %s where name='%s' and college='%s'" % (school, name, major)
     cursor.execute(sql)
-
     result = cursor.fetchone()
     scholarname = result[1]
     scholarschool =result[2]
@@ -43,25 +45,31 @@ def scholarinfo():
         cited_list = []
         partner_list = []
         paper_name_list = []
-        paper_info_list = []
+        paper_info_list = ['','','','','','','','','','']
         paper_search_list = []
         collaborate_org = []
-    #学科映射
+
+    #学科映射_申林
     subject=[]
     file2 = open("subjectname.txt", "r", encoding='utf-8')
     text2 = file2.readlines()
+    wordsplitscholarfield=[]
+    for fieldone in scholarfield:
+        wordsplitscholarfield.append(wordsExtra_zsf.wordsplit(fieldone))
     for line in text2:
-        for i in scholarfield:
-            if i in line.strip().split(":")[0]:
-                subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
-                subject.append(subjectone)
+        for i in wordsplitscholarfield:
+            for j in i:
+                if j in line.strip().split(":")[0]:
+                    subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
+                    subject.append(subjectone)
+
     paper_search_all=[]
     for i in range(len(paper_search_list)):
         for j in range(len(paper_search_list[i])):
             paper_search_all.append(paper_search_list[i][j])
     paper_search_list = Counter(paper_search_all)
-    paper_search_key=[];
-    paper_search_num=[];
+    paper_search_key=[]
+    paper_search_num=[]
     # 调用方哥的单词抽取函数
     # 传入参数为数据库中原始字符串，返回值为抽取的单词字典
     try:
@@ -70,8 +78,7 @@ def scholarinfo():
         paper_search_num1 = list(dict_word.values())
     except:
         dict_word={}
-        paper_search_key1=[]
-        paper_search_num1=[]
+
     if len(paper_search_key1)>30:
         paper_search_key = paper_search_key1[:30]
         paper_search_num = paper_search_num1[:30]
@@ -97,11 +104,10 @@ def scholarinfo():
             continue
         else:
             rela_partner_data.append(i)
-    paper_info_list_len = len(paper_info_list)
+
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
                            ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,
-                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,
-                           rela_center=rela_center_data,rela_partner=rela_partner_data)
+                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject)
 

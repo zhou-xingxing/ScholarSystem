@@ -32,7 +32,7 @@ def appSearch_result():
             SQL += sql
     elif search_type == "4":
         for i in results:
-            sql = "select * from %s where id between 1 and 2500 and field LIKE %s" % (i[0] , '%'+name+'%')
+            sql = "select * from %s where id between 1 and 2500 and field LIKE '%s'" % (i[0] , '%'+name+'%')
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql

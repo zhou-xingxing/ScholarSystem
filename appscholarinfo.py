@@ -118,6 +118,8 @@ def scholarinfo():
         if i['name'] == scholarname:
             continue
         else:
+            if 'corpnum' not in i.keys():
+                i['corpnum'] = 1
             rela_partner_data.append(i)
 
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor

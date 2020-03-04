@@ -465,6 +465,13 @@ $(function() {
         ec2.setOption(option2)
         ec3.setOption(option3)
         ec4.setOption(option4)
+
+        window.addEventListener("resize",function (){
+            ec1.resize();
+            ec2.resize();
+            ec3.resize();
+            ec4.resize();
+        });
     })
 
 

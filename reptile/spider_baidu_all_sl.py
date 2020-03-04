@@ -74,6 +74,7 @@ for i in results:
                         file_object.write(str(j)+'\n'+Url+'\n'+str(e)+'\n')
                     print("爬取失败：",Url,j)
                 havenum+=1
+		#数据库提供学者数，其中百度学术有信息数，正确爬取数
                 print(totnum,havenum,havenum-wrongnum)
                 browser_baidu1.quit()
                 browser_baidu2.quit()

@@ -5,63 +5,69 @@ import json
 from collections import Counter
 import wordsExtra_zsf
 
+#创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 
+#个人详细页面的路由--余晓
 @app.route('/scholarinfo')
 def scholarinfo():
+    #获取要点击查询的学者学校，姓名和专业以便确定学者
     school = request.args.get('school');
     name = request.args.get('name');
     major = request.args.get('major');
+    #创建数据库连接
     connection = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                                  charset="utf8")
     cursor = connection.cursor()
-
+    #在表中查询结果，用result保存
     sql = "select * from %s where name='%s' and college='%s'" % (school, name, major)
     cursor.execute(sql)
     result = cursor.fetchone()
-    scholarname = result[1]
-    scholarschool =result[2]
-    scholarmajor = result[3]
-    scholarid = result[4]
-    cited_num = result[6]
-    achievement_num = result[7]
-    Hpoint = result[8]
-    Gpoint = result[9]
+    #对查询的结果每一个字段进行分割并处理传到前端页面
+    scholarname = result[1]  #姓名
+    scholarschool =result[2]  # 学校
+    scholarmajor = result[3]  #专业
+    scholarid = result[4]  #id
+    cited_num = result[6]  #引用量
+    achievement_num = result[7]  #成果数
+    Hpoint = result[8]  #H指数
+    Gpoint = result[9]   #G指数
     #str ="{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
+    #对要使用eval函数的标签进行try并跑出异常操作
     try:
-        scholarfield = eval(result[5])
+        scholarfield = eval(result[5])  #研究领域
     except:
         scholarfield = []
     try:
-        achievement_list = eval(result[10])
+        achievement_list = eval(result[10])  #成果列表
     except:
         achievement_list = []
     try:
-        achievement_list2 = eval(result[11])
+        achievement_list2 = eval(result[11])  #按照年份的成果数量字典
     except:
         achievement_list2 = []
     try:
-        cited_list = eval(result[12])
+        cited_list = eval(result[12])  #引用量
     except:
         cited_list = []
     try:
-        partner_list = eval(result[13])
+        partner_list = eval(result[13])  #合租学者
     except:
         partner_list = []
     try:
-        paper_name_list = eval(result[14])
+        paper_name_list = eval(result[14])  #论文名
     except:
         paper_name_list = []
     try:
-        paper_info_list = eval(result[15])
+        paper_info_list = eval(result[15])  #论文信息
     except:
         paper_info_list = []
     try:
-        paper_search_list = eval(result[16])
+        paper_search_list = eval(result[16])  #论文关键词
     except:
         paper_search_list = []
     try:
-        collaborate_org = eval(result[17])
+        collaborate_org = eval(result[17])  #合作机构
     except:
         collaborate_org = []
     #学科映射_申林
@@ -102,7 +108,7 @@ def scholarinfo():
         paper_search_num = paper_search_num1
 
 
-# 关系网络图部分
+    # 关系网络图部分
     # 中心学者结点
     rela_center_data = {
         "name": scholarname,

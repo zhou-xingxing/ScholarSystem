@@ -56,7 +56,7 @@ for i in results:
                     conn.commit()
                 except:
                     print(Url)
-                browser_baidu1.close()
-                browser_baidu2.close()
+                browser_baidu1.quit()
+                browser_baidu2.quit()
         time.sleep(2)
         browser.quit()

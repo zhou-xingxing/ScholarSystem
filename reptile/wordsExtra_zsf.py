@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import jieba
+from rake_nltk import Rake
 from jieba import posseg
 from jieba import analyse
 textrank = analyse.textrank
@@ -75,10 +76,24 @@ def deal_srchp2(titlesource, textsource):
     return  dict_cnt
 
 if __name__ == '__main__':
-    print('拆分统计字典_只用研究点列表', sorted(deal_srchp(textsource3).items(), key=lambda x: x[1], reverse=True)[:30])
-    print()
-    print('拆分统计字典，使用研究点列表和论文题目关键词抽取',
-          sorted(deal_srchp2(titlesource1, textsource3).items(), key=lambda x: x[1], reverse=True)[:30])
+
+    print("hello")
+
+    r = Rake()
+    my_test = 'My father was a self-taught mandolin player. He was one of the best string instrument players in our town. He could not read music, but if he heard a tune a few times, he could play it. When he was younger, he was a member of a small country music band. They would play at local dances and on a few occasions would play for the local radio station. He often told us how he had auditioned and earned a position in a band that featured Patsy Cline as their lead singer. He told the family that after he was hired he never went back. Dad was a very religious man. He stated that there was a lot of drinking and cursing the day of his audition and he did not want to be around that type of environment.'
+    r.extract_keywords_from_text(my_test)
+    print(r.get_ranked_phrases())
+    print("==============================")
+    print(r.get_ranked_phrases_with_scores())
+    print("===========================")
+    print(r.stopwords)
+    print("=============================")
+    print(r.get_word_degrees())
+
+    # print('拆分统计字典_只用研究点列表', sorted(deal_srchp(textsource3).items(), key=lambda x: x[1], reverse=True)[:30])
+    # print()
+    # print('拆分统计字典，使用研究点列表和论文题目关键词抽取',
+    #       sorted(deal_srchp2(titlesource1, textsource3).items(), key=lambda x: x[1], reverse=True)[:30])
 
 '''
 text = "[['循环经济', '系统协调', '可持续发展', '城市可持续发展'], ['系统动力学', '可持续发展', '复杂系统'], ['市场失效', '外部性', '解决方法', '交通拥堵'], ['燃油经济性', '政策措施', '政策体系', '新能源汽车', '燃油消耗量', '燃油消耗'], ['利益相关者分析', '燃油经济性', '经济研究', '影响评价'], ['企业管理人员', '影响因素分析', '问卷调查', '气候变化'], ['企业管理人员', '行为意愿', '统计分析', '气候变化'], ['出口退税率', '钢铁行业'], ['环境经济学', '经济学分析', '外部性', '自然环境', '信息技术产品'], ['合作博弈', '治理研究', '线性优化', '京津冀']]"

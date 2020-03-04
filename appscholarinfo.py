@@ -21,22 +21,40 @@ def scholarinfo():
     scholarschool =result[2]
     scholarmajor = result[3]
     scholarid = result[4]
-    print(result[5])
-    scholarfield = eval(result[5])
     cited_num = result[6]
     achievement_num = result[7]
     Hpoint = result[8]
     Gpoint = result[9]
     #str ="{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
-    achievement_list =  eval(result[10])
-    achievement_list2 = eval(result[11])
-    cited_list = eval(result[12])
-    partner_list = eval(result[13])
-    paper_name_list =eval(result[14])
-    paper_info_list = eval(result[15])
-    paper_search_list = eval(result[16])
-    collaborate_org = eval(result[17])
-
+    try:
+        scholarfield = eval(result[5])
+        achievement_list =  eval(result[10])
+        achievement_list2 = eval(result[11])
+        cited_list = eval(result[12])
+        partner_list = eval(result[13])
+        paper_name_list =eval(result[14])
+        paper_info_list = eval(result[15])
+        paper_search_list = eval(result[16])
+        collaborate_org = eval(result[17])
+    except:
+        scholarfield=[]
+        achievement_list = []
+        achievement_list2 = []
+        cited_list = []
+        partner_list = []
+        paper_name_list = []
+        paper_info_list = []
+        paper_search_list = []
+        collaborate_org = []
+    #学科映射
+    subject=[]
+    file2 = open("subjectname.txt", "r", encoding='utf-8')
+    text2 = file2.readlines()
+    for line in text2:
+        for i in scholarfield:
+            if i in line.strip().split(":")[0]:
+                subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
+                subject.append(subjectone)
     paper_search_all=[]
     for i in range(len(paper_search_list)):
         for j in range(len(paper_search_list[i])):

@@ -8,8 +8,8 @@ app = Blueprint("appSearch_Result",__name__)
 
 @app.route('/Search_result')
 def appSearch_result():
-    keyword = request.args.get('keyword');
-    search_type = request.args.get('type');
+    keyword = request.args.get('keyword')
+    search_type = request.args.get('type')
     start_time = time.time()  # 开始时间
     conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                            charset="utf8")
@@ -28,7 +28,7 @@ def appSearch_result():
                 sql += " UNION "
             SQL += sql
     elif search_type == "3":
-            sql = "select * from %s " % (name)
+            sql = "select * from %s where id between 1 and 2500" % (name)
             SQL += sql
     elif search_type == "4":
         for i in results:

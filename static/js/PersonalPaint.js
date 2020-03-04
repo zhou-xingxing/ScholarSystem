@@ -2,23 +2,28 @@ var paper_key=data.paper_search_key;
 var paper_num =data.paper_search_num;
 var scholar_school=data.scholar_school;
 var scholar_name=data.scholar_name;
-var labels=[]  //个人画像的标签，目前考虑到的有：论文关键词、工作机构、学科专业、
-
-labels.push({
-  "name":scholar_school,
-  "value":1,
-});
-labels.push({
-  "name":scholar_name,
-  "value":2,
-});
+var labels=[];  //个人画像的标签，目前考虑到的有：论文关键词、工作机构、学科专业、
+var max_value=0; //这里是为了取到关键词的最大value值，然后赋给学者姓名。
+// 可能会因为太大，而背景尺寸太小字数无法显示。需要修改64行的width和height。 ---2020.3.4 bwm
 
 for (i=0,len=paper_key.length;i<len;i++){
             labels.push({
                 "name": paper_key[i],
                 "value": paper_num[i],
             });
+            if (paper_num[i]>max_value){
+                max_value=paper_num[i]
+            };
         }
+labels.push({
+  "name":scholar_school,
+  "value":1,
+});
+labels.push({
+  "name":scholar_name,
+  "value":max_value,
+});
+
 var data1 = {
   value: labels,
         //专家图片，转码成base64
@@ -38,9 +43,9 @@ var data1 = {
               },
               series: [{
                 type: 'wordCloud',
-                gridSize: 1,
-                sizeRange: [12, 55],
-                rotationRange: [-45, 0, 45, 90],
+                gridSize: 5,  //用来调制字的大小范围
+                sizeRange: [12,45],  //用来调制词的旋转方向
+                rotationRange: [-45, 0, 45, 90],  //生成字体颜色选择
                 maskImage: maskImage,
                 textStyle: {
                   normal: {
@@ -54,12 +59,12 @@ var data1 = {
                 },
                 left: 'center',
                 top: 'center',
-                // width: '96%',
-                // height: '100%',
+                width: '100%',
+                height: '100%',
                 right: null,
                 bottom: null,
-                // width: 300,
-                // height: 200,
+                //width: 400,
+                //height: 400,
                 // top: 20,
                 data: data1.value
               }]

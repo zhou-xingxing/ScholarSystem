@@ -55,8 +55,12 @@ def deal_srchp(textsource):
 # 加入对论文题目的关键词抽取
 def deal_srchp2(titlesource, textsource):
     all_list = []
-    titlesource = eval(titlesource)
-    textlist = sum(eval(textsource), [])
+    try:
+        titlesource = eval(titlesource)
+        textlist = sum(eval(textsource), [])
+    except:
+        titlesource = []
+        textlist = []
 
     # 对论文题目进行关键词抽取
     for t1 in titlesource:

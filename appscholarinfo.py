@@ -45,10 +45,9 @@ def scholarinfo():
         cited_list = []
         partner_list = []
         paper_name_list = []
-        paper_info_list = ['','','','','','','','','','']
+        paper_info_list = []
         paper_search_list = []
         collaborate_org = []
-
     #学科映射_申林
     subject=[]
     file2 = open("subjectname.txt", "r", encoding='utf-8')
@@ -108,6 +107,6 @@ def scholarinfo():
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
-                           ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,
+                           ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,paperlen=len(paper_info_list),
                            paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject)
 

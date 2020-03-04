@@ -347,25 +347,25 @@
                                                         <table class="my-table table-hover">
                                                             <thead>
                                                             <tr>
-                                                                <th style="width: 20%">序号</th>
-                                                                <th style="width: 40%">名称</th>
+                                                                <th style="width: 10%">序号</th>
+                                                                <th style="width: 15%">所属研究方向</th>
+                                                                <th style="width: 15%">研究方向代码</th>
+                                                                <th style="width: 15%">所属一级学科</th>
+                                                                <th style="width: 15%">一级学科代码</th>
+                                                                <th style="width: 15%">所属二级学科</th>
+                                                                <th style="width: 15%">二级学科代码</th>
                                                                 <th></th>
-                                                                <th>成果数量</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td><span class="num-box radius3">1</span></td>
-                                                                <td>名称</td>
-                                                                <td>------------</td>
-                                                                <td>成果数量</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="num-box radius3">2</span></td>
-                                                                <td>名称</td>
-                                                                <td>------------</td>
-                                                                <td>成果数量</td>
-                                                            </tr>
+                                                            {% for sub in subject %}
+                                                                    <tr>
+                                                                        <td><span class="num-box radius3">{{ loop.index }}</span></td>
+                                                                        {% for s in sub %}
+                                                                                <td><span class="b">{{ s }}</span></td>
+                                                                        {% endfor %}
+                                                                    </tr>
+                                                                {% endfor %}
                                                             </tbody>
                                                         </table>
                                                     </div>

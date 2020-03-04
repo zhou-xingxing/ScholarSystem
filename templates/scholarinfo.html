@@ -260,19 +260,21 @@
                                                         <div id="ContentPlaceHolder1_InfoList1_divid">
                                                             {% for i in range(paperlen)%}
                                                                 <li class="ico-box">
-                                                                    <a class="font16" style="color:blue" href="{{ paper_info_list[i]["href"] }}">
-                                                                        <span class="pr10">{{ loop.index }}</span>
-                                                                        {{ paper_name_list[i] }}
+                                                                    <a class="font16" href="{{ paper_info_list[i]["href"] }}">
+                                                                        <p class="font16" style="width: 90%">
+                                                                            <span class="pr10">{{ loop.index }}</span>
+                                                                            {{ paper_name_list[i] }}
+                                                                        </p>
                                                                     </a>
                                                                     {% for paper_info in paper_info_list[i] %}
                                                                         {% if paper_info == "time" %}
-                                                                             <p class="pt10">发表时间: {{ paper_info_list[i][paper_info] }}</p>
+                                                                             <p class="pt5">发表时间: {{ paper_info_list[i][paper_info] }}</p>
                                                                         {% endif %}
                                                                         {% if paper_info == "corppersons" %}
-                                                                             <p class="pt10">合作学者: {{ paper_info_list[i][paper_info] }}</p>
+                                                                             <p>合作学者: {{ paper_info_list[i][paper_info] }}</p>
                                                                         {% endif %}
                                                                         {% if paper_info == "cited" %}
-                                                                             <p class="pt10">引用量: {{ paper_info_list[i][paper_info] }}&nbsp;&nbsp;&nbsp;
+                                                                             <p>引用量: {{ paper_info_list[i][paper_info] }}&nbsp;&nbsp;&nbsp;
                                                                         {% endif %}
                                                                         {% if paper_info == "source" %}
                                                                              来源: {{ paper_info_list[i][paper_info] }}</p>
@@ -349,20 +351,20 @@
                                                     <div class="line-a bg-e pd40">
                                                         <table class="my-table table-hover">
                                                             <thead>
-                                                            <tr>
-                                                                <th style="width: 10%">序号</th>
-                                                                <th style="width: 15%">所属研究方向</th>
-                                                                <th style="width: 15%">研究方向代码</th>
-                                                                <th style="width: 15%">所属一级学科</th>
-                                                                <th style="width: 15%">一级学科代码</th>
-                                                                <th style="width: 15%">所属二级学科</th>
-                                                                <th style="width: 15%">二级学科代码</th>
+                                                            <tr style="width: auto;">
+                                                                <th style="width: 8%;">序号</th>
+                                                                <th>研究方向</th>
+                                                                <th>研究方向代码</th>
+                                                                <th>一级学科</th>
+                                                                <th>代码1</th>
+                                                                <th>二级学科</th>
+                                                                <th>代码2</th>
                                                                 <th></th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
                                                             {% for sub in subject %}
-                                                                    <tr>
+                                                                    <tr style="width: auto">
                                                                         <td><span class="num-box radius3">{{ loop.index }}</span></td>
                                                                         {% for s in sub %}
                                                                                 <td><span class="b">{{ s }}</span></td>
@@ -408,9 +410,9 @@
                                                 </div>
                                                 <!--个人画像模块-->
                                                 <div role="tabpanel" class="tab-pane" id="cluster7">
-                                                    <div class="line-a bg-e pd40">
+                                                    <div class="line-a bg-e pl10">
                                                         <div id="ContentPlaceHolder1_divPainting"></div>
-                                                        <div id="7_main" style="width: 800px; height: 600px"></div>
+                                                        <div id="7_main" style="margin: auto;;width: 800px; height: 600px;"></div>
                                                     </div>
                                                 </div>
                                                 <!--数据可视化模块-->

@@ -185,7 +185,7 @@ position: absolute; left: 20px; top:23px;}
 .userbox{display: block; width: 90px; height: 120px; overflow: hidden; background: url("../images/bg-white.png");
 /*  -webkit-border-radius: 70px;
     -moz-border-radius: 70px;
-    border-radius: 70px; */ 
+    border-radius: 70px; */
  }
 .userbox img{width: 100%;}
 .ico-box{ background: url("../images/scholarinfo-txt.jpg") no-repeat 15px 15px; padding: 15px 15px 15px 155px!important;}
@@ -273,7 +273,7 @@ box-shadow: 0px 0px 5px 0px rgba(11,37,124,0.1);}
 .num-list li:hover .num-box{ background: #3555aa; color:#fff;}
 .my-table {width: 100%;}
 .my-table tr th{border-bottom:1px solid #eee;}
-/*.my-table tr th,.my-table tr td{padding: 10px; color:#3555aa; font-weight: blod!important;}*/
+.my-table tr th,.my-table tr td{padding: 10px; color:#3555aa; font-weight: blod!important;}
 .my-table tr th:nth-child(1),.my-table tr td:nth-child(1) {
     width: 50px;
     text-align: center;

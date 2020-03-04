@@ -271,13 +271,13 @@ position: absolute; right: 0px; top:20px;}
 box-shadow: 0px 0px 5px 0px rgba(11,37,124,0.1);}
 .num-list li:hover a.color-blue2{top: 12px;}
 .num-list li:hover .num-box{ background: #3555aa; color:#fff;}
-.my-table {width: 100%;}
-.my-table tr th{border-bottom:1px solid #eee;}
-.my-table tr th,.my-table tr td{padding: 10px; color:#3555aa; font-weight: blod!important;}
-.my-table tr th:nth-child(1),.my-table tr td:nth-child(1) {
-    width: 50px;
-    text-align: center;
-}
+/*.my-table {width: 100%;}*/
+/*.my-table tr th{border-bottom:1px solid #eee;}*/
+/*!*.my-table tr th,.my-table tr td{padding: 10px; color:#3555aa; font-weight: blod!important;}*!*/
+/*.my-table tr th:nth-child(1),.my-table tr td:nth-child(1) {*/
+/*    width: 50px;*/
+/*    text-align: center;*/
+/*}*/
 .table-hover > tbody > tr:hover {
   background-color: #fff;
 }

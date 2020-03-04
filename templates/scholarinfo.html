@@ -296,6 +296,7 @@
                                                         </nav>
                                                     </div>
                                                 </div>
+                                                <!-- 合作机构 -->
                                                 <div role="tabpanel" class="tab-pane" id="cluster2">
                                                     <div class="line-a bg-e pd40">
                                                             <table class="my-table table-hover">
@@ -318,6 +319,7 @@
                                                             </table>
                                                     </div>
                                                 </div>
+                                                <!-- 合作学者 -->
                                                 <div role="tabpanel" class="tab-pane" id="cluster3">
                                                     <div class="line-a bg-e pd40">
                                                         <table class="my-table table-hover">
@@ -351,15 +353,14 @@
                                                     <div class="line-a bg-e pd40">
                                                         <table class="my-table table-hover">
                                                             <thead>
-                                                            <tr style="width: auto;">
+                                                            <tr>
                                                                 <th style="width: 8%;">序号</th>
-                                                                <th>研究方向</th>
-                                                                <th>研究方向代码</th>
-                                                                <th>一级学科</th>
-                                                                <th>代码1</th>
-                                                                <th>二级学科</th>
-                                                                <th>代码2</th>
-                                                                <th></th>
+                                                                <th style="width: 15%;">研究方向</th>
+                                                                <th style="width: 16%;">研究方向代码</th>
+                                                                <th style="width: 15%;">一级学科</th>
+                                                                <th style="width: 15%;">代码1</th>
+                                                                <th style="width: 15%;">二级学科</th>
+                                                                <th style="width: 15%;">代码2</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -375,6 +376,7 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                                <!-- 期刊列表 -->
                                                 <div role="tabpanel" class="tab-pane" id="cluster5">
                                                     <div class="line-a bg-e pd40">
                                                          <table class="my-table table-hover">
@@ -382,20 +384,18 @@
                                                                 <tr>
                                                                     <th style="width: 20%">序号</th>
                                                                     <th style="width: 40%">名称</th>
-                                                                    <th ></th>
+                                                                    <th >&nbsp;</th>
                                                                     <th>成果数量</th>
                                                                 </tr>
-                                                            </thead>
-                                                            <tbody>
                                                                 {% for achievement in achievement_list %}
                                                                      <tr>
                                                                         <td><span class="num-box radius3">{{ loop.index }}</span></td>
-                                                                        <td>{{ achievement }}</td>
+                                                                        <td><span class="b">{{ achievement }}</span></td>
                                                                         <td>------------</td>
-                                                                        <td>{{ achievement_list[achievement] }}</td>
+                                                                        <td><span class="b">{{ achievement_list[achievement] }}</span></td>
                                                                     </tr>
                                                                 {% endfor %}
-                                                            </tbody>
+                                                            </thead>
                                                          </table>
                                                     </div>
                                                 </div>

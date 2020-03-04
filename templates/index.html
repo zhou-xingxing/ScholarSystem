@@ -23,15 +23,20 @@
 </head>
 <body>
     <div class="head">
-        <div>
-            <img class="headimage" src="../static/images/left-logo.png" alt>
+        <div class="headimage">
+            <a href="/">
+                <img src="../static/images/left-logo.png" alt>
+            </a>
         </div>
-        <div>
-            <button type="button" class="btn btn-info btn-default btnfeedback" title="点击反馈"><a href="feedback">反馈问题</a></button>
+        <div class="headtip">
+            <a class="my-btn" href="feedback" title="点击反馈">反馈问题</a>
         </div>
     </div>
+
     <div class = "inputcontainer">
-        <div><image class="globalid" src="../static/images/globalID.png"></image></div>
+        <div class="globalid">
+            <img src="../static/images/globalID.png" alt>
+        </div>
         <div class="input">
             <select name="search_type" class="select" id="select_type">
                     <option value="1">学者姓名</option>
@@ -102,20 +107,14 @@
                 </span>
                 <div class="schoolnames">
                     <table class="table table-hover table-striped">
-                        <tr>
-                            <td>清华大学</td>
-                            <td>北京大学</td>
-                            <td>浙江大学</td>
-                            <td>山东大学</td>
-                            <td>同济大学</td>
-                        </tr>
-                        <tr>
-                            <td>清华大学</td>
-                            <td>北京大学</td>
-                            <td>浙江大学</td>
-                            <td>山东大学</td>
-                            <td>同济大学</td>
-                        </tr>
+                          {% for li_us in list_us %}
+                            {% if loop.index%5 == 0 %}
+                                <td>{{ li_us }}</td>
+                                <tr></tr>
+                            {% else %}
+                                <td>{{ li_us}}</td>
+                            {% endif %}
+                        {% endfor %}
                     </table>
                 </div>
             </div>

@@ -68,11 +68,20 @@
                                 <p class="font18 box-shawd10 bg-wit pd10 pl20 ">查询结果( <span>共{{ length }}</span> 条记录)
                                 </p>
                             </div>
-                            <div class="box1200 mau pt10 ">
-                                <p class="box-shawd10 bg-wit pl20 font16 ">
-                                <p class="font18 box-shawd10 bg-wit pd10 pl20 ">学者列表</p>
-                                </p>
-                            </div>
+                            {% if length %}
+                                <div class="box1200 mau pt10 ">
+                                    <p class="box-shawd10 bg-wit pl20 font16 ">
+                                    <p class="font18 box-shawd10 bg-wit pd10 pl20 ">学者列表</p>
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="box1200 mau pt10 ">
+                                    <p class="box-shawd10 bg-wit pl20 font16 ">
+                                    <p class="font18 box-shawd10 bg-wit pd10 pl20 ">暂无相关数据，可以点击右上方反馈问题按钮，我们会及时更新数据</p>
+                                    </p>
+                                </div>
+                            {% endif %}
+
                             <!--循环输出同名学者-->
                             <div class="box1200 mau pd100">
                                 <ul id="ContentPlaceHolder1_ulAuthor" class="clearfix author-list">

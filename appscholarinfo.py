@@ -30,23 +30,39 @@ def scholarinfo():
     #str ="{'其他': '62', '专著': '43', '其他会议数': '195', '北大核心期刊': '6', 'CSCD期刊数': '5', '中国科技核心': '10', 'SCI期刊数': '16', 'EI期刊数': '29', 'SCIE期刊数': '25', 'SSCI期刊数': '1', '其他期刊数': '113'}"
     try:
         scholarfield = eval(result[5])
-        achievement_list =  eval(result[10])
+    except:
+        scholarfield = []
+    try:
+        achievement_list = eval(result[10])
+    except:
+        achievement_list = []
+    try:
         achievement_list2 = eval(result[11])
+    except:
+        achievement_list2 = []
+    try:
         cited_list = eval(result[12])
+    except:
+        cited_list = []
+    try:
         partner_list = eval(result[13])
-        paper_name_list =eval(result[14])
+    except:
+        partner_list = []
+    try:
+        paper_name_list = eval(result[14])
+    except:
+        paper_name_list = []
+    try:
         paper_info_list = eval(result[15])
+    except:
+        paper_info_list = []
+    try:
         paper_search_list = eval(result[16])
+    except:
+        paper_search_list = []
+    try:
         collaborate_org = eval(result[17])
     except:
-        scholarfield=[]
-        achievement_list = []
-        achievement_list2 = []
-        cited_list = []
-        partner_list = []
-        paper_name_list = []
-        paper_info_list = []
-        paper_search_list = []
         collaborate_org = []
     #学科映射_申林
     subject=[]

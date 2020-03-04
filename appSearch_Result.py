@@ -43,10 +43,14 @@ def appSearch_result():
                 sql += " UNION "
             SQL += sql
     # print(SQL+';')
-    cls.execute(SQL + ';')
-    conn.commit()
-    result = cls.fetchall()
-    end_time = time.time()  # 结束时间
-    print("time:", (end_time - start_time))  # 结束时间-开始时间
-    length = len(result)
+    try:
+        cls.execute(SQL + ';')
+        conn.commit()
+        result = cls.fetchall()
+        end_time = time.time()  # 结束时间
+        print("time:", (end_time - start_time))  # 结束时间-开始时间
+        length = len(result)
+    except:
+        result=[]
+        length=0;
     return render_template('search_result.html',result=result,length=length)

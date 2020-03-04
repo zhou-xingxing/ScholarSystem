@@ -50,15 +50,15 @@
         </div>
         <div class="record">
             <p>
-                <a class="recordname">杨振宁</a>
-                <a class="recordname">屠呦呦</a>
-                <a class="recordname">饶毅</a>
-                <a class="recordname">葛均波</a>
-                <a class="recordname">张建平</a>
-                <a class="recordname">贾伟平</a>
-                <a class="recordname">王拥军</a>
-                <a class="recordname">于吉红</a>
-                <a class="recordname">黄晓军</a>
+                <a class="recordname" href="../Search_result?keyword=杨振宁&type=1">杨振宁</a>
+                <a class="recordname" href="../Search_result?keyword=屠呦呦&type=1">屠呦呦</a>
+                <a class="recordname" href="../Search_result?keyword=饶毅&type=1">饶毅</a>
+                <a class="recordname" href="../Search_result?keyword=葛均波&type=1">葛均波</a>
+                <a class="recordname" href="../Search_result?keyword=张建平&type=1">张建平</a>
+                <a class="recordname" href="../Search_result?keyword=贾伟平&type=1">贾伟平</a>
+                <a class="recordname" href="../Search_result?keyword=王拥军&type=1">王拥军</a>
+                <a class="recordname" href="../Search_result?keyword=于吉红&type=1">于吉红</a>
+                <a class="recordname" href="../Search_result?keyword=黄晓军&type=1">黄晓军</a>
             </p>
         </div>
     </div>
@@ -76,10 +76,10 @@
                         <table class="table table-hover table-striped">
                             {% for li_985 in list_985 %}
                                 {% if loop.index%5 == 0 %}
-                                    <td>{{ li_985 }}</td>
+                                    <td> <a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985 }}</a></td>
                                     <tr></tr>
                                 {% else %}
-                                    <td>{{ li_985}}</td>
+                                    <td><a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985}}</a></td>
                                 {% endif %}
                             {% endfor %}
                         </table>
@@ -94,10 +94,10 @@
                         <table class="table table-hover table-striped">
                             {% for li_211 in list_211 %}
                                 {% if loop.index%5 == 0 %}
-                                    <td>{{ li_211 }}</td>
+                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
                                     <tr></tr>
                                 {% else %}
-                                    <td>{{ li_211}}</td>
+                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
                                 {% endif %}
                             {% endfor %}
                         </table>
@@ -112,10 +112,10 @@
                         <table class="table table-hover table-striped">
                               {% for li_us in list_us %}
                                 {% if loop.index%5 == 0 %}
-                                    <td>{{ li_us }}</td>
+                                    <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
                                     <tr></tr>
                                 {% else %}
-                                    <td>{{ li_us}}</td>
+                                    <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
                                 {% endif %}
                             {% endfor %}
                         </table>

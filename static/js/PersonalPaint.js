@@ -1,3 +1,4 @@
+//这个js是个人画像的js，与scholarinfo.html由id=7_main联系。
 var paper_key=data.paper_search_key;
 var paper_num =data.paper_search_num;
 var scholar_school=data.scholar_school;
@@ -6,6 +7,7 @@ var labels=[];  //个人画像的标签，目前考虑到的有：论文关键�
 var max_value=0; //这里是为了取到关键词的最大value值，然后赋给学者姓名。
 // 可能会因为太大，而背景尺寸太小字数无法显示。需要修改64行的width和height。 ---2020.3.4 bwm
 
+//这个循环是输入论文关键词及其对应的出现次数
 for (i=0,len=paper_key.length;i<len;i++){
             labels.push({
                 "name": paper_key[i],
@@ -15,6 +17,7 @@ for (i=0,len=paper_key.length;i<len;i++){
                 max_value=paper_num[i]
             };
         }
+//下面是push进学者姓名与工作机构
 labels.push({
   "name":scholar_school,
   "value":1,
@@ -24,6 +27,7 @@ labels.push({
   "value":max_value,
 });
 
+//data1里的内容有刚刚输入的值与背景专家图片的转码
 var data1 = {
   value: labels,
         //专家图片，转码成base64
@@ -49,7 +53,7 @@ var data1 = {
                 maskImage: maskImage,
                 textStyle: {
                   normal: {
-                    color: function() {
+                    color: function() {  //调整词云的颜色
                       return 'rgb(' +
                           Math.round(Math.random() * 255) +
                           ', ' + Math.round(Math.random() * 255) +
@@ -57,7 +61,7 @@ var data1 = {
                     }
                   }
                 },
-                left: 'center',
+                left: 'center', //下面是一些位置与尺寸的参数
                 top: 'center',
                 width: '100%',
                 height: '100%',
@@ -66,7 +70,7 @@ var data1 = {
                 //width: 400,
                 //height: 400,
                 // top: 20,
-                data: data1.value
+                data: data1.value  //引用data1里的value字典
               }]
             })
           }

@@ -18,16 +18,16 @@ cls = conn.cursor()
 sql1 = "select table_name from information_schema.tables where table_schema='scholar_info'"  # 获取当前所有表（学校）
 cls.execute(sql1)
 conn.commit()
-#results = cls.fetchall()
-#从输入的表名（学校名）和id号开启搜索
-result=sys.argv[1]
-dataid=sys.argv[2]
-results=['%s'%result]
+results = cls.fetchall()
+#result=sys.argv[1]
+dataid=0
+#results=['%s'%result]
 totnum=0
 havenum=0
 wrongnum=0
 for i in results:
-    sql2 = "select id,name,school from %s where id>%s; " % (i,dataid)  # 获取当前学校和id后的学者
+	# 获取每一个学校表中的所有学者
+    sql2 = "select id,name,school from %s where id>%s; " % (i[0],dataid)  
     print(sql2)
     cls.execute(sql2)
     conn.commit()
@@ -46,7 +46,7 @@ for i in results:
         all_a = browser.find_elements_by_css_selector("p.personInstitution")
         all_b = browser.find_elements_by_css_selector("a.searchResult_take")
         for k in range(0, len(all_a)):
-			  #对百度学术进行姓名和学校匹配
+			#对百度学术进行姓名和学校匹配
             if school in all_a[k].text:
                 #print(all_a[k].text)
                 #print(all_b[k].get_attribute("href"))  # 待爬取详细信息网址
@@ -74,6 +74,7 @@ for i in results:
                         file_object.write(str(j)+'\n'+Url+'\n'+str(e)+'\n')
                     print("爬取失败：",Url,j)
                 havenum+=1
+		#数据库提供学者数，其中百度学术有信息数，正确爬取数
                 print(totnum,havenum,havenum-wrongnum)
                 browser_baidu1.quit()
                 browser_baidu2.quit()

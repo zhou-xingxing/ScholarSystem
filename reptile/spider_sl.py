@@ -10,7 +10,7 @@ browser = Chrome(options=option)   #创建浏览器实例  executable_path="" op
 browser.get(url)     #打开具体的网页
 # html=browser.page_source  #获取页面源码
 # print(html)
-school = browser.find_elements_by_css_selector("li > dl > dt > div > a")
+school = browser.find_elements_by_css_selector("li:nth-child(3) > dl > dt > div > a")
 
 #找到所有学校元素进行遍历
 for i in school:
@@ -47,8 +47,6 @@ for i in school:
     # browser.find_element_by_xpath('//*/li[1]/dl/dt/div[1]/a[1]').click()
     time.sleep(2)
     college=schoolbrowser.find_elements_by_css_selector("dl > dt > div > a")
-
-    # 找到所有学院元素进行遍历
     for j in college:
         print(j.text)
         collegeurl = j.get_attribute("href")

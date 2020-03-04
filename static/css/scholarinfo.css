@@ -19,7 +19,7 @@ a:hover{color: #299fff; text-decoration: none;}
 .my-btn{ -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px; }
-.my-btn:hover{background: #69bcff; color: #fff;}
+.my-btn:hover{background: #69bcff; color: #fff;text-decoration: none}
 .foot-tip{ background: #3555aa;}
 .bg-blue2{ background: #3555aa;}
 .tzy{width: 50px; height: 30px; padding-top: 2px; 
@@ -82,6 +82,7 @@ a:hover{color: #299fff; text-decoration: none;}
 .box90{ width: 90%; height: 42px; }
 .box09{ width: 9%; height: 42px; background: #000;}
 .box09 a{display: block; width: 100%; height: 42px;color: #fff;}
+.box09 a:hover{color: #fff;text-decoration: none}
 /*height css*/
 .h10{ height:6px; }
 .h30{ height:30px; line-height: 30px; }

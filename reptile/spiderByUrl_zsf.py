@@ -105,7 +105,7 @@ def spid(url0, browser, browser2):
     try:
         browser.find_element_by_css_selector('#main_content_right > div.co_author_wr > h3 > a').click()
         sleep(1)
-        # a1 = browser.find_element_by_css_selector('#co_rel_map > h3')
+        a1 = browser.find_element_by_css_selector('#co_rel_map > h3')
         corppersons = browser.find_elements_by_css_selector('#co_rel_map > div > a')
         # print('corppersons', corppersons)
         # print('num of corppersons', len(corppersons))
@@ -193,13 +193,7 @@ def spid(url0, browser, browser2):
                 i + 1) + ') > div.res_con > h3 > a')
         urlnew = paper.get_attribute('href')
         browser2.get(urlnew)
-        try:
-            # 从点进去的论文主页获取论文名字
-            namelist.append(browser2.find_element_by_css_selector('#dtl_l > div> h3').text)
-        except Exception as e:
-            # 从原来的论文列表获取论文名字
-            namelist.append(browser.find_element_by_css_selector('#articlelist_container > div.in_content_result_wr > div.in_conternt_reslist > div:nth-child('+str(i+1)+') > div.res_con > h3'))
-            print('论文主页获取题目失败，改为从论文列表获取')
+        namelist.append(browser2.find_element_by_css_selector('#dtl_l > div> h3').text)
         paperinfo = {}
         try:
             paperinfo['time'] = \

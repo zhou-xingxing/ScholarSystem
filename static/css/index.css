@@ -113,3 +113,69 @@
     border-radius: 3px;
 }
 .my-btn:hover{background: #69bcff; color: #fff;text-decoration: none}
+
+.foot{
+    border-top:1px solid #eee;
+    border-bottom:0px solid #299fff;
+    width: 100%;
+    margin-top: 1%;
+}
+.foot-title
+{
+    padding-top: 20px;
+    font-size: 24px;
+    margin-left: 16.4%;
+}
+.foot-context
+{
+    float: left;
+    width: 33%;
+    height: 10%;
+    margin-left: 16.5%;
+}
+.foot-context p
+{
+    font-size: 12px;
+    padding-right: 6%;
+    padding-top: 8%;
+    color:#ababab;
+}
+
+.foot-box{
+    width: 8%;
+    height: 122px;
+    border: 1px solid #eeeeee;
+    overflow: hidden;
+    float: right;
+    margin-bottom: 5%;
+    margin-right: 15%;
+}
+.foot-box img
+{
+    width: 100%;
+    padding: 5px;
+}
+.foot-box p
+{
+    color: #299fff;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.box1200{ width: 100%; padding: 0 20px; }
+
+.btn-top
+{
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    background: #299fff;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+    color: #fff; display: block;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+}
+.btn-top img{height: 80%;}

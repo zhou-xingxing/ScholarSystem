@@ -32,7 +32,6 @@
             <a class="my-btn" href="feedback" title="点击反馈">反馈问题</a>
         </div>
     </div>
-
     <div class = "inputcontainer">
         <div class="globalid">
             <img src="../static/images/globalID.png" alt>
@@ -63,61 +62,86 @@
             </p>
         </div>
     </div>
-    <div class="inner">
-            <div class="schools">
-                <span class="schoolhead">
-                    <img class="schoolheadimage" src="../static/images/china.png" alt>
-                    <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
-                </span>
-                <div class="schoolnames">
-                    <table class="table table-hover table-striped">
-                        {% for li_985 in list_985 %}
-                            {% if loop.index%5 == 0 %}
-                                <td>{{ li_985 }}</td>
-                                <tr></tr>
-                            {% else %}
-                                <td>{{ li_985}}</td>
-                            {% endif %}
-                        {% endfor %}
-                    </table>
+    <table width="100%" height="2" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td style="background-color: #f6f7fb">
+                <div class="inner" style="background-color: #FFFFFF">
+                    <div class="schools">
+                    <span class="schoolhead">
+                        <img class="schoolheadimage" src="../static/images/china.png" alt>
+                        <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
+                    </span>
+                    <div class="schoolnames">
+                        <table class="table table-hover table-striped">
+                            {% for li_985 in list_985 %}
+                                {% if loop.index%5 == 0 %}
+                                    <td>{{ li_985 }}</td>
+                                    <tr></tr>
+                                {% else %}
+                                    <td>{{ li_985}}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="schools">
-                <span class="schoolhead">
-                    <img class="schoolheadimage" src="../static/images/china.png" alt>
-                    <h3 class="schoolheadtitle">中国211+其他</h3>
-                </span>
-                <div class="schoolnames">
-                    <table class="table table-hover table-striped">
-                        {% for li_211 in list_211 %}
-                            {% if loop.index%5 == 0 %}
-                                <td>{{ li_211 }}</td>
-                                <tr></tr>
-                            {% else %}
-                                <td>{{ li_211}}</td>
-                            {% endif %}
-                        {% endfor %}
-                    </table>
+                    <div class="schools">
+                    <span class="schoolhead">
+                        <img class="schoolheadimage" src="../static/images/china.png" alt>
+                        <h3 class="schoolheadtitle">中国211+其他</h3>
+                    </span>
+                    <div class="schoolnames">
+                        <table class="table table-hover table-striped">
+                            {% for li_211 in list_211 %}
+                                {% if loop.index%5 == 0 %}
+                                    <td>{{ li_211 }}</td>
+                                    <tr></tr>
+                                {% else %}
+                                    <td>{{ li_211}}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="schools" >
-                <span class="schoolhead">
-                    <img class="schoolheadimage" src="../static/images/US.png" alt>
-                    <h3 class="schoolheadtitle">U.S.</h3>
-                </span>
-                <div class="schoolnames">
-                    <table class="table table-hover table-striped">
-                          {% for li_us in list_us %}
-                            {% if loop.index%5 == 0 %}
-                                <td>{{ li_us }}</td>
-                                <tr></tr>
-                            {% else %}
-                                <td>{{ li_us}}</td>
-                            {% endif %}
-                        {% endfor %}
-                    </table>
+                    <div class="schools" >
+                    <span class="schoolhead">
+                        <img class="schoolheadimage" src="../static/images/US.png" alt>
+                        <h3 class="schoolheadtitle">U.S.</h3>
+                    </span>
+                    <div class="schoolnames">
+                        <table class="table table-hover table-striped">
+                              {% for li_us in list_us %}
+                                {% if loop.index%5 == 0 %}
+                                    <td>{{ li_us }}</td>
+                                    <tr></tr>
+                                {% else %}
+                                    <td>{{ li_us}}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="foot">
+            <div class="foot-title">
+                高校学者发现系统
             </div>
+            <div class="foot-context">
+                <p>
+                    高校学者发现系统是一款免费公开的用来查询学者信息的网站，在1.0版本中我们爬取了各大网站的国内学者信息，包括其工作机构、科研成果、学术关系网络、学者画像等。
+                </p>
+            </div>
+            <div class="foot-box">
+                <p class="text-center">返回顶部</p>
+                <a href="#top" class="btn-top">
+                    <img src="../static/images/top.png" >
+                </a>
+            </div>
+        <p style="margin-top: 10%; margin-left: 22%;" class="text-center">Copyright © 2020 CAU云中君开发团队</p>
     </div>
     <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
     <SCRIPT LANGUAGE="JavaScript">

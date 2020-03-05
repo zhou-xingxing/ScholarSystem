@@ -307,6 +307,8 @@
                                                                         <th>&nbsp;</th>
                                                                         <th style="text-align: center">合作次数</th>
                                                                     </tr>
+                                                                </thead>
+                                                                <tbody>
                                                                     {% for col in collaborate_org %}
                                                                         <tr>
                                                                             <td><span class="num-box radius3">{{ loop.index }}</span></td>
@@ -315,7 +317,7 @@
                                                                             <td style="text-align: center"><span class="b">{{ collaborate_org[col] }}</span></td>
                                                                         </tr>
                                                                     {% endfor %}
-                                                                </thead>
+                                                                </tbody>
                                                             </table>
                                                     </div>
                                                 </div>
@@ -330,6 +332,8 @@
                                                                     <th>机构</th>
                                                                     <th>合作次数</th>
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody>
                                                                 {% for pal in rela_partner %}
                                                                     <tr>
                                                                         <td><span class="num-box radius3">{{ loop.index }}</span></td>
@@ -346,7 +350,7 @@
                                                                         {% endfor %}
                                                                     </tr>
                                                                 {% endfor %}
-                                                            </thead>
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -389,6 +393,8 @@
                                                                     <th >&nbsp;</th>
                                                                     <th>成果数量</th>
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody>
                                                                 {% for achievement in achievement_list %}
                                                                      <tr>
                                                                         <td><span class="num-box radius3">{{ loop.index }}</span></td>
@@ -397,7 +403,7 @@
                                                                         <td><span class="b">{{ achievement_list[achievement] }}</span></td>
                                                                     </tr>
                                                                 {% endfor %}
-                                                            </thead>
+                                                            </tbody>
                                                          </table>
                                                     </div>
                                                 </div>

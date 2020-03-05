@@ -158,17 +158,28 @@
     }
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-    document.getElementById("searchbtn").onclick = function () {
-        if (window.localStorage) {
-            var  myselect=document.getElementById("select_type").value;
-            var keyword = document.getElementById("data2search_result").value;
+    $(function () {
+        //添加热键
+        $(document).keydown(function (e) {
+            if (e.keyCode === 13){
+                var  myselect=document.getElementById("select_type").value;
+                var keyword = document.getElementById("data2search_result").value;
+                localStorage.value = keyword;
+                location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+            }
+        })
+        document.getElementById("searchbtn").onclick = function () {
+            if (window.localStorage) {
+                var  myselect=document.getElementById("select_type").value;
+                var keyword = document.getElementById("data2search_result").value;
 
-            localStorage.value = keyword;
-            location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
-        } else {
-            alert('浏览器不支持')
+                localStorage.value = keyword;
+                location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+            } else {
+                alert('浏览器不支持')
+            }
         }
-    }
+    })
 </SCRIPT>
 </body>
 </html>

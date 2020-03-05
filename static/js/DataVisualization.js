@@ -1,10 +1,10 @@
 //加载第一个图表数据
-var achivelist = data.achive
+var achivelist = data.cited
 var achiveyear = []
 var achivenum =[]
 
 //加载第二个图表数据
-var citedlist = data.cited
+var citedlist = data.achive
 var citedyear = []
 var citednum =[]
 

@@ -4,7 +4,6 @@ import requests
 import json
 from collections import Counter
 import wordsExtra_zsf
-
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 

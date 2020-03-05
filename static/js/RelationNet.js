@@ -118,11 +118,11 @@ function draw () {
         layout: 'force',
         force: {
             //斥力因子
-            repulsion: 1000,
+            repulsion: 800,
             //加载动画
             layoutAnimation: true,
             //线的长度，根据线的value线性映射
-            edgeLength: [120, 240],
+            edgeLength: [70, 140],
         },
         symbol:"circle",
         // 鼠标滑过线是否聚焦

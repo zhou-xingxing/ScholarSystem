@@ -305,14 +305,14 @@
                                                                         <th style="width: 20%;">序号</th>
                                                                         <th style="width: 40%;">机构名称</th>
                                                                         <th>&nbsp;</th>
-                                                                        <th>合作次数</th>
+                                                                        <th style="text-align: center">合作次数</th>
                                                                     </tr>
                                                                     {% for col in collaborate_org %}
                                                                         <tr>
                                                                             <td><span class="num-box radius3">{{ loop.index }}</span></td>
                                                                             <td><span class="b">{{ col }}</span></td>
                                                                             <td>------------</td>
-                                                                            <td><span class="b">{{ collaborate_org[col] }}</span></td>
+                                                                            <td style="text-align: center"><span class="b">{{ collaborate_org[col] }}</span></td>
                                                                         </tr>
                                                                     {% endfor %}
                                                                 </thead>
@@ -358,7 +358,7 @@
                                                             <tr>
                                                                 <th style="width: 8%;">序号</th>
                                                                 <th style="width: 15%;">研究方向</th>
-                                                                <th style="width: 16%;">研究方向代码</th>
+                                                                <th style="width: 16%;">方向代码</th>
                                                                 <th style="width: 15%;">一级学科</th>
                                                                 <th style="width: 15%;">代码1</th>
                                                                 <th style="width: 15%;">二级学科</th>
@@ -405,7 +405,7 @@
                                                 <div role="tabpanel" class="tab-pane" id="cluster6">
                                                     <div class="line-a bg-e pd40">
                                                         <div id="ContentPlaceHolder1_divRenetwork"></div>
-                                                        <div id="RelationNet" style="width: 600px;height: 500px;">
+                                                        <div id="RelationNet" style="width: 700px;height: 700px;">
                                                             <script>
                                                                 draw()
                                                             </script>

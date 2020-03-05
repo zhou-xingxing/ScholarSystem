@@ -146,18 +146,27 @@ $(function() {
         series: [{
             type: 'bar',
             data: achivenum,
-            barWidth: '20px',
+            barWidth: '90%',
             itemStyle: {
                 normal: {
                     //设置bar颜色随数值渐变
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                         offset: 0,
-                        color: '#ff7204' // 0% 处的颜色
+                        color: '#ff7204' // 100% 处的颜色 #ff7204
+                    }, {
+                        offset: 0.75,
+                        color: '#ff8d19' // 75% 处的颜色
+                    },{
+                        offset: 0.5,
+                        color:'#ff8c1a' // 50% 处的颜色
+                    }, {
+                        offset: 0.25,
+                        color:'#ff934f' // 25% 处的颜色
                     }, {
                         offset: 1,
-                        color: '#ffe670' // 100% 处的颜色
+                        color:'#ffe670' // 0% 处的颜色
                     }], false),
-                    barBorderRadius: [30, 30, 0, 0],
+                    barBorderRadius: [3, 3, 0, 0],
                 }
             },
             //bar的标签
@@ -259,17 +268,33 @@ $(function() {
     series: [{
         type: 'bar',
         data: citednum,
-        barWidth: '20px',
+        barWidth: '90%',
         itemStyle: {
             normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: '#ff7204' // 0% 处的颜色
-                }, {
-                    offset: 1,
-                    color: '#ffe670' // 100% 处的颜色
-                }], false),
-                barBorderRadius: [30, 30, 0, 0],
+                 offset: 0,
+                        color: '#ff7204' // 100% 处的颜色 #ff7204
+                    }, {
+                        offset: 0.75,
+                        color: '#ff8d19' // 75% 处的颜色
+                    },{
+                        offset: 0.5,
+                        color:'#ff8c1a' // 50% 处的颜色
+                    }, {
+                        offset: 0.25,
+                        color:'#ff934f' // 25% 处的颜色
+                    }, {
+                        offset: 1,
+                        color:'#ffe670' // 0% 处的颜色
+                    }], false),
+                    barBorderRadius: [3, 3, 0, 0],
+                    //     offset: 0,
+                //     color: '#ff7204' // 100% 处的颜色
+                // }, {
+                //     offset: 1,
+                //     color: '#ffe670' // 0% 处的颜色
+                // }], false),
+                // barBorderRadius: [30, 30, 0, 0],
             }
         },
         label: {
@@ -323,7 +348,7 @@ $(function() {
     right: '15%',
     bottom: '3%'
   },
-  color: '#FF00FF',
+  color: '#ff4d1e',
   //两个纵坐标轴
   yAxis: [{
     type: 'category',

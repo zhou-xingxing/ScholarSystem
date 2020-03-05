@@ -23,8 +23,8 @@ def wordsplit(str):
     for word in words:
         # print('word:', word.word, 'flag', word.flag)
         # 过滤其中名词性分词
-        if word.flag in ['n', 'ns', 'nz', 'nt', 'ng', 'un']:
-            anslist.append(word.word)
+        # if word.flag in ['n', 'ns', 'nz', 'nt', 'ng', 'un']:
+        anslist.append(word.word)
     return anslist
 
 

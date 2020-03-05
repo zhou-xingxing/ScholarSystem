@@ -22,30 +22,31 @@ def appSearch_result():
     #print(results)
     SQL = ""
     name = keyword
+    need_part = '`id`,`name`,`school`,`college`,`field`,`achievement_num`'
     if search_type == "1":
         for i in results:
-            sql = "select * from %s where id between 1 and 2500 and name='%s'" % (i[0], name)
+            sql = "select %s from %s where id between 1 and 2500 and name='%s'" % (need_part,i[0], name)
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql
     elif search_type == "2":
         for i in results:
-            sql = "select * from %s where id between 1 and 2500 and college LIKE '%s'" % (i[0] , '%'+name+'%')
+            sql = "select %s from %s where id between 1 and 2500 and college LIKE '%s'" % (need_part,i[0] , '%'+name+'%')
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql
     elif search_type == "3":
-            sql = "select * from %s where id between 1 and 2500" % (name)
+            sql = "select %s from %s where id between 1 and 2500" % (need_part,name)
             SQL += sql
     elif search_type == "4":
         for i in results:
-            sql = "select * from %s where id between 1 and 2500 and field LIKE '%s'" % (i[0] , '%'+name+'%')
+            sql = "select %s from %s where id between 1 and 2500 and field LIKE '%s'" % (need_part,i[0] , '%'+name+'%')
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql
     elif search_type == "5":
         for i in results:
-            sql = "select * from %s where id between 1 and 2500 and scholarid='%s'" % (i[0],name)
+            sql = "select %s from %s where id between 1 and 2500 and scholarid='%s'" % (need_part,i[0],name)
             if i != results[-1]:
                 sql += " UNION "
             SQL += sql
@@ -60,5 +61,16 @@ def appSearch_result():
         length = len(result)
     except:
         result=[]
-        length=0;
-    return render_template('search_result.html',result=result,length=length)
+        length=0
+    #把研究领域的['','']去掉
+    listresult = []
+    for reone in result:
+        if reone[4]:
+            newstr = (reone[4].replace('[\'', ' ').replace('\']', ' ').replace('\', \'', ', '))
+            newtuple = (reone[0], reone[1], reone[2], reone[3], newstr, reone[5])
+        else:
+            newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], reone[5])
+        listresult.append(newtuple)
+    end_time = time.time()  # 结束时间
+    print("time:", (end_time - start_time))  # 结束时间-开始时间
+    return render_template('search_result.html',result=listresult,length=length)

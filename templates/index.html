@@ -154,6 +154,7 @@
     <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
     <SCRIPT LANGUAGE="JavaScript">
             $(function () {
+                localStorage.clear()
                 $(document).keydown(function (e) {
                     if (e.keyCode === 13){
                         var  myselect=document.getElementById("select_type").value;

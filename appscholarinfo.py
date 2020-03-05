@@ -4,7 +4,6 @@ import requests
 import json
 from collections import Counter
 import wordsExtra_zsf
-
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 
@@ -127,7 +126,14 @@ def scholarinfo():
             if 'corpnum' not in i.keys():
                 i['corpnum'] = 1
             rela_partner_data.append(i)
-
+    #删除掉查询不到的论文
+    del_i=[]
+    for i in range(len(paper_name_list)):
+        if '层次分析法' in paper_name_list[i]:
+            del_i.append(i)
+    for i in del_i:
+        paper_name_list.pop(i)
+        paper_info_list.pop(i)
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2

@@ -12,6 +12,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../static/layer/layer.js" ></script>
     <script type="text/javascript">
     </script>
 </head>
@@ -23,8 +24,9 @@
                 <img src="../static/images/left-logo.png" alt>
             </a>
         </div>
-        <div class="headtip">
-            <a class="my-btn" href="feedback" title="点击反馈">反馈问题</a>
+        <div class="headtip" style="display:flex;">
+            <a class="my-btn" title="学者对比" id="compare">学者对比</a>
+            <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
         </div>
     </div>
     <div class = "inputcontainer">
@@ -151,6 +153,14 @@
             </div>
         <p style="margin-top: 10%; margin-left: 22%;" class="text-center">Copyright © 2020 CAU云中君开发团队</p>
     </div>
+    <!--添加弹窗元素-->
+    <div class="compareDialog" id="compareDialog" style="display: none">
+        学者姓名：<input type="text" class="compareDialogInput">
+        学者机构：<input type="text" class="compareDialogInput">
+        学者学院：<input type="text" class="compareDialogInput" placeholder="非必填"><br>
+        <button>增加一个</button>
+    </div>
+
     <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
     <SCRIPT LANGUAGE="JavaScript">
             $(function () {
@@ -173,6 +183,14 @@
                         alert('浏览器不支持')
                     }
                 }
+                $("#compare").click(function() {
+                    layer.open({
+                        type:1,
+                        title:"学者对比",
+                        area:["600px","300px"],
+                        content: $('#compareDialog')
+                    });
+                })
             })
     </SCRIPT>
 </body>

@@ -10,6 +10,7 @@
     <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../static/css/tableyx.css" rel="stylesheet" type="text/css">
+    <script src="../static/layer/layer.js" ></script>
     <script type="text/javascript">
         var data={
             achive:{{ achievement_list2|tojson }},
@@ -82,6 +83,14 @@
                 $("#8_main3")[0].style.display = "none";
                 $("#8_main4")[0].style.display = "block";
             });
+            $("#comparescholar").click(function() {
+                    layer.open({
+                        type:1,
+                        title:"学者对比",
+                        area:["900px","700px"],
+                        content: $('#partnercompare')
+                    });
+            })
         })
     </script>
 </head>
@@ -416,7 +425,19 @@
                                                             </script>
                                                         </div>
                                                         <div id="ContentPlaceHolder1_divRenetwork">
-                                                            <button>学者对比</button>
+                                                            <button class="comparescholar" id="comparescholar">学者对比</button>
+                                                        </div>
+                                                        <div class="partnercompare" id="partnercompare" style="display:none">
+                                                            <div class="datatypeselect">
+                                                                <button type="button" id="datatypeselectbtn1" class="btn btn-primary">学术成果</button>
+                                                                <button type="button" id="datatypeselectbtn2" class="btn btn-primary">论文引用</button>
+                                                                <button type="button" id="datatypeselectbtn3" class="btn btn-primary">期刊会议</button>
+                                                                <button type="button" id="datatypeselectbtn4" class="btn btn-primary">研究方向</button>
+                                                            </div>
+                                                            <div id="partnerCompare1" align="center" style="margin:0 auto;width: 650px;height: 550px;display: block">1</div>
+                                                            <div id="partnerCompare2" align="center" style="margin:0 auto;width: 650px;height: 550px;display: none">2/div>
+                                                            <div id="partnerCompare3" align="center" style="margin:0 auto;width: 700px;height: 600px;display: none">3</div>
+                                                            <div id="partnerCompare4" align="center" style="margin:0 auto;width: 650px;height: 550px;display: none;">4</div>
                                                         </div>
                                                     </div>
 

@@ -28,7 +28,7 @@
     padding: 0 20px;
     float: left;
     margin-top: 1.7%;
-    margin-left: 19.38%
+    margin-left: 10%
 }
 
 .btn-info{
@@ -179,3 +179,6 @@
     border-radius: 30px;
 }
 .btn-top img{height: 80%;}
+.compareDialogInput{
+    width: 100px;
+}

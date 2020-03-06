@@ -4,6 +4,7 @@ import requests
 import json
 from collections import Counter
 import wordsExtra_zsf
+from appScholar_Compare import compare
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 
@@ -134,6 +135,9 @@ def scholarinfo():
     for i in del_i:
         paper_name_list.pop(i)
         paper_info_list.pop(i)
+
+    #合作学者的对比
+    compare(partner_list,"",1)
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2

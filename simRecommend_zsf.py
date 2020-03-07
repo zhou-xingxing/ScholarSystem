@@ -2,11 +2,11 @@
 import re
 import nltk
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.probability import FreqDist
-import pandas as pd
-import datetime
-import gensim
+# from nltk.stem import WordNetLemmatizer
+# from nltk.probability import FreqDist
+# import pandas as pd
+# import datetime
+# import gensim
 import pymysql
 from gensim import corpora, models, similarities
 # import logging
@@ -32,7 +32,7 @@ def text_deal(s1):
 # 思路：将学者排名前10（或者10以内）论文名称组合为一个词语列表，对所有词语列表进行计算
 # 根据一位学者的论文名称组合列表，输出除了自己之外最匹配的学者名字。
 # 输入：str（学者scholarID）
-# 输出：str（最匹配的学者id/前几个最匹配的学者id列表） 返回0时代表数据库中无此学者ID
+# 输出：str（最匹配的学者id/前几个最匹配的学者id列表）
 def scholar_Recommend(id_test):
     # 读入映射字典、tfidf词典、tfidf模型、tfidf索引
     file = open('corpusModel\dict_index2id.txt', 'r', encoding='utf8')

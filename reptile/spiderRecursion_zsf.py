@@ -47,21 +47,41 @@ def spid_breadth(Nmax = 10, urlstart = 'http://xueshu.baidu.com/scholarID/CN-BK7
         conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                                charset="utf8")
         cls = conn.cursor()
-        sql2 = "UPDATE `scholar_info`.%s SET `college` = '%s',`scholarid` = '%s',`field`='%s', `cited_num`='%s', `achievement_num` = '%s', `Hpoint` = '%s', `Gpoint` = '%s', `achievement_list` = '%s', `achievement_list2` = '%s', `cited_list` ='%s', `partner_list` = '%s', `paper_name_list`='%s',`paper_info_list`='%s', `paper_search_list` ='%s',`collaborate_org` = '%s' WHERE `id` = %s; " % \
+        # sql1是试图插入数据
+        sql1 = "INSERT INTO `scholar_info`.`%s`(`name`, `school`, `college`, `scholarid`, `field`, `cited_num`, `achievement_num`, `Hpoint`, `Gpoint`, `achievement_list`, `achievement_list2`, `cited_list`, `partner_list`, `paper_name_list`, `paper_info_list`, `paper_search_list`, `collaborate_org`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'); " % (
+            str(info[14]), str(info[16]), str(info[14]), str(info[15]), info[0], str(info[1]).replace('\'', '\\\''), str(info[2]).replace('\'', '\\\''),
+            str(info[3]).replace('\'', '\\\''), str(info[4]).replace('\'', '\\\''),
+            str(info[5]).replace('\'', '\\\''), str(info[6]).replace('\'', '\\\''),
+            str(info[7]).replace('\'', '\\\''), str(info[8]).replace('\'', '\\\''),
+            str(info[9]).replace('\'', '\\\''),
+            str(info[10]).replace('\'', '\\\''), str(info[11]).replace('\'', '\\\''),
+            str(info[12]).replace('\'', '\\\''), str(info[13]).replace('\'', '\\\''))
+
+        # sql2是试图刷新数据
+        sql2 = "UPDATE `scholar_info`.%s SET `college` = '%s',`scholarid` = '%s',`field`='%s', `cited_num`='%s', `achievement_num` = '%s', `Hpoint` = '%s', `Gpoint` = '%s', `achievement_list` = '%s', `achievement_list2` = '%s', `cited_list` ='%s', `partner_list` = '%s', `paper_name_list`='%s',`paper_info_list`='%s', `paper_search_list` ='%s',`collaborate_org` = '%s' WHERE `name` = '%s'; " % \
                (str(info[14]), str(info[15]), info[0], str(info[1]).replace('\'', '\\\''), str(info[2]).replace('\'', '\\\''),
                 str(info[3]).replace('\'', '\\\''), str(info[4]).replace('\'', '\\\''),
                 str(info[5]).replace('\'', '\\\''), str(info[6]).replace('\'', '\\\''),
                 str(info[7]).replace('\'', '\\\''), str(info[8]).replace('\'', '\\\''),
                 str(info[9]).replace('\'', '\\\''),
                 str(info[10]).replace('\'', '\\\''), str(info[11]).replace('\'', '\\\''),
-                str(info[12]).replace('\'', '\\\''), str(info[13]).replace('\'', '\\\''), id)  # 获取当前学校所有学者
-        # print(sql2)
-        print(sql2)
-        cls.execute(sql2)
-        conn.commit()
-        print('插入数据库成功')
-        # except:
-        #     print('插入数据库失败：', url)
+                str(info[12]).replace('\'', '\\\''), str(info[13]).replace('\'', '\\\''), str(info[16]))  # 获取当前学校所有学者
+        try:
+            cls.execute(sql1)
+            conn.commit()
+            print('插入数据库成功')
+            print('name:', info[16])
+        except Exception as e:
+            print('插入数据库失败的原因：', e)
+            try:
+                cls.execute(sql2)
+                conn.commit()
+                print('更新数据库成功')
+                print('name:', info[16])
+            except Exception as e2:
+                print('更新数据库失败的原因:', e2)
+                print('name:', info[16])
+
     b1.quit()
     b2.quit()
     sleep(0.5)
@@ -335,7 +355,7 @@ def spid2(url0, browser, browser2, Nmax):
 
 
     return [info_id, info_field, info_cited, info_achi, info_h, info_g, achi_dict, achi_json, cited_json, per_json, namelist, \
-           paperinfolist, mainplist, corpins_dict, info_school, info_college]
+           paperinfolist, mainplist, corpins_dict, info_school, info_college, info_name]
 
 
 if __name__ == '__main__':

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学者对比</title>
+    <script src="../static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        var comparedata={
+            data:{{ comparescholar|tojson }}
+        }
+    </script>
+    <script type="text/javascript" src="../static/js/compare.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/compare.css">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="all" style="display: flex">
+        {% if length %}
+            {% for com in comparescholar %}
+                {% if com %}
+                    <div style="border: solid 1px; width: 50%; ">
+                        <div class="header2" style="height: 230px;">
+                            <div class="headimage">
+                                <image class="image2" style="margin-left: 10%;margin-top: 30%;" src="../static/images/scholar_portrait.png"></image>
+                            </div>
+                            <div class="otherinfo">
+                                <div class="scholarname" style="margin-top: 10%;">
+                                    <span class="name2">{{ com[1] }}</span>
+                                </div>
+                                <div class="describe" style="margin-top: 3%;margin-left: 8%;color: #ababab;width: 100%">
+                                    <div class="scholarschool">
+                                        <i class="iconfont icon-jigou pr10"></i>
+                                        <span>{{ com[2] }}</span>
+                                    </div>
+                                    <div class="scholarid" style="margin-top: 10px">
+                                        <span>ScholarID：</span>
+                                        <span>{{ com[4] }}</span>
+                                    </div>
+                                    <div class="scholarmajor" style="margin-top: 10px">
+                                        <span>研究领域：</span>
+                                        <span>{{ com[5] }}</span>
+                                    </div>
+                                    <div style="margin-top: 10px">
+                                        <p class="color-gray">
+                                            <!-- 成果数目-->
+                                            <a class="mr15 color-wit line-h" href="javascript:void(0)">
+                                                <span class="txt-h">成果数</span>
+                                                <span id="ContentPlaceHolder1_LabelCount">{{ com[7] }}</span>
+                                            </a>
+                                            <!-- 引用数目-->
+                                            <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF" class="mr15 color-wit line-h">
+                                                <span class="txt-h">引用数</span>
+                                                <span id="ContentPlaceHolder1_LabelCountIF">{{ com[6] }}</span>
+                                            </a>
+                                            <!-- H指数-->
+                                            <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
+                                                <span class="txt-h">H指数</span>
+                                                <span id="ContentPlaceHolder1_LabelAverageIF">{{ com[8] }}</span>
+                                            </a>
+                                            <!-- G指数-->
+                                            <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
+                                                <span class="txt-h">G指数</span>
+                                                <span id="ContentPlaceHolder1_LabelAverageIF">{{ com[9] }}</span>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin: 0px;border: solid 2px;color: black">
+                        <div style="background-color: #f6f7fb;">
+                            <div class="relationet" style="width: 100%;height: 100px;">
+                                <div class="title" style="margin-left: 8%;font-size: 20px;font-weight: 600;padding-top: 10px;">
+                                    <div>
+                                        <span>学者关系网络</span>
+                                        <button type="button" id="swap" class="btn btn-primary swap" style="float: right;margin-right: 10px">切换对比模式</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 100px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 8%;font-size: 20px;font-weight: 600;padding-top: 10px;">
+                                    <span>个人画像</span>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 200px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 8%;font-size: 20px;font-weight: 600;padding-top: 10px;">
+                                    <span>可视化</span>
+                                </div>
+                                <div class="visualtype">
+                                    <button type="button" id="visualtypebtn1" class="btn btn-primary" style="margin-left: 8%; margin-top:10px;width: 78px;">学术成果</button>
+                                    <button type="button" id="visualtypebtn2" class="btn btn-primary" style="margin-left: 5%; margin-top:10px;width: 78px;">论文引用</button>
+                                    <button type="button" id="visualtypebtn3" class="btn btn-primary" style="margin-left: 5%; margin-top:10px;width: 78px;">期刊会议</button>
+                                    <button type="button" id="visualtypebtn4" class="btn btn-primary" style="margin-left: 8%; margin-top:10px;width: 78px;">研究方向</button>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 650px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 3%;font-size: 18px;font-weight: 600;padding-top: 10px;">
+                                    <span>学术成果</span>
+                                    {% for i in range(com[18]) %}
+                                        <br>
+                                        <a class="font16" href="{{ com[15][i]["href"] }}" style="text-decoration: none">
+                                            <span style="font-size:18px;font-weight:100;">{{ loop.index }}.{{ com[14][i] }}</span>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 450px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 3%;font-size: 18px;font-weight: 600;padding-top: 10px;">
+                                    <span>合作机构</span>
+                                <table>
+                                    <tbody>
+                                        {% for foo in com[17] %}
+                                            <tr style="font-size:18px;font-weight:100;">
+                                                <td style="width: 7%;">{{ loop.index}}.</td>
+                                                <td style="width: 75%;">{{ foo }}</td>
+                                                <td style="text-align: center;width: 18%"> {{ com[17][foo] }}次</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 980px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 3%;font-size: 18px;font-weight: 600;padding-top: 10px;">
+                                    <span>合作学者</span>
+                                    <table >
+                                        {% for pal in com[13] %}
+                                            <tr style="font-size:18px;font-weight:100;margin-top: 5px;">
+                                                <td style="font-size:18px;font-weight:100;width: 10px;">{{ loop.index }}.</td>
+                                                {% for p in pal %}
+                                                    {% if p=="name" %}
+                                                        <td style="text-align: center;width: 20%;">{{ pal[p]}}</td>
+                                                    {% endif %}
+                                                    {% if p=="corpnum" %}
+                                                        <td style="text-align: center;width: 15%;">{{ pal[p]}}次</td>
+                                                    {% endif %}
+                                                    {% if p!="id" and p!="corpnum" and p!="name"%}
+                                                        <td>{{ pal[p]}}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 100px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 8%;font-size: 20px;font-weight: 600;">
+                                    <span>学科</span>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px;border: solid 2px;color: black">
+                            <div class="personalpainr" style="width: 100%;height: 400px;background-color: #f6f7fb;">
+                                <div class="title" style="margin-left: 8%;font-size: 20px;font-weight: 600;padding-top: 10px;">
+                                    <span>期刊</span>
+                                    <table>
+                                        <tbody>
+                                            {% for foo in com[10] %}
+                                                <tr style="font-size:18px;font-weight:100;">
+                                                    <td style="width: 15%;">{{ loop.index }}.</td>
+                                                    <td style="width: 45%;">{{ foo }}</td>
+                                                    <td style="text-align: center;width: 40%;">{{ com[10][foo] }}篇</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin: 0px;border: solid 2px;color: black">
+                        <div style="margin-top: 5%;float: right;">
+                            <button type="button" id="addmore" class="btn btn-primary">增加对比</button>
+                        </div>
+                    </div>
+                {% else %}
+                    <div style="border: solid 1px; width: 50%; height: 1000px;">
+                            暂无该学者信息，请耐心等待后台数据更新
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

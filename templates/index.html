@@ -13,6 +13,7 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="../static/layer/layer.js" ></script>
+    <script src="../static/js/index.js"></script>
     <script type="text/javascript">
     </script>
 </head>
@@ -155,43 +156,16 @@
     </div>
     <!--添加弹窗元素-->
     <div class="compareDialog" id="compareDialog" style="display: none">
-        学者姓名：<input type="text" class="compareDialogInput">
-        学者机构：<input type="text" class="compareDialogInput">
-        学者学院：<input type="text" class="compareDialogInput" placeholder="非必填"><br>
-        <button>增加一个</button>
+        <div class="scholarInfoIinput" id="scholarInfoIinput"> 
+            <div class="Dialogdiv">
+                学者姓名：<input type="text" class="compareDialogInput1" id="nameinput">
+                学者机构：<input type="text" class="compareDialogInput2" id="schoolinput">
+                学者学院：<input type="text" class="compareDialogInput3" placeholder="非必填" id="collegeinput">
+            </div>
+        </div>
+        <br>
+        <button class="addone" id="addone">增加一个</button>
+        <button class="startcompare" id="startcompare">开始对比</button>
     </div>
-
-    <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
-    <SCRIPT LANGUAGE="JavaScript">
-            $(function () {
-                localStorage.clear()
-                $(document).keydown(function (e) {
-                    if (e.keyCode === 13){
-                        var  myselect=document.getElementById("select_type").value;
-                        var keyword = document.getElementById("data2search_result").value;
-                        localStorage.value = keyword;
-                        location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
-                    }
-                })
-                document.getElementById("searchbtn").onclick=function () {
-                    if(window.localStorage) {
-                        var  myselect=document.getElementById("select_type").value;
-                        var keyword = document.getElementById("data2search_result").value;
-                        localStorage.value = keyword;
-                        location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
-                    }else{
-                        alert('浏览器不支持')
-                    }
-                }
-                $("#compare").click(function() {
-                    layer.open({
-                        type:1,
-                        title:"学者对比",
-                        area:["600px","300px"],
-                        content: $('#compareDialog')
-                    });
-                })
-            })
-    </SCRIPT>
 </body>
 </html>

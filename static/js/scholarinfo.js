@@ -6,7 +6,6 @@
     $("#partnerCompare1")[0].style.display = "block";
     $("#partnerCompare2")[0].style.display = "none";
     $("#partnerCompare3")[0].style.display = "none";
-    $("#partnerCompare4")[0].style.display = "none";
     $("#datatypeselectbtn1").click(function() {
         $("#8_main1")[0].style.display = "block";
         $("#8_main2")[0].style.display = "none";
@@ -35,25 +34,19 @@
         $("#partnerCompare1")[0].style.display = "block";
         $("#partnerCompare2")[0].style.display = "none";
         $("#partnerCompare3")[0].style.display = "none";
-        $("#partnerCompare4")[0].style.display = "none";
+
     });
     $("#partnerbtn2").click(function() {
         $("#partnerCompare1")[0].style.display = "none";
         $("#partnerCompare2")[0].style.display = "block";
         $("#partnerCompare3")[0].style.display = "none";
-        $("#partnerCompare4")[0].style.display = "none";
+
     });
      $("#partnerbtn3").click(function() {
         $("#partnerCompare1")[0].style.display = "none";
         $("#partnerCompare2")[0].style.display = "none";
         $("#partnerCompare3")[0].style.display = "block";
-        $("#partnerCompare4")[0].style.display = "none";
-    });
-     $("#partnerbtn4").click(function() {
-        $("#partnerCompare1")[0].style.display = "none";
-        $("#partnerCompare2")[0].style.display = "none";
-        $("#partnerCompare3")[0].style.display = "none";
-        $("#partnerCompare4")[0].style.display = "block";
+
     });
     $("#comparescholar").click(function() {
             layer.open({

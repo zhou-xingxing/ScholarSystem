@@ -7,7 +7,7 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
     all_name = []
     achivement_list = []
     achivement_list2 = []
-    citede_list =[]
+    cited_list =[]
     paper_search_list =[]
     need_part = '`name`,`scholarid`,`achievement_list`,`achievement_list2`,`cited_list`,`paper_search_list`'
     achiveminiyear,cited_minyear = 10000,10000;
@@ -22,7 +22,7 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
             else:
                 realschool = school[0]
             sql = "select %s from %s where id between 1 and 2500 and scholarid='%s'" % (need_part,realschool,id)
-            #print(sql)
+            # print(sql)
             try:
                 cls.execute(sql);
                 conn.commit()
@@ -30,7 +30,7 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
                 all_name.append(result[0])
                 achivement_list.append(eval(result[2]))
                 achivement_list2.append(eval(result[4]))
-                citede_list.append(eval(result[3]))
+                cited_list.append(eval(result[3]))
                 paper_search_list.append(eval(result[5]))
                 citede_year = eval(result[3])
                 achivement_year = eval(result[4])
@@ -63,10 +63,23 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
             except:
                 print('查询出错,无该学者所在学校或者表')
 
+    compare_ans={
+        'all_name':all_name,
+        'achivement_list':achivement_list,
+        'achivement_list2':achivement_list2,
+        'cited_list':cited_list,
+        'paper_search_list':paper_search_list,
+        'achive_minyear':achiveminiyear,
+        'achive_maxyear':achivemaxyear,
+        'cited_minyear':cited_minyear,
+        'cited_maxyear':cited_maxyear,
+    }
+
+    return compare_ans
     # print(all_name)
     # print(achivement_list)
     # print(achivement_list2)
-    # print(citede_list)
+    # print(cited_list)
     # print(paper_search_list)
     # print(achiveminiyear)
     # print(achivemaxyear)

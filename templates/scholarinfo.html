@@ -43,6 +43,20 @@
     </script>
     <script src="../static/js/PersonalPaint.js" type="text/javascript"></script>
     <script type="text/javascript">
+        var compare_data={
+            com_all_name:{{ com_all_name|tojson }},
+            com_achivement_list:{{ com_achivement_list|tojson }},
+            com_achivement_list2:{{ com_achivement_list2|tojson }},
+            com_cited_list:{{ com_cited_list|tojson }},
+            com_paper_search_list:{{ com_paper_search_list|tojson }},
+            com_achive_minyear:{{ com_achive_minyear|tojson }},
+            com_achive_maxyear:{{ com_achive_maxyear|tojson }},
+            com_cited_minyear:{{ com_cited_minyear|tojson }},
+            com_cited_maxyear:{{ com_cited_maxyear|tojson }},
+        }
+    </script>
+    <script src="../static/js/ScholarCompare.js" type="text/javascript"></script>
+    <script type="text/javascript">
         //<![CDATA[
         var theForm = document.forms['form1'];
             if (!theForm) {

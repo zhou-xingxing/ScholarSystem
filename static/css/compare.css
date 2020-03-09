@@ -1,0 +1,18 @@
+.image2{
+    width: 120px;
+    background-color: white;
+    margin-left: 60px;
+    margin-top: 40px;
+    height: 130px;
+}
+.header2{
+    background: #3555aa;
+    display: flex;
+}
+.name2{
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: 50px;
+    margin-left: 30px;
+}

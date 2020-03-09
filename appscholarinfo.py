@@ -4,6 +4,7 @@ import requests
 import json
 from collections import Counter
 import wordsExtra_zsf
+from appScholar_Compare import compare
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 
@@ -134,8 +135,45 @@ def scholarinfo():
     for i in del_i:
         paper_name_list.pop(i)
         paper_info_list.pop(i)
+
+    #合作学者的对比
+    #同时加入本人的信息
+    selfinfo={
+        "name":scholarname,
+        "in":scholarschool,
+        "id":scholarid,
+    }
+    partner_list2=partner_list
+    partner_list2.append(selfinfo)
+    compare_ans=compare(partner_list2,"",1)
+    # 'all_name': all_name,
+    # 'achivement_list': achivement_list,
+    # 'achivement_list2': achivement_list2,
+    # 'cited_list': cited_list,
+    # 'paper_search_list': paper_search_list,
+    # 'achive_minyear': achiveminiyear,
+    # 'achive_maxyear': achivemaxyear,
+    # 'cited_minyear': cited_minyear,
+    # 'cited_maxyear': cited_maxyear,
+    com_all_name=compare_ans['all_name']
+    com_achivement_list=compare_ans['achivement_list']
+    com_achivement_list2=compare_ans['achivement_list2']
+    com_cited_list=compare_ans['cited_list']
+    com_paper_search_list=compare_ans['paper_search_list']
+    com_achive_minyear=compare_ans['achive_minyear']
+    com_achive_maxyear=compare_ans['achive_maxyear']
+    com_cited_minyear=compare_ans['cited_minyear']
+    com_cited_maxyear=compare_ans['cited_maxyear']
+
+
+
+
+
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
                            ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,paperlen=len(paper_info_list),
-                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject)
+                           paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject,
+                           com_all_name=com_all_name,com_achivement_list=com_achivement_list,com_achivement_list2=com_achivement_list2,com_cited_list=com_cited_list,
+                           com_paper_search_list=com_paper_search_list,com_achive_minyear=com_achive_minyear,com_achive_maxyear=com_achive_maxyear,
+                           com_cited_minyear=com_cited_minyear,com_cited_maxyear=com_cited_maxyear)

@@ -12,6 +12,8 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../static/layer/layer.js" ></script>
+    <script src="../static/js/index.js"></script>
     <script type="text/javascript">
     </script>
 </head>
@@ -23,8 +25,9 @@
                 <img src="../static/images/left-logo.png" alt>
             </a>
         </div>
-        <div class="headtip">
-            <a class="my-btn" href="feedback" title="点击反馈">反馈问题</a>
+        <div class="headtip" style="display:flex;">
+            <a class="my-btn" title="学者对比" id="compare">学者对比</a>
+            <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
         </div>
     </div>
     <div class = "inputcontainer">
@@ -151,29 +154,18 @@
             </div>
         <p style="margin-top: 10%; margin-left: 22%;" class="text-center">Copyright © 2020 CAU云中君开发团队</p>
     </div>
-    <!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
-    <SCRIPT LANGUAGE="JavaScript">
-            $(function () {
-                localStorage.clear()
-                $(document).keydown(function (e) {
-                    if (e.keyCode === 13){
-                        var  myselect=document.getElementById("select_type").value;
-                        var keyword = document.getElementById("data2search_result").value;
-                        localStorage.value = keyword;
-                        location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
-                    }
-                })
-                document.getElementById("searchbtn").onclick=function () {
-                    if(window.localStorage) {
-                        var  myselect=document.getElementById("select_type").value;
-                        var keyword = document.getElementById("data2search_result").value;
-                        localStorage.value = keyword;
-                        location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
-                    }else{
-                        alert('浏览器不支持')
-                    }
-                }
-            })
-    </SCRIPT>
+    <!--添加弹窗元素-->
+    <div class="compareDialog" id="compareDialog" style="display: none">
+        <div class="scholarInfoIinput" id="scholarInfoIinput"> 
+            <div class="Dialogdiv">
+                学者姓名：<input type="text" class="compareDialogInput1" id="nameinput">
+                学者机构：<input type="text" class="compareDialogInput2" id="schoolinput">
+                学者学院：<input type="text" class="compareDialogInput3" placeholder="非必填" id="collegeinput">
+            </div>
+        </div>
+        <br>
+        <button class="addone" id="addone">增加一个</button>
+        <button class="startcompare" id="startcompare">开始对比</button>
+    </div>
 </body>
 </html>

@@ -37,8 +37,17 @@ def index():
     # 关闭文件
     file1.close()
 
+    # 统计点击次数在首页推荐
+    connection = pymysql.connect(host="39.106.96.175", port=3306, db="search_count", user="root", password="12345678",
+                                 charset="utf8")
+    cursor = connection.cursor()
+    sql = "select * from `search_count` order by searchcount desc limit 10;"
+    cursor.execute(sql)
+    connection.commit()
+    searchresult = cursor.fetchall()
+    print(searchresult)
     # 将分类好的三个列表传回html中
-    return render_template("index.html",list_985=list_985,list_211=list_211,list_us=list_us)
+    return render_template("index.html",list_985=list_985,list_211=list_211,list_us=list_us,searchresult=searchresult)
 
 
 # 反馈页面

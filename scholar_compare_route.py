@@ -16,5 +16,6 @@ def index():
         dict_scholar["school"] = request.args.get(agr2)
         dict_scholar["college"] = request.args.get(agr3)
         allscholarinfo.append(dict_scholar)
-    results = compare("",allscholarinfo,2)
+    results,compareans = compare("",allscholarinfo,2)
+    print(compareans)
     return render_template("compare.html",comparescholar= results,length=length)

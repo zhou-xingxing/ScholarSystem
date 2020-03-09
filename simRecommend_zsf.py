@@ -197,11 +197,11 @@ def model_Cal():
     print('总用时：', time.time()-start_time)
 
 
-if __name__ == '__main__':
-    # model_Cal()
-    id = input('请输入需要推荐的学者scholarID')
-    print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
-    pass
+# if __name__ == '__main__':
+#     # model_Cal()
+#     id = input('请输入需要推荐的学者scholarID')
+#     print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
+#     pass
 
 
 

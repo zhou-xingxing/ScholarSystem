@@ -195,7 +195,7 @@ def model_Cal():
     # 建立tfidf索引
     tfidf_index = similarities.Similarity(r'corpusModel\corpus_m', corpus_tfidf, len(dictionary))
     # 设置推荐个数
-    tfidf_index.num_best = 4
+    tfidf_index.num_best = 31   # 设置30组备选推荐学者
     tfidf_index.save('corpusModel\\tfidf_index')
     print('模型建立完毕')
     print('总用时：', time.time()-start_time)

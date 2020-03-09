@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,Blueprint
+from flask import Flask, redirect, session, render_template, request, Blueprint
 import pymysql
 import requests
 import json
@@ -8,6 +8,9 @@ from appScholar_Compare import compare
 import simRecommend_zsf
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
+
+
+
 
 #个人详细页面的路由--余晓
 @app.route('/scholarinfo')
@@ -28,6 +31,8 @@ def scholarinfo():
         sql = "select * from %s where name='%s' and college='%s'" % (school, name, major)
         cursor.execute(sql)
         result = cursor.fetchone()
+
+
     # 如果传入了scholarid，就用scholarid多表并联查询
     else:
         # 创建数据库连接
@@ -48,6 +53,11 @@ def scholarinfo():
         cls.execute(SQL + ';')
         conn.commit()
         result = cls.fetchone()
+        # print('result:', result)
+        # 如果有scholarid却没有搜索到result，说明数据库中无此学者，直接跳转到搜索页
+        if not result:
+            # session['oldpath'] = request.path  # 保存当前路由
+            return redirect("/Search_result?keyword=%s&type=%s" % (scholarid, str(5)))
 
     #对查询的结果每一个字段进行分割并处理传到前端页面
     scholarname = result[1]  #姓名

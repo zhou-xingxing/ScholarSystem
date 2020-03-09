@@ -76,7 +76,11 @@ def scholar_Recommend(id_test='CN-B2746FCJ', Nstart=0):
         cls.execute(SQL + ';')
         conn.commit()
         result = cls.fetchall()
-        text_test = str(result[0][0])  # 此处注意传入的数据格式！！！
+        try:
+            text_test = str(result[0][0])  # 此处注意传入的数据格式！！！
+        except :
+            print('simRe报错：数据库中无此学者')
+            return None
         # except:
         #     result = []
         #     length = 0
@@ -191,17 +195,17 @@ def model_Cal():
     # 建立tfidf索引
     tfidf_index = similarities.Similarity(r'corpusModel\corpus_m', corpus_tfidf, len(dictionary))
     # 设置推荐个数
-    tfidf_index.num_best = 4
+    tfidf_index.num_best = 31   # 设置30组备选推荐学者
     tfidf_index.save('corpusModel\\tfidf_index')
     print('模型建立完毕')
     print('总用时：', time.time()-start_time)
 
 
-# if __name__ == '__main__':
-#     # model_Cal()
-#     id = input('请输入需要推荐的学者scholarID')
-#     print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
-#     pass
+if __name__ == '__main__':
+    model_Cal()  # 首次使用需要先运行本函数：计算模型并存储索引
+    # id = input('请输入需要推荐的学者scholarID')
+    # print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
+    # pass
 
 
 

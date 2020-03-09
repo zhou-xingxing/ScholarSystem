@@ -44,7 +44,8 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
                 if int(achivement_year[len(achivement_year)-1]['year']) > achivemaxyear:
                     achivemaxyear = int(achivement_year[len(achivement_year)-1]['year'])
             except:
-                print('查询出错,无该学者所在学校或者表')
+                pass
+               # print('查询出错,无该学者所在学校或者表')
         compare_ans = {
             'all_name': all_name,
             'achivement_list': achivement_list,
@@ -75,7 +76,7 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
                 results.append(result)
             except:
                 results.append("")
-                print('查询出错,无该学者所在学校或者表')
+               #  print('查询出错,无该学者所在学校或者表')
         print(results)
         # 对results进行处理
         listresult = []

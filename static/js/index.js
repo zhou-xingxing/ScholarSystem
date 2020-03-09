@@ -1,5 +1,7 @@
 $(function () {
     localStorage.clear()
+    $('#collapseTwo').collapse('hide')
+    $('#collapseThree').collapse('hide')
     $(document).keydown(function (e) {
         if (e.keyCode === 13){
             var  myselect=document.getElementById("select_type").value;

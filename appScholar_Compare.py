@@ -119,11 +119,21 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
                         cooperate = eval(reone[17])
                     except:
                         cooperate = []
-                    newtuple = (
-                    reone[0], reone[1], reone[2], reone[3], reone[4], filed, reone[6], reone[7], reone[8], reone[9],
-                    meeting, achive, cited,
-                    partner, paper_name, paper_info, paper_search, cooperate, len(paper_name));
+                    newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], filed, reone[6], reone[7], reone[8], reone[9],
+                    meeting, achive, cited,partner, paper_name, paper_info, paper_search, cooperate, len(paper_name));
                     listresult.append(newtuple)
+                    all_name.append(reone[0]);
+                    achivement_list.append(meeting);
+                    achivement_list2.append(achive)
+                    cited_list.append(cited)
+                    if int(cited[0]['year']) < cited_minyear:
+                        cited_minyear = int(cited[0]['year'])
+                    if int(cited[len(cited) - 1]['year']) > cited_maxyear:
+                        cited_maxyear = int(cited[len(cited) - 1]['year'])
+                    if int(achive[0]['year']) < achiveminiyear:
+                        achiveminiyear = int(achive[0]['year'])
+                    if int(achive[len(achive) - 1]['year']) > achivemaxyear:
+                        achivemaxyear = int(achive[len(achive) - 1]['year'])
                 else:
                     newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], reone[5], reone[6], reone[7], reone[8],
                     reone[9], reone[10], reone[11], reone[12],
@@ -131,7 +141,17 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
                     listresult.append(newtuple)
             else:#表示无该条学者数据
                 listresult.append(reone)
-        return listresult
+        compare_ans = {
+            'all_name': all_name,
+            'achivement_list': achivement_list,
+            'achivement_list2': achivement_list2,
+            'cited_list': cited_list,
+            'achive_minyear': achiveminiyear,
+            'achive_maxyear': achivemaxyear,
+            'cited_minyear': cited_minyear,
+            'cited_maxyear': cited_maxyear,
+        }
+        return listresult,compare_ans
 
     # print(all_name)
     # print(achivement_list)

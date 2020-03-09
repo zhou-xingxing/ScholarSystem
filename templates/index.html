@@ -6,12 +6,11 @@
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
     <script src="../static/layer/layer.js" ></script>
     <script src="../static/js/index.js"></script>
     <script type="text/javascript">
@@ -70,64 +69,84 @@
         <tr>
             <td style="background-color: #f6f7fb">
                 <div class="inner" style="background-color: #FFFFFF">
-                    <div class="schools">
-                    <!--985高校-->
-                    <span class="schoolhead">
-                        <img class="schoolheadimage" src="../static/images/china.png" alt>
-                        <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
-                    </span>
-                    <!--从字典里获取学校列表数据-->
-                    <div class="schoolnames">
-                        <table class="table table-hover table-striped">
-                            {% for li_985 in list_985 %}
-                                {% if loop.index%5 == 0 %}
-                                    <td> <a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985 }}</a></td>
-                                    <tr></tr>
-                                {% else %}
-                                    <td><a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985}}</a></td>
-                                {% endif %}
-                            {% endfor %}
-                        </table>
+                <div class="panel-group" id="accordion" style="background-color: #dff0d8">
+                    <div class="panel panel-success" style="background-color: #dff0d8">
+                        <div class="schools">
+                            <!--985高校-->
+                            <span class="schoolhead" >
+                                <img class="schoolheadimage" src="../static/images/china.png" alt>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="text-decoration: none">
+                                    <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
+                                </a>
+                            </span>
+                            <!--从字典里获取学校列表数据-->
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="schoolnames">
+                                    <table class="table table-hover table-striped">
+                                        {% for li_985 in list_985 %}
+                                            {% if loop.index%5 == 0 %}
+                                                <td> <a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985 }}</a></td>
+                                                <tr></tr>
+                                            {% else %}
+                                                <td><a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985}}</a></td>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                    <div class="schools">
-                    <!--211高校-->
-                    <span class="schoolhead">
-                        <img class="schoolheadimage" src="../static/images/china.png" alt>
-                        <h3 class="schoolheadtitle">中国211+其他</h3>
-                    </span>
-                    <!--字典列表读取，并使用jinja模板展示-->
-                    <div class="schoolnames">
-                        <table class="table table-hover table-striped">
-                            {% for li_211 in list_211 %}
-                                {% if loop.index%5 == 0 %}
-                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
-                                    <tr></tr>
-                                {% else %}
-                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
-                                {% endif %}
-                            {% endfor %}
-                        </table>
+                    <div class="panel panel-success" style="background-color: #dff0d8">
+                        <div class="schools">
+                            <!--211高校-->
+                            <span class="schoolhead">
+                                <img class="schoolheadimage" src="../static/images/china.png" alt>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="text-decoration: none">
+                                    <h3 class="schoolheadtitle">中国211+其他</h3>
+                                </a>
+                            </span>
+                            <!--字典列表读取，并使用jinja模板展示-->
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+                                <div class="schoolnames">
+                                    <table class="table table-hover table-striped">
+                                        {% for li_211 in list_211 %}
+                                            {% if loop.index%5 == 0 %}
+                                                <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
+                                                <tr></tr>
+                                            {% else %}
+                                                <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <!--国外高校US-->
-                    <div class="schools" >
-                    <span class="schoolhead">
-                        <img class="schoolheadimage" src="../static/images/US.png" alt>
-                        <h3 class="schoolheadtitle">U.S.</h3>
-                    </span>
-                     <!--字典列表读取，并使用jinja模板循环展示-->
-                    <div class="schoolnames">
-                        <table class="table table-hover table-striped">
-                              {% for li_us in list_us %}
-                                {% if loop.index%5 == 0 %}
-                                    <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
-                                    <tr></tr>
-                                {% else %}
-                                    <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
-                                {% endif %}
-                            {% endfor %}
-                        </table>
+                    <!--国外高校US-->
+                    <div class="panel panel-success" style="background-color: #dff0d8">
+                        <div class="schools" >
+                            <span class="schoolhead">
+                                <img class="schoolheadimage" src="../static/images/US.png" alt>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration: none">
+                                    <h3 class="schoolheadtitle">U.S.</h3>
+                                </a>
+                            </span>
+                             <!--字典列表读取，并使用jinja模板循环展示-->
+                            <div id="collapseThree" class="panel-collapse collapse in">
+                                <div class="schoolnames">
+                                    <table class="table table-hover table-striped">
+                                          {% for li_us in list_us %}
+                                            {% if loop.index%5 == 0 %}
+                                                <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
+                                                <tr></tr>
+                                            {% else %}
+                                                <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 </div>

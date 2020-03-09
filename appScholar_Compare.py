@@ -80,54 +80,56 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
         # 对results进行处理
         listresult = []
         for reone in results:
-            # 如果reone[4]存在表示整条数据存在
-            if reone[4]:
-                # 去掉研究领域的[]
-                if reone[5]:
-                    filed = (reone[5].replace('[\'', ' ').replace('\']', ' ').replace('\', \'', ', '))
-                try:  # 期刊会议
-                    meeting = eval(reone[10])
-                except:
-                    meeting = []
-                try:  # 引用
-                    cited = eval(reone[11])
-                except:
-                    cited = []
-                try:  # 成果
-                    achive = eval(reone[12])
-                except:
-                    achive = []
-                try:  # 合作学者
-                    partner = eval(reone[13])
-                except:
-                    partner = []
-                try:  # paper_name
-                    paper_name = eval(reone[14])
-                except:
-                    paper_name = []
-                try:  # 论文关键信息
-                    paper_info = eval(reone[15])
-                except:
-                    paper_info = []
-                try:  # 论文搜索信息
-                    paper_search = eval(reone[16])
-                except:
-                    paper_search = []
-                try:  # 合作机构
-                    cooperate = eval(reone[17])
-                except:
-                    cooperate = []
-                newtuple = (
-                reone[0], reone[1], reone[2], reone[3], reone[4], filed, reone[6], reone[7], reone[8], reone[9],
-                meeting, achive, cited,
-                partner, paper_name, paper_info, paper_search, cooperate, len(paper_name));
-                listresult.append(newtuple)
-            else:
-                newtuple = (
-                reone[0], reone[1], reone[2], reone[3], reone[4], reone[5], reone[6], reone[7], reone[8],
-                reone[9], reone[10], reone[11], reone[12],
-                reone[13], reone[14], reone[15], reone[16], reone[17], 0)
-                listresult.append(newtuple)
+            if reone:#表示能查到该条数据
+                # 如果reone[4]存在表示整条数据存在
+                if reone[4]:
+                    # 去掉研究领域的[]
+                    if reone[5]:
+                        filed = (reone[5].replace('[\'', ' ').replace('\']', ' ').replace('\', \'', ', '))
+                    try:  # 期刊会议
+                        meeting = eval(reone[10])
+                    except:
+                        meeting = []
+                    try:  # 引用
+                        cited = eval(reone[11])
+                    except:
+                        cited = []
+                    try:  # 成果
+                        achive = eval(reone[12])
+                    except:
+                        achive = []
+                    try:  # 合作学者
+                        partner = eval(reone[13])
+                    except:
+                        partner = []
+                    try:  # paper_name
+                        paper_name = eval(reone[14])
+                    except:
+                        paper_name = []
+                    try:  # 论文关键信息
+                        paper_info = eval(reone[15])
+                    except:
+                        paper_info = []
+                    try:  # 论文搜索信息
+                        paper_search = eval(reone[16])
+                    except:
+                        paper_search = []
+                    try:  # 合作机构
+                        cooperate = eval(reone[17])
+                    except:
+                        cooperate = []
+                    newtuple = (
+                    reone[0], reone[1], reone[2], reone[3], reone[4], filed, reone[6], reone[7], reone[8], reone[9],
+                    meeting, achive, cited,
+                    partner, paper_name, paper_info, paper_search, cooperate, len(paper_name));
+                    listresult.append(newtuple)
+                else:
+                    newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], reone[5], reone[6], reone[7], reone[8],
+                    reone[9], reone[10], reone[11], reone[12],
+                    reone[13], reone[14], reone[15], reone[16], reone[17], 0)
+                    listresult.append(newtuple)
+            else:#表示无该条学者数据
+                listresult.append(reone)
         return listresult
 
     # print(all_name)

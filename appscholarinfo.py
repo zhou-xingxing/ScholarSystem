@@ -12,9 +12,9 @@ app = Blueprint("appscholarinfo",__name__)
 @app.route('/scholarinfo')
 def scholarinfo():
     #获取要点击查询的学者学校，姓名和专业以便确定学者
-    school = request.args.get('school');
-    name = request.args.get('name');
-    major = request.args.get('major');
+    school = request.args.get('school')
+    name = request.args.get('name')
+    major = request.args.get('major')
     #创建数据库连接
     connection = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                                  charset="utf8")
@@ -80,7 +80,7 @@ def scholarinfo():
     for line in text2:
         for i in wordsplitscholarfield:
             for j in i:
-                if j in line.strip().split(":")[0]:
+                if j in line.strip().split(":")[0] and len(j)>1:
                     subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
                     subject.append(subjectone)
 
@@ -165,9 +165,18 @@ def scholarinfo():
     com_cited_minyear=compare_ans['cited_minyear']
     com_cited_maxyear=compare_ans['cited_maxyear']
 
-
-
-
+    #统计点击次数在首页推荐
+    connection = pymysql.connect(host="39.106.96.175", port=3306, db="search_count", user="root", password="12345678",
+                                 charset="utf8")
+    cursor = connection.cursor()
+    try:
+        sql = "INSERT INTO `search_count`.`search_count`(`name`, `school`, `college`, `scholarid`, `searchcount`) VALUES ('%s', '%s', '%s', '%s', 1)" % (name, school, major,scholarid)
+        cursor.execute(sql)
+        connection.commit()
+    except:
+        sql = "update `search_count`.`search_count` set searchcount=searchcount+1 where scholarid = '%s';"%(scholarid)
+        cursor.execute(sql)
+        connection.commit()
 
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,

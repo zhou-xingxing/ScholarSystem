@@ -29,10 +29,14 @@ def spid_breadth(Nmax = 10, urlstart = 'http://xueshu.baidu.com/scholarID/CN-BK7
 
     # 使用option
     option = ChromeOptions()  # 创建配置示例
-    option.add_argument('--headless')  # 无头模式，后台启动
+    option.add_argument('--headless')  # 在后台启动
+    option.add_argument('--no-sandbox')
+    option.add_argument('--disable-dev-shm-usage')
+    option.add_argument('blink-settings=imagesEnabled=false')
+    option.add_argument('--disable-gpu')
     # 创建浏览器
-    b1 = Chrome(options=option)
-    b2 = Chrome(options=option)
+    b1 = Chrome(executable_path="/home/scholar/Chrome/chromedriver",options=option)
+    b2 = Chrome(executable_path="/home/scholar/Chrome/chromedriver",options=option)
 
     while (not Info4srch.empty()) :
         url = Info4srch.get()

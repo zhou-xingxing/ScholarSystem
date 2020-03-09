@@ -56,4 +56,43 @@
                 content: $('#partnercompare')
             });
     })
+     $(".recommendscholar").click(function () {
+        $.ajax({
+            url:'/recommend',
+            type:'GET',
+            data:{'user':'CN-B973QRIJ' },
+            success:function(data){
+                console.log(data)
+                data = eval(data);
+                var item;
+                $(".reclist")[0].innerHTML="";
+                $.each(data,function(i,result){
+                    item=result[1];
+                    $(".reclist")[0].append(item);
+                });
+                $(".reclist")[0].style.display="block"
+            }
+        })
+    })
+    $(".change").click(function () {
+        var num = parseInt($(".change").val())
+        num+=3;
+        $(".change")[0].value = num;
+        $.ajax({
+            url:'/refresh',
+            type:'GET',
+            data:{'user':'CN-B973QRIJ','type':num},
+            success:function(data){
+                console.log(data)
+                data = eval(data);
+                var item;
+                $(".reclist")[0].innerHTML="";
+                $.each(data,function(i,result){
+                    item=result[1];
+                    $(".reclist")[0].append(item);
+                });
+                $(".reclist")[0].style.display="block"
+            }
+        })
+    })
 })

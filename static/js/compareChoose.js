@@ -1,6 +1,13 @@
 $(function () {
     checkedlist=[false,false,false,false,false]
     var index=0;
+    var visuallength = $(".visual1").length;
+    for(var i=0;i<visuallength;i++){
+        $(".visual1")[i].style.display="block";
+        $(".visual2")[i].style.display="none";
+        $(".visual3")[i].style.display="none";
+        $(".visual4")[i].style.display="none";
+    }
     $(".addmore").click(function() {
         var allchecked = $(".choicecheck");
         for(var i=0;i<allchecked.length;i++){
@@ -12,6 +19,38 @@ $(function () {
             area:["850px","500px"],
             content: $('.comparechoice')
         });
+    })
+    $(".visualbtn1").click(function () {
+        for(var i=0;i<visuallength;i++){
+            $(".visual1")[i].style.display="block";
+            $(".visual2")[i].style.display="none";
+            $(".visual3")[i].style.display="none";
+            $(".visual4")[i].style.display="none";
+        }        
+    })
+    $(".visualbtn2").click(function () {
+        for(var i=0;i<visuallength;i++){
+            $(".visual1")[i].style.display="none";
+            $(".visual2")[i].style.display="block";
+            $(".visual3")[i].style.display="none";
+            $(".visual4")[i].style.display="none";
+        }        
+    })
+    $(".visualbtn3").click(function () {
+        for(var i=0;i<visuallength;i++){
+            $(".visual1")[i].style.display="none";
+            $(".visual2")[i].style.display="none";
+            $(".visual3")[i].style.display="block";
+            $(".visual4")[i].style.display="none";
+        }        
+    })
+    $(".visualbtn4").click(function () {
+        for(var i=0;i<visuallength;i++){
+            $(".visual1")[i].style.display="none";
+            $(".visual2")[i].style.display="none";
+            $(".visual3")[i].style.display="none";
+            $(".visual4")[i].style.display="block";
+        }       
     })
     $(".confirm").click(function () {
         var allchecked = $(".choicecheck");

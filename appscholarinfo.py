@@ -10,8 +10,6 @@ import simRecommend_zsf
 app = Blueprint("appscholarinfo",__name__)
 
 
-
-
 #个人详细页面的路由--余晓
 @app.route('/scholarinfo')
 def scholarinfo():

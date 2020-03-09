@@ -53,7 +53,7 @@ def scholar_Recommend(id_test='CN-B2746FCJ', Nstart=0):
         ans_list = tfidf_index[corpus[index1]]
         id_list = []
         # 除去本人，从Nstart数处开始推荐3位
-        for ans in ans_list[1+Nstart:]:
+        for ans in ans_list[1+Nstart:1 + Nstart+3]:
             id_list.append(dict_index2id[str(ans[0])])
 
 
@@ -97,7 +97,7 @@ def scholar_Recommend(id_test='CN-B2746FCJ', Nstart=0):
         ans_list = tfidf_index[dictionary.doc2bow(text_test)]
         id_list = []
         # 除去本人，从Nstart数处开始推荐3位
-        for ans in ans_list[1 + Nstart:]:
+        for ans in ans_list[1 + Nstart: 1 + Nstart+3]:
             id_list.append(dict_index2id[str(ans[0])])
 
     # 使用IDlist从数据库中寻找学者的姓名、学校信息

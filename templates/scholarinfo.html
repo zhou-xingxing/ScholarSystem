@@ -356,7 +356,7 @@
                                                                             <!--去掉合作学者里的id信息并给合作学者加上链接  3.4 bwm-->
                                                                             {% if p=="name" %}
 {#                                                                               <td><span class="b"><a href="/scholarinfo?school={{ pal['in'] }}&name={{ pal[p] }}&major={{ scholarmajor }}">{{ pal[p]}}</a></span></td>#}
-                                                                                <td><span id="searchbtn2" class="b"><a href="/scholarinfo2?scholarid={{ pal['id'] }}">{{ pal[p]}}</a></span></td>
+                                                                                <td><span id="searchbtn2" class="b"><a href="/scholarinfo?scholarid={{ pal['id'] }}">{{ pal[p]}}</a></span></td>
 {#                                                                                <td><span id="searchbtn2" class="b">{{ pal[p]}}</span></td>#}
                                                                             {% endif %}
                                                                             {% if p!="id" and p!="name" %}

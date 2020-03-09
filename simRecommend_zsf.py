@@ -31,9 +31,9 @@ def text_deal(s1):
 
 # 思路：将学者排名前10（或者10以内）论文名称组合为一个词语列表，对所有词语列表进行计算
 # 根据一位学者的论文名称组合列表，输出除了自己之外最匹配的学者名字。
-# 输入：str（学者scholarID）
-# 输出：str（最匹配的学者id/前几个最匹配的学者id列表）
-def scholar_Recommend(id_test):
+# 输入：str（学者scholarID），Nstart 从第几位顺位的学者开始往后数3位推荐
+# 输出：str（前3个最匹配的学者[id,name,school]列表）
+def scholar_Recommend(id_test='CN-B2746FCJ', Nstart=0):
     # 读入映射字典、tfidf词典、tfidf模型、tfidf索引
     file = open('corpusModel\dict_index2id.txt', 'r', encoding='utf8')
     js = file.read()
@@ -52,9 +52,10 @@ def scholar_Recommend(id_test):
         corpus = corpora.MmCorpus('corpusModel\corpus.txt')
         ans_list = tfidf_index[corpus[index1]]
         id_list = []
-        for ans in ans_list[1:]:
+        # 除去本人，从Nstart数处开始推荐3位
+        for ans in ans_list[1+Nstart:]:
             id_list.append(dict_index2id[str(ans[0])])
-        return id_list
+
 
     else:
         print('原字典中无此scholarID，去数据库中搜索...')
@@ -91,10 +92,34 @@ def scholar_Recommend(id_test):
         # print('text_test', text_test)
         ans_list = tfidf_index[dictionary.doc2bow(text_test)]
         id_list = []
-        for ans in ans_list[1:]:
+        # 除去本人，从Nstart数处开始推荐3位
+        for ans in ans_list[1 + Nstart:]:
             id_list.append(dict_index2id[str(ans[0])])
-        return id_list
 
+    # 使用IDlist从数据库中寻找学者的姓名、学校信息
+    return_list = []
+    for id in id_list:
+        # 从数据库中以ID来查询该学者的name、school
+        conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
+                               charset="utf8")
+        cls = conn.cursor()
+        sql1 = "select table_name from information_schema.tables where table_schema='scholar_info'"  # 获取当前所有表（学校）
+        cls.execute(sql1)
+        conn.commit()
+        results = cls.fetchall()
+        SQL = ''
+        for i in results:
+            sql = "select name,school,college,field from %s where scholarid='%s' " % (i[0], id)
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
+        cls.execute(SQL + ';')
+        conn.commit()
+        results = cls.fetchall()
+        # print('查询结果：', results)
+        return_list.append([id, results[0][0], results[0][1], results[0][2], eval(results[0][3])])
+
+    return return_list
     pass
 
 # 模型更新函数，每运行一遍会更新模型并存入文件
@@ -165,17 +190,17 @@ def model_Cal():
     tfidf_m.save('corpusModel\\tfidf_m.txt')
     # 建立tfidf索引
     tfidf_index = similarities.Similarity(r'corpusModel\corpus_m', corpus_tfidf, len(dictionary))
+    # 设置推荐个数
     tfidf_index.num_best = 4
     tfidf_index.save('corpusModel\\tfidf_index')
     print('模型建立完毕')
     print('总用时：', time.time()-start_time)
 
 
-
 if __name__ == '__main__':
     # model_Cal()
     id = input('请输入需要推荐的学者scholarID')
-    print('前3相似学者scholarID为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
+    print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
     pass
 
 

@@ -5,6 +5,7 @@ import json
 from collections import Counter
 import wordsExtra_zsf
 from appScholar_Compare import compare
+import simRecommend_zsf
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 
@@ -165,9 +166,9 @@ def scholarinfo():
     com_cited_minyear=compare_ans['cited_minyear']
     com_cited_maxyear=compare_ans['cited_maxyear']
 
-
-
-
+    id_rescholar = scholarid
+    Nstart = 0
+    recommend_list = simRecommend_zsf.scholar_Recommend(id_rescholar, Nstart)
 
     return render_template("scholarinfo.html",scholarname=scholarname,scholarschool=scholarschool,scholarmajor=scholarmajor
                            ,scholarid=scholarid,scholarfield=scholarfield,cited_num=cited_num,achievement_num=achievement_num,
@@ -176,4 +177,4 @@ def scholarinfo():
                            paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject,
                            com_all_name=com_all_name,com_achivement_list=com_achivement_list,com_achivement_list2=com_achivement_list2,com_cited_list=com_cited_list,
                            com_paper_search_list=com_paper_search_list,com_achive_minyear=com_achive_minyear,com_achive_maxyear=com_achive_maxyear,
-                           com_cited_minyear=com_cited_minyear,com_cited_maxyear=com_cited_maxyear)
+                           com_cited_minyear=com_cited_minyear,com_cited_maxyear=com_cited_maxyear,recommend_list=recommend_list)

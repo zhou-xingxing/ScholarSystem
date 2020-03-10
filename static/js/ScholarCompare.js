@@ -60,6 +60,13 @@ $(function() {
                         type:'line',
                         data:dd,
                         smooth: true,
+                         lineStyle: {
+                            type:'solid',
+                            width: 3,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            shadowBlur: 6,
+                            shadowOffsetY:6,
+                        }
                     }
                     compare_achive_data.push(a)
                 }
@@ -82,6 +89,13 @@ $(function() {
                         type:'line',
                         data:dd,
                         smooth: true,
+                        lineStyle: {
+                            type:'solid',
+                            width: 3,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            shadowBlur: 6,
+                            shadowOffsetY:6,
+                        }
                     }
                     compare_cited_data.push(a)
                 }
@@ -105,6 +119,13 @@ $(function() {
                         type:'line',
                         data:dd,
                         smooth: true,
+                        lineStyle: {
+                            type:'solid',
+                            width: 3,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            shadowBlur: 6,
+                            shadowOffsetY:6,
+                        }
                     }
                     compare_paper_data.push(a)
                 }
@@ -137,6 +158,22 @@ $(function() {
                     yAxis: {
                         type: 'value'
                     },
+                    dataZoom:[
+                        {
+                            type:'slider',
+                            show:true,
+                            xAxisIndex:[0],
+                            start:1,
+                            end:40
+                        },
+                         {
+                            type:'inside',
+                            show:true,
+                            xAxisIndex:[0],
+                            start:1,
+                            end:40
+                        }
+                    ],
                     series:compare_achive_data
                 };
                 var option2 = {
@@ -168,6 +205,22 @@ $(function() {
                     yAxis: {
                         type: 'value'
                     },
+                    dataZoom:[
+                        {
+                            type:'slider',
+                            show:true,
+                            xAxisIndex:[0],
+                            start:1,
+                            end:40
+                        },
+                         {
+                            type:'inside',
+                            show:true,
+                            xAxisIndex:[0],
+                            start:1,
+                            end:40
+                        }
+                    ],
                     series:compare_cited_data
                 };
                 var option3 = {
@@ -199,6 +252,22 @@ $(function() {
                     yAxis: {
                         type: 'value'
                     },
+                    dataZoom:[
+                        {
+                            type:'slider',
+                            show:true,
+                            xAxisIndex:[0],
+                            start:1,
+                            end:40
+                        },
+                         {
+                            type:'inside',
+                            show:true,
+                            xAxisIndex:[0],
+                            start:1,
+                            end:40
+                        }
+                    ],
                     series:compare_paper_data
                  };
                 ec1.hideLoading();

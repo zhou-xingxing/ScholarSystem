@@ -202,7 +202,7 @@ $(function() {
         ec1.setOption(option1);
         ec2.setOption(option2);
         ec3.setOption(option3);
-     window.addEventListener("resize",function (){
+        window.addEventListener("resize",function (){
             ec1.resize();
             ec2.resize();
             ec3.resize();

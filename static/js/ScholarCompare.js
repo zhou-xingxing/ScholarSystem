@@ -59,6 +59,7 @@ $(function() {
                         name:compare_all_name[i],
                         type:'line',
                         data:dd,
+                        smooth: true,
                     }
                     compare_achive_data.push(a)
                 }
@@ -80,6 +81,7 @@ $(function() {
                         name:compare_all_name[i],
                         type:'line',
                         data:dd,
+                        smooth: true,
                     }
                     compare_cited_data.push(a)
                 }
@@ -102,6 +104,7 @@ $(function() {
                         name:compare_all_name[i],
                         type:'line',
                         data:dd,
+                        smooth: true,
                     }
                     compare_paper_data.push(a)
                 }

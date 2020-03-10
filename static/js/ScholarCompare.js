@@ -49,6 +49,7 @@ for(i=0;i<compare_all_name.length;i++){
         name:compare_all_name[i],
         type:'line',
         data:dd,
+        smooth: true,
     }
     compare_achive_data.push(a)
 }
@@ -70,6 +71,7 @@ for(i=0;i<compare_all_name.length;i++){
         name:compare_all_name[i],
         type:'line',
         data:dd,
+        smooth: true,
     }
     compare_cited_data.push(a)
 }
@@ -94,6 +96,7 @@ for(i=0;i<compare_all_name.length;i++){
         name:compare_all_name[i],
         type:'line',
         data:dd,
+        smooth: true,
     }
     compare_paper_data.push(a)
 }

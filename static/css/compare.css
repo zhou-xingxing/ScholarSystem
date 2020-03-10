@@ -47,7 +47,7 @@
 }
 .relationet{
     width: 100%;
-    height: 100px;
+    height: 500px;
 }
 .itemsfont{
     margin-left: 3%;
@@ -61,12 +61,12 @@
 }
 .personalpaint{
     width: 100%;
-    height: 100px;
+    height: 500px;
     background-color: #f6f7fb;
 }
 .datavisual{
     width: 100%;
-    height: 200px;
+    height: 550px;
     background-color: #f6f7fb;
 }
 .achivement{

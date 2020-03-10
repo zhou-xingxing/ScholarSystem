@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request,Blueprint
 import pymysql
+import wordsExtra_zsf
 def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
     conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                            charset="utf8")
@@ -119,8 +120,23 @@ def compare(ScholarInfoLists,ScholarInfoIncluedeCollege,type):
                         cooperate = eval(reone[17])
                     except:
                         cooperate = []
-                    newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], filed, reone[6], reone[7], reone[8], reone[9],
-                    meeting, achive, cited,partner, paper_name, paper_info, paper_search, cooperate, len(paper_name));
+                    try:
+                        dict_word = wordsExtra_zsf.deal_srchp2(reone[14], reone[16])
+                        paper_search_key1 = list(dict_word.keys())
+                        paper_search_num1 = list(dict_word.values())
+                    except:
+                        dict_word = {}
+
+                    if len(paper_search_key1) > 30:
+                        paper_search_key = paper_search_key1[:30]
+                        paper_search_num = paper_search_num1[:30]
+                    else:
+                        paper_search_key = paper_search_key1
+                        paper_search_num = paper_search_num1
+                    newtuple = (
+                    reone[0], reone[1], reone[2], reone[3], reone[4], filed, reone[6], reone[7], reone[8], reone[9],
+                    meeting, achive, cited,
+                    partner, paper_name, paper_info, paper_search, cooperate, len(paper_name),paper_search_key,paper_search_num);
                     listresult.append(newtuple)
                     all_name.append(reone[0]);
                     achivement_list.append(meeting);

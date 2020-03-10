@@ -5,6 +5,7 @@
     <title>学者对比</title>
     <script src="../static/js/jquery-1.8.3.min.js"></script>
     <script src="../static/js/echarts.js" ></script>
+    <script type="text/javascript" src="../static/js/echarts-wordcloud.js"></script>
     <script type="text/javascript">
         var comparedata={
             data:{{ comparescholar|tojson }}
@@ -78,14 +79,16 @@
                                         <span>学者关系网络</span>
                                         <button type="button" id="swap" class="btn btn-primary swap">切换对比模式</button>
                                     </div>
-                                    <div class="netcontent"></div>
+                                    <div class="netcontent" style="width: 450px;height: 450px"></div>
                                 </div>
                                 <hr class="comparehr">
                             </div>
                             <div >
                                 <div class="title itemsfont personalpaint">
                                     <span>个人画像</span>
+                                    <div class="personalpaintcontent" style="width: 450px;height: 450px"></div>
                                 </div>
+
                                 <hr class="comparehr">
                             </div>
                             <div>
@@ -99,16 +102,16 @@
                                         <button type="button" id="visualtypebtn3" class="btn btn-primary visualbtn3" style="margin-left: 5%; margin-top:10px;width: 78px;">期刊会议</button>
                                         <button type="button" id="visualtypebtn4" class="btn btn-primary visualbtn4" style="margin-left: 8%; margin-top:10px;width: 78px;">研究方向</button>
                                     </div>
-                                    <div class="visual1">
+                                    <div class="visual1" style="width: 450px;height: 450px">
                                         1
                                     </div>
-                                    <div class="visual2">
+                                    <div class="visual2" style="width: 450px;height: 450px">
                                         2
                                     </div>
-                                    <div class="visual3">
+                                    <div class="visual3" style="width: 450px;height: 450px">
                                         3
                                     </div>
-                                    <div class="visual4">
+                                    <div class="visual4" style="width: 450px;height: 450px">
                                         4
                                     </div>
                                 </div>

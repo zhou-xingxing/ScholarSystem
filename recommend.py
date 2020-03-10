@@ -1,8 +1,8 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from flask import Flask, render_template, request, Blueprint
 import datetime, pymysql
 import simRecommend_zsf
-from django.http import JsonResponse
+# from django.http import JsonResponse
 import json
 app = Blueprint("recommend", __name__)
 @app.route("/recommend")

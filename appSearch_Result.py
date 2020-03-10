@@ -3,6 +3,7 @@ import pymysql
 import requests
 import json
 import time
+import page_utils
 app = Blueprint("appSearch_Result",__name__)
 
 
@@ -63,14 +64,23 @@ def appSearch_result():
         result=[]
         length=0
     #把研究领域的['','']去掉
-    listresult = []
+    listresults = []
     for reone in result:
         if reone[4]:
             newstr = (reone[4].replace('[\'', ' ').replace('\']', ' ').replace('\', \'', ', '))
             newtuple = (reone[0], reone[1], reone[2], reone[3], newstr, reone[5])
         else:
             newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], reone[5])
-        listresult.append(newtuple)
+        listresults.append(newtuple)
     end_time = time.time()  # 结束时间
     print("time:", (end_time - start_time))  # 结束时间-开始时间
-    return render_template('search_result.html',result=listresult,length=length)
+
+    #实现翻页
+    li = []
+    for i in range(1, length):
+        li.append(i)
+    pager_obj = page_utils.Pagination(request.args.get("page", 1), len(li), request.path, request.args, per_page_count=10)
+    html = pager_obj.page_html()
+    listresult = listresults[pager_obj.start:pager_obj.end]
+
+    return render_template('search_result.html',result=listresult,length=length,html=html)

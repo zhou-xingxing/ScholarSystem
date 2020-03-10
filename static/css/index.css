@@ -69,9 +69,6 @@
     margin-left: 31%;
 }
 
-.schools{
-
-}
 .schoolhead{
     display: inline-flex;
 }
@@ -199,3 +196,44 @@
 .Dialogdiv{
     margin-top: 10px;
 }
+/*.span_minus:before{*/
+/*  content: "－";*/
+/*}*/
+/*.span_plus:before{*/
+/*  content: "+";*/
+/*}*/
+
+@font-face {
+  font-family: "panelfont logo";
+  src: url(../fonts/panelfont.eot);
+  src:
+    url(../fonts/panelfont.woff) format('woff'),
+    url(../fonts/panelfont.ttf) format('truetype');
+}
+
+
+.panelfont {
+    font-family: 'panelfont logo', serif;
+    font-size: 29px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.panel-upArrow:before {
+  content: "\e610";
+}
+
+.panel-downArrow:before {
+  content: "\e670";
+}
+
+#accordion .panel-title a:after,
+#accordion .panel-title a.collapsed:after
+{
+    content: "\e670";
+    font-family: panelfont logo, serif;
+    font-size: 29px;
+    line-height: 0px;
+}
+#accordion .panel-title a.collapsed:after{ content: "\e610"; }

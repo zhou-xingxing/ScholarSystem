@@ -13,8 +13,6 @@
     <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
     <script src="../static/layer/layer.js" ></script>
     <script src="../static/js/index.js"></script>
-    <script type="text/javascript">
-    </script>
 </head>
 <body>
     <!--首页logo图片及反馈问题按钮 -->
@@ -68,20 +66,23 @@
         <tbody>
         <tr>
             <td style="background-color: #f6f7fb">
-                <div class="inner" style="background-color: #FFFFFF">
-                <div class="panel-group" id="accordion" style="background-color: #dff0d8">
-                    <div class="panel panel-success" style="background-color: #dff0d8">
-                        <div class="schools">
-                            <!--985高校-->
-                            <span class="schoolhead" >
-                                <img class="schoolheadimage" src="../static/images/china.png" alt>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="text-decoration: none">
-                                    <h3 class="schoolheadtitle">中国985+研究所+港澳台</h3>
-                                </a>
-                            </span>
-                            <!--从字典里获取学校列表数据-->
+                <div class="inner">
+                    <div class="panel-group" id="accordion">
+                        <!--985高校-->
+                        <div class="panel" style="background-color: #f6f7fb">
+                            <div class="panel-heading" id="collapseHeadingOne">
+                                <div class="panel-title">
+                                    <h3 class="schoolhead">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="text-decoration: none">
+                                            <img class="schoolheadimage" src="../static/images/china.png" alt>
+                                            <span class="schoolheadtitle">中国985+研究所+港澳台</span>
+                                        </a>
+                                    </h3>
+                                    <!--从字典里获取学校列表数据-->
+                                </div>
+                            </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="schoolnames">
+                                <div class="schoolnames panel-body">
                                     <table class="table table-hover table-striped">
                                         {% for li_985 in list_985 %}
                                             {% if loop.index%5 == 0 %}
@@ -95,60 +96,63 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-success" style="background-color: #dff0d8">
-                        <div class="schools">
-                            <!--211高校-->
-                            <span class="schoolhead">
-                                <img class="schoolheadimage" src="../static/images/china.png" alt>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="text-decoration: none">
-                                    <h3 class="schoolheadtitle">中国211+其他</h3>
-                                </a>
-                            </span>
-                            <!--字典列表读取，并使用jinja模板展示-->
+                        <!--211高校-->
+                        <div class="panel" style="background-color: #f6f7fb">
+                            <div class="panel-heading" id="collapseHeadingTwo">
+                                <div class="schools panel-title">
+                                    <h3 class="schoolhead">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="text-decoration: none">
+                                            <img class="schoolheadimage" src="../static/images/china.png" alt>
+                                            <span class="schoolheadtitle">中国211+其他</span>
+                                        </a>
+                                    </h3>
+                                </div>
+                            </div>
+                                <!--字典列表读取，并使用jinja模板展示-->
                             <div id="collapseTwo" class="panel-collapse collapse in">
-                                <div class="schoolnames">
-                                    <table class="table table-hover table-striped">
-                                        {% for li_211 in list_211 %}
-                                            {% if loop.index%5 == 0 %}
-                                                <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
-                                                <tr></tr>
-                                            {% else %}
-                                                <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </table>
+                                    <div class="schoolnames panel-body">
+                                        <table class="table table-hover table-striped">
+                                            {% for li_211 in list_211 %}
+                                                {% if loop.index%5 == 0 %}
+                                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
+                                                    <tr></tr>
+                                                {% else %}
+                                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                        <!--国外高校US-->
+                        <div class="panel" style="background-color: #f6f7fb">
+                            <div class="panel-heading" id="collapseHeadingThree">
+                                <div class="schools panel-title" >
+                                    <h3 class="schoolhead">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration: none">
+                                            <img class="schoolheadimage" src="../static/images/US.png" alt>
+                                            <span class="schoolheadtitle">U.S.</span>
+                                        </a>
+                                    </h3>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!--国外高校US-->
-                    <div class="panel panel-success" style="background-color: #dff0d8">
-                        <div class="schools" >
-                            <span class="schoolhead">
-                                <img class="schoolheadimage" src="../static/images/US.png" alt>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration: none">
-                                    <h3 class="schoolheadtitle">U.S.</h3>
-                                </a>
-                            </span>
-                             <!--字典列表读取，并使用jinja模板循环展示-->
+                            <!--字典列表读取，并使用jinja模板循环展示-->
                             <div id="collapseThree" class="panel-collapse collapse in">
-                                <div class="schoolnames">
-                                    <table class="table table-hover table-striped">
-                                          {% for li_us in list_us %}
-                                            {% if loop.index%5 == 0 %}
-                                                <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
-                                                <tr></tr>
-                                            {% else %}
-                                                <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </table>
-                                </div>
-                            </div>
+                                        <div class="schoolnames panel-body">
+                                            <table class="table table-hover table-striped">
+                                                  {% for li_us in list_us %}
+                                                    {% if loop.index%5 == 0 %}
+                                                        <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
+                                                        <tr></tr>
+                                                    {% else %}
+                                                        <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </td>
         </tr>

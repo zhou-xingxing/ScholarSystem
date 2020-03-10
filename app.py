@@ -45,8 +45,9 @@ def index():
     cursor.execute(sql)
     connection.commit()
     searchresult = cursor.fetchall()
-    print(searchresult)
-    # 将分类好的三个列表传回html中
+    # print(searchresult)
+
+    # 将分类好的三个列表和推荐热门传回html中
     return render_template("index.html",list_985=list_985,list_211=list_211,list_us=list_us,searchresult=searchresult)
 
 

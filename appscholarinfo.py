@@ -179,25 +179,6 @@ def scholarinfo():
     }
     partner_list2=partner_list
     partner_list2.append(selfinfo)
-    compare_ans=compare(partner_list2,"",1)
-    # 'all_name': all_name,
-    # 'achivement_list': achivement_list,
-    # 'achivement_list2': achivement_list2,
-    # 'cited_list': cited_list,
-    # 'paper_search_list': paper_search_list,
-    # 'achive_minyear': achiveminiyear,
-    # 'achive_maxyear': achivemaxyear,
-    # 'cited_minyear': cited_minyear,
-    # 'cited_maxyear': cited_maxyear,
-    com_all_name=compare_ans['all_name']
-    com_achivement_list=compare_ans['achivement_list']
-    com_achivement_list2=compare_ans['achivement_list2']
-    com_cited_list=compare_ans['cited_list']
-    com_paper_search_list=compare_ans['paper_search_list']
-    com_achive_minyear=compare_ans['achive_minyear']
-    com_achive_maxyear=compare_ans['achive_maxyear']
-    com_cited_minyear=compare_ans['cited_minyear']
-    com_cited_maxyear=compare_ans['cited_maxyear']
 
     #统计点击次数在首页推荐
     connection = pymysql.connect(host="39.106.96.175", port=3306, db="search_count", user="root", password="12345678",
@@ -219,9 +200,7 @@ def scholarinfo():
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
                            ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,paperlen=len(paper_info_list),
                            paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject,
-                           com_all_name=com_all_name,com_achivement_list=com_achivement_list,com_achivement_list2=com_achivement_list2,com_cited_list=com_cited_list,
-                           com_paper_search_list=com_paper_search_list,com_achive_minyear=com_achive_minyear,com_achive_maxyear=com_achive_maxyear,
-                           com_cited_minyear=com_cited_minyear,com_cited_maxyear=com_cited_maxyear, recommend_list=recommend_list  )
+                           partner_list2=partner_list2)
 
 
 #个人详细页面的路由--翟胜方--通过合作学者直接跳转  后面并入晓哥的路由1

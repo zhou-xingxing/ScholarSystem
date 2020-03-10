@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, Blueprint
 import datetime, pymysql
-from appScholar_Compare import compare
+from appScholar_Compare import compare1
 app = Blueprint("scholar_compare_route", __name__)
 
-@app.route('/compare')
+@app.route('/scholarcompare')
 def index():
     length = int(request.args.get('length'))
     allscholarinfo=[]
@@ -16,6 +16,6 @@ def index():
         dict_scholar["school"] = request.args.get(agr2)
         dict_scholar["college"] = request.args.get(agr3)
         allscholarinfo.append(dict_scholar)
-    results,compareans = compare("",allscholarinfo,2)
+    results,compareans = compare1(allscholarinfo)
     print(compareans)
     return render_template("compare.html",comparescholar= results,length=length)

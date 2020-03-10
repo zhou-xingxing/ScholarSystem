@@ -44,15 +44,7 @@
     <script src="../static/js/PersonalPaint.js" type="text/javascript"></script>
     <script type="text/javascript">
         var compare_data={
-            com_all_name:{{ com_all_name|tojson }},
-            com_achivement_list:{{ com_achivement_list|tojson }},
-            com_achivement_list2:{{ com_achivement_list2|tojson }},
-            com_cited_list:{{ com_cited_list|tojson }},
-            com_paper_search_list:{{ com_paper_search_list|tojson }},
-            com_achive_minyear:{{ com_achive_minyear|tojson }},
-            com_achive_maxyear:{{ com_achive_maxyear|tojson }},
-            com_cited_minyear:{{ com_cited_minyear|tojson }},
-            com_cited_maxyear:{{ com_cited_maxyear|tojson }},
+            partnerlist:{{ partner_list2|tojson }}
         }
     </script>
     <script src="../static/js/ScholarCompare.js" type="text/javascript"></script>
@@ -428,9 +420,9 @@
                                                                 <button type="button" id="partnerbtn2" class="btn btn-primary" style="margin-left: 10%">论文引用</button>
                                                                 <button type="button" id="partnerbtn3" class="btn btn-primary" style="margin-left: 10%">期刊会议</button>
                                                             </div>
-                                                            <div id="partnerCompare1" align="center" style="margin:0 auto;width: 650px;height: 550px;display: block">1</div>
-                                                            <div id="partnerCompare2" align="center" style="margin:0 auto;width: 650px;height: 550px;display: none">2</div>
-                                                            <div id="partnerCompare3" align="center" style="margin:0 auto;width: 700px;height: 600px;display: none">3</div>
+                                                            <div id="partnerCompare1" align="center" style="margin:0 auto;width: 650px;height: 550px;display: block"></div>
+                                                            <div id="partnerCompare2" align="center" style="margin:0 auto;width: 650px;height: 550px;display: none"></div>
+                                                            <div id="partnerCompare3" align="center" style="margin:0 auto;width: 700px;height: 600px;display: none"></div>
                                                         </div>
                                                     </div>
 

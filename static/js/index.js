@@ -49,7 +49,7 @@ $(function () {
         var allscholarname = $(".compareDialogInput1")
         var allscholarschool = $(".compareDialogInput2")
         var allscholarcollege = $(".compareDialogInput3")
-        var href = "../compare?";
+        var href = "../scholarcompare?";
         var flag=1;
         if (allscholarname.length ==1){
             alert("对比人数不少于一人且不多余四人")

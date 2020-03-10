@@ -57,10 +57,11 @@
             });
     })
      $(".recommendscholar").click(function () {
+         var scholarid = document.getElementById("ContentPlaceHolder1_LabelORCID").innerText;
         $.ajax({
             url:'/recommend',
             type:'GET',
-            data:{'user':'CN-B973QRIJ' },
+            data:{'user':scholarid },
             success:function(data){
                 console.log(data)
                 data = eval(data);
@@ -75,13 +76,17 @@
         })
     })
     $(".change").click(function () {
-        var num = parseInt($(".change").val())
+        var num = parseInt($(".change").val());
+        var scholarid = document.getElementById("ContentPlaceHolder1_LabelORCID").innerText;
         num+=3;
+        if(num==30){
+            num=0;
+        }
         $(".change")[0].value = num;
         $.ajax({
             url:'/refresh',
             type:'GET',
-            data:{'user':'CN-B973QRIJ','type':num},
+            data:{'user':scholarid,'type':num},
             success:function(data){
                 console.log(data)
                 data = eval(data);

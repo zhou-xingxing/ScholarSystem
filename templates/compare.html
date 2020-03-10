@@ -4,231 +4,253 @@
     <meta charset="UTF-8">
     <title>学者对比</title>
     <script src="../static/js/jquery-1.8.3.min.js"></script>
-    <script src="../static/js/echarts.js" ></script>
+    <script src="../static/js/echarts.js"></script>
     <script type="text/javascript" src="../static/js/echarts-wordcloud.js"></script>
     <script type="text/javascript">
-        var comparedata={
-            data:{{ comparescholar|tojson }}
+        var comparedata = {
+            data:{{ comparescholar|tojson }},
+            nodatascholar:{{ nodatascholar|tojson }}
         }
     </script>
     <script type="text/javascript" src="../static/js/compare.js"></script>
-    <script src="../static/layer/layer.js" ></script>
+    <script src="../static/layer/layer.js"></script>
     <script type="text/javascript" src="../static/js/compareChoose.js"></script>
+    <script type="text/javascript">
+        var compare_data = {
+            com_all_name:{{ com_all_name|tojson }},
+            com_achivement_list:{{ com_achivement_list|tojson }},
+            com_achivement_list2:{{ com_achivement_list2|tojson }},
+            com_cited_list:{{ com_cited_list|tojson }},
+            com_achive_minyear:{{ com_achive_minyear|tojson }},
+            com_achive_maxyear:{{ com_achive_maxyear|tojson }},
+            com_cited_minyear:{{ com_cited_minyear|tojson }},
+            com_cited_maxyear:{{ com_cited_maxyear|tojson }}
+        }
+    </script>
+    <script type="text/javascript" src="../static/js/SwapCompare.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/compare.css">
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="all" style="display: flex">
-            {% for com in comparescholar %}
-                {% if com %}
-                    <div class="compareBody">
-                        <div class="header2" style="height: 230px;">
-                            <div class="headimage">
-                                <image class="image2" src="../static/images/scholar_portrait.png"></image>
+<div class="all" style="display: flex">
+    {% for com in newresults %}
+        {% if com %}
+            <div class="compareBody" style="width: 100%">
+                <div class="header2" style="height: 230px;">
+                    <div class="headimage">
+                        <image class="image2" src="../static/images/scholar_portrait.png"></image>
+                    </div>
+                    <div class="otherinfo">
+                        <div class="scholarname">
+                            <span class="name2">{{ com[1] }}</span>
+                        </div>
+                        <div class="describe">
+                            <div class="scholarschool">
+                                <i class="iconfont icon-jigou pr10"></i>
+                                <span>{{ com[2] }}</span>
                             </div>
-                            <div class="otherinfo">
-                                <div class="scholarname">
-                                    <span class="name2">{{ com[1] }}</span>
+                            <div class="scholarid">
+                                <span>ScholarID：</span>
+                                <span>{{ com[4] }}</span>
+                            </div>
+                            <div class="scholarmajor">
+                                <span>研究领域：</span>
+                                <span>{{ com[5] }}</span>
+                            </div>
+                            <div class="comparenum">
+                                <p class="color-gray">
+                                    <!-- 成果数目-->
+                                    <a class="mr15 color-wit line-h" href="javascript:void(0)">
+                                        <span class="txt-h">成果数</span>
+                                        <span id="ContentPlaceHolder1_LabelCount">{{ com[7] }}</span>
+                                    </a>
+                                    <!-- 引用数目-->
+                                    <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF"
+                                       class="mr15 color-wit line-h">
+                                        <span class="txt-h">引用数</span>
+                                        <span id="ContentPlaceHolder1_LabelCountIF">{{ com[6] }}</span>
+                                    </a>
+                                    <!-- H指数-->
+                                    <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2"
+                                       class="mr15 color-wit line-h">
+                                        <span class="txt-h">H指数</span>
+                                        <span id="ContentPlaceHolder1_LabelAverageIF">{{ com[8] }}</span>
+                                    </a>
+                                    <!-- G指数-->
+                                    <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2"
+                                       class="mr15 color-wit line-h">
+                                        <span class="txt-h">G指数</span>
+                                        <span id="ContentPlaceHolder1_LabelAverageIF">{{ com[9] }}</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="comparehr">
+                <div class="compareitems">
+                    <div>
+                        <div class="title itemsfont relationet">
+                            <div>
+                                <span>学者关系网络</span>
+                                <button type="button" id="comparescholar" class="btn btn-primary swap">切换对比模式</button>
+                            </div>
+                            <div class="netcontent" style="width: 400px;height: 450px"></div>
+                            <div class="partnercompare" id="partnercompare" style="display:none">
+                                <div class="datatypeselect">
+                                    <button type="button" id="partnerbtn1" class="btn btn-primary" style="margin-left: 20%">学术成果</button>
+                                    <button type="button" id="partnerbtn2" class="btn btn-primary" style="margin-left: 10%">论文引用</button>
+                                    <button type="button" id="partnerbtn3" class="btn btn-primary" style="margin-left: 10%">期刊会议</button>
                                 </div>
-                                <div class="describe" >
-                                    <div class="scholarschool">
-                                        <i class="iconfont icon-jigou pr10"></i>
-                                        <span>{{ com[2] }}</span>
-                                    </div>
-                                    <div class="scholarid">
-                                        <span>ScholarID：</span>
-                                        <span>{{ com[4] }}</span>
-                                    </div>
-                                    <div class="scholarmajor" >
-                                        <span>研究领域：</span>
-                                        <span>{{ com[5] }}</span>
-                                    </div>
-                                    <div class="comparenum">
-                                        <p class="color-gray">
-                                            <!-- 成果数目-->
-                                            <a class="mr15 color-wit line-h" href="javascript:void(0)">
-                                                <span class="txt-h">成果数</span>
-                                                <span id="ContentPlaceHolder1_LabelCount">{{ com[7] }}</span>
-                                            </a>
-                                            <!-- 引用数目-->
-                                            <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF" class="mr15 color-wit line-h">
-                                                <span class="txt-h">引用数</span>
-                                                <span id="ContentPlaceHolder1_LabelCountIF">{{ com[6] }}</span>
-                                            </a>
-                                            <!-- H指数-->
-                                            <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
-                                                <span class="txt-h">H指数</span>
-                                                <span id="ContentPlaceHolder1_LabelAverageIF">{{ com[8] }}</span>
-                                            </a>
-                                            <!-- G指数-->
-                                            <a href="javascript:void(0)" id="ContentPlaceHolder1_aIF2" class="mr15 color-wit line-h">
-                                                <span class="txt-h">G指数</span>
-                                                <span id="ContentPlaceHolder1_LabelAverageIF">{{ com[9] }}</span>
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
+                                <div id="partnerCompare1" align="center" style="margin:0 auto;width: 650px;height: 550px;display: block"></div>
+                                <div id="partnerCompare2" align="center" style="margin:0 auto;width: 650px;height: 550px;display: none"></div>
+                                <div id="partnerCompare3" align="center" style="margin:0 auto;width: 700px;height: 600px;display: none"></div>
                             </div>
                         </div>
                         <hr class="comparehr">
-                        <div class="compareitems">
-                            <div>
-                                <div class="title itemsfont relationet" >
-                                    <div>
-                                        <span>学者关系网络</span>
-                                        <button type="button" id="swap" class="btn btn-primary swap">切换对比模式</button>
-                                    </div>
-                                    <div class="netcontent" style="width: 450px;height: 450px"></div>
-                                </div>
-                                <hr class="comparehr">
-                            </div>
-                            <div >
-                                <div class="title itemsfont personalpaint">
-                                    <span>个人画像</span>
-                                    <div class="personalpaintcontent" style="width: 450px;height: 450px"></div>
-                                </div>
+                    </div>
+                    <div>
+                        <div class="title itemsfont personalpaint">
+                            <span>个人画像</span>
+                            <div class="personalpaintcontent" style="width: 400px;height: 450px"></div>
+                        </div>
 
-                                <hr class="comparehr">
+                        <hr class="comparehr">
+                    </div>
+                    <div>
+                        <div class="datavisual">
+                            <div class="title itemsfont">
+                                <span>可视化</span>
                             </div>
-                            <div>
-                                <div class="datavisual">
-                                    <div class="title itemsfont">
-                                        <span>可视化</span>
-                                    </div>
-                                    <div class="visualtype">
-                                        <button type="button" id="visualtypebtn1" class="btn btn-primary visualbtn1" style="margin-left: 8%; margin-top:10px;width: 78px;">学术成果</button>
-                                        <button type="button" id="visualtypebtn2" class="btn btn-primary visualbtn2" style="margin-left: 5%; margin-top:10px;width: 78px;">论文引用</button>
-                                        <button type="button" id="visualtypebtn3" class="btn btn-primary visualbtn3" style="margin-left: 5%; margin-top:10px;width: 78px;">期刊会议</button>
-                                        <button type="button" id="visualtypebtn4" class="btn btn-primary visualbtn4" style="margin-left: 8%; margin-top:10px;width: 78px;">研究方向</button>
-                                    </div>
-                                    <div class="visual1" style="width: 450px;height: 450px">
-                                        1
-                                    </div>
-                                    <div class="visual2" style="width: 450px;height: 450px">
-                                        2
-                                    </div>
-                                    <div class="visual3" style="width: 450px;height: 450px">
-                                        3
-                                    </div>
-                                    <div class="visual4" style="width: 450px;height: 450px">
-                                        4
-                                    </div>
-                                </div>
-                                <hr class="comparehr">
+                            <div class="visualtype">
+                                <button type="button" id="visualtypebtn1" class="btn btn-primary visualbtn1"
+                                        style="margin-left: 8%; margin-top:10px;width: 78px;">学术成果
+                                </button>
+                                <button type="button" id="visualtypebtn2" class="btn btn-primary visualbtn2"
+                                        style="margin-left: 5%; margin-top:10px;width: 78px;">论文引用
+                                </button>
+                                <button type="button" id="visualtypebtn3" class="btn btn-primary visualbtn3"
+                                        style="margin-left: 5%; margin-top:10px;width: 78px;">期刊会议
+                                </button>
+                                <button type="button" id="visualtypebtn4" class="btn btn-primary visualbtn4"
+                                        style="margin-left: 8%; margin-top:10px;width: 78px;">研究方向
+                                </button>
                             </div>
-                            <div>
-                                <div class="achivement">
-                                    <div class="title itemsfont" >
-                                        <span>学术成果</span>
-                                        {% for i in range(com[18]) %}
-                                            <br>
-                                            <a class="font16" href="{{ com[15][i]["href"] }}" style="text-decoration: none">
-                                                <span style="font-size:18px;font-weight:100;">{{ loop.index }}.{{ com[14][i] }}</span>
-                                            </a>
+                            <div class="visual1" style="width: 450px;height: 450px">
+                                1
+                            </div>
+                            <div class="visual2" style="width: 450px;height: 450px">
+                                2
+                            </div>
+                            <div class="visual3" style="width: 450px;height: 450px">
+                                3
+                            </div>
+                            <div class="visual4" style="width: 450px;height: 450px">
+                                4
+                            </div>
+                        </div>
+                        <hr class="comparehr">
+                    </div>
+                    <div class="achivementwithhr">
+                        <div class="achivement">
+                            <div class="title itemsfont">
+                                <span>学术成果</span>
+                                {% for i in range(com[18]) %}
+                                    <br>
+                                    <a class="font16" href="{{ com[15][i]["href"] }}" style="text-decoration: none">
+                                        <span style="font-size:18px;font-weight:100;">{{ loop.index }}.{{ com[14][i] }}</span>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr class="comparehr">
+                    </div>
+                    <div class="cooperatewithhr">
+                        <div class="cooperate">
+                            <div class="title itemsfont">
+                                <span>合作机构</span>
+                                <table>
+                                    <tbody>
+                                    {% if com[17] %}
+                                        {% for foo in com[17] %}
+                                            <tr style="font-size:18px;font-weight:100;">
+                                                <td style="width: 7%;">{{ loop.index }}.</td>
+                                                <td style="width: 75%;">{{ foo }}</td>
+                                                <td style="text-align: center;width: 18%"> {{ com[17][foo] }}次</td>
+                                            </tr>
                                         {% endfor %}
-                                    </div>
-                                </div>
-                                <hr class="comparehr">
+                                    {% endif %}
+                                    </tbody>
+                                </table>
                             </div>
-                            <div>
-                                <div class="cooperate">
-                                    <div class="title itemsfont">
-                                        <span>合作机构</span>
-                                        <table>
-                                            <tbody>
-                                                {% if com[17] %}
-                                                    {% for foo in com[17] %}
-                                                            <tr style="font-size:18px;font-weight:100;">
-                                                                <td style="width: 7%;">{{ loop.index}}.</td>
-                                                                <td style="width: 75%;">{{ foo }}</td>
-                                                                <td style="text-align: center;width: 18%"> {{ com[17][foo] }}次</td>
-                                                            </tr>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr class="comparehr">
-                            </div>
-                            <div>
-                                <div class="partner">
-                                    <div class="title itemsfont" >
-                                        <span>合作学者</span>
-                                        <table >
-                                            {% if com[13] %}
-                                                {% for pal in com[13] %}
-                                                        <tr style="font-size:18px;font-weight:100;margin-top: 5px;">
-                                                            <td style="font-size:18px;font-weight:100;width: 10px;">{{ loop.index }}.</td>
-                                                            {% for p in pal %}
-                                                                {% if p=="name" %}
-                                                                    <td style="text-align: center;width: 20%;">{{ pal[p]}}</td>
-                                                                {% endif %}
-                                                                {% if p=="corpnum" %}
-                                                                    <td style="text-align: center;width: 15%;">{{ pal[p]}}次</td>
-                                                                {% endif %}
-                                                                {% if p!="id" and p!="corpnum" and p!="name"%}
-                                                                    <td>{{ pal[p]}}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
+                        </div>
+                        <hr class="comparehr">
+                    </div>
+                    <div class="partnerwithhr">
+                        <div class="partner">
+                            <div class="title itemsfont">
+                                <span>合作学者</span>
+                                <table>
+                                    {% if com[13] %}
+                                        {% for pal in com[13] %}
+                                            <tr style="font-size:18px;font-weight:100;margin-top: 5px;">
+                                                <td style="font-size:18px;font-weight:100;width: 10px;">{{ loop.index }}.</td>
+                                                {% for p in pal %}
+                                                    {% if p=="name" %}
+                                                        <td style="text-align: center;width: 20%;">{{ pal[p] }}</td>
+                                                    {% endif %}
+                                                    {% if p=="corpnum" %}
+                                                        <td style="text-align: center;width: 15%;">{{ pal[p] }}次</td>
+                                                    {% endif %}
+                                                    {% if p!="id" and p!="corpnum" and p!="name" %}
+                                                        <td>{{ pal[p] }}</td>
+                                                    {% endif %}
                                                 {% endfor %}
-                                            {% endif %}
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr class="comparehr">
-                            </div>
-                            <div>
-                                <div class="subject">
-                                    <div class="title itemsfont">
-                                        <span>学科</span>
-                                    </div>
-                                </div>
-                                <hr class="comparehr">
-                            </div>
-                            <div>
-                                <div class="meeting" >
-                                    <div class="title itemsfont">
-                                        <span>期刊</span>
-                                        <table>
-                                            <tbody>
-                                                {% if com[10] %}
-                                                    {% for foo in com[10] %}
-                                                            <tr style="font-size:18px;font-weight:100;">
-                                                                <td style="width: 15%;">{{ loop.index }}.</td>
-                                                                <td style="width: 45%;">{{ foo }}</td>
-                                                                <td style="text-align: center;width: 40%;">{{ com[10][foo] }}篇</td>
-                                                            </tr>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr class="comparehr">
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                </table>
                             </div>
                         </div>
-                        <div style="margin-top: 5%;float: right;">
-                            <button type="button" id="addmore" class="btn btn-primary addmore">增加对比</button>
+                        <hr class="comparehr">
+                    </div>
+                    <div class="meetingwithhr">
+                        <div class="meeting">
+                            <div class="title itemsfont">
+                                <span>期刊</span>
+                                <table>
+                                    <tbody>
+                                    {% if com[10] %}
+                                        {% for foo in com[10] %}
+                                            <tr style="font-size:18px;font-weight:100;">
+                                                <td style="width: 15%;">{{ loop.index }}.</td>
+                                                <td style="width: 45%;">{{ foo }}</td>
+                                                <td style="text-align: center;width: 40%;">{{ com[10][foo] }}篇</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                        <hr class="comparehr">
                     </div>
-                {% else %}
-                    <div style="border: solid 1px; width: 50%; height: 1000px;background-color: #f6f7fb;font-size: 25px;">
-                            暂无该学者信息，请耐心等待后台数据更新
-                    </div>
-                {% endif %}
-            {% endfor %}
-    </div>
-    <div class="comparechoice" style="display: none;font-size: 20px;margin-left: 5%; margin-top: 5%;" id="comparechoice">
-        <span>请选择您需要增加的对比项:</span><br>
-        <label class="comparelabel"><input name="Fruit" type="checkbox" value="学术成果" class="choicecheck" />学术成果 </label>
-        <label class="comparelabel"><input name="Fruit" type="checkbox" value="合作机构" class="choicecheck" />合作机构 </label>
-        <label class="comparelabel"><input name="Fruit" type="checkbox" value="合作学者" class="choicecheck"/>合作学者 </label>
-        <label class="comparelabel"><input name="Fruit" type="checkbox" value="学科" class="choicecheck"/>学科</label>
-        <label class="comparelabel"><input name="Fruit" type="checkbox" value="期刊" class="choicecheck"/>期刊</label><br>
-        <button type="button" id="confirm" class="btn btn-primary confirm">确认</button>
-    </div>
+                </div>
+                <div style="margin-top: 5%;float: right;">
+                    <button type="button" id="addmore" class="btn btn-primary addmore">增加对比</button>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="comparechoice" style="display: none;font-size: 20px;margin-left: 5%; margin-top: 5%;" id="comparechoice">
+    <span>请选择您需要增加的对比项:</span><br>
+    <label class="comparelabel"><input name="Fruit" type="checkbox" value="学术成果" class="choicecheck"/>学术成果 </label>
+    <label class="comparelabel"><input name="Fruit" type="checkbox" value="合作机构" class="choicecheck"/>合作机构 </label>
+    <label class="comparelabel"><input name="Fruit" type="checkbox" value="合作学者" class="choicecheck"/>合作学者 </label>
+    <label class="comparelabel"><input name="Fruit" type="checkbox" value="期刊" class="choicecheck"/>期刊</label><br>
+    <button type="button" id="confirm" class="btn btn-primary confirm">确认</button>
+</div>
 </body>
 </html>

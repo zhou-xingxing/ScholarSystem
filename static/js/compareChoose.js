@@ -1,5 +1,5 @@
 $(function () {
-    checkedlist=[false,false,false,false,false]
+    checkedlist=[false,false,false,false]
     var index=0;
     var visuallength = $(".visual1").length;
     for(var i=0;i<visuallength;i++){
@@ -7,6 +7,10 @@ $(function () {
         $(".visual2")[i].style.display="none";
         $(".visual3")[i].style.display="none";
         $(".visual4")[i].style.display="none";
+        $(".achivementwithhr")[i].style.display="none";
+        $(".cooperatewithhr")[i].style.display="none";
+        $(".partnerwithhr")[i].style.display="none";
+        $(".meetingwithhr")[i].style.display="none";
     }
     $(".addmore").click(function() {
         var allchecked = $(".choicecheck");
@@ -58,7 +62,6 @@ $(function () {
         for(var i=0;i<allchecked.length;i++){
             if(allchecked[i].checked){
                 checkedname.push(allchecked[i].value)
-
             }
             checkedlist[i]=allchecked[i].checked;
         }
@@ -67,32 +70,26 @@ $(function () {
         alllength = $(".achivement").length
         for(var i=0;i<alllength;i++){
             if(checkedlist[0]){
-                $(".achivement")[i].style.display="block"
+                $(".achivementwithhr")[i].style.display="block"
             }else{
-                $(".achivement")[i].style.display="none"
+                $(".achivementwithhr")[i].style.display="none"
             }
             if(checkedlist[1]){
-                $(".cooperate")[i].style.display="block"
+                $(".cooperatewithhr")[i].style.display="block"
             }else{
-                $(".cooperate")[i].style.display="none"
+                $(".cooperatewithhr")[i].style.display="none"
             }
             if(checkedlist[2]){
-                $(".partner")[i].style.display="block"
+                $(".partnerwithhr")[i].style.display="block"
             }else{
-                $(".partner")[i].style.display="none"
+                $(".partnerwithhr")[i].style.display="none"
             }
             if(checkedlist[3]){
-                $(".subject")[i].style.display="block"
-            }else{
-                $(".subject")[i].style.display="none"
-            }
-            if(checkedlist[4]){
-                $(".meeting")[i].style.display="block"
+                $(".meetingwithhr")[i].style.display="block"
             }  else{
-                $(".meeting")[i].style.display="none"
+                $(".meetingwithhr")[i].style.display="none"
             }
         }
-
         layer.close(index);
     })
 })

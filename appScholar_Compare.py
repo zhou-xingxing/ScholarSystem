@@ -78,6 +78,7 @@ def compare1(ScholarInfoIncluedeCollege):
     achiveminiyear,cited_minyear = 10000,10000;
     achivemaxyear ,cited_maxyear= 0,0
     results = []
+    nodatascholar = []
     for scholar in ScholarInfoIncluedeCollege:
         name = scholar['name']
         school = scholar['school']
@@ -92,13 +93,17 @@ def compare1(ScholarInfoIncluedeCollege):
             cls.execute(sql);
             conn.commit()
             result = cls.fetchone()
-            results.append(result)
+            if result[4]:
+                results.append(result)
+            else:
+                nodatascholar.append(result)
         except:
             results.append("")
            #  print('查询出错,无该学者所在学校或者表')
-    print(results)
     # 对results进行处理
     listresult = []
+    newresults=[]
+
     for reone in results:
         if reone:#表示能查到该条数据
             # 如果reone[4]存在表示整条数据存在
@@ -156,7 +161,8 @@ def compare1(ScholarInfoIncluedeCollege):
                     meeting, achive, cited,partner, paper_name, paper_info, paper_search, cooperate, len(paper_name), paper_search_key,
                     paper_search_num);
                 listresult.append(newtuple)
-                all_name.append(reone[0]);
+                newresults.append(newtuple)
+                all_name.append(reone[1]);
                 achivement_list.append(meeting);
                 achivement_list2.append(achive)
                 cited_list.append(cited)
@@ -169,12 +175,11 @@ def compare1(ScholarInfoIncluedeCollege):
                 if int(achive[len(achive) - 1]['year']) > achivemaxyear:
                     achivemaxyear = int(achive[len(achive) - 1]['year'])
             else:
-                newtuple = (reone[0], reone[1], reone[2], reone[3], reone[4], reone[5], reone[6], reone[7], reone[8],
-                reone[9], reone[10], reone[11], reone[12],
-                reone[13], reone[14], reone[15], reone[16], reone[17], 0)
-                listresult.append(newtuple)
+                newresults.append("")
+                pass
         else:#表示无该条学者数据
-            listresult.append(reone)
+            newresults.append("")
+            pass
     compare_ans = {
         'all_name': all_name,
         'achivement_list': achivement_list,
@@ -185,4 +190,4 @@ def compare1(ScholarInfoIncluedeCollege):
         'cited_minyear': cited_minyear,
         'cited_maxyear': cited_maxyear,
     }
-    return listresult,compare_ans
+    return listresult,compare_ans,newresults,nodatascholar

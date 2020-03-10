@@ -201,11 +201,11 @@ def model_Cal():
     print('总用时：', time.time()-start_time)
 
 
-if __name__ == '__main__':
-    # model_Cal()  # 首次使用需要先运行本函数：计算模型并存储索引
-    id = input('请输入需要推荐的学者scholarID')
-    print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
-    pass
+# if __name__ == '__main__':
+#     model_Cal()  # 首次使用需要先运行本函数：计算模型并存储索引
+    #id = input('请输入需要推荐的学者scholarID')
+    #print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
+    #pass
 
 
 

@@ -208,8 +208,15 @@ $(function() {
             ec3.resize();
             // ec4.resize();
         });
-}
-)
+        $("#comparescholar").click(function() {
+            layer.open({
+                type:1,
+                title:"学者对比",
+                area:["900px","700px"],
+                content: $('#partnercompare')
+            });
+        })
+})
 
 
 

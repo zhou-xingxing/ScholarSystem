@@ -40,12 +40,12 @@
                 <div class="form-group">
                     <label for="name">学者姓名</label>
 <!-- 实现鼠标点击input框中placeholder内容消失-->
-                    <input type="text" class="form-control" id="name" name="name"
+                    <input type="text" class="form-control" id="fscholar_name" name="name"
                            placeholder="请输入您要反馈的学者姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您要反馈的学者姓名'">
                 </div>
                 <div class="form-group">
                     <label for="school">学术机构</label>
-                    <input type="text" class="form-control" id="school" name="school"
+                    <input type="text" class="form-control" id="fscholar_school" name="school"
                            placeholder="请输入您要反馈学者的所在学术机构" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您要反馈学者的所在学术机构'">
                 </div>
                 <div class="form-group">
@@ -88,6 +88,14 @@
 
 
 {% endblock %}
-
+<!--反馈自动化 接收scholarinfo传来的值 3.6 bwm -->
+<script language="javascript" type="text/javascript">
+    //获取scholarinfo传过来的值
+    var content = JSON.parse(localStorage.getItem("info"))
+    if(content){
+        document.getElementById("fscholar_name").value = content.scholar_name1;
+        document.getElementById("fscholar_school").value=content.scholar_school1;
+    }
+</script>
 </body>
 </html>

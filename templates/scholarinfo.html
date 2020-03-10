@@ -485,5 +485,13 @@
         </tr>
         </tbody>
     </table>
+    <!--3.10号柏为民添加 传值给反馈页面 -->
+<script>
+    var data1={
+        scholar_name1:{{ scholarname }},
+        scholar_school1:{{ scholarschool }}
+    };
+    localStorage.setItem("info",JSON.stringify(data1));
+</script>
 </body>
 </html>

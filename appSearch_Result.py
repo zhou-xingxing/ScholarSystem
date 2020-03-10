@@ -53,6 +53,23 @@ def appSearch_result():
             SQL += sql
         #return render_template('scholarinfo.html',result=result,length=length)
     # print(SQL+';')
+    elif search_type == "6":  #按论文搜索  3.6 bwm
+        for i in results:
+            sql = "select %s from %s where id between 1 and 2500 and paper_name_list LIKE '%s'" % (need_part, i[0], '%'+name+'%')
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
+    elif search_type == "7":  #高级搜索  3.6 bwm
+        for i in results:
+            if(keyword3!=""):
+                sql = "select %s from %s where id between 1 and 2500 and name='%s' and school LIKE '%s' and college LIKE '%s'" % (need_part, i[0], name,keyword2,keyword3)
+            elif(keyword2!=""):
+                sql = "select %s from %s where id between 1 and 2500 and name='%s' and school LIKE '%s'" % (need_part, i[0], name, keyword2)
+            else:
+                sql = "select %s from %s where id between 1 and 2500 and name='%s'" % (need_part, i[0], name)
+            if i != results[-1]:
+                sql += " UNION "
+            SQL += sql
     try:
         cls.execute(SQL + ';')
         conn.commit()

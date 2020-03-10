@@ -41,6 +41,20 @@
     height: 45px;
     margin-top: 3%;
 }
+/*input2是高级搜索里的小框尺寸 3.6 bwm*/
+.input2{
+    width: 13%;
+    height: 45px;
+    margin-top: 3%;
+}
+.input3{
+    width: 0%;
+    height: 45px;
+    margin-top: 3%;
+}
+.soso-hide{
+    display: none;
+}
 .btnfeedback{
     margin-top: 20px;
     margin-left: 500px;

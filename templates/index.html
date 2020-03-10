@@ -12,7 +12,27 @@
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
     <script src="../static/layer/layer.js" ></script>
+    <script src="../static/js/echarts.js"></script>
     <script src="../static/js/index.js"></script>
+    <script src="../static/js/china.js"></script>
+    <!--点击高级搜索后 展示出三个隐藏的input  3.6 bwm-->
+    <script>
+        $(document).ready(function () {
+            $("#advanced_soso1").on("click", function () {
+                $("#soso2").toggle();
+                $("#soso1").toggle();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#advanced_soso2").on("click", function () {
+                $("#soso1").toggle();
+                $("#soso2").toggle();
+                //$("#data2search_result").toggleClass("input2");
+            });
+        });
+    </script>
 </head>
 <body>
     <!--首页logo图片及反馈问题按钮 -->
@@ -33,18 +53,40 @@
             <img src="../static/images/globalID.png" alt>
         </div>
         <div class="input">
-            <!--搜索类型-->
-            <select name="search_type" class="select" id="select_type">
+            <!--关键词输入框-->
+            <div style="display: block" id="soso1"> <!--普通搜索框 第一个div-->
+                <!--搜索类型-->
+                <select name="search_type" class="select" id="select_type">
                     <option value="1">学者姓名</option>
                     <option value="2">学者专业</option>
                     <option value="3">学者学校</option>
                     <option value="4">研究方向</option>
-            </select>
-            <!--关键词输入框-->
-            <input type="text" class="input1" placeholder="请输入关键字" id="data2search_result">
-            <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
-                <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
-            </button>
+                    <option value="6">论文搜索</option>
+                </select>
+                <input type="text" class="input1" placeholder="请输入关键字" id="data2search_result">
+                <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
+                    <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
+                </button>
+                <a id="advanced_soso1" class="font16" href="javascript:void(1)" style="color:black"> 高级搜索</a>
+            </div>
+            <div id="soso2" style="display: none"> <!--高级搜索框 第二个div-->
+                <!--搜索类型-->
+                <select name="search_type" class="select" id="select_type">
+                    <option value="1">学者姓名</option>
+                    <option value="2">学者专业</option>
+                    <option value="3">学者学校</option>
+                    <option value="4">研究方向</option>
+                    <option value="6">论文搜索</option>
+                </select>
+                <input type="text" class="input2" placeholder="请输入学者姓名" id="data2search_result1">
+                <input type="text" class="input2" placeholder="请输入学者工作机构" id="data2search_result2">
+                <input type="text" class="input2" placeholder="请输入学者所在学院" id="data2search_result3">
+                <button type="button" id="searchbtn2"  class="btn btn-info btn-default btnsearch">
+                    <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
+                </button>
+                <a id="advanced_soso2" class="font16" href="javascript:void(1)" style="color:black"> 高级搜索</a>
+            </div>
+
         </div>
         <!--热门学者推荐-->
         <div class="record">
@@ -158,6 +200,10 @@
         </tr>
         </tbody>
     </table>
+    <!--3.10柏为民添加 首页底部的学者分布地图 -->
+    <div id="map1">
+        <div id="index_map1" align="center" style="margin:0 auto 0 auto;width: 800px;height: 600px;display: inline"></div>
+    </div>
      <!--页面底部系统介绍-->
     <div class="foot">
             <div class="foot-title">
@@ -178,7 +224,7 @@
     </div>
     <!--添加弹窗元素-->
     <div class="compareDialog" id="compareDialog" style="display: none">
-        <div class="scholarInfoIinput" id="scholarInfoIinput"> 
+        <div class="scholarInfoIinput" id="scholarInfoIinput">
             <div class="Dialogdiv">
                 学者姓名：<input type="text" class="compareDialogInput1" id="nameinput">
                 学者机构：<input type="text" class="compareDialogInput2" id="schoolinput">
@@ -189,5 +235,368 @@
         <button class="addone" id="addone">增加一个</button>
         <button class="startcompare" id="startcompare">开始对比</button>
     </div>
+
+
+<!--3.10柏为民添加 首页底部的学者分布地图 -->
+<script>
+    // 此版本通过设置geoindex && seriesIndex: [1] 属性来实现geo和map共存，来达到hover散点和区域显示tooltip的效果
+    // 默认情况下，map series 会自己生成内部专用的 geo 组件。但是也可以用这个 geoIndex 指定一个 geo 组件。这样的话，map 和 其他 series（例如散点图）就可以共享一个 geo 组件了。并且，geo 组件的颜色也可以被这个 map series 控制，从而用 visualMap 来更改。
+    // 当设定了 geoIndex 后，series-map.map 属性，以及 series-map.itemStyle 等样式配置不再起作用，而是采用 geo 中的相应属性。
+    // 并且加了pin气泡图标以示数值大小
+    var name_title = "大陆地区高校学者分布情况"
+    var subname = '数据来源于武书连2018年统计'
+    var nameColor = " rgb(55, 75, 113)"
+    var name_fontFamily = '等线'
+    var subname_fontSize = 15
+    var name_fontSize = 18
+    var mapName = 'china'
+    var data = [
+        {name:"北京",value:56820},
+        {name:"天津",value:19931},
+        {name:"河北",value:32479},
+        {name:"山西",value:22610},
+        {name:"内蒙古",value:15172},
+        {name:"辽宁",value:41118},
+        {name:"吉林",value:26482},
+        {name:"黑龙江",value:31410},
+        {name:"上海",value:35444},
+        {name:"江苏",value:58680},
+        {name:"浙江",value:31625},
+        {name:"安徽",value:29007},
+        {name:"福建",value:23270},
+        {name:"江西",value:26138},
+        {name:"山东",value:57478},
+        {name:"河南",value:46802},
+        {name:"湖北",value:45705},
+        {name:"湖南",value:32261},
+        {name:"重庆",value:21097},
+        {name:"四川",value:44096},
+        {name:"贵州",value:14531},
+        {name:"云南",value:18607},
+        {name:"西藏",value:1518},
+        {name:"陕西",value:39554},
+        {name:"甘肃",value:15736},
+        {name:"青海",value:2683},
+        {name:"宁夏",value:3744},
+        {name:"新疆",value:10881},
+        {name:"广东",value:47822},
+        {name:"广西",value:20351},
+        {name:"海南",value:3949},
+    ];
+    var myChart = echarts.init(document.getElementById('index_map1'))
+    var geoCoordMap = {};
+    var toolTipData = [
+        {name:"北京",value:[{name:"文科",value:95},{name:"理科",value:82}]},
+        {name:"天津",value:[{name:"文科",value:22},{name:"理科",value:20}]},
+        {name:"河北",value:[{name:"文科",value:60},{name:"理科",value:42}]},
+        {name:"山西",value:[{name:"文科",value:40},{name:"理科",value:41}]},
+        {name:"内蒙古",value:[{name:"文科",value:23},{name:"理科",value:24}]},
+        {name:"辽宁",value:[{name:"文科",value:39},{name:"理科",value:28}]},
+        {name:"吉林",value:[{name:"文科",value:41},{name:"理科",value:41}]},
+        {name:"黑龙江",value:[{name:"文科",value:35},{name:"理科",value:31}]},
+        {name:"上海",value:[{name:"文科",value:12},{name:"理科",value:12}]},
+        {name:"江苏",value:[{name:"文科",value:47},{name:"理科",value:45}]},
+        {name:"浙江",value:[{name:"文科",value:57},{name:"理科",value:57}]},
+        {name:"安徽",value:[{name:"文科",value:57},{name:"理科",value:52}]},
+        {name:"福建",value:[{name:"文科",value:59},{name:"理科",value:57}]},
+        {name:"江西",value:[{name:"文科",value:49},{name:"理科",value:42}]},
+        {name:"山东",value:[{name:"文科",value:67},{name:"理科",value:52}]},
+        {name:"河南",value:[{name:"文科",value:69},{name:"理科",value:68}]},
+        {name:"湖北",value:[{name:"文科",value:60},{name:"理科",value:56}]},
+        {name:"湖南",value:[{name:"文科",value:62},{name:"理科",value:52}]},
+        {name:"重庆",value:[{name:"文科",value:47},{name:"理科",value:44}]},
+        {name:"四川",value:[{name:"文科",value:65},{name:"理科",value:60}]},
+        {name:"贵州",value:[{name:"文科",value:32},{name:"理科",value:30}]},
+        {name:"云南",value:[{name:"文科",value:42},{name:"理科",value:41}]},
+        {name:"西藏",value:[{name:"文科",value:5},{name:"理科",value:4}]},
+        {name:"陕西",value:[{name:"文科",value:38},{name:"理科",value:42}]},
+        {name:"甘肃",value:[{name:"文科",value:28},{name:"理科",value:28}]},
+        {name:"青海",value:[{name:"文科",value:5},{name:"理科",value:5}]},
+        {name:"宁夏",value:[{name:"文科",value:10},{name:"理科",value:8}]},
+        {name:"新疆",value:[{name:"文科",value:36},{name:"理科",value:31}]},
+        {name:"广东",value:[{name:"文科",value:63},{name:"理科",value:60}]},
+        {name:"广西",value:[{name:"文科",value:29},{name:"理科",value:30}]},
+        {name:"海南",value:[{name:"文科",value:8},{name:"理科",value:6}]},
+    ];
+    /*获取地图数据*/
+    myChart.showLoading();
+    var mapFeatures = echarts.getMap(mapName).geoJson.features;
+    myChart.hideLoading();
+    mapFeatures.forEach(function(v) {
+        // 地区名称
+        var name = v.properties.name;
+        // 地区经纬度
+        geoCoordMap[name] = v.properties.cp;
+
+    });
+    console.log(data)
+    console.log(toolTipData)
+    var max = 480,
+        min = 9; // todo
+    var maxSize4Pin = 100,
+        minSize4Pin = 20;
+    var convertData = function(data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            var geoCoord = geoCoordMap[data[i].name];
+            if (geoCoord) {
+                res.push({
+                    name: data[i].name,
+                    value: geoCoord.concat(data[i].value),
+                });
+            }
+        }
+        return res;
+    };
+    option = {
+        title: {
+            text: name_title,
+            subtext: subname,
+            x: 'center',
+            textStyle: {
+                color: nameColor,
+                fontFamily: name_fontFamily,
+                fontSize: name_fontSize
+            },
+            subtextStyle:{
+                fontSize:subname_fontSize,
+                fontFamily:name_fontFamily
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: function(params) {
+                if (typeof(params.value)[2] == "undefined") {
+                    var toolTiphtml = ''
+                    for(var i = 0;i<toolTipData.length;i++){
+                        if(params.name==toolTipData[i].name){
+                            toolTiphtml += toolTipData[i].name+':<br>'
+                            for(var j = 0;j<toolTipData[i].value.length;j++){
+                                toolTiphtml+=toolTipData[i].value[j].name+':'+toolTipData[i].value[j].value+"<br>"
+                            }
+                        }
+                    }
+                    console.log(toolTiphtml)
+                    // console.log(convertData(data))
+                    return toolTiphtml;
+                } else {
+                    var toolTiphtml = ''
+                    for(var i = 0;i<toolTipData.length;i++){
+                        if(params.name==toolTipData[i].name){
+                            toolTiphtml += toolTipData[i].name+':<br>'
+                            for(var j = 0;j<toolTipData[i].value.length;j++){
+                                toolTiphtml+=toolTipData[i].value[j].name+':'+toolTipData[i].value[j].value+"<br>"
+                            }
+                        }
+                    }
+                    console.log(toolTiphtml)
+                    // console.log(convertData(data))
+                    return toolTiphtml;
+                }
+            }
+        },
+        visualMap: {
+            show: true,
+            min: 1000,
+            max: 60000,
+            left: 'left',
+            top: 'bottom',
+            text: ['高', '低'], // 文本，默认为数值文本
+            calculable: true,
+            seriesIndex: [1],
+            inRange: {
+                color: ['#00467F', '#A5CC82'] // 蓝绿
+            }
+        },
+        geo: {
+            show: true,
+            map: mapName,
+            label: {
+                normal: {
+                    show: false
+                },
+                emphasis: {
+                    show: false,
+                }
+            },
+            roam: true,
+            itemStyle: {
+                normal: {
+                    areaColor: '#031525',
+                    borderColor: '#3B5077',
+                },
+                emphasis: {
+                    areaColor: '#2B91B7',
+                }
+            }
+        },
+        series: [{
+            name: '散点',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData(data),
+            symbolSize: function(val) {
+                return val[2] / 3000;
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#05C3F9'
+                }
+            }
+        },
+            {
+                type: 'map',
+                map: mapName,
+                geoIndex: 0,
+                aspectScale: 0.75, //长宽比
+                showLegendSymbol: false, // 存在legend时显示
+                label: {
+                    normal: {
+                        show: true
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                roam: true,
+                itemStyle: {
+                    normal: {
+                        areaColor: '#031525',
+                        borderColor: '#3B5077',
+                    },
+                    emphasis: {
+                        areaColor: '#2B91B7'
+                    }
+                },
+                animation: false,
+                data: data
+            },
+            {
+                name: '点',
+                type: 'scatter',
+                coordinateSystem: 'geo',
+                symbol: 'pin', //气泡
+                symbolSize: function(val) {
+                    var a = (maxSize4Pin - minSize4Pin) / (max - min);
+                    var b = minSize4Pin - a * min;
+                    b = (maxSize4Pin - a * max)/300;
+                    return a * val[2]/300 + b;
+                },
+                label: {
+                    normal: {
+                        formatter:function(obj){
+                            var num=obj.data.value[2]/10000;
+                            var z='万'
+                            console
+                                .log(num.toFixed(2));
+                            return num.toFixed(2)+z;
+                        },
+                        show: true,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 9,
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#F62157', //标志颜色
+                    }
+                },
+                zlevel: 6,
+                data: convertData(data),
+            },
+            {
+                name: 'Top 5',
+                type: 'effectScatter',
+                coordinateSystem: 'geo',
+                data: convertData(data.sort(function(a, b) {
+                    return b.value - a.value;
+                }).slice(0, 5)),
+                symbolSize: function(val) {
+                    return val[2] / 3000;
+                },
+                showEffectOn: 'render',
+                rippleEffect: {
+                    brushType: 'stroke'
+                },
+                hoverAnimation: true,
+                label: {
+                    normal: {
+                        formatter: '{b}',
+                        position: 'right',
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'yellow',
+                        shadowBlur: 10,
+                        shadowColor: 'yellow'
+                    }
+                },
+                zlevel: 1
+            },
+
+        ]
+    };
+    myChart.setOption(option);
+    window.onresize = function () {
+        myChart.resize();
+    }
+</script>
+<!--3.3号柏为民添加。主要是给button加上链接，即实现从首页搜索跳转到搜索结果-->
+<!--3.6号柏为民添加。高级搜索功能-->
+<SCRIPT LANGUAGE="JavaScript">
+    $(function () {
+        localStorage.clear()
+        $(document).keydown(function (e) {
+            if (e.keyCode === 13){
+                var  myselect=document.getElementById("select_type").value;
+                var keyword = document.getElementById("data2search_result").value;
+                localStorage.value = keyword;
+                location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+            }
+        })
+        document.getElementById("searchbtn").onclick=function () {
+            if(window.localStorage) {
+                //这里是普通搜索功能。
+                var  myselect=document.getElementById("select_type").value;
+                var keyword = document.getElementById("data2search_result").value;
+                localStorage.value = keyword;
+                location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+            }else{
+                alert('浏览器不支持')
+            }
+        }
+        document.getElementById("searchbtn2").onclick=function () {
+            //这里是高级搜索功能。
+            if(window.localStorage) {
+                var  myselect=7;
+                var keyword = document.getElementById("data2search_result1").value;
+                var keyword2 = document.getElementById("data2search_result2").value;
+                var keyword3 = document.getElementById("data2search_result3").value;
+                //alert(keyword2);
+                localStorage.value = keyword;
+                location.href = "../Search_result?keyword="+keyword+"&keyword2="+keyword2+"&keyword3="+keyword3+"&type="+myselect;
+            }else{
+                alert('浏览器不支持')
+            }
+        }
+    })
+</SCRIPT>
 </body>
 </html>

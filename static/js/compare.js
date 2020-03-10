@@ -1,9 +1,25 @@
 //全部数据
 all_data=comparedata.data
+noscholardata = comparedata.nodatascholar
 //比较的人数
 compare_num=all_data.length
 console.log(all_data)
-
+$(function () {
+    var info  ="暂无学者";
+    for(var i=0;i<noscholardata.length;i++){
+        info += noscholardata[i][1];
+        if(i!=noscholardata.length-1){
+            info +=",";
+        }
+    }
+    info +="信息，请耐心等待学者更新或对该学者数据进行反馈!";
+    if(noscholardata.length!=0){
+        alert(info)
+    }
+    if(compare_num==0){
+        window.location.href="../";
+    }
+})
 //关系网络部分
 $(document).ready(function() {
     for(i=0;i<compare_num;i++){

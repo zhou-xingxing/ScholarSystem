@@ -125,6 +125,12 @@ def compare1(ScholarInfoIncluedeCollege):
                     achive = []
                 try:  # 合作学者
                     partner = eval(reone[13])
+                    rela_partner_data = []
+                    for i in partner:
+                        if 'corpnum' not in i.keys():
+                            i['corpnum'] = 1
+                        rela_partner_data.append(i)
+                    partner=rela_partner_data
                 except:
                     partner = []
                 try:  # paper_name

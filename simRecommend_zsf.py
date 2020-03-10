@@ -53,7 +53,7 @@ def scholar_Recommend(id_test='CN-B2746FCJ', Nstart=0):
         ans_list = tfidf_index[corpus[index1]]
         id_list = []
         # 除去本人，从Nstart数处开始推荐3位
-        for ans in ans_list[1+Nstart:]:
+        for ans in ans_list[1+Nstart:1 + Nstart+3]:
             id_list.append(dict_index2id[str(ans[0])])
 
 
@@ -97,7 +97,7 @@ def scholar_Recommend(id_test='CN-B2746FCJ', Nstart=0):
         ans_list = tfidf_index[dictionary.doc2bow(text_test)]
         id_list = []
         # 除去本人，从Nstart数处开始推荐3位
-        for ans in ans_list[1 + Nstart:]:
+        for ans in ans_list[1 + Nstart: 1 + Nstart+3]:
             id_list.append(dict_index2id[str(ans[0])])
 
     # 使用IDlist从数据库中寻找学者的姓名、学校信息
@@ -202,10 +202,10 @@ def model_Cal():
 
 
 if __name__ == '__main__':
-    model_Cal()  # 首次使用需要先运行本函数：计算模型并存储索引
-    # id = input('请输入需要推荐的学者scholarID')
-    # print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
-    # pass
+    # model_Cal()  # 首次使用需要先运行本函数：计算模型并存储索引
+    id = input('请输入需要推荐的学者scholarID')
+    print('前3相似学者的信息为：', scholar_Recommend(id))   # 'CN-B2746FCJ'
+    pass
 
 
 

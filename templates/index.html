@@ -260,8 +260,6 @@
         <button class="addone" id="addone">增加一个</button>
         <button class="startcompare" id="startcompare">开始对比</button>
     </div>
-
-
 <!--3.10柏为民添加 首页底部的学者分布地图 -->
 <script>
     // 此版本通过设置geoindex && seriesIndex: [1] 属性来实现geo和map共存，来达到hover散点和区域显示tooltip的效果
@@ -514,6 +512,11 @@
 
         ]
     };
+    myChart.on('click', function (param) {
+       console.log(param.name);
+       var keyword = param.name;
+       location.href = "../Search_result?keyword="+keyword+"&type=8";
+    });
     myChart.setOption(option);
     //3.11号柏为民添加，主要是点击某一省份后跳转
     myChart.on('click',function(param){
@@ -521,7 +524,10 @@
         //alert(param.name); //弹出点击区域的省份名
         //alert(param.href="www.baidu.com");
         //alert(param.href="../Search_result?keyword="+param.name+"&type="+8);
-        window.open("../Search_result?keyword="+area_name+"&type="+8);
+        if(area_name!="云南"&&area_name!="贵州"&&area_name!="青海"&&area_name!="宁夏"&&area_name!="广西")
+            window.open("../Search_result?keyword="+area_name+"&type="+8);
+        else
+            alert("抱歉，"+area_name+"地区暂无学者数据，我们会及时更新。");
     });
     window.onresize = function () {
         myChart.resize();

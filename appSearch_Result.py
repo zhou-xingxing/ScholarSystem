@@ -90,12 +90,13 @@ def appSearch_result():
         # http://baize.chinaeast.cloudapp.chinacloudapi.cn/Search_result?keyword=北京&type=8
         # dict_keys(['上海', '黑龙江', '辽宁', '吉林', '江苏', '湖南', '湖北', '北京', '山东', '安徽', '广东', '甘肃', '内蒙古', '天津', '江西', '福建', '台湾', '四川', '山西', '新疆', '河北', '浙江', '海南', '澳门', '陕西', '重庆', '西藏', '河南', '香港'])
         start_time = time.time()  # 开始时间
-        length = 10
+
         with open('reptile\\area_scholar_dict.txt', 'r', newline='') as txtfile:
             area_scholar_dict = eval(txtfile.read())
         # 传给result列表
         result = []
         scholarlist = area_scholar_dict[keyword]
+        length = len(scholarlist)
         for per in scholarlist:
             result.append([1, per[0], per[1], per[2], str(per[5]), per[6]])  # 添加一个“自增id属性”，为符合下面流程
 

@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="../static/css/index.css">
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -43,7 +42,7 @@
             </a>
         </div>
         <div class="headtip" style="display:flex;">
-            <a class="my-btn" title="学者对比" id="compare">学者对比</a>
+            <a class="my-btn" title="学者对比" id="compare" href="#">学者对比</a>
             <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
         </div>
     </div>
@@ -67,7 +66,7 @@
                 <button type="button" id="searchbtn"  class="btn btn-info btn-default btnsearch">
                     <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
                 </button>
-                <a id="advanced_soso1" class="font16" href="javascript:void(1)" style="color:black"> 高级搜索</a>
+                <a id="advanced_soso1" class="font16" href="javascript:void(1)" style="color:black;text-decoration: none">高级搜索</a>
             </div>
             <div id="soso2" style="display: none"> <!--高级搜索框 第二个div-->
                 <!--搜索类型-->
@@ -80,17 +79,17 @@
                 </select>
                 <input type="text" class="input2" placeholder="请输入学者姓名" id="data2search_result1">
                 <input type="text" class="input2" placeholder="请输入学者工作机构" id="data2search_result2">
-                <input type="text" class="input2" placeholder="请输入学者所在学院" id="data2search_result3">
-                <button type="button" id="searchbtn2"  class="btn btn-info btn-default btnsearch">
+                <input type="text" class="input3" placeholder="请输入学者所在学院" id="data2search_result3">
+                <button type="button" id="searchbtn2"  class="btn btn-info btn-default btnsearch" style="height: 40px">
                     <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
                 </button>
-                <a id="advanced_soso2" class="font16" href="javascript:void(1)" style="color:black"> 高级搜索</a>
+                <a id="advanced_soso2" class="font16" href="javascript:void(1)" style="color:black;text-decoration: none">高级搜索</a>
             </div>
 
         </div>
         <!--热门学者推荐-->
         <div class="record">
-           <p>
+            <p>
                 <span style="font-size: 14px;color: white">学者热搜</span>
                 <a class="recordname" title="{{ searchresult[0][1] }}" href="scholarinfo?school={{ searchresult[0][1] }}&name={{ searchresult[0][0] }}&major={{ searchresult[0][2] }} ">{{ searchresult[0][0] }}</a>
                 <a class="recordname" title="{{ searchresult[1][1] }}" href="scholarinfo?school={{ searchresult[1][1] }}&name={{ searchresult[1][0] }}&major={{ searchresult[1][2] }} ">{{ searchresult[1][0] }}</a>
@@ -284,7 +283,7 @@
         {name:"广西",value:20351},
         {name:"海南",value:3949},
     ];
-    var myChart = echarts.init(document.getElementById('index_map1'))
+    var myChart = echarts.init(document.getElementById('index_map1'));
     var geoCoordMap = {};
     /*获取地图数据*/
     myChart.showLoading();
@@ -297,7 +296,7 @@
         geoCoordMap[name] = v.properties.cp;
 
     });
-    console.log(data)
+    console.log(data);
 
     var max = 480,
         min = 9; // todo

@@ -38,19 +38,34 @@
 }
 .input1{
     width: 40%;
-    height: 45px;
+    height: 40px;
     margin-top: 3%;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    outline: none;
+    text-indent: 10px;
+    vertical-align: bottom;
 }
 /*input2是高级搜索里的小框尺寸 3.6 bwm*/
 .input2{
     width: 13%;
-    height: 45px;
+    height: 40px;
     margin-top: 3%;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    outline: none;
+    text-indent: 10px;
+    vertical-align: bottom;
 }
 .input3{
-    width: 0%;
-    height: 45px;
+    width: 13.5%;
+    height: 40px;
     margin-top: 3%;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    outline: none;
+    text-indent: 10px;
+    vertical-align: bottom;
 }
 .soso-hide{
     display: none;
@@ -60,15 +75,17 @@
     margin-left: 500px;
 }
 .btnsearch{
-    height: 45px;
+    height: 40px;
     margin-top: -5px;
     width: 80px;
-    /* margin-left: -2px; */
     margin-left: 2px;
 }
 .select{
     margin-left: 25%;
-    height: 45px;
+    height: 40px;
+    padding-bottom: 0.15%;
+    border-radius: 5px;
+    outline: none;
 }
 .globalid
 {
@@ -110,7 +127,10 @@
     font-size: 14px;
     color: #c4c4c4;
 }
-
+.recordname:hover{
+    text-decoration: none;
+    color: #c4c4c4;
+}
 .my-btn
 {
     padding: 0 30px; height: 30px; line-height: 30px;

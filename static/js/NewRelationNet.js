@@ -1,10 +1,10 @@
 //新关系网络
 //中心学者姓名
-var center_name=rela_center.data["name"]
+var center_name=rela_center.data["name"];
 //同学校学者姓名
-var same_school=new_rela_partner.same_school_partner
+var same_school=new_rela_partner.same_school_partner;
 //同论文学者姓名
-var same_paper=new_rela_partner.same_paper_partner
+var same_paper=new_rela_partner.same_paper_partner;
 
 $(document).ready(function() {
         var  myChart = echarts.init(document.getElementById("NewRelationNet"));
@@ -45,11 +45,11 @@ $(document).ready(function() {
             "category": "学校",
             "symbolSize": 55,
             "draggable":true,
-        }
+        };
         tmp2={
             "source": "学校",
             "target": same_school[i],
-        }
+        };
         graph["nodes"].push(tmp);
         graph["links"].push(tmp2);
     }
@@ -61,11 +61,11 @@ $(document).ready(function() {
             "category": "论文",
             "symbolSize": 55,
             "draggable":true,
-        }
+        };
         tmp2={
             "source": "论文",
             "target": same_paper[i],
-        }
+        };
         graph["nodes"].push(tmp);
         graph["links"].push(tmp2);
     }
@@ -255,4 +255,4 @@ const option = {
 
 
 
-})
+});

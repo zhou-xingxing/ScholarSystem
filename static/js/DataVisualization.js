@@ -1,12 +1,12 @@
 //加载第一个图表数据
-var achivelist = data.cited
-var achiveyear = []
-var achivenum =[]
+var achivelist = data.cited;
+var achiveyear = [];
+var achivenum =[];
 
 //加载第二个图表数据
-var citedlist = data.achive
-var citedyear = []
-var citednum =[]
+var citedlist = data.achive;
+var citedyear = [];
+var citednum =[];
 
 //加载第三个图表数据
 var paper=data.paper;
@@ -16,14 +16,14 @@ var papernum=[];
 //加载第四个图表数据
 var paper_key=data.paper_search_key;
 var paper_num =data.paper_search_num;
-var paper_data=[]
+var paper_data=[];
 
 $(function() {
         //初始化echarts
-        var  ec1 = echarts.init(document.getElementById('8_main1'))
-        var  ec2= echarts.init(document.getElementById('8_main2'))
-        var  ec3= echarts.init(document.getElementById('8_main3'))
-        var  ec4= echarts.init(document.getElementById('8_main4'))
+        var  ec1 = echarts.init(document.getElementById('8_main1'));
+        var  ec2= echarts.init(document.getElementById('8_main2'));
+        var  ec3= echarts.init(document.getElementById('8_main3'));
+        var  ec4= echarts.init(document.getElementById('8_main4'));
         //填充为图表可用数据格式
         for(i=0,len=achivelist.length;i<len;i++){
 
@@ -487,10 +487,10 @@ $(function() {
     }]
 };
         //设置option
-        ec1.setOption(option1)
-        ec2.setOption(option2)
-        ec3.setOption(option3)
-        ec4.setOption(option4)
+        ec1.setOption(option1);
+        ec2.setOption(option2);
+        ec3.setOption(option3);
+        ec4.setOption(option4);
 
         window.addEventListener("resize",function (){
             ec1.resize();
@@ -498,7 +498,7 @@ $(function() {
             ec3.resize();
             ec4.resize();
         });
-    })
+    });
 
 
 

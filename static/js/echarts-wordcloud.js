@@ -6104,7 +6104,7 @@ function parse(colorStr, rgbaArr) {
   }
 
   setRgba(rgbaArr, 0, 0, 0, 1);
-  return;
+
 }
 /**
  * @param {Array.<number>} hsla
@@ -14913,7 +14913,7 @@ var _default = Path.extend({
     }
 
     ctx.closePath();
-    return;
+
   }
 });
 

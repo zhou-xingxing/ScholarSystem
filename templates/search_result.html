@@ -164,7 +164,7 @@
 
 <script language="javascript" type="text/javascript">
     //获取index首页搜索框传过来的值
-    var content = localStorage.value
+    var content = localStorage.value;
     if(content){
         document.getElementById("data2search_result").value = content;
     }
@@ -179,7 +179,7 @@
                 localStorage.value = keyword;
                 location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
             }
-        })
+        });
         document.getElementById("searchbtn").onclick = function () {
             if (window.localStorage) {
                 var  myselect=document.getElementById("select_type").value;

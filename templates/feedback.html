@@ -91,7 +91,7 @@
 <!--反馈自动化 接收scholarinfo传来的值 3.6 bwm -->
 <script language="javascript" type="text/javascript">
     //获取scholarinfo传过来的值
-    var content = JSON.parse(localStorage.getItem("info"))
+    var content = JSON.parse(localStorage.getItem("info"));
     if(content){
         document.getElementById("fscholar_name").value = content.scholar_name1;
         document.getElementById("fscholar_school").value=content.scholar_school1;
@@ -103,9 +103,9 @@
     var oBtn = document.getElementById('feedbackbt');
     function isvalid() {
         if(receive.checked==true){
-            var str=email.value
+            var str=email.value;
             if(str == '' || str == undefined || str == null){
-                alert("请填入联系方式")
+                alert("请填入联系方式");
                 return false
             }
         }

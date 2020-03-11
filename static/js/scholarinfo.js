@@ -66,7 +66,7 @@
             type:'GET',
             data:{'user':scholarid },
             success:function(data){
-                console.log(data)
+                console.log(data);
                 data = eval(data);
                 var item;
                 $(".reclist")[0].innerHTML="";
@@ -77,9 +77,9 @@
                 $(".reclist")[0].style.display="block"
             }
         })
-    })
+    });
     $(".change").click(function () {
-        var num = parseInt($(".change").val())
+        var num = parseInt($(".change").val());
         var scholarid = document.getElementById("ContentPlaceHolder1_LabelORCID").innerText;
         num+=3;
         if(num==30){
@@ -91,7 +91,7 @@
             type:'GET',
             data:{'user':scholarid,'type':num},
             success:function(data){
-                console.log(data)
+                console.log(data);
                 data = eval(data);
                 var item;
                 $(".reclist")[0].innerHTML="";
@@ -103,4 +103,4 @@
             }
         })
     })
-})
+});

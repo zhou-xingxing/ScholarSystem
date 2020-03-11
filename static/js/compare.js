@@ -1,9 +1,9 @@
 //全部数据
-all_data = comparedata.data
-noscholardata = comparedata.nodatascholar
+all_data = comparedata.data;
+noscholardata = comparedata.nodatascholar;
 //比较的人数
-compare_num = all_data.length
-console.log(all_data)
+compare_num = all_data.length;
+console.log(all_data);
 $(function () {
     var info  ="暂无学者";
     for(var i=0;i<noscholardata.length;i++){
@@ -19,18 +19,18 @@ $(function () {
     if(compare_num==0){
         window.location.href="../";
     }
-})
+});
 //关系网络部分
 $(document).ready(function () {
     for (i = 0;i < compare_num; i++) {
-        var ec = echarts.init(document.getElementsByClassName("netcontent")[i])
+        var ec = echarts.init(document.getElementsByClassName("netcontent")[i]);
         //数据组装部分
         var selfdata = {
             "name": all_data[i][1],
             "in": all_data[i][2],
             "corpnum": 100,
-        }
-        var partnerdata = all_data[i][13]
+        };
+        var partnerdata = all_data[i][13];
 
         var local_data = []; //结点数组
         var local_links = []; //连接数组
@@ -40,7 +40,7 @@ $(document).ready(function () {
         //先把中心放进去
         local_category.push({
             "name": selfdata["name"]
-        })
+        });
         //合作学者放进去
         for (j = 0, len = partnerdata.length; j < len; j++) {
             local_category.push({
@@ -59,7 +59,7 @@ $(document).ready(function () {
             //禁止拖动
             "draggable": false,
             "in": selfdata["in"],
-        })
+        });
         //合作学者放进去
         for (j = 0, len = partnerdata.length; j < len; j++) {
             if (partnerdata[j]["name"] == selfdata["name"]) {
@@ -177,7 +177,7 @@ $(document).ready(function () {
         ec.setOption(option);
     }
 
-})
+});
 
 
 //个人画像部分
@@ -189,7 +189,7 @@ $(document).ready(function() {
         var paint_scholar_school=all_data[i][2];
         var paint_scholar_name=all_data[i][1];
         var paint_scholar_college=all_data[i][3];
-        var paint_scholar_field=all_data[i][5]
+        var paint_scholar_field=all_data[i][5];
         var labels=[];  //个人画像的标签，目前考虑到的有：论文关键词、工作机构、学科专业、
         var max_value=0; //这里是为了取到关键词的最大value值，然后赋给学者姓名。
         // 可能会因为太大，而背景尺寸太小字数无法显示。需要修改64行的width和height。 ---2020.3.4 bwm
@@ -201,9 +201,9 @@ $(document).ready(function() {
                     });
                     if (paint_paper_num[j]>max_value){
                         max_value=paint_paper_num[j]
-                    };
+                    }
                 }
-        paint_scholar_field=paint_scholar_field.split(',')
+        paint_scholar_field=paint_scholar_field.split(',');
         //下面是push进学者姓名与工作机构与研究领域
         labels.push({
           "name":paint_scholar_school,
@@ -220,7 +220,7 @@ $(document).ready(function() {
           "name":paint_scholar_field,
           "value":1,
         });
-        var  ec = echarts.init(document.getElementsByClassName("personalpaintcontent")[i])
+        var  ec = echarts.init(document.getElementsByClassName("personalpaintcontent")[i]);
         var option = {
     tooltip: {
         show:false
@@ -266,18 +266,18 @@ $(document).ready(function() {
 };
         ec.setOption(option);
     }
-})
+});
 
 
 
 //学术成果
 $(document).ready(function () {
     for (i = 0; i < compare_num; i++) {
-        var ec = echarts.init(document.getElementsByClassName("visual1")[i])
+        var ec = echarts.init(document.getElementsByClassName("visual1")[i]);
         //填入数据
-        var achivedata = all_data[i][11]
-        var achiveyear = []
-        var achivenum = []
+        var achivedata = all_data[i][11];
+        var achiveyear = [];
+        var achivenum = [];
 
         for (j = 0, len = achivedata.length; j < len; j++) {
 
@@ -421,16 +421,16 @@ $(document).ready(function () {
         ec.setOption(option);
     }
 
-})
+});
 
 //引用成果
 $(document).ready(function () {
     for (i = 0; i < compare_num; i++) {
-        var ec = echarts.init(document.getElementsByClassName("visual2")[i])
+        var ec = echarts.init(document.getElementsByClassName("visual2")[i]);
         //填入数据
-        var citeddata = all_data[i][12]
-        var citedyear = []
-        var citednum = []
+        var citeddata = all_data[i][12];
+        var citedyear = [];
+        var citednum = [];
 
         for (j = 0, len = citeddata.length; j < len; j++) {
 
@@ -562,14 +562,14 @@ $(document).ready(function () {
         ec.setOption(option);
     }
 
-})
+});
 
 //期刊分布
 $(document).ready(function () {
     for (i = 0; i < compare_num; i++) {
-        var ec = echarts.init(document.getElementsByClassName("visual3")[i])
+        var ec = echarts.init(document.getElementsByClassName("visual3")[i]);
         //填入数据
-        var paperdata = all_data[i][10]
+        var paperdata = all_data[i][10];
         var papername = [];
         var papernum = [];
 
@@ -702,17 +702,17 @@ $(document).ready(function () {
         ec.setOption(option);
     }
 
-})
+});
 
 
 // 论文关键词
 $(document).ready(function () {
     for (i = 0; i < compare_num; i++) {
-        var ec = echarts.init(document.getElementsByClassName("visual4")[i])
+        var ec = echarts.init(document.getElementsByClassName("visual4")[i]);
         //填入数据
-        var paper_key = all_data[i][19]
+        var paper_key = all_data[i][19];
         var paper_key_num = all_data[i][20];
-        var paper_key_data = []
+        var paper_key_data = [];
 
         for (j = 0, len = paper_key.length; j < len; j++) {
             paper_key_data.push({
@@ -768,4 +768,4 @@ $(document).ready(function () {
         ec.setOption(option);
     }
 
-})
+});

@@ -10,6 +10,9 @@ app = Blueprint("appSearch_Result",__name__)
 @app.route('/Search_result')
 def appSearch_result():
     keyword = request.args.get('keyword')
+    keyword2=request.args.get('keyword2')
+    keyword3=request.args.get('keyword3')
+    area_name=request.args.get('area_name')
     #scholarid=request.args.get('scholarid')
     search_type = request.args.get('type')
     if search_type!= "8":
@@ -84,10 +87,9 @@ def appSearch_result():
         #把研究领域的['','']去掉
 
     elif search_type=='8':
-    # --地区热度学者推荐功能：type==8时，先从本地读入已经筛选过的模型，再处理并传回前端
-    # http://baize.chinaeast.cloudapp.chinacloudapi.cn/Search_result?keyword=北京&type=8
-
-    # dict_keys(['上海', '黑龙江', '辽宁', '吉林', '江苏', '湖南', '湖北', '北京', '山东', '安徽', '广东', '甘肃', '内蒙古', '天津', '江西', '福建', '台湾', '四川', '山西', '新疆', '河北', '浙江', '海南', '澳门', '陕西', '重庆', '西藏', '河南', '香港'])
+        # --地区热度学者推荐功能：type==8时，先从本地读入已经筛选过的模型，再处理并传回前端
+        # http://baize.chinaeast.cloudapp.chinacloudapi.cn/Search_result?keyword=北京&type=8
+        # dict_keys(['上海', '黑龙江', '辽宁', '吉林', '江苏', '湖南', '湖北', '北京', '山东', '安徽', '广东', '甘肃', '内蒙古', '天津', '江西', '福建', '台湾', '四川', '山西', '新疆', '河北', '浙江', '海南', '澳门', '陕西', '重庆', '西藏', '河南', '香港'])
         start_time = time.time()  # 开始时间
         length = 10
         with open('reptile\\area_scholar_dict.txt', 'r', newline='') as txtfile:
@@ -117,4 +119,4 @@ def appSearch_result():
     html = pager_obj.page_html()
     listresult = listresults[pager_obj.start:pager_obj.end]
 
-    return render_template('search_result.html',result=listresult,length=length,html=html)
+    return render_template('search_result.html',result=listresult,length=length,html=html,keyword=keyword)

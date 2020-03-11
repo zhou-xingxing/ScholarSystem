@@ -496,6 +496,14 @@
         ]
     };
     myChart.setOption(option);
+    //3.11号柏为民添加，主要是点击某一省份后跳转
+    myChart.on('click',function(param){
+        var area_name=param.name;
+        //alert(param.name); //弹出点击区域的省份名
+        //alert(param.href="www.baidu.com");
+        //alert(param.href="../Search_result?keyword="+param.name+"&type="+8);
+        window.open("../Search_result?keyword="+area_name+"&type="+8);
+    })
     window.onresize = function () {
         myChart.resize();
     }

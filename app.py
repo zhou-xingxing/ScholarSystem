@@ -90,7 +90,7 @@ def handlefeedback():
         # print('Successful')
         connection.commit()
     except:
-        # print('Failed')
+        print('Failed')
         SuccessOrNot = False
         # 插入数据失败则回滚操作
         connection.rollback()

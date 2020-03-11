@@ -6,6 +6,8 @@
     $("#partnerCompare1")[0].style.display = "block";
     $("#partnerCompare2")[0].style.display = "none";
     $("#partnerCompare3")[0].style.display = "none";
+    $("#RelationNet")[0].style.display = "block";
+    $("#NewRelationNet")[0].style.display = "none";
     $("#datatypeselectbtn1").click(function() {
         $("#8_main1")[0].style.display = "block";
         $("#8_main2")[0].style.display = "none";
@@ -47,6 +49,15 @@
         $("#partnerCompare2")[0].style.display = "none";
         $("#partnerCompare3")[0].style.display = "block";
 
+    });
+      $("#nettypeselectbtn1").click(function() {
+        $("#RelationNet")[0].style.display = "block";
+        $("#NewRelationNet")[0].style.display = "none";
+
+    });
+     $("#nettypeselectbtn2").click(function() {
+        $("#RelationNet")[0].style.display = "none";
+        $("#NewRelationNet")[0].style.display = "block";
     });
      $(".recommendscholar").click(function () {
          var scholarid = document.getElementById("ContentPlaceHolder1_LabelORCID").innerText;

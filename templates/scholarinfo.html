@@ -103,6 +103,13 @@
     }
     </script>
     <script type="text/javascript">
+        var new_rela_partner={
+            same_school_partner:{{ same_school_partner|tojson }},
+            same_paper_partner:{{ same_paper_partner|tojson }}
+        }
+    </script>
+    <script src="../static/js/NewRelationNet.js" type="text/javascript"></script>
+    <script type="text/javascript">
         //<![CDATA[
         var theForm = document.forms['form1'];
             if (!theForm) {
@@ -468,11 +475,15 @@
                                                 <!-- 关系网络列表 -->
                                                 <div role="tabpanel" class="tab-pane" id="cluster6" style="width: 860px;">
                                                     <div class="line-a bg-e pd40" style="display: flex">
-                                                        <div id="RelationNet" style="width: 700px;height: 700px;">
-                                                            <script>
-                                                                draw()
-                                                            </script>
+                                                        <div class="datatypeselect">
+                                                                <button type="button" id="nettypeselectbtn1" class="btn btn-primary">关系网络1</button>
+                                                                <button type="button" id="nettypeselectbtn2" class="btn btn-primary">关系网络2</button>
                                                         </div>
+                                                        <div id="RelationNet"  style="width: 700px;height: 700px;display: block">
+                                                            <script>draw()</script>
+                                                        </div>
+                                                        <div id="NewRelationNet"  style="width: 700px;height: 700px;display: none"></div>
+
                                                         <div id="ContentPlaceHolder1_divRenetwork">
                                                             <button class="comparescholar" id="comparescholar">学者对比</button>
                                                         </div>

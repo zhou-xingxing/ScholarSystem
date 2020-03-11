@@ -128,12 +128,17 @@ def scholarinfo():
     # 调用方哥的单词抽取函数
     # 传入参数为数据库中原始字符串，返回值为抽取的单词字典
     try:
+        # result[14], result[16]分别对应数据库中paper_name_list、paper_name_list字段
         dict_word = wordsExtra_zsf.deal_srchp2(result[14], result[16])
         paper_search_key1 = list(dict_word.keys())
         paper_search_num1 = list(dict_word.values())
     except:
         dict_word={}
+        paper_search_key1 = list(dict_word.keys())
+        paper_search_num1 = list(dict_word.values())
 
+    # paper_search_key: 词云图的文本
+    # paper_search_num：词云图的文本频率，用来控制词的大小
     if len(paper_search_key1)>30:
         paper_search_key = paper_search_key1[:30]
         paper_search_num = paper_search_num1[:30]

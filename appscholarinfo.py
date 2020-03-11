@@ -6,6 +6,7 @@ from collections import Counter
 import wordsExtra_zsf
 from appScholar_Compare import compare
 import simRecommend_zsf
+import nameTest_zsf
 #创建Blueprint对象以便在appall中注册
 app = Blueprint("appscholarinfo",__name__)
 
@@ -128,12 +129,17 @@ def scholarinfo():
     # 调用方哥的单词抽取函数
     # 传入参数为数据库中原始字符串，返回值为抽取的单词字典
     try:
+        # result[14], result[16]分别对应数据库中paper_name_list、paper_name_list字段
         dict_word = wordsExtra_zsf.deal_srchp2(result[14], result[16])
         paper_search_key1 = list(dict_word.keys())
         paper_search_num1 = list(dict_word.values())
     except:
         dict_word={}
+        paper_search_key1 = list(dict_word.keys())
+        paper_search_num1 = list(dict_word.values())
 
+    # paper_search_key: 词云图的文本
+    # paper_search_num：词云图的文本频率，用来控制词的大小
     if len(paper_search_key1)>30:
         paper_search_key = paper_search_key1[:30]
         paper_search_num = paper_search_num1[:30]
@@ -180,6 +186,22 @@ def scholarinfo():
     partner_list2=partner_list
     partner_list2.append(selfinfo)
 
+    # 关系网络升级版-只传名字
+    # 同一学校的合作学者
+    same_school_partner=[]
+    for i in rela_partner_data:
+        if scholarschool in i["in"]:
+            same_school_partner.append(i["name"])
+    # 同一paper的合作学者
+    same_paper_partner=[]
+    same_paper_partner2=nameTest_zsf.corpbypaper(scholarname,scholarschool)
+    # 检测防止合作列表中有学者本人
+    for i in same_paper_partner2:
+        if i==scholarname:
+            continue
+        else:
+            same_paper_partner.append(i)
+
     #统计点击次数在首页推荐
     connection = pymysql.connect(host="39.106.96.175", port=3306, db="search_count", user="root", password="12345678",
                                  charset="utf8")
@@ -200,7 +222,7 @@ def scholarinfo():
                            Hpoint=Hpoint,Gpoint=Gpoint,achievement_list=achievement_list,achievement_list2=achievement_list2
                            ,cited_list=cited_list,partner_list=partner_list,paper_name_list=paper_name_list,paper_info_list=paper_info_list,paperlen=len(paper_info_list),
                            paper_search_key=paper_search_key,paper_search_num=paper_search_num,collaborate_org=collaborate_org,rela_center=rela_center_data,rela_partner=rela_partner_data,subject=subject,
-                           partner_list2=partner_list2)
+                           partner_list2=partner_list2,same_school_partner=same_school_partner,same_paper_partner=same_paper_partner)
 
 
 #个人详细页面的路由--翟胜方--通过合作学者直接跳转  后面并入晓哥的路由1

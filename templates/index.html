@@ -42,32 +42,15 @@
                 <img src="../static/images/left-logo.png" alt>
             </a>
         </div>
-
-            {% block access_control %}
-            {% if current_user.is_authenticated %}
-            <div class="navbar-text btn-group pull-right">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <i class="glyphicon glyphicon-user"></i>
-                {% if current_user.first_name -%}
-                {{ current_user.first_name }}
-                {% else -%}
-                {{ current_user.email }}
-                {%- endif %}<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ url_for('security.logout') }}" title="{{ url_for('security.logout') }}">Log out</a></li>
-            </ul>
-        </div>
-        {% endif %}
-        {% endblock %}
-
-
         <div class="headtip" style="display:flex;">
             {% if not current_user.is_authenticated %}
-                <a class="my-btn" title="学者对比" id="compare">学者对比</a>
+                <a class="my-btn" href="#" title="学者对比" id="compare">学者对比</a>
                 <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
-                <a class="my-btn" href="{{ url_for('security.login') }}">管理员登录</a>
+                <a class="my-btn" href="{{ url_for('security.login') }}" style="margin-left: 10px">管理员登录</a>
             {% else %}
-                    <a class="my-btn" href="/admin/feedback">您已通过管理员身份登录，点击查询用户反馈</a>
+                    <a class="my-btn" href="#" title="学者对比" id="compare">学者对比</a>
+                    <a class="my-btn" href="/admin/feedback" title="查询反馈内容" style="margin-left: 10px">管理员身份已登录</a>
+                    <a class="my-btn" href="{{ url_for('security.logout') }}" title="注销" style="margin-left: 10px">注销</a>
             {% endif %}
         </div>
     </div>
@@ -104,7 +87,7 @@
                 </select>
                 <input type="text" class="input2" placeholder="请输入学者姓名" id="data2search_result1">
                 <input type="text" class="input2" placeholder="请输入学者工作机构" id="data2search_result2">
-                <input type="text" class="input2" placeholder="请输入学者所在学院" id="data2search_result3">
+                <input type="text" class="input3" placeholder="请输入学者所在学院" id="data2search_result3">
                 <button type="button" id="searchbtn2"  class="btn btn-info btn-default btnsearch" style="height: 40px">
                     <span class="iconfont icon-search pr10" aria-hidden="true">搜索</span>
                 </button>

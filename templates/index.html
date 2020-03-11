@@ -54,7 +54,7 @@
                 {{ current_user.email }}
                 {%- endif %}<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ url_for('security.logout') }}">Log out</a></li>
+                <li><a href="{{ url_for('security.logout') }}" title="{{ url_for('security.logout') }}">Log out</a></li>
             </ul>
         </div>
         {% endif %}
@@ -67,7 +67,7 @@
                 <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
                 <a class="my-btn" href="{{ url_for('security.login') }}">管理员登录</a>
             {% else %}
-                    <a class="my-btn" href="{{ url_for('security.login') }}">您已通过管理员身份登录，点击查询用户反馈</a>
+                    <a class="my-btn" href="/admin/feedback">您已通过管理员身份登录，点击查询用户反馈</a>
             {% endif %}
         </div>
     </div>
@@ -268,13 +268,13 @@
     // 默认情况下，map series 会自己生成内部专用的 geo 组件。但是也可以用这个 geoIndex 指定一个 geo 组件。这样的话，map 和 其他 series（例如散点图）就可以共享一个 geo 组件了。并且，geo 组件的颜色也可以被这个 map series 控制，从而用 visualMap 来更改。
     // 当设定了 geoIndex 后，series-map.map 属性，以及 series-map.itemStyle 等样式配置不再起作用，而是采用 geo 中的相应属性。
     // 并且加了pin气泡图标以示数值大小
-    var name_title = "大陆地区高校学者分布情况"
-    var subname = '数据来源于武书连2018年统计'
-    var nameColor = " rgb(55, 75, 113)"
-    var name_fontFamily = '等线'
-    var subname_fontSize = 15
-    var name_fontSize = 18
-    var mapName = 'china'
+    var name_title = "大陆地区高校学者分布情况";
+    var subname = '数据来源于武书连2018年统计';
+    var nameColor = " rgb(55, 75, 113)";
+    var name_fontFamily = '等线';
+    var subname_fontSize = 15;
+    var name_fontSize = 18;
+    var mapName = 'china';
     var data = [
         {name:"北京",value:56820},
         {name:"天津",value:19931},
@@ -308,7 +308,7 @@
         {name:"广西",value:20351},
         {name:"海南",value:3949},
     ];
-    var myChart = echarts.init(document.getElementById('index_map1'))
+    var myChart = echarts.init(document.getElementById('index_map1'));
     var geoCoordMap = {};
     /*获取地图数据*/
     myChart.showLoading();
@@ -321,7 +321,7 @@
         geoCoordMap[name] = v.properties.cp;
 
     });
-    console.log(data)
+    console.log(data);
 
     var max = 480,
         min = 9; // todo
@@ -460,7 +460,7 @@
                     normal: {
                         formatter:function(obj){
                             var num=obj.data.value[2]/10000;
-                            var z='万'
+                            var z='万';
                             console
                                 .log(num.toFixed(2));
                             return num.toFixed(2)+z;
@@ -522,7 +522,7 @@
         //alert(param.href="www.baidu.com");
         //alert(param.href="../Search_result?keyword="+param.name+"&type="+8);
         window.open("../Search_result?keyword="+area_name+"&type="+8);
-    })
+    });
     window.onresize = function () {
         myChart.resize();
     }
@@ -531,7 +531,7 @@
 <!--3.6号柏为民添加。高级搜索功能-->
 <SCRIPT LANGUAGE="JavaScript">
     $(function () {
-        localStorage.clear()
+        localStorage.clear();
         $(document).keydown(function (e) {
             if (e.keyCode === 13){
                 var  myselect=document.getElementById("select_type").value;
@@ -539,7 +539,7 @@
                 localStorage.value = keyword;
                 location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
             }
-        })
+        });
         document.getElementById("searchbtn").onclick=function () {
             if(window.localStorage) {
                 //这里是普通搜索功能。
@@ -550,7 +550,7 @@
             }else{
                 alert('浏览器不支持')
             }
-        }
+        };
         document.getElementById("searchbtn2").onclick=function () {
             //这里是高级搜索功能。
             if(window.localStorage) {

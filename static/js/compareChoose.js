@@ -1,5 +1,5 @@
 $(function () {
-    checkedlist=[false,false,false,false]
+    checkedlist=[false,false,false,false];
     var index=0;
     var visuallength = $(".visual1").length;
     for(var i=0;i<visuallength;i++){
@@ -23,7 +23,7 @@ $(function () {
             area:["850px","500px"],
             content: $('.comparechoice')
         });
-    })
+    });
     $(".visualbtn1").click(function () {
         for(var i=0;i<visuallength;i++){
             $(".visual1")[i].style.display="block";
@@ -31,7 +31,7 @@ $(function () {
             $(".visual3")[i].style.display="none";
             $(".visual4")[i].style.display="none";
         }        
-    })
+    });
     $(".visualbtn2").click(function () {
         for(var i=0;i<visuallength;i++){
             $(".visual1")[i].style.display="none";
@@ -39,7 +39,7 @@ $(function () {
             $(".visual3")[i].style.display="none";
             $(".visual4")[i].style.display="none";
         }        
-    })
+    });
     $(".visualbtn3").click(function () {
         for(var i=0;i<visuallength;i++){
             $(".visual1")[i].style.display="none";
@@ -47,7 +47,7 @@ $(function () {
             $(".visual3")[i].style.display="block";
             $(".visual4")[i].style.display="none";
         }        
-    })
+    });
     $(".visualbtn4").click(function () {
         for(var i=0;i<visuallength;i++){
             $(".visual1")[i].style.display="none";
@@ -55,19 +55,19 @@ $(function () {
             $(".visual3")[i].style.display="none";
             $(".visual4")[i].style.display="block";
         }       
-    })
+    });
     $(".confirm").click(function () {
         var allchecked = $(".choicecheck");
-        var checkedname=[]
+        var checkedname=[];
         for(var i=0;i<allchecked.length;i++){
             if(allchecked[i].checked){
                 checkedname.push(allchecked[i].value)
             }
             checkedlist[i]=allchecked[i].checked;
         }
-        console.log(checkedname)
-        console.log(checkedlist)
-        alllength = $(".achivement").length
+        console.log(checkedname);
+        console.log(checkedlist);
+        alllength = $(".achivement").length;
         for(var i=0;i<alllength;i++){
             if(checkedlist[0]){
                 $(".achivementwithhr")[i].style.display="block"
@@ -92,4 +92,4 @@ $(function () {
         }
         layer.close(index);
     })
-})
+});

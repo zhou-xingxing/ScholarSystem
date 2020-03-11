@@ -107,8 +107,10 @@ class MyModelView(sqla.ModelView):
                 return redirect(url_for('security.login', next=request.url))
 
 # Flask views
-@app.route('/admin')
+@app.route('/admin/',endpoint='/',redirect_to='/')#,endpoint='/',redirect_to='/'
 def index():
+    print("已经重定向到首页")
+    # return render_template("index.html")
     return redirect(url_for('index', next=request.url))
 
 # Create admin
@@ -135,8 +137,7 @@ class FeedbackView(MyModelView):
 
 # admin.add_view(MyModelView(Role, db.session))
 # admin.add_view(MyModelView(User, db.session))
-admin.add_view(FeedbackView(Feedback, db.session))
-
+admin.add_view(FeedbackView(Feedback, db.session,name=u'反馈'))
 # define a context processor for merging flask-admin's template context into the
 # flask-security views.
 @security.context_processor

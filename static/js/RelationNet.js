@@ -15,7 +15,7 @@ function setCategory(datalist){
     //先把中心放进去
     local_category.push({
         "name":center_data["name"]
-    })
+    });
     //合作学者放进去
     for (i = 0,len=datalist.length; i < len; i++){
         local_category.push({
@@ -36,7 +36,7 @@ function setData(datalist) {
         //禁止拖动
         "draggable": false,
         "in":center_data["in"],
-    })
+    });
     //合作学者放进去
     for (i = 0,len=datalist.length; i < len; i++) {
         local_data.push({
@@ -67,7 +67,7 @@ setLinks(datalist);
 
 //初始化echarts
 function draw () {
-    var ec = echarts.init(document.getElementById('RelationNet'))
+    var ec = echarts.init(document.getElementById('RelationNet'));
     //配置option
     var option = {
         //标题

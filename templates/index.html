@@ -90,16 +90,17 @@
         </div>
         <!--热门学者推荐-->
         <div class="record">
-            <p>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[0][1] }}&name={{ searchresult[0][0] }}&major={{ searchresult[0][2] }} ">{{ searchresult[0][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[1][1] }}&name={{ searchresult[1][0] }}&major={{ searchresult[1][2] }} ">{{ searchresult[1][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[2][1] }}&name={{ searchresult[2][0] }}&major={{ searchresult[2][2] }} ">{{ searchresult[2][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[3][1] }}&name={{ searchresult[3][0] }}&major={{ searchresult[3][2] }} ">{{ searchresult[3][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[4][1] }}&name={{ searchresult[4][0] }}&major={{ searchresult[4][2] }} ">{{ searchresult[4][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[5][1] }}&name={{ searchresult[5][0] }}&major={{ searchresult[5][2] }} ">{{ searchresult[5][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[6][1] }}&name={{ searchresult[6][0] }}&major={{ searchresult[6][2] }} ">{{ searchresult[6][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[7][1] }}&name={{ searchresult[7][0] }}&major={{ searchresult[7][2] }} ">{{ searchresult[7][0] }}</a>
-                <a class="recordname" href="scholarinfo?school={{ searchresult[8][1] }}&name={{ searchresult[8][0] }}&major={{ searchresult[8][2] }} ">{{ searchresult[8][0] }}</a>
+           <p>
+                <span style="font-size: 14px;color: white">学者热搜</span>
+                <a class="recordname" title="{{ searchresult[0][1] }}" href="scholarinfo?school={{ searchresult[0][1] }}&name={{ searchresult[0][0] }}&major={{ searchresult[0][2] }} ">{{ searchresult[0][0] }}</a>
+                <a class="recordname" title="{{ searchresult[1][1] }}" href="scholarinfo?school={{ searchresult[1][1] }}&name={{ searchresult[1][0] }}&major={{ searchresult[1][2] }} ">{{ searchresult[1][0] }}</a>
+                <a class="recordname" title="{{ searchresult[2][1] }}" href="scholarinfo?school={{ searchresult[2][1] }}&name={{ searchresult[2][0] }}&major={{ searchresult[2][2] }} ">{{ searchresult[2][0] }}</a>
+                <a class="recordname" title="{{ searchresult[3][1] }}" href="scholarinfo?school={{ searchresult[3][1] }}&name={{ searchresult[3][0] }}&major={{ searchresult[3][2] }} ">{{ searchresult[3][0] }}</a>
+                <a class="recordname" title="{{ searchresult[4][1] }}" href="scholarinfo?school={{ searchresult[4][1] }}&name={{ searchresult[4][0] }}&major={{ searchresult[4][2] }} ">{{ searchresult[4][0] }}</a>
+                <a class="recordname" title="{{ searchresult[5][1] }}" href="scholarinfo?school={{ searchresult[5][1] }}&name={{ searchresult[5][0] }}&major={{ searchresult[5][2] }} ">{{ searchresult[5][0] }}</a>
+                <a class="recordname" title="{{ searchresult[6][1] }}" href="scholarinfo?school={{ searchresult[6][1] }}&name={{ searchresult[6][0] }}&major={{ searchresult[6][2] }} ">{{ searchresult[6][0] }}</a>
+                <a class="recordname" title="{{ searchresult[7][1] }}" href="scholarinfo?school={{ searchresult[7][1] }}&name={{ searchresult[7][0] }}&major={{ searchresult[7][2] }} ">{{ searchresult[7][0] }}</a>
+                <a class="recordname" title="{{ searchresult[8][1] }}" href="scholarinfo?school={{ searchresult[8][1] }}&name={{ searchresult[8][0] }}&major={{ searchresult[8][2] }} ">{{ searchresult[8][0] }}</a>
             </p>
         </div>
     </div>
@@ -285,39 +286,6 @@
     ];
     var myChart = echarts.init(document.getElementById('index_map1'))
     var geoCoordMap = {};
-    var toolTipData = [
-        {name:"北京",value:[{name:"文科",value:95},{name:"理科",value:82}]},
-        {name:"天津",value:[{name:"文科",value:22},{name:"理科",value:20}]},
-        {name:"河北",value:[{name:"文科",value:60},{name:"理科",value:42}]},
-        {name:"山西",value:[{name:"文科",value:40},{name:"理科",value:41}]},
-        {name:"内蒙古",value:[{name:"文科",value:23},{name:"理科",value:24}]},
-        {name:"辽宁",value:[{name:"文科",value:39},{name:"理科",value:28}]},
-        {name:"吉林",value:[{name:"文科",value:41},{name:"理科",value:41}]},
-        {name:"黑龙江",value:[{name:"文科",value:35},{name:"理科",value:31}]},
-        {name:"上海",value:[{name:"文科",value:12},{name:"理科",value:12}]},
-        {name:"江苏",value:[{name:"文科",value:47},{name:"理科",value:45}]},
-        {name:"浙江",value:[{name:"文科",value:57},{name:"理科",value:57}]},
-        {name:"安徽",value:[{name:"文科",value:57},{name:"理科",value:52}]},
-        {name:"福建",value:[{name:"文科",value:59},{name:"理科",value:57}]},
-        {name:"江西",value:[{name:"文科",value:49},{name:"理科",value:42}]},
-        {name:"山东",value:[{name:"文科",value:67},{name:"理科",value:52}]},
-        {name:"河南",value:[{name:"文科",value:69},{name:"理科",value:68}]},
-        {name:"湖北",value:[{name:"文科",value:60},{name:"理科",value:56}]},
-        {name:"湖南",value:[{name:"文科",value:62},{name:"理科",value:52}]},
-        {name:"重庆",value:[{name:"文科",value:47},{name:"理科",value:44}]},
-        {name:"四川",value:[{name:"文科",value:65},{name:"理科",value:60}]},
-        {name:"贵州",value:[{name:"文科",value:32},{name:"理科",value:30}]},
-        {name:"云南",value:[{name:"文科",value:42},{name:"理科",value:41}]},
-        {name:"西藏",value:[{name:"文科",value:5},{name:"理科",value:4}]},
-        {name:"陕西",value:[{name:"文科",value:38},{name:"理科",value:42}]},
-        {name:"甘肃",value:[{name:"文科",value:28},{name:"理科",value:28}]},
-        {name:"青海",value:[{name:"文科",value:5},{name:"理科",value:5}]},
-        {name:"宁夏",value:[{name:"文科",value:10},{name:"理科",value:8}]},
-        {name:"新疆",value:[{name:"文科",value:36},{name:"理科",value:31}]},
-        {name:"广东",value:[{name:"文科",value:63},{name:"理科",value:60}]},
-        {name:"广西",value:[{name:"文科",value:29},{name:"理科",value:30}]},
-        {name:"海南",value:[{name:"文科",value:8},{name:"理科",value:6}]},
-    ];
     /*获取地图数据*/
     myChart.showLoading();
     var mapFeatures = echarts.getMap(mapName).geoJson.features;
@@ -330,7 +298,7 @@
 
     });
     console.log(data)
-    console.log(toolTipData)
+
     var max = 480,
         min = 9; // todo
     var maxSize4Pin = 100,
@@ -363,38 +331,7 @@
                 fontFamily:name_fontFamily
             }
         },
-        tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                if (typeof(params.value)[2] == "undefined") {
-                    var toolTiphtml = ''
-                    for(var i = 0;i<toolTipData.length;i++){
-                        if(params.name==toolTipData[i].name){
-                            toolTiphtml += toolTipData[i].name+':<br>'
-                            for(var j = 0;j<toolTipData[i].value.length;j++){
-                                toolTiphtml+=toolTipData[i].value[j].name+':'+toolTipData[i].value[j].value+"<br>"
-                            }
-                        }
-                    }
-                    console.log(toolTiphtml)
-                    // console.log(convertData(data))
-                    return toolTiphtml;
-                } else {
-                    var toolTiphtml = ''
-                    for(var i = 0;i<toolTipData.length;i++){
-                        if(params.name==toolTipData[i].name){
-                            toolTiphtml += toolTipData[i].name+':<br>'
-                            for(var j = 0;j<toolTipData[i].value.length;j++){
-                                toolTiphtml+=toolTipData[i].value[j].name+':'+toolTipData[i].value[j].value+"<br>"
-                            }
-                        }
-                    }
-                    console.log(toolTiphtml)
-                    // console.log(convertData(data))
-                    return toolTiphtml;
-                }
-            }
-        },
+
         visualMap: {
             show: true,
             min: 1000,

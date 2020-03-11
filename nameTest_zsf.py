@@ -44,7 +44,7 @@ def corpbypaper(name, school):
         # 如果四种名字可能中存在一种在paper_info_list中存在，就将这位学者的名字和id填入输出列表
         if (name_guess_list[0] in result[1]) or (name_guess_list[1] in result[1]) or (name_guess_list[2] in result[1]) or (name_guess_list[3] in result[1]):
             # print('存在')
-            corpbypaper_list.append([partner['name'], partner['id']])
+            corpbypaper_list.append(partner['name'])
 
     return corpbypaper_list
 

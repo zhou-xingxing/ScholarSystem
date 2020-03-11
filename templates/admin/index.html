@@ -1,0 +1,26 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            {% if not current_user.is_authenticated %}
+            <p>请以管理员身份登录:
+            <ul>
+                <li>Email Address: <b>admin</b></li>
+                <li>Password: <b>admin</b></li>
+            </ul>
+            <p>
+                <a class="btn btn-primary" href="{{ url_for('security.login') }}"><i class="glyphicon glyphicon-chevron-right"></i>点击登录</a>
+            </p>
+            {% else %}
+                <p>登录后请点击反馈界面查看</p>
+            {% endif %}
+            <p>
+                <a class="btn btn-primary" href="/"><i class="glyphicon glyphicon-chevron-left"></i>返回主页</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+{% endblock body %}

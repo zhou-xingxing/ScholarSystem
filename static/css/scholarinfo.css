@@ -341,5 +341,71 @@ box-shadow: 0px 0px 5px 0px rgba(11,37,124,0.1);}
 }
 
 @media print {
-   
+
 }
+
+.myrecommend
+{
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+.myrecommend:focus
+{
+    text-decoration: none;
+    color: #fff;
+}
+.myrecommend:visited
+{
+    text-decoration: none;
+    color: #fff;
+}
+.myrecommend:active
+{
+    text-decoration: none;
+    color: #299fff;
+}
+.myrecommend:hover
+{
+    text-decoration: none;
+    color: #299fff;
+}
+
+
+.Flex-color-Special
+ {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px  #fff,
+               0 0 30px  #fff,
+               0 0 40px  #00c0ef,
+               0 0 70px  #00c0ef,
+               0 0 80px  #00c0ef,
+               0 0 100px #00c0ef,
+               0 0 150px #00c0ef;
+  }
+
+
+@-webkit-keyframes fadeIn {
+0% {
+opacity: 0; /*初始状态 透明度为0*/
+}
+    25% {
+opacity: 0.25; /*中间状态 透明度为0*/
+}
+50% {
+opacity: 0.5; /*中间状态 透明度为0*/
+}
+    75% {
+opacity: 0.75; /*中间状态 透明度为0*/
+}
+100% {
+opacity: 1; /*结尾状态 透明度为1*/
+}
+}
+
+.Flex-fadeIn
+{-webkit-animation-name: fadeIn; /*动画名称*/
+-webkit-animation-duration: 5s; /*动画持续时间*/
+-webkit-animation-iteration-count: 1; /*动画次数 infinite 为无限 否则就是具体次数*/
+-webkit-animation-delay: 0s; /*延迟时间*/}

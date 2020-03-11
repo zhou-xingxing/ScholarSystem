@@ -109,7 +109,7 @@ class MyModelView(sqla.ModelView):
 # Flask views
 @app.route('/admin')
 def index():
-    return redirect(url_for('admin.index', next=request.url))
+    return redirect(url_for('index', next=request.url))
 
 # Create admin
 admin = flask_admin.Admin(

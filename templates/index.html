@@ -43,8 +43,13 @@
             </a>
         </div>
         <div class="headtip" style="display:flex;">
-            <a class="my-btn" title="学者对比" id="compare">学者对比</a>
-            <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
+            {% if not current_user.is_authenticated %}
+                <a class="my-btn" title="学者对比" id="compare">学者对比</a>
+                <a class="my-btn" href="feedback" title="点击反馈" style="margin-left: 10px">反馈问题</a>
+                <a class="my-btn" href="{{ url_for('security.login') }}">管理员登录</a>
+            {% else %}
+                    <a class="my-btn" href="{{ url_for('security.login') }}">您已通过管理员身份登录，点击查询用户反馈</a>
+            {% endif %}
         </div>
     </div>
     <div class = "inputcontainer">

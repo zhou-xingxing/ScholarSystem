@@ -84,7 +84,6 @@ def appSearch_result():
         except:
             result=[]
             length=0
-        #把研究领域的['','']去掉
 
     elif search_type=='8':
         # --地区热度学者推荐功能：type==8时，先从本地读入已经筛选过的模型，再处理并传回前端
@@ -100,6 +99,8 @@ def appSearch_result():
         for per in scholarlist:
             result.append([1, per[0], per[1], per[2], str(per[5]), per[6]])  # 添加一个“自增id属性”，为符合下面流程
 
+
+    # 把研究领域的['','']去掉
     listresults = []
     for reone in result:
         if reone[4]:

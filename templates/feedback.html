@@ -76,10 +76,10 @@
                 <div class="checkbox">
 <!-- 返回str类型，选中返回"on"，未选中返回"None"-->
                     <label>
-                        <input type="checkbox" name="receive"> 接收反馈结果
+                        <input type="checkbox" name="receive" id="receive"> 接收反馈结果
                     </label>
                 </div>
-                <button type="submit"  class="btn btn-default" style="display:block;margin:0 auto">提交反馈</button>
+                <button type="submit" id="feedbackbt" class="btn btn-default" style="display:block;margin:0 auto" onclick="return isvalid()">提交反馈</button>
             </form>
         </div>
     </div>
@@ -97,5 +97,21 @@
         document.getElementById("fscholar_school").value=content.scholar_school1;
     }
 </script>
+<script>
+    var email = document.getElementById('email');
+    var receive = document.getElementById('receive');
+    var oBtn = document.getElementById('feedbackbt');
+    function isvalid() {
+        if(receive.checked==true){
+            var str=email.value
+            if(str == '' || str == undefined || str == null){
+                alert("请填入联系方式")
+                return false
+            }
+        }
+    }
+
+</script>
+
 </body>
 </html>

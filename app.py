@@ -20,7 +20,8 @@ def index():
     for i in range(len(list_row)):
         list_school.append(list_row[i].split('\': \'')[0])
         list_location.append(list_row[i].split('\': \'')[1])
-
+        print(list_school)
+        print(list_location)
     # 定义不同类型学校列表
     list_985 = []
     list_211 = []

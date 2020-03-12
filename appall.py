@@ -5,9 +5,9 @@ from appSearch_Result import app as appSearch_Result
 from scholar_compare_route import app as scholarcompare
 from recommend import app as recommened
 from appScholar_Compare import app as compare
-#创建flask对象
+# 创建flask对象
 app =  Flask(__name__)
-#使用blueprint注册之前创建的flask对象 app1主要包含跟路由和反馈 appscholar主要是学者详细信息的路由 appSearch_Resukt包含查询结果接口
+# 使用blueprint注册之前创建的flask对象 app1主要包含跟路由和反馈 appscholar主要是学者详细信息的路由 appSearch_Resukt包含查询结果接口
 app.register_blueprint(app1)
 app.register_blueprint(appscholar)
 app.register_blueprint(appSearch_Result)
@@ -16,7 +16,7 @@ app.register_blueprint(recommened)
 app.register_blueprint(compare)
 
 
-#以下为管理员附加代码——申林
+# 以下为管理员附加代码——申林
 import os
 from flask import Flask, url_for, redirect, render_template, request, abort,session, Blueprint
 from flask_sqlalchemy import SQLAlchemy
@@ -42,7 +42,7 @@ roles_users = db.Table(
     db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
 )
 
-
+# 角色类，分为普通用户和超级用户
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
@@ -51,7 +51,7 @@ class Role(db.Model, RoleMixin):
     def __str__(self):
         return self.name
 
-
+# 用户类，同为用户数据表
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(255))
@@ -66,6 +66,7 @@ class User(db.Model, UserMixin):
 
         return self.email
 
+# 反馈类，同为反馈数据表
 class Feedback(db.Model):
     __tablename__ = "feedback"
     id = db.Column(db.Integer, primary_key=True)
@@ -82,11 +83,13 @@ class Feedback(db.Model):
         return '<feedback_id %r>' % (self.id)
 
 # Setup Flask-Security
+# 将角色和用户封装调用flask安全模式
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
 
 # Create customized model view class
+# 继承view，对权限做区分
 class MyModelView(sqla.ModelView):
     def is_accessible(self):
         return (current_user.is_active and
@@ -107,7 +110,9 @@ class MyModelView(sqla.ModelView):
                 return redirect(url_for('security.login', next=request.url))
 
 # Flask views
+# 将admin路由重定向到首页
 @app.route('/admin/',endpoint='/',redirect_to='/')#,endpoint='/',redirect_to='/'
+# 此函数不会执行
 def index():
     print("已经重定向到首页")
     # return render_template("index.html")
@@ -134,7 +139,7 @@ class FeedbackView(MyModelView):
         state=u'审核状态',
     )
 
-
+# 将需要的view加入页面显示，暂时只加入反馈表
 # admin.add_view(MyModelView(Role, db.session))
 # admin.add_view(MyModelView(User, db.session))
 admin.add_view(FeedbackView(Feedback, db.session,name=u'反馈'))
@@ -148,57 +153,6 @@ def security_context_processor():
         h=admin_helpers,
         get_url=url_for
     )
-
-'''
-def build_sample_db():
-    """
-    Populate a small db with some example entries.
-    """
-
-    import string
-    import random
-
-    db.drop_all()
-    db.create_all()
-
-    with app.app_context():
-        user_role = Role(name='user')
-        super_user_role = Role(name='superuser')
-        db.session.add(user_role)
-        db.session.add(super_user_role)
-        db.session.commit()
-
-        test_user = user_datastore.create_user(
-            first_name='Admin',
-            email='admin',
-            password=encrypt_password('admin'),
-            roles=[user_role, super_user_role]
-        )
-
-        first_names = [
-            'Harry', 'Amelia', 'Oliver', 'Jack', 'Isabella', 'Charlie', 'Sophie', 'Mia',
-            'Jacob', 'Thomas', 'Emily', 'Lily', 'Ava', 'Isla', 'Alfie', 'Olivia', 'Jessica',
-            'Riley', 'William', 'James', 'Geoffrey', 'Lisa', 'Benjamin', 'Stacey', 'Lucy'
-        ]
-        last_names = [
-            'Brown', 'Smith', 'Patel', 'Jones', 'Williams', 'Johnson', 'Taylor', 'Thomas',
-            'Roberts', 'Khan', 'Lewis', 'Jackson', 'Clarke', 'James', 'Phillips', 'Wilson',
-            'Ali', 'Mason', 'Mitchell', 'Rose', 'Davis', 'Davies', 'Rodriguez', 'Cox', 'Alexander'
-        ]
-
-        for i in range(len(first_names)):
-            tmp_email = first_names[i].lower() + "." + last_names[i].lower() + "@example.com"
-            tmp_pass = ''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(10))
-            user_datastore.create_user(
-                first_name=first_names[i],
-                last_name=last_names[i],
-                email=tmp_email,
-                password=encrypt_password(tmp_pass),
-                roles=[user_role, ]
-            )
-        db.session.commit()
-    return
-'''
 
 if __name__ == '__main__':
     app.run()

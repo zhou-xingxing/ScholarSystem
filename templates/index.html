@@ -191,7 +191,7 @@
                                         <div class="schoolnames panel-body">
                                             <table class="table table-hover table-striped">
                                                   {% for li_us in list_us %}
-                                                    {% if loop.index%5 == 0 %}
+                                                    {% if loop.index%4 == 0 %}
                                                         <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
                                                         <tr></tr>
                                                     {% else %}

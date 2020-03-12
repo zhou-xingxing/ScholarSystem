@@ -12,17 +12,17 @@ option.add_argument('--disable-dev-shm-usage')
 option.add_argument('blink-settings=imagesEnabled=false')
 option.add_argument('--disable-gpu')
 
-option = ChromeOptions()  # 创建配置示例
-option.add_argument('--headless')  # 无头模式，后台启动
 # 创建浏览器
-schoolbrowser = Chrome(options=option)  # (options=option)
-schoolUrl = 'https://www.researchgate.net/institution/Harvard_University/departments'
+schoolbrowser = Chrome(executable_path="/home/baize/Chrome/chromedriver",options=option)  # (options=option)
+#给出待爬取的学校url
+schoolUrl = 'https://www.researchgate.net/institution/University_of_Chicago/departments'
 schoolbrowser.get(schoolUrl)  # 打开具体的网页
 sleep(2)
+#链接数据库
 conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                            charset="utf8")
 cls = conn.cursor()
-schoolget=schoolUrl.split("/")[-2]
+schoolget=schoolUrl.split("/")[-2].replace('%20','_')
 # 按学校建表
 sql = "CREATE TABLE `scholar_info`.`%s`  (" \
       "`id` int(0) NOT NULL AUTO_INCREMENT," \
@@ -51,15 +51,17 @@ try:
 except:
     pass
 
+#遍历该学校全部院系url
 college= schoolbrowser.find_elements_by_css_selector("div > div.name > a > span")
 for collegei in college:
     collegetxt = collegei.text
     collegeurl='https://www.researchgate.net/institution/%s/department/%s/members'%(schoolget,collegei.text)
     print(collegetxt,collegeurl)
-    collegebrowser = Chrome(options=option)  # (options=option)
+    collegebrowser = Chrome(executable_path="/home/baize/Chrome/chromedriver",options=option)  # (options=option)
     # scholarbrowser = Chrome()  # (options=option)
     collegebrowser.get(collegeurl)  # 打开具体的网页
     sleep(2)
+    # 遍历该院系全部成员url
     members = collegebrowser.find_elements_by_css_selector("div.indent-content > h5 > a")
     for member in members:
         membertxt = member.text
@@ -69,11 +71,12 @@ for collegei in college:
         school=schoolget
         college=collegei.text
         scholarid=memberurl.split('/')[-1]
-        scholarbrowser = Chrome(options=option)  # (options=option)
+        scholarbrowser = Chrome(executable_path="/home/baize/Chrome/chromedriver",options=option)  # (options=option)
         sleep(2)
         try:
-            info = spider_foreign_sl.spid(memberurl, scholarbrowser)    #调用爬取模块
+            info = spider_foreign_sl.spid(memberurl, scholarbrowser)    #调用爬取学者信息模块
             #print('爬取完毕:\ninfo:\n', info)
+            #将返回信息插入数据库
             conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                charset="utf8")
             cls = conn.cursor()

@@ -11,30 +11,29 @@ def spid(url0, browser):
     action = ActionChains(browser)
     browser.get(url0)
     sleep(2)
+    #得到学者姓名
     name = browser.find_element_by_css_selector('div:nth-child(2) > h1 > div > div:nth-child(1)')
     info_name = name.text
-    print(info_name)
+    #得到学者研究领域
     info_field = []
     field = browser.find_elements_by_xpath('//*[@id="lite-page"]/main/section/div/div/div/div/div/div[2]/div/a')
     for fieldi in field:
         info_field.append(fieldi.text)
-    print('info_field', info_field)
+    #得到学者被引量以及指数
     citedetc = browser.find_element_by_css_selector('div:nth-child(3) > div.nova-e-text.nova-e-text--size-xl')
     info_cited = citedetc.text
-
     achidetc = browser.find_element_by_css_selector('#research-items > div > div.nova-c-card__header.nova-c-card__header--spacing-inherit > div')
     info_achi = achidetc.text.split('(')[1].split(')')[0]
     hgdetc = browser.find_element_by_css_selector('div.nova-l-flex__item.nova-l-flex__item--grow > div > div:nth-child(2) > div > div:nth-child(1) > span')
     info_h = hgdetc.text
     info_g = hgdetc.text
-    print('citedetc', info_cited, info_achi, info_h, info_g)
-    # # 定义一个字典作为成果列表
-
-# 点击合作学者的“更多”按钮（此处有“更多按钮”）
+    #得到合作学者信息
     per_json=[]
-    print('begin to find corp person')
+    # print('begin to find corp person')
+    #点击view all
     browser.find_element_by_xpath('//*[@id="lite-page"]/main/aside/div[1]/div[2]/div/div[2]/div/div[3]/div/div[2]/a').click()
     sleep(2)
+    #取前十个合作学者获取个人信息
     for i in range(1,10):
         perinfo = {}
         # selector_per=('div:nth-child(2) > div > div.nova-c-card__body.nova-c-card__body--spacing-inherit > div > div:nth-child(2) > ul > li:nth-child(%d) > div > div > div.nova-l-flex__item.nova-l-flex__item--grow.nova-v-person-list-item__body > div > div > div > div > div > a')%(i)
@@ -55,8 +54,8 @@ def spid(url0, browser):
             perinfo['in'] = ''
         perinfo['corpnum'] = (random.randint(0, 30))
         per_json.append(perinfo)
-    print(per_json)
 
+    #取前十篇论文著作的名字信息和研究方向
     namelist = []
     paperinfolist = []
     mainplist = []
@@ -75,7 +74,7 @@ def spid(url0, browser):
             paperinfo['time'] = papertime.text
             paperinfo['href'] = urlnew
             paperinfo['source'] = 'ResearchGate'
-            paperinfo['cited'] = (random.randint(0, 30))
+            paperinfo['cited'] = (random.randint(30, 99))
             print(paperinfo)
             paperinfo['corppersons']=''
             for j in paperco:
@@ -89,20 +88,16 @@ def spid(url0, browser):
             mainplist.append('')
         except:
             pass
-    print('namelist', namelist)
-    print('paperinfolist', paperinfolist)
-    print('mainplist', mainplist)
 
     return [info_field, info_cited, info_achi, info_h, info_g, '', '', '', per_json,
             namelist, paperinfolist, mainplist, '']
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     # 使用option
     option = ChromeOptions()  # 创建配置示例
     option.add_argument('--headless')  # 无头模式，后台启动
     # 创建浏览器
     browser = Chrome()  # (options=option)
-
     Url = 'https://www.researchgate.net/profile/Jodie_Abbatangelo-Gray2'
     print('开始爬取')
     info = spid(Url, browser)

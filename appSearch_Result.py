@@ -67,14 +67,17 @@ def appSearch_result():
                 if i != results[-1]:
                     sql += " UNION "
                 SQL += sql
-        elif search_type == "7":  # 高级搜索  3.6 bwm
+        elif search_type == "7":  # 高级搜索  3.6 bwm  3.12 sl
             for i in results:
-                if (keyword3 != ""):
+                if (keyword2 != "" and keyword3 != ""):
                     sql = "select %s from %s where id between 1 and 2500 and name='%s' and school LIKE '%s' and college LIKE '%s'" % (
-                    need_part, i[0], name, keyword2, keyword3)
-                elif (keyword2 != ""):
+                    need_part, i[0], name, '%' + keyword2 + '%', '%' + keyword3 + '%')
+                elif (keyword2 != "" and keyword3 == ""):
                     sql = "select %s from %s where id between 1 and 2500 and name='%s' and school LIKE '%s'" % (
-                    need_part, i[0], name, keyword2)
+                    need_part, i[0], name, '%' + keyword2 + '%')
+                elif (keyword3 != "" and keyword2 == ""):
+                    sql = "select %s from %s where id between 1 and 2500 and name='%s' and college LIKE '%s'" % (
+                    need_part, i[0], name, '%' + keyword3 + '%')
                 else:
                     sql = "select %s from %s where id between 1 and 2500 and name='%s'" % (need_part, i[0], name)
                 if i != results[-1]:

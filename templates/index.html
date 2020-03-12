@@ -136,10 +136,10 @@
                                     <table class="table table-hover table-striped">
                                         {% for li_985 in list_985 %}
                                             {% if loop.index%5 == 0 %}
-                                                <td> <a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985 }}</a></td>
+                                                <td style="width: 20%"> <a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985 }}</a></td>
                                                 <tr></tr>
                                             {% else %}
-                                                <td><a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985}}</a></td>
+                                                <td style="width: 20%"><a href="../Search_result?keyword={{ li_985 }}&type=3">{{ li_985}}</a></td>
                                             {% endif %}
                                         {% endfor %}
                                     </table>
@@ -164,10 +164,10 @@
                                         <table class="table table-hover table-striped">
                                             {% for li_211 in list_211 %}
                                                 {% if loop.index%5 == 0 %}
-                                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
+                                                    <td style="width: 20%"><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211 }}</a></td>
                                                     <tr></tr>
                                                 {% else %}
-                                                    <td><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
+                                                    <td style="width: 20%"><a href="../Search_result?keyword={{ li_211 }}&type=3">{{ li_211}}</a></td>
                                                 {% endif %}
                                             {% endfor %}
                                         </table>
@@ -188,19 +188,19 @@
                             </div>
                             <!--字典列表读取，并使用jinja模板循环展示-->
                             <div id="collapseThree" class="panel-collapse collapse in">
-                                        <div class="schoolnames panel-body">
-                                            <table class="table table-hover table-striped">
-                                                  {% for li_us in list_us %}
-                                                    {% if loop.index%4 == 0 %}
-                                                        <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
-                                                        <tr></tr>
-                                                    {% else %}
-                                                        <td><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </table>
-                                        </div>
-                                    </div>
+                                 <div class="schoolnames panel-body">
+                                     <table class="table table-hover table-striped">
+                                         {% for li_us in list_us %}
+                                             {% if loop.index%4 == 0 %}
+                                                 <td style="width: 25%"><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us }}</a></td>
+                                                 <tr></tr>
+                                             {% else %}
+                                                 <td style="width: 25%"><a href="../Search_result?keyword={{ li_us }}&type=3">{{ li_us}}</a></td>
+                                             {% endif %}
+                                         {% endfor %}
+                                     </table>
+                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>

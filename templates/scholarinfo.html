@@ -368,18 +368,18 @@
                                                             <table class="my-table table-hover">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th style="width: 20%;">序号</th>
-                                                                        <th style="width: 40%;">机构名称</th>
-                                                                        <th>&nbsp;</th>
-                                                                        <th style="text-align: center">合作次数</th>
+                                                                        <th style="width: 10%;">序号</th>
+                                                                        <th style="width: 50%;">机构名称</th>
+                                                                        <th style="width: 20%;text-align: center">&nbsp;</th>
+                                                                        <th style="width: 20%;text-align: center">合作次数</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     {% for col in collaborate_org %}
                                                                         <tr>
-                                                                            <td><span class="num-box radius3">{{ loop.index }}</span></td>
-                                                                            <td><span class="b">{{ col }}</span></td>
-                                                                            <td>------------</td>
+                                                                            <td style="width: 10%"><span class="num-box radius3">{{ loop.index }}</span></td>
+                                                                            <td style="width: 50%"><span class="b">{{ col }}</span></td>
+                                                                            <td style="text-align: center;">------------</td>
                                                                             <td style="text-align: center"><span class="b">{{ collaborate_org[col] }}</span></td>
                                                                         </tr>
                                                                     {% endfor %}
@@ -393,10 +393,10 @@
                                                         <table class="my-table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th style="width: 20%;">序号</th>
+                                                                    <th style="width: 10%;">序号</th>
                                                                     <th style="width: 20%;">姓名</th>
-                                                                    <th>机构</th>
-                                                                    <th>合作次数</th>
+                                                                    <th style="width: 40%;">机构</th>
+                                                                    <th style="width: 20%;margin-left: 10%">合作次数</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -454,19 +454,19 @@
                                                          <table class="my-table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th style="width: 20%">序号</th>
-                                                                    <th style="width: 40%">名称</th>
-                                                                    <th >&nbsp;</th>
-                                                                    <th>成果数量</th>
+                                                                    <th style="width: 15%">序号</th>
+                                                                    <th style="width: 35%">名称</th>
+                                                                    <th style="width: 20%;text-align: center">&nbsp;</th>
+                                                                    <th style="width: 30%;text-align: center">成果数量</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 {% for achievement in achievement_list %}
                                                                      <tr>
-                                                                        <td><span class="num-box radius3">{{ loop.index }}</span></td>
-                                                                        <td><span class="b">{{ achievement }}</span></td>
-                                                                        <td>------------</td>
-                                                                        <td><span class="b">{{ achievement_list[achievement] }}</span></td>
+                                                                        <td style="width: 15%"><span class="num-box radius3">{{ loop.index }}</span></td>
+                                                                        <td style="width: 35%"><span class="b">{{ achievement }}</span></td>
+                                                                        <td style="width: 20%;text-align: center">------------</td>
+                                                                        <td style="width: 30%;text-align: center"><span class="b">{{ achievement_list[achievement] }}</span></td>
                                                                     </tr>
                                                                 {% endfor %}
                                                             </tbody>

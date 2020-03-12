@@ -112,7 +112,7 @@ def scholarinfo():
     wordsplitscholarfield=[]
     for fieldone in scholarfield:
         wordsplitscholarfield.append(wordsExtra_zsf.wordsplit(fieldone))
-        if "计算" in fieldone:
+        if "计算" or "算法" or "理论" or "数据" or "信息" or "软件" or "智能" in fieldone:
             wordsplitscholarfield.append(['计算'])
     for line in text2:
         for i in wordsplitscholarfield:

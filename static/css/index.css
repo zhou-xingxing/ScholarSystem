@@ -129,8 +129,14 @@
 }
 .recordname:hover{
     text-decoration: none;
+    color: #299fff;
+}
+
+.recordname:focus{
+    text-decoration: none;
     color: #c4c4c4;
 }
+
 .my-btn
 {
     padding: 0 30px; height: 30px; line-height: 30px;

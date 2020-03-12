@@ -79,7 +79,11 @@ function draw () {
         textStyle: {
             color: '#000000',
             fontSize:20
-        }
+        },
+            subtextStyle:{
+                color:'#242424',
+                fontSize:16,
+            }
     },
     //定义提示框内容
     tooltip: {

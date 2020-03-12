@@ -209,7 +209,7 @@
         </tbody>
     </table>
     <!--3.10柏为民添加 首页底部的学者分布地图 -->
-    <div id="map1">
+    <div id="map1" align="center" style="margin:0 auto 0 auto;">
         <div id="index_map1" align="center" style="margin:0 auto 0 auto;width: 800px;height: 600px;display: inline"></div>
     </div>
      <!--页面底部系统介绍-->
@@ -495,11 +495,6 @@
 
         ]
     };
-    myChart.on('click', function (param) {
-       console.log(param.name);
-       var keyword = param.name;
-       location.href = "../Search_result?keyword="+keyword+"&type=8";
-    });
     myChart.setOption(option);
     //3.11号柏为民添加，主要是点击某一省份后跳转
     myChart.on('click',function(param){

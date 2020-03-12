@@ -112,12 +112,15 @@ def scholarinfo():
     wordsplitscholarfield=[]
     for fieldone in scholarfield:
         wordsplitscholarfield.append(wordsExtra_zsf.wordsplit(fieldone))
+        if "计算" in fieldone:
+            wordsplitscholarfield.append(['计算'])
     for line in text2:
         for i in wordsplitscholarfield:
             for j in i:
                 if j in line.strip().split(":")[0] and len(j)>1:
                     subjectone=[line.strip().split(":")[0].split('（')[0],line.strip().split(":")[1].split(" ")[0],line.strip().split(":")[1].split(" ")[1],line.strip().split(":")[1].split(" ")[2],line.strip().split(":")[1].split(" ")[3],line.strip().split(":")[1].split(" ")[4]]
-                    subject.append(subjectone)
+                    if subjectone not in subject:
+                        subject.append(subjectone)
 
     paper_search_all=[]
     for i in range(len(paper_search_list)):

@@ -8,7 +8,7 @@ var same_paper=new_rela_partner.same_paper_partner;
 
 $(document).ready(function() {
         var  myChart = echarts.init(document.getElementById("NewRelationNet"));
-
+        //预装基本数据
         var graph={
             "nodes":[
                 {
@@ -149,7 +149,7 @@ function remove(nodeName) {
 function redrawGraph() {
     option.series[0].data = Object.values(currentGraph.nodes);
     option.series[0].links = Object.values(currentGraph.links);
-    console.log(option);
+    // console.log(option);
     myChart.setOption(option);
 }
 const option = {
@@ -241,6 +241,7 @@ const option = {
     }]
 };
     init();
+    //处理点击事件
     myChart.on('click', function(params) {
         if (params.dataType === "node") {
             const node = nodeMap[params.data.name];

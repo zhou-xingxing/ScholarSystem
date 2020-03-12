@@ -7,6 +7,7 @@ $(function() {
         var  ec1 = echarts.init(document.getElementById('partnerCompare1'));
         var  ec2 = echarts.init(document.getElementById('partnerCompare2'));
         var  ec3 = echarts.init(document.getElementById('partnerCompare3'));
+        //加载图表前的loading动画
         ec1.showLoading();
         layer.open({
             type:1,
@@ -158,20 +159,21 @@ $(function() {
                     yAxis: {
                         type: 'value'
                     },
+                    //坐标轴伸缩，可拖动，可滚轮
                     dataZoom:[
                         {
                             type:'slider',
                             show:true,
                             xAxisIndex:[0],
-                            start:1,
-                            end:40
+                            start:40,
+                            end:100
                         },
                          {
                             type:'inside',
                             show:true,
                             xAxisIndex:[0],
-                            start:1,
-                            end:40
+                            start:40,
+                            end:100
                         }
                     ],
                     series:compare_achive_data
@@ -210,15 +212,15 @@ $(function() {
                             type:'slider',
                             show:true,
                             xAxisIndex:[0],
-                            start:1,
-                            end:40
+                            start:40,
+                            end:100
                         },
                          {
                             type:'inside',
                             show:true,
                             xAxisIndex:[0],
-                            start:1,
-                            end:40
+                            start:40,
+                            end:100
                         }
                     ],
                     series:compare_cited_data
@@ -257,15 +259,15 @@ $(function() {
                             type:'slider',
                             show:true,
                             xAxisIndex:[0],
-                            start:1,
-                            end:40
+                            start:40,
+                            end:100
                         },
                          {
                             type:'inside',
                             show:true,
                             xAxisIndex:[0],
-                            start:1,
-                            end:40
+                            start:40,
+                            end:100
                         }
                     ],
                     series:compare_paper_data
@@ -278,7 +280,7 @@ $(function() {
                     ec1.resize();
                     ec2.resize();
                     ec3.resize();
-                    // ec4.resize();
+
                 });
             }
         });

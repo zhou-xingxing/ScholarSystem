@@ -3,7 +3,7 @@ all_data = comparedata.data;
 noscholardata = comparedata.nodatascholar;
 //比较的人数
 compare_num = all_data.length;
-console.log(all_data);
+// console.log(all_data);
 $(function () {
     var info  ="暂无学者";
     for(var i=0;i<noscholardata.length;i++){
@@ -192,7 +192,6 @@ $(document).ready(function() {
         var paint_scholar_field=all_data[i][5];
         var labels=[];  //个人画像的标签，目前考虑到的有：论文关键词、工作机构、学科专业、
         var max_value=0; //这里是为了取到关键词的最大value值，然后赋给学者姓名。
-        // 可能会因为太大，而背景尺寸太小字数无法显示。需要修改64行的width和height。 ---2020.3.4 bwm
         //这个循环是输入论文关键词及其对应的出现次数
         for (j=0,len=paint_paper_key.length;j<len;j++){
                     labels.push({
@@ -286,17 +285,7 @@ $(document).ready(function () {
         }
 
         var option = {
-            //标题内容
-            //     title: {
-            //     text: '1. 学术成果可视化',
-            //     textStyle: {
-            //     	 align: 'center',
-            //         color: '#000',
-            //         fontSize: 20,
-            //     },
-            //     top: '3%',
-            //     left: '5%',
-            // },
+
             //定义鼠标提示框内容
             tooltip: {
                 show: true,
@@ -439,17 +428,7 @@ $(document).ready(function () {
         }
 
         var option = {
-            //     title: {
-            //     text: '2. 引用可视化',
-            //     textStyle: {
-            //     	 align: 'center',
-            //         color:'black',
-            //         fontSize: 20,
-            //     },
-            //
-            //     top: '3%',
-            //     left: '5%',
-            // },
+
             tooltip: {
                 show: true,
                 formatter: '{b}年：{c}次'
@@ -579,17 +558,6 @@ $(document).ready(function () {
         }
 
         var option = {
-            //     title: {
-            //     text: '2. 引用可视化',
-            //     textStyle: {
-            //     	 align: 'center',
-            //         color:'black',
-            //         fontSize: 20,
-            //     },
-            //
-            //     top: '3%',
-            //     left: '5%',
-            // },
             tooltip: {
                 show: true,
                 formatter: '{b}：{c}篇'
@@ -603,7 +571,6 @@ $(document).ready(function () {
                     saveAsImage: {
                         show: true
                     },
-
                 },
                 top: '3%',
                 right: '10%',
@@ -722,7 +689,6 @@ $(document).ready(function () {
         }
 
         var option = {
-
             tooltip: {},
             toolbox: {
                 show: true,
@@ -764,7 +730,6 @@ $(document).ready(function () {
                 data: paper_key_data,
             }]
         };
-
         ec.setOption(option);
     }
 

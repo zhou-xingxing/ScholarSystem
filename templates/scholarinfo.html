@@ -64,7 +64,7 @@
                     data = eval(data);
                     var item='';
                     $.each(data, function (i, result) {
-                        item += '<p><a class="font16 color-gray" title="'+ result[2] + result[3] +'" href="/scholarinfo?scholarid=' + result[0] + '">' + result[1]+'</a></p>';
+                        item += '<p><a class="myrecommend" title="'+ result[2] + result[3] +'" href="/scholarinfo?scholarid=' + result[0] + '">' + result[1]+'</a></p>';
                     });
                     $('#reclist').html(item);
                     $('#reclist').css({"display":"block"});
@@ -94,7 +94,7 @@
                 data = eval(data);
                 var item = '';
                 $.each(data,function(i,result){
-                    item += '<p><a class="font16 color-gray" title="' + result[2] + result[3]  +'" href="/scholarinfo?scholarid=' + result[0] + '">' + result[1]+'</a></p>';
+                    item += '<p><a class="myrecommend" title="' + result[2] + result[3]  +'" href="/scholarinfo?scholarid=' + result[0] + '">' + result[1]+'</a></p>';
                 });
                 $('#reclist').html(item);
                 $('#reclist').css({"display":"block"});
@@ -230,13 +230,13 @@
                                                     <div>
                                                         <!--<p><button class="recommendscholar">推荐学者</button></p>-->
                                                         <p>
-                                                            <a id="recommendscholar" class="color-wit font16" href="javascript:void(0);" onclick="recommend()">
+                                                            <a id="recommendscholar" style="font-size: 22px;" class="myrecommend Flex-color-Special Flex-fadeIn" href="javascript:void(0);" onclick="recommend()">
                                                                 推荐学者
                                                             </a>
                                                         </p>
                                                     </div>
 
-                                                    <div id="reclist" class="color-gray" style="height: 100px;display: block"></div>
+                                                    <div id="reclist" class="color-gray" style="height: 100px;display: none"></div>
                                                     <div id="changelist" style="display: none">
                                                             <!--
                                                             <button class="change" value="0">换一换</button>
@@ -244,7 +244,7 @@
                                                                 <img src="../static/images/change.png" style="height: 30px" alt>
                                                             </span>
                                                             -->
-                                                         <a id="change" class="color-wit font16" href="javascript:void(0);" onclick="change_scholar()">
+                                                         <a id="change" class="myrecommend" href="javascript:void(0);" onclick="change_scholar()">
                                                                 换一换
                                                              <span>
                                                                 <img src="../static/images/change.png" style="height: 30px" alt>
@@ -474,19 +474,19 @@
                                                 </div>
                                                 <!-- 关系网络列表 -->
                                                 <div role="tabpanel" class="tab-pane" id="cluster6" style="width: 860px;">
-                                                    <div class="line-a bg-e pd40" style="display: flex">
-                                                        <div class="datatypeselect">
-                                                                <button type="button" id="nettypeselectbtn1" class="btn btn-primary">关系网络1</button>
-                                                                <button type="button" id="nettypeselectbtn2" class="btn btn-primary">关系网络2</button>
+                                                    <div class="line-a bg-e pd40">
+                                                        <div class="datatypeselect" style="margin-bottom: 2.5%">
+                                                            <button type="button" id="nettypeselectbtn1" class="btn btn-primary" style="margin-left: 30%">关系网络1</button>
+                                                            <button type="button" id="nettypeselectbtn2" class="btn btn-primary" style="margin-left: 15%">关系网络2</button>
+                                                            <div id="ContentPlaceHolder1_divRenetwork" align="right" style="margin: 0 auto">
+                                                                <button class="comparescholar" id="comparescholar">学者对比</button>
+                                                            </div>
                                                         </div>
-                                                        <div id="RelationNet"  style="width: 700px;height: 700px;display: block">
+                                                        <div id="RelationNet" align="center" style="margin:0 auto; width: 700px;height: 700px;display: block">
                                                             <script>draw()</script>
                                                         </div>
-                                                        <div id="NewRelationNet"  style="width: 700px;height: 700px;display: none"></div>
+                                                        <div id="NewRelationNet" align="center" style="margin:0 auto; width: 700px;height: 700px;display: none"></div>
 
-                                                        <div id="ContentPlaceHolder1_divRenetwork">
-                                                            <button class="comparescholar" id="comparescholar">学者对比</button>
-                                                        </div>
                                                         <div class="partnercompare" id="partnercompare" style="display:none">
                                                             <div class="datatypeselect">
                                                                 <button type="button" id="partnerbtn1" class="btn btn-primary" style="margin-left: 20%">学术成果</button>

@@ -95,6 +95,9 @@ def deal_srchp2(titlesource, textsource):
     return  dict_cnt
 
 if __name__ == '__main__':
+    print(deal_srchp2(input('请输出需要统计的标题'), input('请输出需要统计的研究点')))
+    # print(wordsplit(input('请输入需要拆分的字符')))
+
     # 待实现：如何提取英文名词词组？
 
     # while 1:
@@ -106,9 +109,9 @@ if __name__ == '__main__':
     # textsource1 = "[[], ['Pipeline processing', 'Algorithm design and analysis', 'multiple filtering', 'Educational institutions', 'Similarity join'], ['knowledge bases', 'entity search', 'SPARQL query'], ['Query Evaluation', 'Data Partitioning'], ['Query Evaluation', 'Data Partitioning'], ['capacity constraint', 'location selection', 'spatial database'], ['capacity constraint', 'location selection', 'spatial database'], ['Big data', 'Interactive query'], ['Big data', 'Interactive query'], ['Keyword Search']]"
     # textsource2 = "[['Spectral Clustering', 'Constraint Propagation'], ['pattern clustering', 'spatial mismatch', 'image representation', 'image sequences', 'image matching', 'image classification'], ['Spectral Clustering', 'Constraint Propagation'], ['pattern clustering', 'spatial mismatch', 'image representation', 'image sequences', 'image matching', 'image classification'], ['pattern clustering', 'graph theory', 'image representation'], ['Ensemble learning', 'Probabilistic latent semantic analysis', 'Rival penalized competitive learning'], ['constraint propagation', 'image clustering'], ['visual keywords', 'automatic image annotation', 'image annotation', 'kernel methods'], ['Gaussian mixture', 'Regularization theory', 'iterative algorithm', 'Model selection', 'automatic model selection'], ['minimum cross-entropy', 'curve detection', 'Time series prediction', 'Regularization theory', 'Model selection']]"
     # textsource3 = "[['渗透性', '弥漫性', '宗教因素', '热点问题', '冷战后'], ['社会实践', '中国化', '基督教'], ['宗教说'], ['历史学家', '历史过程', '柯林武德', '克罗齐', '历史思想', '历史观念'], ['当代中国', '关系研究'], ['卡西尔', '语言概念', '语言研究', '西方近代哲学', '哲学观念', '哲学体系'], ['梁启超', '利玛窦'], ['宗教对话', '中国文化', '和谐世界'], ['宗教文化', '卡西尔', '非理性主义', '汤因比', '文化结构', '文化观念'], ['文化观', '方法论意义']]"
-    titles = input('请输入标题列表字符串：')
-    texts = input('请输入研究点列表字符串')
-    #
+    # titles = input('请输入标题列表字符串：')
+    # texts = input('请输入研究点列表字符串')
+    # #
     # '''
     # print("hello")
     #
@@ -130,8 +133,8 @@ if __name__ == '__main__':
     #
     # # print('拆分统计字典_只用研究点列表', sorted(deal_srchp(textsource3).items(), key=lambda x: x[1], reverse=True)[:30])
     # # print()
-    print('拆分统计字典，使用研究点列表和论文题目关键词抽取',
-          sorted(deal_srchp2(titles, texts).items(), key=lambda x: x[1], reverse=True)[:30])
+    # print('拆分统计字典，使用研究点列表和论文题目关键词抽取',
+    #       sorted(deal_srchp2(titles, texts).items(), key=lambda x: x[1], reverse=True)[:30])
 
 '''
 text = "[['循环经济', '系统协调', '可持续发展', '城市可持续发展'], ['系统动力学', '可持续发展', '复杂系统'], ['市场失效', '外部性', '解决方法', '交通拥堵'], ['燃油经济性', '政策措施', '政策体系', '新能源汽车', '燃油消耗量', '燃油消耗'], ['利益相关者分析', '燃油经济性', '经济研究', '影响评价'], ['企业管理人员', '影响因素分析', '问卷调查', '气候变化'], ['企业管理人员', '行为意愿', '统计分析', '气候变化'], ['出口退税率', '钢铁行业'], ['环境经济学', '经济学分析', '外部性', '自然环境', '信息技术产品'], ['合作博弈', '治理研究', '线性优化', '京津冀']]"

@@ -112,8 +112,10 @@ def scholarinfo():
     wordsplitscholarfield=[]
     for fieldone in scholarfield:
         wordsplitscholarfield.append(wordsExtra_zsf.wordsplit(fieldone))
-        if "计算" or "算法" or "理论" or "数据" or "信息" or "软件" or "智能" in fieldone:
+        print(fieldone)
+        if "计算" in fieldone or "算法" in fieldone or "理论" in fieldone or "数据" in fieldone or "信息" in fieldone or "软件" in fieldone or "智能" in fieldone:
             wordsplitscholarfield.append(['计算'])
+    # print(wordsplitscholarfield)
     for line in text2:
         for i in wordsplitscholarfield:
             for j in i:
@@ -175,6 +177,8 @@ def scholarinfo():
     for i in range(len(paper_name_list)):
         if '层次分析法' in paper_name_list[i]:
             del_i.append(i)
+    #倒序删除，避免影响前面顺序
+    del_i.reverse()
     for i in del_i:
         paper_name_list.pop(i)
         paper_info_list.pop(i)

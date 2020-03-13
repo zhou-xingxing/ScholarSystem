@@ -77,4 +77,18 @@ $(function () {
             window.location.href=href;
         }
     });
+    <!--点击高级搜索后 展示出三个隐藏的input  3.6 bwm-->
+     $(document).ready(function () {
+            $("#advanced_soso1").on("click", function () {
+                $("#soso2").toggle();
+                $("#soso1").toggle();
+            });
+        });
+      $(document).ready(function () {
+            $("#advanced_soso2").on("click", function () {
+                $("#soso1").toggle();
+                $("#soso2").toggle();
+                //$("#data2search_result").toggleClass("input2");
+            });
+        });
 });

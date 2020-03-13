@@ -161,7 +161,11 @@ const option = {
         textStyle: {
             color: '#000000',
             fontSize:20
-        }
+        },
+        subtextStyle:{
+                color:'#242424',
+                fontSize:16,
+            }
     },
     tooltip: {
         show:true,

@@ -72,6 +72,11 @@ def handlefeedback():
     else:
         receive = 0
     # print(name, school, fd_type, content, email, receive)
+    # 检测content是否为空
+        if len(content) == 0:
+            SuccessOrNot=False
+            return render_template("feedback_result.html", SuccessOrNot=SuccessOrNot)
+
     # 连接数据库
     connection = pymysql.connect(host="39.106.96.175", port=3306, db="feedback", user="root", password="12345678",
                                  charset="utf8")

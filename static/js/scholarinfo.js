@@ -102,5 +102,56 @@
                 $(".reclist")[0].style.display="block"
             }
         })
-    })
+    });
 });
+
+var changenum = 0; //全局变量，点击推荐学家可以被重置为0
+function recommend()
+{
+    var scholarid = document.getElementById("ContentPlaceHolder1_LabelORCID").innerText;
+    $.ajax({
+        url: '/recommend',
+        type: 'GET',
+        data: {'user': scholarid},
+        dataType:"json",
+        success: function (data)
+        {
+            console.log(data);
+            data = eval(data);
+            var item='';
+            $.each(data, function (i, result) {
+                item += '<p><a class="myrecommend" title="'+ result[2] + result[3] +'" href="/scholarinfo?scholarid=' + result[0] + '">' + result[1]+'</a></p>';
+            });
+            $('#reclist').html(item);
+            $('#reclist').css({"display":"block"});
+            $('#changelist').css({"display":"block"});
+            $('#recommendscholar').css({"text-shadow":"none"});
+        }
+    });
+    changenum=0;
+}
+
+function change_scholar()
+{
+    var scholarid = document.getElementById("ContentPlaceHolder1_LabelORCID").innerText;
+    changenum+=3;
+    if(changenum==30)
+    {
+         changenum=0;
+    }
+    $.ajax({
+        url:'/refresh',
+        type:'GET',
+        data:{'user':scholarid,'type':changenum},
+        success:function(data)
+        {
+            console.log(data);
+            data = eval(data);
+            var item = '';
+            $.each(data,function(i,result){
+             item += '<p><a class="myrecommend" title="' + result[2] + result[3]  +'" href="/scholarinfo?scholarid=' + result[0] + '">' + result[1]+'</a></p>';
+            });
+         $('#reclist').html(item);
+         $('#reclist').css({"display":"block"});
+        }});
+}

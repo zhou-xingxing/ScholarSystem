@@ -59,15 +59,7 @@
                 <a id="advanced_soso1" class="font16" href="javascript:void(1)" style="color:black;text-decoration: none">高级搜索</a>
             </div>
             <div id="soso2" style="display: none"> <!--高级搜索框 第二个div-->
-                <!--搜索类型-->
-                <select name="search_type" class="select" id="select_type">
-                    <option value="1">学者姓名</option>
-                    <option value="2">学者专业</option>
-                    <option value="3">学者学校</option>
-                    <option value="4">研究方向</option>
-                    <option value="6">论文搜索</option>
-                </select>
-                <input type="text" class="input2" placeholder="请输入学者姓名" id="data2search_result1">
+                <input type="text" class="input2" placeholder="请输入学者姓名" id="data2search_result1" style="margin-left: 30%">
                 <input type="text" class="input2" placeholder="请输入学者工作机构" id="data2search_result2">
                 <input type="text" class="input3" placeholder="请输入学者所在学院" id="data2search_result3">
                 <button type="button" id="searchbtn2"  class="btn btn-info btn-default btnsearch" style="height: 40px">
@@ -499,11 +491,24 @@
     $(function () {
         localStorage.clear();
         $(document).keydown(function (e) {
+
             if (e.keyCode === 13){
                 var  myselect=document.getElementById("select_type").value;
-                var keyword = document.getElementById("data2search_result").value;
-                localStorage.value = keyword;
-                location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+                var css = $('#soso1').css("display");
+                if(css == "none"){
+                    var  myselect=7;
+                    var keyword = document.getElementById("data2search_result1").value;
+                    var keyword2 = document.getElementById("data2search_result2").value;
+                    var keyword3 = document.getElementById("data2search_result3").value;
+                    //alert(keyword2);
+                    localStorage.value = keyword;
+                    location.href = "../Search_result?keyword="+keyword+"&keyword2="+keyword2+"&keyword3="+keyword3+"&type="+myselect;
+                }
+                else{
+                    var keyword = document.getElementById("data2search_result").value;
+                    localStorage.value = keyword;
+                    location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
+                }
             }
         });
         document.getElementById("searchbtn").onclick=function () {

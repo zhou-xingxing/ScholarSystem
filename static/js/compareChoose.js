@@ -1,7 +1,11 @@
 $(function () {
+    //checkedlist为对比页面中选择需要增加的对比项。分别为成果、合作机构、合作学者、会议期刊
     checkedlist=[false,false,false,false];
+    //index用于记录打开的弹窗序号
     var index=0;
+    //visuallength记录比较的人数
     var visuallength = $(".visual1").length;
+    //对比界面初始化 使可视化界面第一个按钮内容呈现其他内容影藏
     for(var i=0;i<visuallength;i++){
         $(".visual1")[i].style.display="block";
         $(".visual2")[i].style.display="none";
@@ -12,11 +16,14 @@ $(function () {
         $(".partnerwithhr")[i].style.display="none";
         $(".meetingwithhr")[i].style.display="none";
     }
+    //相应增加更多对比项的需求
     $(".addmore").click(function() {
+        //复现之前选过的对比项
         var allchecked = $(".choicecheck");
         for(var i=0;i<allchecked.length;i++){
             allchecked[i].checked=checkedlist[i];
         }
+        //打开选择增加对比项的窗口
         index=layer.open({
             type:1,
             title:"学者对比",
@@ -24,6 +31,7 @@ $(function () {
             content: $('.comparechoice')
         });
     });
+    //响应可视化按钮的点击事件
     $(".visualbtn1").click(function () {
         for(var i=0;i<visuallength;i++){
             $(".visual1")[i].style.display="block";
@@ -56,6 +64,8 @@ $(function () {
             $(".visual4")[i].style.display="block";
         }       
     });
+    //确认选择增加对比按钮的点击按钮
+    //逻辑是先用checkedlist保存用户点击的对比项，然后将用户选择的对比项display设为block
     $(".confirm").click(function () {
         var allchecked = $(".choicecheck");
         var checkedname=[];
@@ -65,8 +75,8 @@ $(function () {
             }
             checkedlist[i]=allchecked[i].checked;
         }
-        console.log(checkedname);
-        console.log(checkedlist);
+        //console.log(checkedname);
+        //console.log(checkedlist);
         alllength = $(".achivement").length;
         for(var i=0;i<alllength;i++){
             if(checkedlist[0]){

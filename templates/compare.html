@@ -7,6 +7,7 @@
     <script src="../static/js/echarts.js"></script>
     <script type="text/javascript" src="../static/js/echarts-wordcloud.js"></script>
     <script type="text/javascript">
+        //传递对比学者的数据，data为数据库中有的学者信息，nodatascholar为数据库未查询到的学者信息
         var comparedata = {
             data:{{ comparescholar|tojson }},
             nodatascholar:{{ nodatascholar|tojson }}
@@ -16,6 +17,8 @@
     <script src="../static/layer/layer.js"></script>
     <script type="text/javascript" src="../static/js/compareChoose.js"></script>
     <script type="text/javascript">
+        //切换对比信息中的学者信息，分类进行数据传输，分比为所有学者姓名、成功
+        //期刊会议、引用、成果最小年份、最大年份以及引用的最小最大年份
         var compare_data = {
             com_all_name:{{ com_all_name|tojson }},
             com_achivement_list:{{ com_achivement_list|tojson }},
@@ -33,31 +36,42 @@
     <link href="../static/css/scholarinfo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<!--整个对比学者的主体-->
 <div class="all" style="display: flex">
+    <!--如果学者信息存在，对每个学者信息进行输出-->
     {% for com in newresults %}
         {% if com %}
             <div class="compareBody" style="width: 100%">
+                <!--学者对比页面头部信息开始-->
                 <div class="header2" style="height: 230px;">
+                    <!--学者头像-->
                     <div class="headimage">
                         <image class="image2" src="../static/images/scholar_portrait.png"></image>
                     </div>
+                    <!--学者其他基本信息-->
                     <div class="otherinfo">
+                        <!--学者姓名-->
                         <div class="scholarname">
                             <span class="name2">{{ com[1] }}</span>
                         </div>
+                        <!--浮动布局-->
                         <div class="describe">
+                            <!--学者学校-->
                             <div class="scholarschool">
                                 <i class="iconfont icon-jigou pr10"></i>
                                 <span>{{ com[2] }}</span>
                             </div>
+                            <!--学者ID-->
                             <div class="scholarid">
                                 <span>ScholarID：</span>
                                 <span>{{ com[4] }}</span>
                             </div>
+                            <!--学者研究领域-->
                             <div class="scholarmajor">
                                 <span>研究领域：</span>
                                 <span>{{ com[5] }}</span>
                             </div>
+                            <!--学者成果方面指数-->
                             <div class="comparenum">
                                 <p class="color-gray">
                                     <!-- 成果数目-->
@@ -89,14 +103,18 @@
                     </div>
                 </div>
                 <hr class="comparehr">
+                <!--学者对比页面头部信息结束-->
+                <!--学者对比项目开始-->
                 <div class="compareitems">
                     <div>
+                        <!--学者关系网络对比-->
                         <div class="title itemsfont relationet">
                             <div>
                                 <span>学者关系网络</span>
                                 <button type="button" id="comparescholar" class="btn btn-primary swap">切换对比模式</button>
                             </div>
                             <div class="netcontent" style="width: 400px;height: 450px"></div>
+                            <!--切换对比模式，将学者信息对比到一张图上-->
                             <div class="partnercompare" id="partnercompare" style="display:none">
                                 <div class="datatypeselect">
                                     <button type="button" id="partnerbtn1" class="btn btn-primary" style="margin-left: 20%">学术成果</button>
@@ -110,6 +128,7 @@
                         </div>
                         <hr class="comparehr">
                     </div>
+                    <!--学者个人画像对比开始-->
                     <div>
                         <div class="title itemsfont personalpaint">
                             <span>个人画像</span>
@@ -118,6 +137,7 @@
 
                         <hr class="comparehr">
                     </div>
+                    <!--学者可视化内容对比开始-->
                     <div>
                         <div class="datavisual">
                             <div class="title itemsfont">
@@ -137,21 +157,26 @@
                                         style="margin-left: 8%; margin-top:10px;width: 78px;">研究方向
                                 </button>
                             </div>
+                            <!--插入学者学术成果的内容-->
                             <div class="visual1" style="width: 450px;height: 450px">
                                 1
                             </div>
+                            <!--插入学者的论文引用内容-->
                             <div class="visual2" style="width: 450px;height: 450px">
                                 2
                             </div>
+                            <!--插入学者的期刊会议内容-->
                             <div class="visual3" style="width: 450px;height: 450px">
                                 3
                             </div>
+                            <!--插入学者的研究方向内容-->
                             <div class="visual4" style="width: 450px;height: 450px">
                                 4
                             </div>
                         </div>
                         <hr class="comparehr">
                     </div>
+                    <!--学者学术成果的对比-->
                     <div class="achivementwithhr">
                         <div class="achivement">
                             <div class="title itemsfont">
@@ -166,6 +191,7 @@
                         </div>
                         <hr class="comparehr">
                     </div>
+                    <!--学者合租机构的对比-->
                     <div class="cooperatewithhr">
                         <div class="cooperate">
                             <div class="title itemsfont">
@@ -187,6 +213,7 @@
                         </div>
                         <hr class="comparehr">
                     </div>
+                    <!--学者合作学者的对比-->
                     <div class="partnerwithhr">
                         <div class="partner">
                             <div class="title itemsfont">
@@ -215,6 +242,7 @@
                         </div>
                         <hr class="comparehr">
                     </div>
+                    <!--学者期刊内容的对比-->
                     <div class="meetingwithhr">
                         <div class="meeting">
                             <div class="title itemsfont">
@@ -237,6 +265,7 @@
                         <hr class="comparehr">
                     </div>
                 </div>
+                <!--增加对比内容-->
                 <div style="margin-top: 5%;float: right;">
                     <button type="button" id="addmore" class="btn btn-primary addmore">增加对比</button>
                 </div>
@@ -244,6 +273,7 @@
         {% endif %}
     {% endfor %}
 </div>
+<!--增加的对比项-->
 <div class="comparechoice" style="display: none;font-size: 20px;margin-left: 5%; margin-top: 5%;" id="comparechoice">
     <span>请选择您需要增加的对比项:</span><br>
     <label class="comparelabel"><input name="Fruit" type="checkbox" value="学术成果" class="choicecheck"/>学术成果 </label>

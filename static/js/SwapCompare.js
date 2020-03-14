@@ -1,4 +1,4 @@
-//从jinjia2传入数据
+//从jinjia2传入对比学者的数据包括姓名、成功列表、引用列表、所有学者成果及引用的最小年份、最大年份
 compare_all_name=compare_data.com_all_name;
 compare_achivement_list=compare_data.com_achivement_list;
 compare_achivement_list2=compare_data.com_achivement_list2;
@@ -83,6 +83,7 @@ for(i=0;i<compare_all_name.length;i++){
     compare_paper_data.push(a)
 }
 $(function() {
+    //切换对比模式的按钮响应事件，
     $("#comparescholar").click(function() {
         layer.open({
             type:1,
@@ -91,22 +92,25 @@ $(function() {
             content: $('#partnercompare')
         });
     });
+    //响应对比合作学者每个按钮的点击事件--成果会议
      $("#partnerbtn1").click(function() {
         $("#partnerCompare1")[0].style.display = "block";
         $("#partnerCompare2")[0].style.display = "none";
         $("#partnerCompare3")[0].style.display = "none";
     });
+      //响应对比合作学者每个按钮的点击事件--引用
     $("#partnerbtn2").click(function() {
         $("#partnerCompare1")[0].style.display = "none";
         $("#partnerCompare2")[0].style.display = "block";
         $("#partnerCompare3")[0].style.display = "none";
     });
+    //响应对比合作学者每个按钮的点击事件--期刊会议
      $("#partnerbtn3").click(function() {
         $("#partnerCompare1")[0].style.display = "none";
         $("#partnerCompare2")[0].style.display = "none";
         $("#partnerCompare3")[0].style.display = "block";
     });
-    //初始化echarts
+    //初始化echarts，对三个表格进行数据填充
         var  ec1 = echarts.init(document.getElementById('partnerCompare1'));
         var  ec2 = echarts.init(document.getElementById('partnerCompare2'));
         var  ec3 = echarts.init(document.getElementById('partnerCompare3'));

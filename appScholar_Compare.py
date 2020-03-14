@@ -3,22 +3,28 @@ import pymysql
 import wordsExtra_zsf
 import json
 app = Blueprint("appScholar_Comapre", __name__)
+#对比路由，在个人信息页面时点击学者对比按钮时，响应到该处
 @app.route("/compare")
 def compare():
+    #传入要对比学者的信息，包括姓名、学校、院校信息
     partner_list = request.args.get('partner')
     partner_list = eval(partner_list)
+    #开始连接数据库，对比信息
     conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                            charset="utf8")
     cls = conn.cursor()
-    all_name = []
-    achivement_list = []
-    achivement_list2 = []
-    cited_list = []
-    paper_search_list = []
-    need_part = '`name`,`scholarid`,`achievement_list`,`achievement_list2`,`cited_list`,`paper_search_list`'
-    achiveminiyear, cited_minyear = 10000, 10000;
-    achivemaxyear, cited_maxyear = 0, 0
-    results = []
+    all_name = []  #用于保存学者的姓名
+    achivement_list = []  #用于保存学者的成果
+    achivement_list2 = [] #用于保存学者的期刊
+    cited_list = [] #用于保存学者的引用
+    paper_search_list = [] #用于保存学者的论文信息
+    need_part = '`name`,`scholarid`,`achievement_list`,`achievement_list2`,`cited_list`,`paper_search_list`' #需要查找的字段
+    achiveminiyear, cited_minyear = 10000, 10000; #用于保存学者的成果、引用的最小年份
+    achivemaxyear, cited_maxyear = 0, 0 #用于保存学者的成果、引用的最大年份
+    results = [] #用于保存结果
+
+    '''对学者进行循环查询，查询的逻辑是先找到学者的大学，然后在对应的学校，查该学者的id
+    #最后将学者的信息 分别拆开放到上面的字段中,最后用compareans保存所有对比信息并返回'''
     for scholar in partner_list:
         name = scholar['name']
         id = scholar['id']
@@ -65,6 +71,9 @@ def compare():
     compare_ans = json.dumps(compare_ans, ensure_ascii=False)
     return compare_ans
 
+'''作为函数响应首页开始对比按钮的函数，参数为学者的信息包括学校 姓名 学院（非必填）'''
+'''逻辑为对学者进行循环查询，查询的逻辑是先找到学者的大学，然后在对应的学校，查该学者的id
+    #最后将学者的信息 分别拆开放到字段中,最后用compareans保存所有对比信息并返回'''
 def compare1(ScholarInfoIncluedeCollege):
     conn = pymysql.connect(host="39.106.96.175", port=3306, db="scholar_info", user="root", password="12345678",
                            charset="utf8")

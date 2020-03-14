@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, Blueprint
 import datetime, pymysql
 from appScholar_Compare import compare1
 app = Blueprint("scholar_compare_route", __name__)
-
+'''学者对比路由，具体思路是获取对比的学者数量，获取填入的学者信息，用compare函数获取对比的数据，
+并将数据分字段，利用jinja模板传递给前端页面'''
 @app.route('/scholarcompare')
 def index():
     length = int(request.args.get('length'))

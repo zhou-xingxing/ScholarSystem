@@ -1,7 +1,9 @@
 $(function () {
     localStorage.clear();
+    //高级按钮的隐藏
     $('#collapseTwo').collapse('hide');
     $('#collapseThree').collapse('hide');
+    //为搜索插入热键
     $(document).keydown(function (e) {
         if (e.keyCode === 13){
             var  myselect=document.getElementById("select_type").value;
@@ -10,6 +12,7 @@ $(function () {
             location.href = "../Search_result?keyword="+keyword+"&type="+myselect;
         }
     });
+    //搜索按钮响应事件，获取关键字和搜索类型进行搜索
     document.getElementById("searchbtn").onclick=function () {
         if(window.localStorage) {
             var  myselect=document.getElementById("select_type").value;
@@ -20,6 +23,7 @@ $(function () {
             alert('浏览器不支持')
         }
     };
+    //首页对比学者增加按钮的响应事件，当多于四个不允许增加
     $("#addone").click(function () {
         var allscholarname = $(".compareDialogInput1");
         if (allscholarname.length>=4){
@@ -32,6 +36,7 @@ $(function () {
         }
 
     });
+    //点击学者对比按钮的弹窗响应事件，初始化弹窗内容为compareDialog
     $("#compare").click(function() {
          document.getElementById("scholarInfoIinput").innerHTML="<div class=\"Dialogdiv\">\n" +
             "                学者姓名：<input type=\"text\" class=\"compareDialogInput1\" id=\"nameinput\" placeholder='必填'>\n" +
@@ -45,6 +50,7 @@ $(function () {
             content: $('#compareDialog')
         });
     });
+    //开始对比按钮的事件响应获取对比的信息并将信息作为超链接参数传递给对别页面
     $("#startcompare").click(function () {
         var allscholarname = $(".compareDialogInput1");
         var allscholarschool = $(".compareDialogInput2");

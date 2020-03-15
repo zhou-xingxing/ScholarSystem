@@ -28,6 +28,7 @@ def scholarinfo():
         cursor = connection.cursor()
         #在表中查询结果，用result保存
         sql = "select * from %s where id between 1 and 2500 and name='%s' and college='%s'" % (school, name, major)
+        print(sql)
         cursor.execute(sql)
         result = cursor.fetchone()
 

@@ -26,9 +26,11 @@ def corpbypaper(name, school):
     sql = "select partner_list,paper_info_list from %s where name='%s' " % (school, name)
     cls.execute(sql)
     result = cls.fetchone()
-
     # 将partner_list转化为列表形式
-    partner_list = list(eval(result[0]))
+    try:
+        partner_list = list(eval(result[0]))
+    except:
+        partner_list=[]
     # print('partner_list', partner_list)
     # print('paper_info_list(str)', result[1])
     corpbypaper_list = []

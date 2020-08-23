@@ -13,6 +13,11 @@
 
 2020.2.29-2020.3.12
 
+## 效果演示
+[演示视频1](https://github.com/zhou-xingxing/ScholarSystem/blob/master/%E7%99%BD%E6%B3%BD%E5%AD%A6%E8%80%85%E5%8F%91%E7%8E%B0%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%911.mp4)
+
+[演示视频2](https://github.com/zhou-xingxing/ScholarSystem/blob/master/%E7%99%BD%E6%B3%BD%E5%AD%A6%E8%80%85%E5%8F%91%E7%8E%B0%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%912.mp4)
+
 ## 技术架构
 
 - 基于Flask框架
